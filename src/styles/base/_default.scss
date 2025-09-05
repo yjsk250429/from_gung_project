@@ -1,0 +1,19 @@
+@use './../utils' as *;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: $main-bg;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    // @include paddingX(16px);
+    @include desktop {
+        // padding-left: 5%;
+        // padding-right: 5%;
+    }
+    @include tablet {
+        // padding-left: 5%;
+        // padding-right: 5%;
+    }
+}

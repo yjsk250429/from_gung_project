@@ -1,0 +1,46 @@
+@use '../../styles/utils' as *;
+
+.home {
+    width: 100%;
+    .inner {
+        padding: 100px 0;
+    }
+    h2 {
+        @include font-32px-B;
+    }
+    @include tablet {
+        .inner {
+            padding: 3rem 0;
+            background-color: skyblue;
+        }
+        h2 {
+            font-size: 3rem;
+        }
+    }
+}
+/*
+@include tablet {
+    .home {
+        .inner {
+            padding: 50px 0;
+            background-color: pink;
+        }
+        h2 {
+            @include font-18px-B;
+        }
+    }
+}
+    */
+/*
+@include mobile {
+    .home {
+        .inner {
+            padding: 3rem 0;
+        }
+        h2 {
+            @include font-18px-B;
+        }
+    }
+}
+    너비는 퍼센트나 vw ...지만! 이번 것은 rem을 위주로 쓰고 너비는 퍼센트로 해라
+    */

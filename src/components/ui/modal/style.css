@@ -1,0 +1,45 @@
+.my-alert,
+.my-confirm,
+.my-prompt,
+.my-toast,
+.my-ajax {
+  font-family: "Noto Sans KR", sans-serif;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.my-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.my-text {
+  font-size: 1.6rem;
+  color: #666;
+}
+
+.my-confirm-btn {
+  background-color: #007bff !important;
+  border-radius: 6px !important;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.my-cancel-btn {
+  background-color: #dc3545 !important;
+  border-radius: 6px !important;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.my-toast {
+  border-radius: 10px;
+  font-size: 1.4rem;
+  padding: 1rem 1.6rem;
+}/*# sourceMappingURL=style.css.map */

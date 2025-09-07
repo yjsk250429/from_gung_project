@@ -19,7 +19,7 @@
     }
     
 }
-.mainvisual{
+.mainvisual {
 width: 100%;
 overflow: hidden;
 img{
@@ -143,6 +143,7 @@ img{
     text-align: right;
   }
 }
+
 /* section2 영역 */
 .section2-main{
     width: 100%;
@@ -170,10 +171,162 @@ img{
         }
     }
 }
-/* section3 영역 */
-.section3-main{
 
+/* section3 영역 */
+.section3-main {
+    width: 100%;
+    height: 165rem;
+    position: relative;
+    background-color: #f8f8f8;
+    overflow: hidden;
+    
+    .s3_main-title {
+        margin-top: 13.75rem;
+        margin-left: 5.8rem;
+        z-index: 10;
+        h1 {
+            @include main1;
+            @include font-130px-B;
+            margin: 0;
+        }
+    }
+    
+    // 상단 이미지 영역
+    .s3_top-image{
+        position: absolute;
+        top: 7.375rem;
+        left: 40%;
+    }
+    
+    // 하단 이미지 영역
+    .s3_bottom-image{
+        position: absolute;
+        bottom: 11.75rem;
+        left: 5%;
+    }
+
+    // 중앙 이미지 영역
+    .s3_center-image {
+        width: 100%;
+        height: 700px;
+        z-index: 0;
+        margin-top: 6.25rem;
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    // 카드 공통 스타일
+    .s3_card {
+        position: absolute;
+        width: 360px;
+        height: 420px;
+        background-color: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: 0.3s ease;
+
+        // hover 시 나타날 이미지
+        .card-hover-image {
+            position: absolute;
+            top: -4.4375rem;
+            right: -3.8125rem;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .card-content {
+            position: absolute;
+            top: 92px;
+            left: 50px;
+            
+            h3 {
+                @include main1;
+                @include font-55px-B;
+                margin-bottom: 5.625rem;
+                transition: color 0.3s ease;
+            }
+
+            .card-tag {
+                color: #ff6b6b;
+                @include font-24px-B;
+                margin-bottom: 1rem;
+                transition: color 0.3s ease;
+            }
+
+            p {
+                @include sub3;
+                @include font-18px-B;
+                opacity: 0.8;
+                transition: color 0.3s ease;
+            }
+        }
+
+        // hover 효과
+        &:hover {
+            background-color: #394B6F;
+            
+            // hover 시 이미지 나타남
+            .card-hover-image {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .card-content {
+                h3 {
+                    @include sub1;
+                }
+                
+                .card-tag {
+                    @include sub4;
+                }
+                
+                p {
+                    @include sub1;
+                }
+            }
+        }
+    }
+
+    // 개별 카드 위치
+    .s3_card--top-right {
+        top: 15rem;
+        right: 15rem;
+    }
+
+    .s3_card--bottom-left {
+        bottom: 40rem;
+        left: 5.8rem;
+    }
+
+    .s3_card--bottom-right {
+        bottom: 30rem;
+        right: 35rem;
+    }
+
+    // 하단 메시지
+    .s3_bottom-message {
+        position: absolute;
+        right: 15rem;
+        bottom: 14rem;
+        z-index: 10;
+        p {
+            @include sub5;
+            @include font-35px-B;
+        }
+    }
 }
+
 /* section4 영역 */
 .section4-main {
   width: 100%;
@@ -216,6 +369,115 @@ img{
     -1px  1px 0 #394B6F,
     -1px  0   0 #394B6F;
   }
+}
+
+/* section5 영역 */
+.section5-main {
+    background-color: #f8f8f8;
+    width: 100%;
+    height: 80rem;
+    position: relative;
+    .section5-container {
+        width:100%;
+        display: flex;
+        padding-left: 300px;
+        padding-top: 150px;
+    }
+    .section5-content {
+       display: flex;
+        .section5-text-area {
+        .section5-main-title {
+        width: 61.25rem;
+        @include font-130px-B;
+        color: #d5d5d5;
+        margin-bottom: 80px;
+    }
+        .section5-subtitle {
+        margin-bottom: 50px;
+        h3 {
+            @include font-55px-B;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+        }
+    }
+        .section5-cta {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            .cta-arrow {
+                transform: translateX(10px);
+            }
+            
+            .cta-text {
+                @include main1
+            }
+        }
+        
+        .cta-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        .cta-arrow {
+            @include main1;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+    }
+    }
+    }
+    .section5-images{
+        position: absolute;
+        left: 100rem;
+        width: 100%;
+        display: flex;
+        gap: 20px;
+        align-items: end;
+        .image-container {
+        background-color: #ddd;
+        &.image1 {
+          width: 12.5rem;
+          height: 15.625rem;
+        }
+        
+        &.image2 {
+          width: 15.625rem;
+          height: 25rem;
+        }
+        
+        &.image3 {
+            width: 21.875rem;
+            height: 40.625rem;
+        
+        }
+        
+        // 이미지가 들어갈 때를 위한 스타일
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        &:hover img {
+            transform: scale(1.05);
+        }
+    
+    }
+    }
+
 }
 
 

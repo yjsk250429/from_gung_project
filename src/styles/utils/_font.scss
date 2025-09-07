@@ -8,6 +8,20 @@
     line-height: rem(200px);
 }
 
+@mixin font-130px-B {
+    font-size: rem(130px);
+    font-weight: 700;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(170px);
+}
+
+@mixin font-55px-B {
+    font-size: rem(55px);
+    font-weight: 700;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(68px);
+}
+
 @mixin font-35px-B {
     font-size: rem(35px);
     font-weight: 700;

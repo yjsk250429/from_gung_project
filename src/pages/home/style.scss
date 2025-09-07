@@ -11,13 +11,20 @@
     @include tablet {
         .inner {
             padding: 3rem 0;
-            background-color: skyblue;
+            
         }
         h2 {
             font-size: 3rem;
         }
     }
     
+}
+.mainvisual{
+width: 100%;
+overflow: hidden;
+img{
+    width: 100%;
+}
 }
 
 /* section1 영역 */
@@ -29,6 +36,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0 auto;
+    overflow: hidden;
     .top-text{
         padding-top: 10.6250rem;
         font-size: 6.25rem;
@@ -135,6 +143,89 @@
     text-align: right;
   }
 }
+/* section2 영역 */
+.section2-main{
+    width: 100%;
+    height: 700px;
+    position: relative;
+    overflow: hidden;
+    .s2_middle-text{
+        position: absolute;
+        top: 12.5rem;
+        right: 6.875rem;
+    }
+    .s2_bottom-text{
+        display: flex;
+        gap: 60px;
+        opacity: 80%;
+        white-space: nowrap;
+        position: absolute;
+        bottom: 60px;
+
+        li{
+            @include font-20px-B;
+            @include sub1;
+            display: inline-block;
+            
+        }
+    }
+}
+/* section3 영역 */
+.section3-main{
+
+}
+/* section4 영역 */
+.section4-main {
+  width: 100%;
+  height: 56.25rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 60px;
+  background-color: #fff;
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    @include font-160px-B;
+    li {
+      display: inline-block;
+      font-size: 60px;
+      font-weight: bold;
+      margin-right: 20px; // 아이템 간격
+    }
+  }
+
+  .s4_top-text {
+    @include sub5;
+    opacity: 70%;
+  }
+
+  .s4_bottom-text {
+    @include sub1;
+    text-shadow: 
+    -1px -1px 0 #394B6F,
+     0   -1px 0 #394B6F,
+     1px -1px 0 #394B6F,
+     1px  0   0 #394B6F,
+     1px  1px 0 #394B6F,
+     0    1px 0 #394B6F,
+    -1px  1px 0 #394B6F,
+    -1px  0   0 #394B6F;
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 

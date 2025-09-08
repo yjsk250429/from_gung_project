@@ -325,6 +325,7 @@
         p {
             @include sub5;
             @include font-35px-SB;
+            font-size: 10px;
         }
     }
 }

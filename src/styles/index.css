@@ -1,0 +1,303 @@
+@font-face {
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 700;
+  src: local("Spoqa Han Sans Neo Bold"), url("/fonts/SpoqaHanSansNeo-Bold.woff2") format("woff2"), url("/fonts/SpoqaHanSansNeo-Bold.woff") format("woff"), url("/fonts/SpoqaHanSansNeo-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 500;
+  src: local("Spoqa Han Sans Neo Medium"), url("/fonts/SpoqaHanSansNeo-Medium.woff2") format("woff2"), url("/fonts/SpoqaHanSansNeo-Medium.woff") format("woff"), url("/fonts/SpoqaHanSansNeo-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 400;
+  src: local("Spoqa Han Sans Neo Regular"), url("/fonts/SpoqaHanSansNeo-Regular.woff2") format("woff2"), url("/fonts/SpoqaHanSansNeo-Regular.woff") format("woff"), url("/fonts/SpoqaHanSansNeo-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 300;
+  src: local("Spoqa Han Sans Neo Light"), url("/fonts/SpoqaHanSansNeo-Light.woff2") format("woff2"), url("/fonts/SpoqaHanSansNeo-Light.woff") format("woff"), url("/fonts/SpoqaHanSansNeo-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Spoqa Han Sans Neo";
+  font-weight: 100;
+  src: local("Spoqa Han Sans Neo Thin"), url("/fonts/SpoqaHanSansNeo-Thin.woff2") format("woff2"), url("/fonts/SpoqaHanSansNeo-Thin.woff") format("woff"), url("/fonts/SpoqaHanSansNeo-Thin.ttf") format("truetype");
+}
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+html,
+body {
+  font-size: 10px;
+}
+
+body {
+  line-height: 1.5;
+  font-size: 1.6rem;
+}
+
+a {
+  list-style: none;
+  color: #333;
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f2f4f8;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+}
+html.is-active {
+  overflow-y: hidden;
+}
+
+#header {
+  border-bottom: 1px solid #dcdcdc;
+  width: 100%;
+  background-color: #000;
+}
+#header .inner {
+  height: 100px;
+}
+#header h1 {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#header h1 a img {
+  width: 60px;
+}
+#header .nav {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#header .nav ul {
+  display: flex;
+}
+#header .nav ul li {
+  margin-left: 100px;
+  position: relative;
+}
+#header .nav ul li a {
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
+  color: #fff;
+}
+#header .nav ul li a:hover {
+  color: tomato;
+}
+#header .nav ul li:last-child span {
+  font-size: 16px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  right: -20px;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+}
+#header .top-menu {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  display: flex;
+}
+#header .top-menu li {
+  margin-left: 25px;
+}
+#header .top-menu li a {
+  font-size: 15px;
+}
+@media (max-width: 1023px) {
+  #header {
+    background: pink;
+  }
+  #header .inner {
+    height: 70px;
+    width: 100%;
+  }
+  #header h1 {
+    left: 10px;
+  }
+  #header h1 a img {
+    width: 40px;
+  }
+  #header .nav ul li {
+    margin-left: 40px;
+  }
+  #header .nav ul li a {
+    font-size: 16px;
+  }
+}
+
+#footer {
+  background-color: #000;
+  width: 100%;
+}
+#footer .inner {
+  height: 250px;
+}
+#footer h2 {
+  padding-top: 80px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.inner {
+  width: 1400px;
+  margin: auto;
+  position: relative;
+  box-sizing: border-box;
+}
+@media (max-width: 1023px) {
+  .inner {
+    width: 95%;
+  }
+}/*# sourceMappingURL=index.css.map */

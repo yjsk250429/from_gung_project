@@ -30,3 +30,26 @@ $tag-blue-bg: $coral-blue;
 $footer-border-color: $daker-gray;
 $header-bg: $gray-white;
 $main-bg: $gray-white;
+
+// 메인 컬러
+@mixin main1 {
+    color: #313574;
+}
+
+
+// 서브 컬러
+@mixin sub5 {
+    color: #394B6F;
+}
+@mixin sub1 {
+    color: #fff;
+}
+@mixin sub2 {
+    color: #F1EFEE;
+}
+@mixin sub3 {
+    color: #000;
+}
+@mixin sub4 {
+    color: #FFE1E0;
+}

@@ -4,10 +4,10 @@ html.is-active {
     overflow-y: hidden;
 }
 #header {
-    border-bottom: 1px solid #dcdcdc;
     width: 100%;
-    background-color: #000;
-
+    background-color: transparent;
+    position:fixed;
+    z-index: 100;
     .inner {
         height: 100px;
     }
@@ -24,18 +24,17 @@ html.is-active {
     }
 
     .nav {
-        height: 100px;
+        height: 80px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        margin-left: 100px;
         ul {
             display: flex;
             li {
                 margin-left: 100px;
                 position: relative;
                 a {
-                    font-size: 18px;
-                    font-weight: 500;
+                    font-size: 20px;
                     transition: 0.3s;
                     color: #fff;
                     &:hover {

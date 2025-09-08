@@ -52,8 +52,8 @@ const Section4 = () => {
 
         // 컴포넌트가 마운트된 후 약간의 지연을 두고 실행
         const timer = setTimeout(() => {
-            animateMarquee(topRef.current, 'left', 25);
-            animateMarquee(bottomRef.current, 'right', 30);
+            animateMarquee(topRef.current, 'left', 55);
+            animateMarquee(bottomRef.current, 'right', 45);
         }, 100);
 
         return () => {

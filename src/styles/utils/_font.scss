@@ -15,6 +15,13 @@
     line-height: rem(170px);
 }
 
+@mixin font-105px-B {
+    font-size: rem(105px);
+    font-weight: 600;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(140px);
+}
+
 @mixin font-55px-B {
     font-size: rem(55px);
     font-weight: 700;

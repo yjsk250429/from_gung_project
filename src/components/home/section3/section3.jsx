@@ -1,7 +1,6 @@
 import React, { use, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import '../style.scss';
 
 // ScrollTrigger 플러그인 등록
 gsap.registerPlugin(ScrollTrigger);

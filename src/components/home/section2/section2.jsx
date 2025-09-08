@@ -37,7 +37,7 @@ const Section2 = () => {
     return (
         <div className="section2-main">
             <div className="video">
-                <img src="/images/con2_video.png" alt="" />
+                <video src="/images/con2_video.mp4" autoPlay muted loop></video>
             </div>
             <div className="s2_middle-text">
                 <img src="/images/con2_text.png" alt="" />

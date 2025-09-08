@@ -2,10 +2,11 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { InertiaPlugin } from 'gsap/InertiaPlugin';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import tourItems from '../../../api/mainData';
 
-gsap.registerPlugin(Draggable);
-gsap.registerPlugin(Draggable, InertiaPlugin);
+// 플러그인 등록
+gsap.registerPlugin(Draggable, InertiaPlugin, ScrollTrigger);
 
 const Section1 = () => {
     const gridRef = useRef(null);
@@ -13,7 +14,7 @@ const Section1 = () => {
     useEffect(() => {
         const grid = gridRef.current;
 
-        // GSAP Draggable 설정
+        // ✅ Draggable 설정
         Draggable.create(grid, {
             type: 'x',
             bounds: { minX: -grid.scrollWidth + window.innerWidth, maxX: 0 },
@@ -23,6 +24,46 @@ const Section1 = () => {
             dragResistance: 0.2,
             snap: (endValue) => Math.round(endValue / 50) * 50,
         });
+
+        // ✅ ScrollTrigger 애니메이션: top-text (위에서 아래로)
+        gsap.fromTo(
+            '.top-text',
+            { y: -200, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: 'power4.out',
+                scrollTrigger: {
+                    trigger: '.section1-main',
+                    start: 'top 70%',
+                    end: 'bottom 100%',
+                    toggleActions: 'play reverse play reverse',
+                },
+            }
+        );
+
+        // ✅ ScrollTrigger 애니메이션: bottom-text (아래에서 위로)
+        gsap.fromTo(
+            '.bottom-text',
+            { y: 200, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: 'power4.out',
+                scrollTrigger: {
+                    trigger: '.section1-main',
+                    start: 'top+=200',
+                    end: 'bottom+=400 100%',
+                    toggleActions: 'play reverse play reverse',
+                },
+            }
+        );
+
+        return () => {
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        };
     }, []);
 
     return (

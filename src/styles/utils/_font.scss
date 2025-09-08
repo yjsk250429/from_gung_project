@@ -1,6 +1,41 @@
 @use './unit' as *;
 //B: bold style. 안 붙어있는 건 normal
 
+@mixin font-160px-B {
+    font-size: rem(160px);
+    font-weight: 700;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(200px);
+}
+
+@mixin font-130px-B {
+    font-size: rem(130px);
+    font-weight: 900;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(170px);
+}
+
+@mixin font-55px-B {
+    font-size: rem(55px);
+    font-weight: 700;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(68px);
+}
+
+@mixin font-35px-B {
+    font-size: rem(35px);
+    font-weight: 700;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(48px);
+}
+
+@mixin font-35px-SB {
+    font-size: rem(35px);
+    font-weight: 500;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(48px);
+}
+
 @mixin font-32px-B {
     font-size: rem(32px);
     font-weight: 700;
@@ -13,6 +48,13 @@
     font-weight: 700;
     letter-spacing: rem(-0.3px);
     line-height: rem(36px);
+}
+
+@mixin font-20px-B {
+    font-size: rem(20px);
+    font-weight: 600;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(30px);
 }
 
 @mixin font-18px-B {
@@ -47,6 +89,12 @@
     font-weight: 700;
     letter-spacing: rem(-0.3px);
     line-height: rem(18px);
+}
+
+@mixin font-20px {
+    font-size: rem(20px);
+    letter-spacing: rem(-0.3px);
+    line-height: rem(30px);
 }
 
 @mixin font-12px {

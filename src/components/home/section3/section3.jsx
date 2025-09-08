@@ -1,4 +1,4 @@
-import React, { use, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -14,6 +14,38 @@ const Section3 = () => {
     const cardBottomRightRef = useRef(null);
     const topMessageRef = useRef(null);
     const bottomMessageRef = useRef(null);
+    const centerImageRef = useRef(null);
+
+    // 중앙 이미지 상태 관리
+    const [activeImage, setActiveImage] = useState('default');
+
+    // 이미지 맵핑
+    const imageMap = {
+        default: '/images/con3_img4.png',
+        tea: '/images/con3_img3.png', // 다도 체험 이미지
+        hanbok: '/images/con3_img1.png', // 한복 체험 이미지
+        bibimbap: '/images/con3_img2.png', // 비빔밥 체험 이미지
+    };
+
+    // 카드 클릭 핸들러
+    const handleCardClick = (imageType) => {
+        if (activeImage !== imageType) {
+            // 페이드 아웃 -> 이미지 변경 -> 페이드 인 효과
+            gsap.to(centerImageRef.current, {
+                opacity: 0,
+                duration: 0.2,
+                ease: 'power2.out',
+                onComplete: () => {
+                    setActiveImage(imageType);
+                    gsap.to(centerImageRef.current, {
+                        opacity: 1,
+                        duration: 0.4,
+                        ease: 'power2.out',
+                    });
+                },
+            });
+        }
+    };
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -138,12 +170,23 @@ const Section3 = () => {
                 <img src="/images/con3_bg2.png" alt="" />
             </div>
             <div className="s3_center-image">
-                <img src="/images/con3_img1.png" alt="" className="main-image" />
+                <img
+                    ref={centerImageRef}
+                    src={imageMap[activeImage]}
+                    alt=""
+                    className="main-image"
+                />
             </div>
 
             {/* 카드 영역들 */}
-            {/* 왼쪽 상단 카드 - 차 향에 머무는 시간 */}
-            <div className="s3_card s3_card--top-right" ref={cardTopRightRef}>
+            {/* 우측 상단 카드 - 차 향에 머무는 시간 */}
+            <div
+                className={`s3_card s3_card--top-right ${activeImage === 'tea' ? 'active' : ''}`}
+                ref={cardTopRightRef}
+                onMouseEnter={() => handleCardClick('tea')}
+                onMouseLeave={() => handleCardClick('default')}
+                style={{ cursor: 'pointer' }}
+            >
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />
                 </div>
@@ -166,8 +209,16 @@ const Section3 = () => {
                 </div>
             </div>
 
-            {/* 왼쪽 하단 카드 - 한국의 시간을 입다 */}
-            <div className="s3_card s3_card--bottom-left" ref={cardBottomLeftRef}>
+            {/* 좌측 하단 카드 - 한국의 시간을 입다 */}
+            <div
+                className={`s3_card s3_card--bottom-left ${
+                    activeImage === 'hanbok' ? 'active' : ''
+                }`}
+                ref={cardBottomLeftRef}
+                onMouseEnter={() => handleCardClick('hanbok')}
+                onMouseLeave={() => handleCardClick('default')}
+                style={{ cursor: 'pointer' }}
+            >
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />
                 </div>
@@ -190,8 +241,16 @@ const Section3 = () => {
                 </div>
             </div>
 
-            {/* 오른쪽 하단 카드 - 오색의 맛을 비비다 */}
-            <div className="s3_card s3_card--bottom-right" ref={cardBottomRightRef}>
+            {/* 우측 하단 카드 - 오색의 맛을 비비다 */}
+            <div
+                className={`s3_card s3_card--bottom-right ${
+                    activeImage === 'bibimbap' ? 'active' : ''
+                }`}
+                ref={cardBottomRightRef}
+                onMouseEnter={() => handleCardClick('bibimbap')}
+                onMouseLeave={() => handleCardClick('default')}
+                style={{ cursor: 'pointer' }}
+            >
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />
                 </div>

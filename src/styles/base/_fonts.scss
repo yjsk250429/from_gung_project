@@ -148,3 +148,47 @@
     font-weight: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: 'Arita buri';
+    src: url('./src/Arita-buri-SB.woff');
+    src: url('./src/Arita-buri-SB.woff') format('woff'),
+        url('./src/Arita-buri-SB.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arita buri';
+    src: url('./src/Arita-buri-M.woff');
+    src: url('./src/Arita-buri-M.woff') format('woff'),
+        url('./src/Arita-buri-M.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arita buri';
+    src: url('./src/Arita-buri-L.woff');
+    src: url('./src/Arita-buri-L.woff') format('woff'),
+        url('./src/Arita-buri-L.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arita buri';
+    src: url('./src/Arita-buri-HL.woff');
+    src: url('./src/Arita-buri-HL.woff') format('woff'),
+        url('./src/Arita-buri-HL.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arita buri';
+    src: url('./src/Arita-buri-B.woff');
+    src: url('./src/Arita-buri-B.woff') format('woff'),
+        url('./src/Arita-buri-B.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
+import UtilBar from './UtilBar';
 
 const Header = () => {
     return (
@@ -11,6 +12,7 @@ const Header = () => {
                     </Link>
                 </h1>
                 <NavBar />
+                <UtilBar/>
             </div>
         </header>
     );

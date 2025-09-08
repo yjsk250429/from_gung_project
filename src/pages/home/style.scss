@@ -3,18 +3,12 @@
 .home {
     width: 100%;
     .inner {
-        padding: 100px 0;
+        padding: vw(100, 0);
     }
     h2 {
         @include font-32px-B;
     }
     @include tablet {
-        .inner {
-            padding: 3rem 0;
-        }
-        h2 {
-            font-size: 3rem;
-        }
     }
 }
 .mainvisual {
@@ -27,9 +21,9 @@
 
 /* section1 영역 */
 .section1-main {
-    font-family: 'KoPub Batang', serif;
+    font-family: 'Aritaburi', serif;
     width: 100%;
-    height: 1000px;
+    height: vw(1300);
     background-image: url(images/con1_bg.png);
     background-position: 0 0;
     background-repeat: no-repeat;
@@ -37,28 +31,25 @@
     margin: 0 auto;
     overflow: hidden;
     .top-text {
-        padding-top: 10.625rem;
-        font-size: 6.25rem;
-        margin-left: 5.3125rem;
-        font-weight: bold;
+        @include font-105px-B;
+        padding-top: vw(170);
+        margin-left: vw(85);
         p {
             @include main1;
         }
     }
     .image-grid {
-        padding-top: 7.75rem;
-        margin-left: 4.75rem;
+        padding-top: vw(124);
+        margin-left: vw(85);
         display: flex;
-        gap: 5.1875rem;
-        padding-bottom: 1rem;
-
+        gap: vw(80);
         cursor: grab;
         .image-box {
             flex: 0 0 auto;
-            width: 40rem;
-            height: 45rem;
+            width: vw(380);
+            height: vw(420);
             font-family: 'Pretendard';
-            border-radius: 1.5rem;
+            border-radius: vw(10);
             position: relative;
             box-shadow: 0 0.375rem 1rem rgba(0, 0, 0, 0.1);
 
@@ -91,7 +82,7 @@
             img {
                 width: 100%;
                 height: 100%;
-                border-radius: 1.5rem;
+                border-radius: vw(10);
                 object-fit: cover;
                 display: block;
             }
@@ -99,7 +90,7 @@
             .overlay {
                 position: absolute;
                 inset: 0;
-                border-radius: 1.5rem;
+                border-radius: vw(10);
                 background-color: rgba(0, 0, 0, 0.6); // ⭐ 60% 검정
                 display: flex;
                 flex-direction: column;
@@ -122,10 +113,8 @@
                 transform: translate(-50%, -50%);
                 writing-mode: vertical-rl;
                 text-orientation: mixed;
-
                 color: #fff;
                 font-weight: 500;
-
                 font-size: 25px;
                 letter-spacing: 8px;
             }
@@ -139,32 +128,31 @@
         @include font-35px-SB;
         @include sub5;
         font-family: 'Pretendard';
-        padding-top: 10rem;
-        padding-right: 2.5rem;
+        padding-top: vw(124);
+        padding-right: vw(37);
         text-align: right;
     }
 }
 
 /* section2 영역 */
 .section2-main {
-    font-family: 'KoPub Batang', serif;
+    font-family: 'Aritaburi', serif;
     width: 100%;
-    height: 700px;
+    height: vw(700);
     position: relative;
     overflow: hidden;
     .s2_middle-text {
         position: absolute;
-        top: 12.5rem;
-        right: 6.875rem;
+        top: vw(200);
+        right: vw(110);
     }
     .s2_bottom-text {
         display: flex;
-        gap: 60px;
+        gap: vw(60);
         opacity: 80%;
         white-space: nowrap;
         position: absolute;
-        bottom: 60px;
-
+        bottom: vw(60);
         li {
             @include font-20px-B;
             @include sub1;
@@ -176,17 +164,17 @@
 /* section3 영역 */
 .section3-main {
     width: 100%;
-    height: 165rem;
+    height: vw(2000);
     position: relative;
     background-color: #f8f8f8;
     overflow: hidden;
     font-family: 'Pretendard';
     .s3_main-title {
-        margin-top: 13.75rem;
-        margin-left: 5.8rem;
+        margin-top: vw(220);
+        margin-left: vw(95);
         z-index: 10;
         h1 {
-            font-family: 'KoPub Batang', serif;
+            font-family: 'Aritaburi', serif;
             @include main1;
             @include font-130px-B;
             margin: 0;
@@ -210,7 +198,7 @@
     // 중앙 이미지 영역
     .s3_center-image {
         width: 100%;
-        height: 700px;
+        height: vw(700);
         z-index: 0;
         margin-top: 6.25rem;
         .main-image {
@@ -223,46 +211,46 @@
     // 카드 공통 스타일
     .s3_card {
         position: absolute;
-        width: 360px;
-        height: 420px;
+        width: vw(460);
+        height: vw(550);
         background-color: #fff;
-        border-radius: 1rem;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border-radius: vw(10);
+        box-shadow: vw(0) vw(8) vw(32) rgba(0, 0, 0, 0.1);
         cursor: pointer;
         transition: 0.3s ease;
 
         // hover 시 나타날 이미지
         .card-hover-image {
             position: absolute;
-            top: -4.4375rem;
-            right: -3.8125rem;
+            top: vw(-55);
+            right: vw(-35);
             opacity: 0;
             transform: translateY(-10px);
             transition: all 0.3s ease;
             z-index: 10;
             img {
-                width: 100%;
-                height: 100%;
+                width: 110%;
+                height: 110%;
                 object-fit: contain;
             }
         }
 
         .card-content {
             position: absolute;
-            top: 92px;
-            left: 50px;
+            top: vw(92);
+            left: vw(50);
 
             h3 {
                 @include main1;
                 @include font-55px-B;
-                margin-bottom: 5.625rem;
+                margin-bottom: vw(90);
                 transition: color 0.3s ease;
             }
 
             .card-tag {
                 color: #ff6b6b;
                 @include font-24px-B;
-                margin-bottom: 1rem;
+                margin-bottom: vw(15);
                 transition: color 0.3s ease;
             }
 
@@ -302,25 +290,25 @@
 
     // 개별 카드 위치
     .s3_card--top-right {
-        top: 15rem;
-        right: 15rem;
+        top: vw(200);
+        right: vw(110);
     }
 
     .s3_card--bottom-left {
-        bottom: 40rem;
-        left: 5.8rem;
+        bottom: vw(555);
+        left: vw(100);
     }
 
     .s3_card--bottom-right {
-        bottom: 30rem;
-        right: 35rem;
+        bottom: vw(270);
+        right: vw(360);
     }
 
     // 하단 메시지
     .s3_bottom-message {
         position: absolute;
-        right: 15rem;
-        bottom: 14rem;
+        right: vw(70);
+        bottom: vw(140);
         z-index: 10;
         p {
             @include sub5;
@@ -332,13 +320,13 @@
 /* section4 영역 */
 .section4-main {
     width: 100%;
-    height: 56.25rem;
+    height: vw(900);
     font-family: 'Pretendard';
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 60px;
+    gap: vw(100);
     background-color: #fff;
     ul {
         display: flex;
@@ -349,9 +337,8 @@
         @include font-160px-B;
         li {
             display: inline-block;
-            font-size: 60px;
             font-weight: bold;
-            margin-right: 20px; // 아이템 간격
+            margin-right: vw(20); // 아이템 간격
         }
     }
 
@@ -371,32 +358,33 @@
 .section5-main {
     background-color: #f8f8f8;
     width: 100%;
-    height: 80rem;
+    height: vw(1100);
     position: relative;
     overflow: hidden;
     font-family: 'Pretendard';
     .section5-container {
         width: 100%;
+        height: 100%;
         display: flex;
-        padding-left: 300px;
-        padding-top: 150px;
+        justify-content: center;
+        align-items: center;
     }
     .section5-content {
         display: flex;
+        width: vw(1600);
         .section5-text-area {
             .section5-main-title {
-                font-family: 'KoPub Batang', serif;
-                width: 80.25rem;
+                font-family: 'Aritaburi', serif;
                 @include font-130px-B;
                 color: #d5d5d5;
-                margin-bottom: 80px;
+                margin-bottom: vw(130);
             }
             .section5-subtitle {
-                margin-bottom: 50px;
+                margin-bottom: vw(50);
                 h3 {
                     @include font-55px-B;
                     color: #333;
-                    margin-bottom: 2.5rem;
+                    margin-bottom: vw(50);
                 }
 
                 p {
@@ -406,7 +394,7 @@
             }
             .section5-cta {
                 display: flex;
-                gap: 15px;
+                gap: vw(15);
                 cursor: pointer;
                 transition: all 0.3s ease;
                 &:hover {
@@ -426,7 +414,7 @@
 
                 .cta-arrow {
                     @include main1;
-                    font-size: 1.2rem;
+                    @include font-20px;
                     transition: transform 0.3s ease;
                 }
             }
@@ -434,26 +422,27 @@
     }
     .section5-images {
         position: absolute;
-        left: 100rem;
+        left: vw(1000);
+        bottom: vw(170);
         width: 100%;
         display: flex;
-        gap: 20px;
+        gap: vw(15);
         align-items: end;
         .image-container {
             background-color: #ddd;
             &.image1 {
-                width: 12.5rem;
-                height: 15.625rem;
+                width: vw(200);
+                height: vw(250);
             }
 
             &.image2 {
-                width: 15.625rem;
-                height: 25rem;
+                width: vw(250);
+                height: vw(400);
             }
 
             &.image3 {
-                width: 21.875rem;
-                height: 40.625rem;
+                width: vw(350);
+                height: vw(650);
             }
 
             // 이미지가 들어갈 때를 위한 스타일

@@ -10,7 +10,7 @@
 
 @mixin font-130px-B {
     font-size: rem(130px);
-    font-weight: 700;
+    font-weight: 900;
     letter-spacing: rem(-0.3px);
     line-height: rem(170px);
 }
@@ -25,6 +25,13 @@
 @mixin font-35px-B {
     font-size: rem(35px);
     font-weight: 700;
+    letter-spacing: rem(-0.3px);
+    line-height: rem(48px);
+}
+
+@mixin font-35px-SB {
+    font-size: rem(35px);
+    font-weight: 500;
     letter-spacing: rem(-0.3px);
     line-height: rem(48px);
 }
@@ -45,7 +52,7 @@
 
 @mixin font-20px-B {
     font-size: rem(20px);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: rem(-0.3px);
     line-height: rem(30px);
 }
@@ -82,6 +89,12 @@
     font-weight: 700;
     letter-spacing: rem(-0.3px);
     line-height: rem(18px);
+}
+
+@mixin font-20px {
+    font-size: rem(20px);
+    letter-spacing: rem(-0.3px);
+    line-height: rem(30px);
 }
 
 @mixin font-12px {

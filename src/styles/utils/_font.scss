@@ -2,110 +2,110 @@
 //B: bold style. 안 붙어있는 건 normal
 
 @mixin font-160px-B {
-    font-size: rem(160px);
+    font-size: vw(160px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(200px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(200px);
 }
 
 @mixin font-130px-B {
-    font-size: rem(130px);
+    font-size: vw(130px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(170px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(170px);
 }
 
 @mixin font-105px-B {
     font-size: vw(105px);
     font-weight: 600;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(140px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(140px);
 }
 
 @mixin font-55px-B {
-    font-size: rem(55px);
+    font-size: vw(55px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(68px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(68px);
 }
 
 @mixin font-35px-B {
-    font-size: rem(35px);
+    font-size: vw(35px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(48px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(48px);
 }
 
 @mixin font-35px-SB {
-    font-size: rem(35px);
+    font-size: vw(35px);
     font-weight: 500;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(48px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(48px);
 }
 
 @mixin font-32px-B {
-    font-size: rem(32px);
+    font-size: vw(32px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(48px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(48px);
 }
 
 @mixin font-24px-B {
-    font-size: rem(24px);
+    font-size: vw(24px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(36px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(36px);
 }
 
 @mixin font-20px-B {
-    font-size: rem(20px);
+    font-size: vw(20px);
     font-weight: 600;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(30px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(30px);
 }
 
 @mixin font-18px-B {
-    font-size: rem(18px);
+    font-size: vw(18px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(27px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(27px);
 }
 
 @mixin font-16px-B {
-    font-size: rem(16px);
+    font-size: vw(16px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(24px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(24px);
 }
 
 @mixin font-14px {
-    font-size: rem(14px);
-    letter-spacing: rem(-0.3px);
-    line-height: rem(21px);
+    font-size: vw(14px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(21px);
 }
 
 @mixin font-14px-B {
-    font-size: rem(14px);
+    font-size: vw(14px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(21px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(21px);
 }
 
 @mixin font-12px-B {
-    font-size: rem(12px);
+    font-size: vw(12px);
     font-weight: 700;
-    letter-spacing: rem(-0.3px);
-    line-height: rem(18px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(18px);
 }
 
 @mixin font-20px {
-    font-size: rem(20px);
-    letter-spacing: rem(-0.3px);
-    line-height: rem(30px);
+    font-size: vw(20px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(30px);
 }
 
 @mixin font-12px {
-    font-size: rem(12px);
-    letter-spacing: rem(-0.3px);
-    line-height: rem(18px);
+    font-size: vw(12px);
+    letter-spacing: vw(-0.3px);
+    line-height: vw(18px);
 }

@@ -10,13 +10,13 @@
 
 @mixin font-130px-B {
     font-size: rem(130px);
-    font-weight: 900;
+    font-weight: 700;
     letter-spacing: rem(-0.3px);
     line-height: rem(170px);
 }
 
 @mixin font-105px-B {
-    font-size: rem(105px);
+    font-size: vw(105px);
     font-weight: 600;
     letter-spacing: rem(-0.3px);
     line-height: rem(140px);

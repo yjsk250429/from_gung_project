@@ -1,5 +1,5 @@
 
-const ClassDatail = () => {
+const TourClassDatail = () => {
     return (
         <div>
             
@@ -7,4 +7,4 @@ const ClassDatail = () => {
     );
 };
 
-export default ClassDatail;
+export default TourClassDatail;

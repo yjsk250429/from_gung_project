@@ -21,35 +21,20 @@ $light-green: #03d800;
 $light-purple: #c08fd6;
 
 //--color name 재할당
-$footer-bg: $dark-gray;
-$footer-font: $gray;
-$desc-font: $gray;
-$status-red-font: $orange-red;
-$status-blue-font: $blue;
-$tag-blue-bg: $coral-blue;
-$footer-border-color: $daker-gray;
-$header-bg: $gray-white;
-$main-bg: $gray-white;
+// $footer-bg: $dark-gray;
+// $footer-font: $gray;
+// $desc-font: $gray;
+// $status-red-font: $orange-red;
+// $status-blue-font: $blue;
+// $tag-blue-bg: $coral-blue;
+// $footer-border-color: $daker-gray;
+// $header-bg: $gray-white;
+// $main-bg: $gray-white;
 
-// 메인 컬러
-@mixin main1 {
-    color: #313574;
-}
-
-
-// 서브 컬러
-@mixin sub5 {
-    color: #394B6F;
-}
-@mixin sub1 {
-    color: #fff;
-}
-@mixin sub2 {
-    color: #F1EFEE;
-}
-@mixin sub3 {
-    color: #000;
-}
-@mixin sub4 {
-    color: #FFE1E0;
-}
+$main1:#313574;
+$main2: #F49BAB;
+$sub1:#F1EFEE;
+$sub2: #FFE1E0;
+$sub3:#FF5573;
+$sub4: #7F55B1;
+$sub5:#394B6F;

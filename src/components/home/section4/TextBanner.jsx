@@ -17,7 +17,7 @@ const bottomItems = [
     '지금 경험해보세요',
 ];
 
-const Section4 = () => {
+const TextBanner = () => {
     const topRef = useRef(null);
     const bottomRef = useRef(null);
 
@@ -93,4 +93,4 @@ const Section4 = () => {
     );
 };
 
-export default Section4;
+export default TextBanner;

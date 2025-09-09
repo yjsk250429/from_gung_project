@@ -19,7 +19,7 @@ const items = [
     '북촌한옥마을',
 ];
 
-const Section2 = () => {
+const PalaceVideo = () => {
     const listRef = useRef(null);
 
     useEffect(() => {
@@ -53,4 +53,4 @@ const Section2 = () => {
         </div>
     );
 };
-export default Section2;
+export default PalaceVideo;

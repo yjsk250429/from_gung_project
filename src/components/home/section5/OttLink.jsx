@@ -1,4 +1,4 @@
-const Section5 = () => {
+const OttLink = () => {
     return (
         <div className="section5-main">
             <div className="section5-container">
@@ -41,4 +41,4 @@ const Section5 = () => {
     );
 };
 
-export default Section5;
+export default OttLink;

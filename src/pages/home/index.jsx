@@ -1,22 +1,15 @@
-import {
-    Mainvisual,
-    Section1,
-    Section2,
-    Section3,
-    Section4,
-    Section5,
-} from '../../components/home';
+import { BestTour, Mainvisual, OttLink, PalaceVideo, TextBanner, TraditionClass } from '../../components/home';
 import './style.scss';
 
 const Home = () => {
     return (
         <>
             <Mainvisual />
-            <Section1 />
-            <Section2 />
-            <Section3 />
-            <Section4 />
-            <Section5 />
+            <BestTour />
+            <PalaceVideo />
+            <TraditionClass />
+            <TextBanner />
+            <OttLink />
         </>
     );
 };

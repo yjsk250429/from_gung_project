@@ -6,13 +6,13 @@ const NavBar = () => {
             <nav className="nav">
                 <ul>
                     <li>
-                        <Link to="/brand">BRAND 읽다</Link>
+                        <Link to="/brand"><span>BRAND</span> 읽다</Link>
                     </li>
                     <li>
-                        <Link to="/tour">TOUR 가다</Link>
+                        <Link to="/tour"><span>TOUR</span> 가다</Link>
                     </li>
                     <li>
-                        <Link to="/ott">OTT 보다</Link>
+                        <Link to="/ott"><span>OTT</span> 보다</Link>
                     </li>
                 </ul>
             </nav>

@@ -40,7 +40,9 @@ const PalaceVideo = () => {
                 <video src="/images/con2_video.mp4" autoPlay muted loop></video>
             </div>
             <div className="s2_middle-text">
-                <img src="/images/con2_text.png" alt="" />
+                {/* <img src="/images/con2_text.png" alt="" /> */}
+                <em>"한국 문화의 새로운 경험"</em>
+                <h3>여행하고,<br/><span>기록하고</span><span>이어보다</span></h3>
             </div>
             <ul className="s2_bottom-text" ref={listRef}>
                 {items.map((item, i) => (

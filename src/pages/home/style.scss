@@ -97,7 +97,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
                 transform: translate(-50%, -50%);
                 writing-mode: vertical-rl;
                 text-orientation: mixed;
-                color: #fff;
+                color: $white;
                 font-weight: 500;
                 font-size: 25px;
                 letter-spacing: 8px;
@@ -144,6 +144,37 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
         position: absolute;
         top: vw(200);
         right: vw(110);
+        em{
+            @include font-30px-B;
+            color:$white;
+            text-align: center;
+            display: block;
+            margin-bottom: 28px;
+        }
+        h3{
+            color: $white;
+            font-size: 57px;
+            font-family: $font-sub;
+            span{
+                font-family: $font-sub;
+                &:first-of-type{
+                    margin-left: 42px;
+                    margin-right: 160px;
+                    position: relative;
+                    &::after{
+                        content: "";
+                        display: block;
+                        background: $white;
+                        width: 134px;
+                        height: 2px;
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        transform: translate(110%,-50%);
+                    }
+                }
+            }
+        }
     }
     .s2_bottom-text {
         display: flex;
@@ -155,6 +186,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             @include font-20px-B;
             color: $sub1;
             display: inline-block;
+            font-family: $font-sub;
         }
     }
 }
@@ -322,7 +354,6 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
 .section4-main {
     width: 100%;
     height: vw(900);
-  
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -349,7 +380,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     }
 
     .s4_bottom-text {
-        color: $sub1;
+        color: $white;
         text-shadow: -1px -1px 0 #394b6f, 0 -1px 0 #394b6f, 1px -1px 0 #394b6f, 1px 0 0 #394b6f,
             1px 1px 0 #394b6f, 0 1px 0 #394b6f, -1px 1px 0 #394b6f, -1px 0 0 #394b6f;
     }

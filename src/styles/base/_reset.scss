@@ -1,3 +1,5 @@
+@use './fonts' as *;
+
 html,
 body,
 div,
@@ -83,7 +85,7 @@ video {
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
+    font-family: $font-main;
     vertical-align: baseline;
 }
 
@@ -104,7 +106,7 @@ section {
 }
 html,
 body {
-    font-size: 16px;
+    font-size: 10px;
 }
 body {
     line-height: 1.5;

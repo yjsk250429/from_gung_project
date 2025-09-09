@@ -9,10 +9,10 @@
     transition: transform 1s;
 
     @include tablet {
-        background-color: $white;
+        // background-color: $white;
     }
     @include desktop {
-        background-color: $white;
+        // background-color: $white;
     }
 
     border-radius: rem(10px);
@@ -59,12 +59,12 @@
 
     &__desc {
         @include font-14px;
-        color: $desc-font;
+        // color: $desc-font;
     }
 }
 
 .card-practice {
-    background-color: $white;
+    // background-color: $white;
 
     .card__title {
         margin-top: rem(8px);

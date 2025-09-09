@@ -85,10 +85,11 @@ html.is-active {
                 }
             }
             i{
+                font-size: 16px;
                 position: absolute;
                 right: 10px;
                 top: 50%;
-                transform: translateY(-50%);
+                transform: translateY(-45%);
                 color: #fff;
             }
         }
@@ -100,6 +101,7 @@ html.is-active {
             &.mymenu{
                 gap:20px;
                 li{
+                    font-size: 16px;
                    &:first-child{
                     position: relative;
                         &::after{
@@ -125,6 +127,7 @@ html.is-active {
                 justify-content: center;
                 align-items: center;
                 li{
+                    font-size: 16px;
                     img{
                         margin-right: 5px;
                     

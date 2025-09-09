@@ -4,7 +4,7 @@
 .button {
     appearance: none;
     pointer-events: none;
-    background: $header-bg;
+    // background: $header-bg;
     border: 0;
     padding: rem(8px) rem(16px);
 
@@ -32,7 +32,7 @@
         &__top,
         &__middle,
         &__bottom {
-            background: $dark-gray;
+            // background: $dark-gray;
             position: absolute;
             left: 0;
             width: 100%;
@@ -64,7 +64,7 @@
         border: none;
         background-color: transparent;
         @include font-24px-B;
-        color: $black;
+        // color: $black;
     }
 }
 

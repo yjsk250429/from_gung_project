@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '../common/Layout';
-import { Brand, Class, ClassDatail, Home, Join, Login, MyPage, NotFiles, Ott, OttCategory, OttDetail, Tour, TourDatail } from '../pages';
+import { Brand, Home, Join, Login, MyPage, NotFiles, Ott, OttCategory, OttDetail, TourClass, TourClassDatail, } from '../pages';
 
 export const MyRoutes = () => {
     return (
@@ -12,12 +12,8 @@ export const MyRoutes = () => {
 
                     <Route path="/brand" element={<Brand />} />
 
-                    <Route path="/tour" element={<Tour />} />
-                    <Route path="/tour/:tourID" element={<TourDatail />} />
-                    
-                    <Route path="/class" element={<Class />} />
-                    <Route path="/class/:classID" element={<ClassDatail />} />
-                    
+                    <Route path="/tourclass" element={<TourClass />} />
+                    <Route path="/tourclass/:tourclassID" element={<TourClassDatail />} />
                     {/* 
                         추후 OTT에 다크모드 적용 예정
                         <Route path="/ott" element={<Layout theme="dark" />} >

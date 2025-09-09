@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // ScrollTrigger 플러그인 등록
 gsap.registerPlugin(ScrollTrigger);
 
-const Section3 = () => {
+const TraditionClass = () => {
     const sectionRef = useRef(null);
     const topImageRef = useRef(null);
     const bottomImageRef = useRef(null);
@@ -277,10 +277,10 @@ const Section3 = () => {
 
             {/* 하단 메시지 */}
             <div className="s3_bottom-message" ref={bottomMessageRef}>
-                <p>지금 가장 많은 이들이 발걸음을 이끄는, 사랑받는 인기 투어를 만나보세요.</p>
+                <p>지금 가장 많은 이들의 사랑을 받는, 인기 클래스를 경험해보세요.</p>
             </div>
         </div>
     );
 };
 
-export default Section3;
+export default TraditionClass;

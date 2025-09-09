@@ -8,7 +8,7 @@ import tourItems from '../../../api/mainData';
 // 플러그인 등록
 gsap.registerPlugin(Draggable, InertiaPlugin, ScrollTrigger);
 
-const Section1 = () => {
+const BestTour = () => {
     const gridRef = useRef(null);
 
     useEffect(() => {
@@ -89,4 +89,4 @@ const Section1 = () => {
     );
 };
 
-export default Section1;
+export default BestTour;

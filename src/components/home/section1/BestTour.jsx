@@ -36,7 +36,7 @@ const BestTour = () => {
                 ease: 'power4.out',
                 scrollTrigger: {
                     trigger: '.section1-main',
-                    start: 'top 70%',
+                    start: 'top 60%',
                     end: 'bottom 100%',
                     toggleActions: 'play reverse play reverse',
                 },

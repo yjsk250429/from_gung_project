@@ -1,5 +1,5 @@
 
-const Tour = () => {
+const TourClass = () => {
     return (
         <div>
             
@@ -7,4 +7,4 @@ const Tour = () => {
     );
 };
 
-export default Tour;
+export default TourClass;

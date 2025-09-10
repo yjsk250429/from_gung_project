@@ -38,7 +38,7 @@
 
 @mixin font-35px-SB {
     font-size: vw(35);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: vw(-0.3);
     line-height: vw(48);
 }
@@ -83,6 +83,13 @@
     line-height: vw(27);
 }
 
+@mixin font-18px-SB {
+    font-size: vw(18);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(27);
+}
+
 @mixin font-16px-B {
     font-size: vw(16);
     font-weight: 700;
@@ -98,6 +105,13 @@
 @mixin font-15px-B {
     font-size: vw(15);
     font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(21);
+}
+
+@mixin font-15px-SB {
+    font-size: vw(15);
+    font-weight: 600;
     letter-spacing: vw(-0.3);
     line-height: vw(21);
 }
@@ -118,6 +132,13 @@
 @mixin font-12px-B {
     font-size: vw(12);
     font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(18);
+}
+
+@mixin font-12px-SB {
+    font-size: vw(12);
+    font-weight: 600;
     letter-spacing: vw(-0.3);
     line-height: vw(18);
 }

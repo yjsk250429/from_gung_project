@@ -6,7 +6,7 @@ const Layout = () => {
     return (
         <div className="wrap">
             <Header />
-            <main className="main">
+            <main id="content" className="main">
                 <Outlet />
             </main>
             <Footer />

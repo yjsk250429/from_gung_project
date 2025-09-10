@@ -1,106 +1,104 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Draggable } from 'gsap/Draggable';
 import { InertiaPlugin } from 'gsap/InertiaPlugin';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import tourItems from '../../../api/mainData';
 
-// 플러그인 등록
-gsap.registerPlugin(Draggable, InertiaPlugin, ScrollTrigger);
+// GSAP 플러그인 등록
+gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
 
 const BestTour = () => {
-    const gridRef = useRef(null);
+  const gridRef = useRef(null);
+  const sectionRef = useRef(null);
 
-    useEffect(() => {
-        const grid = gridRef.current;
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const grid = gridRef.current;
 
-        // 세로 스크롤
-        gsap.to(grid, {
-            x: () => -(grid.scrollWidth - window.innerWidth + 200),
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '.section1-main',
-                start: 'top+=50',
-                end: () => '+=' + (grid.scrollWidth - window.innerWidth - 200),
-                scrub: 2,
-                pin: true,
-                anticipatePin: 1,
-            },
-        });
+      // 가로 스크롤 연동
+      gsap.to(grid, {
+        x: () => -(grid.scrollWidth - window.innerWidth),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: () => '+=' + (grid.scrollWidth - window.innerWidth),
+          scrub: 1.5,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
 
-        // Draggable 설정
-        Draggable.create(grid, {
-            type: 'x',
-            bounds: { minX: -grid.scrollWidth + window.innerWidth - 200, maxX: 0 },
-            inertia: true,
-            throwResistance: 1000,
-            edgeResistance: 0.8,
-            dragResistance: 0.2,
-            snap: (endValue) => Math.round(endValue / 50) * 50,
-        });
+      // 드래그로 스크롤도 가능하게
+      Draggable.create(grid, {
+        type: 'x',
+        bounds: { minX: -(grid.scrollWidth - window.innerWidth), maxX: 0 },
+        inertia: true,
+        edgeResistance: 0.85,
+        dragResistance: 0.3,
+      });
 
-        // ScrollTrigger 애니메이션: top-text (위에서 아래로)
-        gsap.fromTo(
-            '.top-text',
-            { y: -200, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                duration: 1.2,
-                ease: 'power4.out',
-                scrollTrigger: {
-                    trigger: '.section1-main',
-                    start: 'top 100%',
-                    end: '+=2800',
-                    toggleActions: 'play reverse play reverse',
-                },
-            }
-        );
+      // 텍스트 애니메이션 (위 → 아래)
+      gsap.fromTo(
+        '.top-text',
+        { y: -150, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
 
-        // ScrollTrigger 애니메이션: bottom-text (아래에서 위로)
-        gsap.fromTo(
-            '.bottom-text',
-            { y: 200, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                duration: 1.2,
-                ease: 'power4.out',
-                scrollTrigger: {
-                    trigger: '.section1-main',
-                    start: 'top+=200',
-                    end: 'bottom+=400 100%',
-                    toggleActions: 'play reverse play reverse',
-                },
-            }
-        );
+      // 텍스트 애니메이션 (아래 → 위)
+      gsap.fromTo(
+        '.bottom-text',
+        { y: 150, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'bottom bottom',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }, sectionRef); // context는 sectionRef 하위에서만 작동
 
-        return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-        };
-    }, []);
+    return () => ctx.revert(); // 자동 cleanup
+  }, []);
 
-    return (
-        <div className="section1-main">
-            <div className="top-text">
-                <p>A Journey Back in Time</p>
+  return (
+    <div className="section1-main" ref={sectionRef}>
+      <div className="top-text">
+        <p>A Journey Back in Time</p>
+      </div>
+      <div className="image-grid" ref={gridRef}>
+        {tourItems.map((item) => (
+          <div className="image-box" key={item.id}>
+            <img src={item.img} alt={item.label} />
+            <div className="overlay">
+              <img src="/images/con1_hover.png" alt="icon" className="overlay-icon" />
+              <span className="label">{item.label}</span>
             </div>
-            <div className="image-grid" ref={gridRef}>
-                {tourItems.map((item) => (
-                    <div className="image-box" key={item.id}>
-                        <img src={item.img} alt={item.label} />
-                        <div className="overlay">
-                            <img src="/images/con1_hover.png" alt="icon" className="overlay-icon" />
-                            <span className="label">{item.label}</span>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div className="bottom-text">
-                <p>역사와 문화를 가장 가까이에서 느낄 수 있는, 주목받는 인기 투어를 소개합니다.</p>
-            </div>
-        </div>
-    );
+          </div>
+        ))}
+      </div>
+      <div className="bottom-text">
+        <p>역사와 문화를 가장 가까이에서 느낄 수 있는, 주목받는 인기 투어를 소개합니다.</p>
+      </div>
+    </div>
+  );
 };
 
 export default BestTour;

@@ -16,7 +16,7 @@ button{
             }
             &.default{
             background-image: url('/images/components/button-default.png');
-            width: 150px;
+            width: vw(150px);
             height: 40px;
         }
         &.medium{

@@ -3,11 +3,8 @@
 // 기본 버튼 스타일
 .button {
     appearance: none;
-    pointer-events: none;
-    // background: $header-bg;
     border: 0;
     padding: rem(8px) rem(16px);
-
     &None {
         appearance: none;
         border: 0;
@@ -64,7 +61,6 @@
         border: none;
         background-color: transparent;
         @include font-24px-B;
-        // color: $black;
     }
 }
 

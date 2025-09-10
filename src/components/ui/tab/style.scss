@@ -1,13 +1,17 @@
+@use '../../../styles/utils' as *;
+@use '../../../styles/base' as *;
+
 .tabs{
     // margin-top: 200px;
     width: 100%;
     display: flex;
-    flex:1;
     justify-content: center;
     align-items: center;
     text-align: center;
     li{
+        flex:1;
         cursor: pointer;
+        @include font-20px-M;
         &.on{
             border-bottom: 1px solid #000;
         }

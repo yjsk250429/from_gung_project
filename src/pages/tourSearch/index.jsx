@@ -1,5 +1,6 @@
 
-const OttCategory = () => {
+
+const TourSearch = () => {
     return (
         <div>
             
@@ -7,4 +8,4 @@ const OttCategory = () => {
     );
 };
 
-export default OttCategory;
+export default TourSearch;

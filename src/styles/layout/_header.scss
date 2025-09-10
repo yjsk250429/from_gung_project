@@ -1,4 +1,5 @@
 @use './../utils' as *;
+@use './../base/fonts' as *;
 
 html.is-active {
     overflow-y: hidden;
@@ -8,6 +9,7 @@ html.is-active {
     background-color: transparent;
     position:fixed;
     z-index: 100;
+    transition: 0.4s;
     .inner {
         height: 100px;
         display: flex;
@@ -40,23 +42,13 @@ html.is-active {
                     font-size: 20px;
                     transition: 0.3s;
                     color: #fff;
+                    span{
+                        @include font-20px-B;
+                        font-family: $font-sub;
+                    }
                     &:hover {
                         color: tomato;
                     }
-                }
-                &:last-child span {
-                    font-size: 16px;
-                    border-radius: 50%;
-                    display: block;
-                    position: absolute;
-                    right: -20px;
-                    top: -5px;
-                    width: 20px;
-                    height: 20px;
-                    background-color: #000;
-                    color: #fff;
-                    text-align: center;
-                    line-height: 20px;
                 }
             }
         }
@@ -64,6 +56,7 @@ html.is-active {
 
     .util{
         display: flex;
+        align-items: center;
         gap: 20px;
         form{
             border: 1px solid #fff;
@@ -79,6 +72,10 @@ html.is-active {
                 height: 30px;
                 padding: 0 20px 0 10px;
                 color: #fff;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
                 &:focus{
                     outline: none;
                     box-shadow: none;
@@ -101,6 +98,7 @@ html.is-active {
             &.mymenu{
                 gap:20px;
                 li{
+                    cursor: pointer;
                     font-size: 16px;
                    &:first-child{
                     position: relative;
@@ -119,18 +117,71 @@ html.is-active {
                 }
             }
             &.reward{
+                cursor: pointer;
                 gap: 10px;
                 background:rgba($color:#fff, $alpha: 0.1);
                 width: 110px;
-                height: 20px;
+                height: 22px;
                 border-radius: 50px;
                 justify-content: center;
                 align-items: center;
                 li{
                     font-size: 16px;
+                    display: flex;
+                    align-items: center;
                     img{
                         margin-right: 5px;
-                    
+                        display: block;
+                        height: 15px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.on{
+        background-color: #fff;
+        .nav{
+            ul{
+                li{
+                    a{
+                        color: #000;
+                        &:hover{
+                            color: tomato;
+                        }
+                    }
+                }
+            }
+        }
+        .util{
+            form{
+                border-color: #000;
+                input[type="text"]{
+                    color: #000;
+                }
+                i{
+                    color: #000;
+                }
+            }
+            ul{
+                li{
+                    color: #000;
+                }
+                &.mymenu{
+                    li{
+                        &:first-child{
+                            &::after{
+                                background: #000;
+                            }
+                        }
+                    }
+                }
+                &.reward{
+                    background:rgba($color: #000000, $alpha: 0.1);
+                    li{
+                        img{
+                            filter:invert(1);
+                        }
                     }
                 }
             }
@@ -150,10 +201,8 @@ html.is-active {
         }
     }
 
-    // hader end
-
     @include tablet {
-        background: pink;
+        // background: pink;
         .inner {
             height: 70px;
             width: 100%;
@@ -171,4 +220,4 @@ html.is-active {
             }
         }
     }
-} //header end
+}

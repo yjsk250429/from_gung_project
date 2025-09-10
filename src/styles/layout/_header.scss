@@ -23,7 +23,7 @@ html.is-active {
         transform: translateY(-50%);
         a {
             img {
-                width: 60px;
+                width: 122px;
             }
         }
     }
@@ -141,6 +141,13 @@ html.is-active {
 
     &.on{
         background-color: #fff;
+        h1{
+            a{
+                img{
+                    filter: invert(1);
+                }
+            }
+        }
         .nav{
             ul{
                 li{

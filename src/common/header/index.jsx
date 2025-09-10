@@ -28,7 +28,7 @@ const Header = () => {
             <div className="inner">
                 <h1>
                     <Link to="/">
-                        <img src="./vite.svg" alt="logo" />
+                        <img src="/images/logo.png" alt="fromgung" />
                     </Link>
                 </h1>
                 <NavBar />

@@ -184,7 +184,7 @@ const TraditionClass = () => {
                 className={`s3_card s3_card--top-right ${activeImage === 'tea' ? 'active' : ''}`}
                 ref={cardTopRightRef}
                 onMouseEnter={() => handleCardClick('tea')}
-                onMouseLeave={() => handleCardClick('default')}
+                // onMouseLeave={() => handleCardClick('default')}
                 style={{ cursor: 'pointer' }}
             >
                 <div className="card-hover-image">
@@ -216,7 +216,7 @@ const TraditionClass = () => {
                 }`}
                 ref={cardBottomLeftRef}
                 onMouseEnter={() => handleCardClick('hanbok')}
-                onMouseLeave={() => handleCardClick('default')}
+                // onMouseLeave={() => handleCardClick('default')}
                 style={{ cursor: 'pointer' }}
             >
                 <div className="card-hover-image">
@@ -248,7 +248,7 @@ const TraditionClass = () => {
                 }`}
                 ref={cardBottomRightRef}
                 onMouseEnter={() => handleCardClick('bibimbap')}
-                onMouseLeave={() => handleCardClick('default')}
+                // onMouseLeave={() => handleCardClick('default')}
                 style={{ cursor: 'pointer' }}
             >
                 <div className="card-hover-image">

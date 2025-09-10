@@ -37,8 +37,8 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
         padding-top: vw(170);
         margin-left: vw(85);
         p {
-           color: $main1;
-           font-family: $font-sub;
+            color: $main1;
+            font-family: $font-sub;
         }
     }
     .image-grid {
@@ -51,7 +51,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             flex: 0 0 auto;
             width: vw(380);
             height: vw(420);
-          
+
             border-radius: vw(10);
             position: relative;
             box-shadow: 0 0.375rem 1rem rgba(0, 0, 0, 0.1);
@@ -59,7 +59,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             // ✅ 개별 요소 위치 조정
             @for $i from 1 through length($y-values) {
                 &:nth-child(#{$i}) {
-                  transform: translateY(nth($y-values, $i));
+                    transform: translateY(nth($y-values, $i));
                 }
             }
 
@@ -124,7 +124,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     height: vw(700);
     position: relative;
     overflow: hidden;
-    .video{
+    .video {
         position: absolute;
         top: vw(-180);
         width: 100%;
@@ -144,25 +144,25 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
         position: absolute;
         top: vw(200);
         right: vw(110);
-        em{
+        em {
             @include font-30px-B;
-            color:$white;
+            color: $white;
             text-align: center;
             display: block;
             margin-bottom: 28px;
         }
-        h3{
+        h3 {
             color: $white;
             font-size: 57px;
             font-family: $font-sub;
-            span{
+            span {
                 font-family: $font-sub;
-                &:first-of-type{
+                &:first-of-type {
                     margin-left: 42px;
                     margin-right: 160px;
                     position: relative;
-                    &::after{
-                        content: "";
+                    &::after {
+                        content: '';
                         display: block;
                         background: $white;
                         width: 134px;
@@ -170,7 +170,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
                         position: absolute;
                         right: 0;
                         top: 50%;
-                        transform: translate(110%,-50%);
+                        transform: translate(110%, -50%);
                     }
                 }
             }
@@ -198,14 +198,14 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     position: relative;
     background-color: #f8f8f8;
     overflow: hidden;
-  
+
     .s3_main-title {
         margin-top: vw(220);
         margin-left: vw(95);
         z-index: 10;
         h1 {
             font-family: $font-sub;
-            color:$main1;
+            color: $main1;
             @include font-130px-B;
             margin: 0;
         }
@@ -271,7 +271,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             left: vw(50);
 
             h3 {
-                color:$main1;
+                color: $main1;
                 @include font-55px-B;
                 margin-bottom: vw(90);
                 transition: color 0.3s ease;
@@ -285,7 +285,6 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             }
 
             p {
-                
                 color: $sub3;
                 @include font-20px;
                 opacity: 0.8;
@@ -305,12 +304,10 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
 
             .card-content {
                 h3 {
-            
                     color: $sub1;
                 }
 
                 .card-tag {
-              
                     color: $sub4;
                 }
 
@@ -393,7 +390,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     height: vw(1100);
     position: relative;
     overflow: hidden;
-  
+
     .section5-container {
         width: 100%;
         height: 100%;

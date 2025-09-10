@@ -14,10 +14,24 @@ const BestTour = () => {
     useEffect(() => {
         const grid = gridRef.current;
 
-        // ✅ Draggable 설정
+        // 세로 스크롤
+        gsap.to(grid, {
+            x: () => -(grid.scrollWidth - window.innerWidth + 200),
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.section1-main',
+                start: 'top+=50',
+                end: () => '+=' + (grid.scrollWidth - window.innerWidth - 200),
+                scrub: 2,
+                pin: true,
+                anticipatePin: 1,
+            },
+        });
+
+        // Draggable 설정
         Draggable.create(grid, {
             type: 'x',
-            bounds: { minX: -grid.scrollWidth + window.innerWidth, maxX: 0 },
+            bounds: { minX: -grid.scrollWidth + window.innerWidth - 200, maxX: 0 },
             inertia: true,
             throwResistance: 1000,
             edgeResistance: 0.8,
@@ -25,7 +39,7 @@ const BestTour = () => {
             snap: (endValue) => Math.round(endValue / 50) * 50,
         });
 
-        // ✅ ScrollTrigger 애니메이션: top-text (위에서 아래로)
+        // ScrollTrigger 애니메이션: top-text (위에서 아래로)
         gsap.fromTo(
             '.top-text',
             { y: -200, opacity: 0 },
@@ -36,14 +50,14 @@ const BestTour = () => {
                 ease: 'power4.out',
                 scrollTrigger: {
                     trigger: '.section1-main',
-                    start: 'top 60%',
-                    end: 'bottom 100%',
+                    start: 'top 100%',
+                    end: '+=2800',
                     toggleActions: 'play reverse play reverse',
                 },
             }
         );
 
-        // ✅ ScrollTrigger 애니메이션: bottom-text (아래에서 위로)
+        // ScrollTrigger 애니메이션: bottom-text (아래에서 위로)
         gsap.fromTo(
             '.bottom-text',
             { y: 200, opacity: 0 },

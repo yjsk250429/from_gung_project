@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
     return (
         <footer id="footer">
@@ -5,7 +7,7 @@ const Footer = () => {
             </div>
             <div className="inner">
                 <div className="top">
-                <h2><a href="#"><img src="/images/logo.png" alt="fromgung" /></a></h2>
+                <h2><Link to="/"><img src="/images/logo.png" alt="fromgung" /></Link></h2>
                 <ul className="policy">
                     <li>개인정보처리방침</li>
                     <li>유튜브</li>

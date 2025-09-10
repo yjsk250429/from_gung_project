@@ -8,7 +8,7 @@ export { default as OttSub } from './ottSub';
 export { default as OttDetail } from './ottDetail';
 export { default as TourClass } from './product';
 export { default as Tour } from './product';
-export { default as TourClassDatail } from './productDetail';
+export { default as TourClassDetail } from './productDetail';
 export { default as NotFiles } from './notfiles';
 export { default as Join } from './login/Join';
 export { default as Login } from './login/Login';

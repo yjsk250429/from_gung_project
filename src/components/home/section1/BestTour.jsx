@@ -86,9 +86,9 @@ const BestTour = () => {
                 <p>A Journey Back in Time</p>
             </div>
             <div className="image-grid" ref={gridRef}>
-                {tourItems.map((item, index) => (
-                    <div className="image-box" key={index}>
-                        <img src={item.img} alt={`tour-${index}`} />
+                {tourItems.map((item) => (
+                    <div className="image-box" key={item.id}>
+                        <img src={item.img} alt={item.label} />
                         <div className="overlay">
                             <img src="/images/con1_hover.png" alt="icon" className="overlay-icon" />
                             <span className="label">{item.label}</span>

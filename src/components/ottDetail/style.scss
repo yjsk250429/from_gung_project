@@ -1,0 +1,66 @@
+@use '../../styles/utils' as *;
+@use '../../styles/base' as *;
+
+//font-family:$font-sub
+
+.detailvisual {
+    .bg {
+        width: vw(1920);
+        height: vw(1000);
+        background-image: url('/images/ott/ottdetail.png');
+        position: absolute;
+    }
+    .inner {
+        .left {
+            padding-top: vw(104);
+            box-sizing: border-box;
+            width: vw(312);
+            height: vw(848);
+            .title {
+                display: flex;
+                justify-content: bottom;
+                align-items: center;
+                strong {
+                    @include font-20px-SB;
+                    color: $white;
+                    margin-right: vw(4);
+                }
+                p {
+                    @include font-15px-SB;
+                    color: $white;
+                }
+            }
+            .list {
+                width: vw(260);
+                height: vw(194);
+                margin-top: vw(4);
+                .contents1 {
+                    margin-bottom: vw(12);
+                    img {
+                        width: vw(260);
+                        height: vw(144);
+                        border-radius: vw(12);
+                        display: block;
+                        margin-bottom: vw(8);
+                    }
+                    strong {
+                        @include font-20px-SB;
+                        color: $white;
+                        margin-right: vw(8);
+                        display: block;
+                    }
+                    .date {
+                        display: flex;
+                        justify-content: right;
+                        align-items: center;
+                        p {
+                            @include font-14px-R;
+                            color: $white;
+                            margin-left: vw(10);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

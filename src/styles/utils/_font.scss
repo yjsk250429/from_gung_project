@@ -121,6 +121,9 @@
     letter-spacing: vw(-0.3);
     line-height: vw(21);
 }
+@mixin font-14px-R {
+    font-size: vw(14px);
+}
 
 @mixin font-14px-B {
     font-size: vw(14);
@@ -148,9 +151,17 @@
     letter-spacing: vw(-0.3);
     line-height: vw(30);
 }
+@mixin font-20px-SB {
+    font-size: vw(20px);
+    font-weight: 600;
+}
 
 @mixin font-12px {
     font-size: vw(12);
     letter-spacing: vw(-0.3);
     line-height: vw(18);
+}
+@mixin font-15px-SB {
+    font-size: vw(15px);
+    font-weight: 600;
 }

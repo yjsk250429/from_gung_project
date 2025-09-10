@@ -1,5 +1,5 @@
 
-const Ott = () => {
+const OttSub = () => {
     return (
         <div>
             
@@ -7,4 +7,4 @@ const Ott = () => {
     );
 };
 
-export default Ott;
+export default OttSub;

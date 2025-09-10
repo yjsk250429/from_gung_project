@@ -1,13 +1,26 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '../common/Layout';
-import { Brand, Home, Join, Login, MyPage, NotFiles, OttDetail, OttMain, OttSearch, OttSub, TourClass, TourClassDetail, TourSearch, } from '../pages';
+import {
+    Brand,
+    Home,
+    Join,
+    Login,
+    MyPage,
+    NotFiles,
+    OttDetail,
+    OttMain,
+    OttSearch,
+    OttSub,
+    TourClass,
+    TourClassDetail,
+    TourSearch,
+} from '../pages';
 
 export const MyRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    
                     <Route index element={<Home />} />
 
                     <Route path="/brand" element={<Brand />} />
@@ -23,17 +36,17 @@ export const MyRoutes = () => {
                     */}
                     <Route path="/ottmain" element={<OttMain />} />
                     <Route path="/ottsub" element={<OttSub />} />
-                    <Route path="/ott/:ottID" element={<OttDetail />} />
+                    {/* <Route path="/ott/:ottID" element={<OttDetail />} /> */}
+                    <Route path="/ott/ottdetail" element={<OttDetail />} />
                     <Route path="/ottresults" element={<OttSearch />} />
 
                     <Route path="/mypage" element={<MyPage />} />
-                    
+
                     {/* <Route path="/login" element={<Login />} />
                     
                     <Route path="/join" element={<Join />} /> */}
 
                     <Route path="*" element={<NotFiles />} />
-
                 </Route>
             </Routes>
         </BrowserRouter>

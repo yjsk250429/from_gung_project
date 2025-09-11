@@ -21,6 +21,7 @@
         }
     }
     .TourClassList{
+        margin-top: 50px;
         @include tourList;
     }
 }

@@ -1,4 +1,8 @@
+@use '../../styles/base' as *; 
+@use '../../styles/utils' as *; 
+
 .ottsub{
+    background: $black;
     .inner{
         padding:200px 0;
     }

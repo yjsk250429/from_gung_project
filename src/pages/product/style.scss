@@ -1,8 +1,21 @@
-// @use './../utils' as *;
+@use '../../styles/utils' as *;
+@use '../../styles/base' as *;
 
 .tourclass{
     .inner{
         padding: 200px 0;
+    }
+    .sort{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: vw(18);
+        li{
+            @include font-18px;
+            i{
+                margin-right: vw(10);
+            }
+        }
     }
     p{
 

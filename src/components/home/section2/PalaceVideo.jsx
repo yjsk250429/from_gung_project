@@ -21,10 +21,34 @@ const items = [
 
 const PalaceVideo = () => {
     const listRef = useRef(null);
+    const rightRef = useRef(null);
 
     useEffect(() => {
         const list = listRef.current;
         const width = list.scrollWidth / 2;
+        const right = rightRef.current;
+
+        // 초기 위치 설정 (화면 밖으로)
+        gsap.set(rightRef.current, { x: 200, opacity: 0 });
+
+        const timeline1 = gsap.timeline({
+            scrollTrigger: {
+                trigger: right,
+                start: 'top 80%',
+                end: 'bottom 80%',
+                scrub: 1,
+            },
+        });
+        timeline1.to(
+            rightRef.current,
+            {
+                x: 0,
+                opacity: 1,
+                duration: 2.5, // 속도 조절
+                ease: 'power3.out',
+            },
+            0
+        );
 
         gsap.to(list, {
             x: -width, // 왼쪽으로 이동
@@ -39,9 +63,8 @@ const PalaceVideo = () => {
             <div className="video">
                 <video src="/images/con2_video1.mp4" autoPlay muted loop></video>
             </div>
-            <div className="s2_middle-text">
-                {/* <img src="/images/con2_text.png" alt="" /> */}
-                <em>"한국 문화의 새로운 경험"</em>
+            <div className="s2_middle-text" ref={rightRef}>
+                <em>“한국 문화의 새로운 경험“</em>
                 <h3>
                     여행하고,
                     <br />

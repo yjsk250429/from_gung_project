@@ -1,11 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../../ui/button/Button';
 import './style.scss';
 
 const OttMainVisual = () => {
+    const navigate = useNavigate();
     return (
         <section className="OttMainVisual">
             <div>
-                <Button text="콘텐츠 전체보기" className="medium" />
+                <Button text="콘텐츠 전체보기" className="medium" onClick={()=>navigate('/ottsub')}/>
                 <strong>{/* 마우스 휠 */}</strong>
                 <p>{/* 그라데이션 */}</p>
             </div>

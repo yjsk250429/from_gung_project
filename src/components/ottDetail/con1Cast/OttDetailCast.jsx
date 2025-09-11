@@ -2,7 +2,7 @@ import './style.scss';
 
 const OttDetailCast = () => {
     return (
-        <section>
+        <section className="ottcast">
             <div className="con1-inner">
                 <div className="cast-title">
                     <strong>등장인물</strong>

@@ -6,7 +6,7 @@ import Button from '../../ui/button/Button';
 
 const OttDetailReview = () => {
     return (
-        <section>
+        <section className="ottreview">
             <div className="con2-inner">
                 <div className="review">
                     <strong>리뷰</strong>

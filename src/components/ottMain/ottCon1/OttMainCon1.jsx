@@ -12,7 +12,7 @@ const OttMainCon1 = () => {
             gsap.to(textLoopRef.current, {
                 xPercent: -50,
                 repeat: -1,
-                duration: 10,
+                duration: 20,
                 ease: 'linear',
             });
         }

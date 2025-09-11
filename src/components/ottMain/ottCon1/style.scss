@@ -11,11 +11,9 @@
         flex-wrap: nowrap;
         width: max-content;
         p {
-            display: inline-block;
-            white-space: nowrap;
-            padding-right: 80px;
+            padding-right: vw(150);
             font-family: $font-sub;
-            color: red;
+            color: $white;
             @include font-200px-B;
         }
     }

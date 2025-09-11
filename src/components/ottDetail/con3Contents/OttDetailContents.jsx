@@ -16,11 +16,11 @@ const OttDetailContents = () => {
     return (
         <section className="ottDetail">
             <div className="con3-inner">
-                <div className="vod">
+                <div className="vod" data-aos="fade-up" data-aos-delay="150">
                     <strong>관련콘텐츠</strong>
                     <i class="line"></i>
                 </div>
-                <div className="vodlist">
+                <div className="vodlist" data-aos="fade-up" data-aos-delay="350">
                     <div className="vod-img">
                         <img src="" alt="" />
                         <span>10p</span>

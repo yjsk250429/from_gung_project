@@ -1,6 +1,13 @@
 @use './unit' as *;
 //B: bold style. 안 붙어있는 건 normal
 
+@mixin font-200px-B {
+    font-size: vw(200);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(200);
+}
+
 @mixin font-160px-B {
     font-size: vw(160);
     font-weight: 700;
@@ -62,6 +69,9 @@
     letter-spacing: vw(-0.3);
     line-height: vw(36);
 }
+@mixin font-24px-R {
+    font-size: vw(24);
+}
 
 @mixin font-20px-B {
     font-size: vw(20);
@@ -74,6 +84,10 @@
     font-weight: 500;
     letter-spacing: vw(-0.3);
     line-height: vw(30);
+}
+@mixin font-20px-R {
+    font-size: vw(20);
+    font-weight: 400;
 }
 
 @mixin font-18px-B {
@@ -164,4 +178,11 @@
 @mixin font-15px-SB {
     font-size: vw(15px);
     font-weight: 600;
+}
+@mixin font-15px-R {
+    font-size: vw(15px);
+    letter-spacing: vw(-0.5);
+}
+@mixin font-17px {
+    font-size: vw(17px);
 }

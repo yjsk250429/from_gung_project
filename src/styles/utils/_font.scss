@@ -108,6 +108,11 @@
     letter-spacing: vw(-0.3);
     line-height: vw(27);
 }
+@mixin font-18px {
+    font-size: vw(18);
+    letter-spacing: vw(-0.3);
+    line-height: vw(27);
+}
 
 @mixin font-16px-B {
     font-size: vw(16);

@@ -23,6 +23,7 @@ const TourClassTop = () => {
             <ul className="recommend">
                 {TourRecommend.map((tour)=>(<li key={tour.id} onClick={()=>navigate(`${tour.link}`)}>
                     <img src={tour.img} alt={tour.title} />
+                    <div className="grad"></div>
                     <div className="text">
                     <strong>{tour.title}</strong>
                     <em>{tour.caption}</em>

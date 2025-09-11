@@ -18,8 +18,18 @@
         }
     }
 
-    .ottPosters {
-        padding: vw(0) vw(160);
+    .inner {
+        .ottPosters_bottom {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .ottPosters_last {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
         .poster {
             background-size: cover;
             background-position: center;
@@ -28,10 +38,13 @@
             overflow: hidden;
             cursor: pointer;
             position: relative;
+
             .jagae {
+                width: 100%;
                 position: absolute;
-                top: 0;
-                left: 0;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 z-index: 1;
                 opacity: 0;
             }
@@ -41,23 +54,25 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 text-align: center;
-
+                width: max-content;
                 color: $white;
                 z-index: 1;
                 opacity: 0;
                 h3 {
                     @include font-35px-SB;
-                    margin-bottom: 30px;
+                    margin-bottom: vw(30);
                 }
                 h4 {
                     @include font-20px-M;
-                    margin-bottom: 30px;
+                    margin-bottom: vw(30);
                 }
                 img {
-                    margin-bottom: 30px;
+                    max-width: vw(20);
+                    height: auto;
+                    margin-bottom: vw(30);
                 }
                 p {
-                    white-space: pre-line;
+                    @include font-20px-R;
                 }
             }
             .overlay {
@@ -68,10 +83,27 @@
                 background-color: rgba(0, 0, 0, 0.5);
             }
 
+            .jagae,
+            .posterText,
+            .overlay {
+                transition: opacity 0.3s ease-in-out;
+            }
+
             &.pic01 {
-                width: vw(1600);
+                width: 100%;
                 height: vw(920);
                 background-image: url('/public/images/ott/main_01.png');
+                margin-bottom: vw(100);
+            }
+            &.pic02 {
+                width: vw(750);
+                height: vw(1060);
+                background-image: url('/public/images/ott/main_02.png');
+            }
+            &.pic03 {
+                width: vw(750);
+                height: vw(420);
+                background-image: url('/public/images/ott/main_03.png');
             }
 
             &:hover {
@@ -84,6 +116,17 @@
                 .overlay {
                     opacity: 1;
                 }
+            }
+        }
+
+        .jagaeImg {
+            width: vw(750);
+            height: vw(640);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                max-width: vw(350);
             }
         }
     }

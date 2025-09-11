@@ -1,0 +1,279 @@
+@use '../../styles/utils' as *;
+@use '../../styles/base' as *;
+
+//font-family:$font-sub
+
+.detailvisual {
+    position: relative;
+    .bg {
+        width: vw(1920);
+        height: vw(1000);
+        background-image: url('/images/ott/ottdetail.png');
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1;
+    }
+    .left {
+        box-sizing: border-box;
+        width: vw(312);
+        height: vw(953);
+        margin-left: vw(60);
+        padding-top: vw(104);
+        display: flex;
+        flex-direction: column;
+        .episode {
+            display: flex;
+            justify-content: bottom;
+            align-items: center;
+            margin-bottom: 8px;
+            strong {
+                @include font-20px-SB;
+                color: $white;
+                margin-right: vw(4);
+            }
+            p {
+                @include font-15px-SB;
+                color: $white;
+            }
+        }
+        .episodeSwiper {
+            width: vw(312);
+            height: vw(804);
+            overflow: hidden;
+            .swiper-scrollbar {
+                background: rgba(255, 255, 255, 0.2);
+                width: vw(3);
+                height: vw(820);
+                right: 0;
+            }
+            .swiper-scrollbar-drag {
+                background: white;
+                border-radius: 999px;
+            }
+            .swiper-slide {
+                width: vw(260);
+                height: vw(200);
+                .lists {
+                    width: vw(260);
+                    height: vw(200);
+                    display: flex;
+                    margin-bottom: vw(12);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: left;
+                    align-items: left;
+                    cursor: pointer;
+                    position: relative;
+
+                    img {
+                        width: vw(260);
+                        height: vw(144);
+                        border-radius: vw(12);
+                        display: block;
+                        margin-bottom: vw(8);
+                    }
+                    .icon {
+                        img {
+                            width: vw(60);
+                            height: vw(60);
+                            position: absolute;
+                            top: vw(42);
+                            left: vw(100);
+                            opacity: 0;
+                        }
+                    }
+                    &:hover {
+                        > img {
+                            filter: brightness(0.5);
+                        }
+                        .icon {
+                            img {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                    strong {
+                        @include font-20px-SB;
+                        color: $white;
+                        display: block;
+                        span {
+                            @include font-20px-SB;
+                            color: $white;
+                            margin-left: vw(8);
+                        }
+                    }
+                    .date {
+                        display: flex;
+                        justify-content: right;
+                        align-items: center;
+                        p {
+                            @include font-14px-R;
+                            color: $white;
+                            margin-left: vw(10);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .title {
+        width: vw(598);
+        height: vw(580);
+        position: absolute;
+        top: vw(238);
+        left: vw(444);
+        filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.6));
+        .con1 {
+            color: $white;
+            gap: vw(24);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            .star {
+                display: flex;
+                justify-content: center;
+                p {
+                    @include font-24px-R;
+                    line-height: 1;
+                    margin: 0;
+                    margin-right: vw(8);
+                }
+                span {
+                    @include font-20px;
+                }
+            }
+            p {
+                @include font-20px;
+                margin-right: vw(-16);
+            }
+            em {
+                @include font-17px;
+            }
+        }
+        .con2 {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            margin-bottom: vw(20);
+            strong {
+                @include font-20px-M;
+                background-color: $sub4;
+                color: $white;
+                border-radius: vw(5);
+                width: vw(30);
+                height: vw(30);
+                text-align: center;
+            }
+            p {
+                @include font-16px;
+                color: $white;
+                border-right: vw(1) solid $white;
+                padding: 0 vw(10);
+                margin: 0;
+                line-height: vw(20);
+                height: vw(20);
+                &:last-child {
+                    border: none;
+                }
+            }
+        }
+        img {
+            width: vw(476);
+            height: vw(264);
+            margin-bottom: vw(20);
+        }
+        .cast {
+            display: flex;
+            color: $white;
+            margin-bottom: vw(12);
+            strong {
+                @include font-20px-R;
+                margin-right: vw(20);
+            }
+            span {
+                @include font-20px-R;
+                margin-right: vw(4);
+            }
+        }
+        .desc {
+            @include font-20px-R;
+            color: $white;
+            margin-bottom: vw(20);
+        }
+        .price {
+            color: $white;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            margin-bottom: vw(0);
+            span {
+                @include font-15px-R;
+                margin-right: vw(4);
+            }
+            em {
+                margin: vw(8);
+            }
+            strong {
+                @include font-20px-B;
+            }
+        }
+        .btns {
+            display: flex;
+            gap: vw(16);
+            .ep1 {
+                color: $white;
+                @include font-18px-B;
+                font-family: $font-sub;
+                width: vw(184);
+                height: vw(44);
+                padding: vw(11) vw(26);
+                background-color: $main1;
+                border: none;
+                display: flex;
+                text-align: center;
+                align-items: center;
+            }
+            .all {
+                color: $main1;
+                @include font-18px-B;
+                font-family: $font-sub;
+                width: vw(164);
+                height: vw(44);
+                padding: vw(11) vw(37);
+                border: none;
+                background-color: $white;
+                display: flex;
+                text-align: center;
+                align-items: center;
+                gap: vw(4);
+            }
+        }
+    }
+    .bottom {
+        width: vw(1920);
+        height: vw(24);
+        position: absolute;
+        top: vw(935);
+        .line {
+            display: block;
+            width: vw(1708);
+            height: vw(1);
+            background-color: $white;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .icons {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+
+            a {
+                margin-right: vw(35);
+                color: $white;
+            }
+        }
+    }
+}

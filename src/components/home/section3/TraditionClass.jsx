@@ -9,12 +9,8 @@ const TraditionClass = () => {
     const sectionRef = useRef(null);
     const topImageRef = useRef(null);
     const bottomImageRef = useRef(null);
-    const cardTopRightRef = useRef(null);
-    const cardBottomLeftRef = useRef(null);
-    const cardBottomRightRef = useRef(null);
     const topMessageRef = useRef(null);
     const bottomMessageRef = useRef(null);
-    const centerImageRef = useRef(null);
 
     // 중앙 이미지 상태 관리
     const [activeImage, setActiveImage] = useState('default');
@@ -27,48 +23,34 @@ const TraditionClass = () => {
         bibimbap: '/images/con3_img2.png', // 비빔밥 체험 이미지
     };
 
-    // 카드 클릭 핸들러
-    const handleCardClick = (imageType) => {
-        if (activeImage !== imageType) {
-            // 페이드 아웃 -> 이미지 변경 -> 페이드 인 효과
-            gsap.to(centerImageRef.current, {
-                opacity: 0,
-                duration: 0.2,
-                ease: 'power2.out',
-                onComplete: () => {
-                    setActiveImage(imageType);
-                    gsap.to(centerImageRef.current, {
-                        opacity: 1,
-                        duration: 0.4,
-                        ease: 'power2.out',
-                    });
-                },
-            });
-        }
-    };
-
     useEffect(() => {
         const section = sectionRef.current;
 
-        // 초기 위치 설정 (화면 밖으로)
-        gsap.set([topImageRef.current, cardTopRightRef.current], { x: 200, opacity: 0 });
-        gsap.set([bottomImageRef.current, cardBottomLeftRef.current], { x: -200, opacity: 0 });
-        gsap.set(cardBottomRightRef.current, { x: 200, opacity: 0 });
-        gsap.set(topMessageRef.current, { y: -50, opacity: 0 });
+        if (
+            !topImageRef.current ||
+            !bottomImageRef.current ||
+            !topMessageRef.current ||
+            !bottomMessageRef.current
+        )
+            return;
+
+        // 초기 위치 설정
+        gsap.set(topImageRef.current, { x: 200, opacity: 0 });
+        gsap.set(bottomImageRef.current, { x: -500, opacity: 0 });
+        gsap.set(topMessageRef.current, { y: -300, opacity: 0 });
         gsap.set(bottomMessageRef.current, { y: 50, opacity: 0 });
 
-        // 스크롤 트리거 애니메이션 설정
+        // 단일 타임라인 사용
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: section,
-                start: 'top 100%',
+                start: 'top 90%',
                 end: 'bottom 60%',
-                scrub: 0, // 스크롤과 동기화 (1초 지연)
-                markers: false, // 개발 시 true로 설정하면 마커 표시
+                scrub: 0,
+                markers: false,
             },
         });
 
-        // 오른쪽에서 나타나는 요소들
         timeline
             .to(
                 topImageRef.current,
@@ -81,29 +63,6 @@ const TraditionClass = () => {
                 0
             )
             .to(
-                cardTopRightRef.current,
-                {
-                    x: 0,
-                    opacity: 1,
-                    duration: 1.2,
-                    ease: 'power2.out',
-                },
-                0
-            )
-            .to(
-                cardBottomRightRef.current,
-                {
-                    x: 0,
-                    opacity: 1,
-                    duration: 1.2,
-                    ease: 'power2.out',
-                },
-                0
-            );
-
-        // 왼쪽에서 나타나는 요소들
-        timeline
-            .to(
                 bottomImageRef.current,
                 {
                     x: 0,
@@ -111,44 +70,29 @@ const TraditionClass = () => {
                     duration: 1,
                     ease: 'power2.out',
                 },
-                0
+                0.3
             )
             .to(
-                cardBottomLeftRef.current,
+                topMessageRef.current,
                 {
-                    x: 0,
+                    y: 0,
                     opacity: 1,
-                    duration: 1.2,
+                    duration: 1,
                     ease: 'power2.out',
                 },
                 0
+            )
+            .to(
+                bottomMessageRef.current,
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.out',
+                },
+                0.6
             );
 
-        // 상단 메시지는 위에서 아래로
-        timeline.to(
-            topMessageRef.current,
-            {
-                y: 0,
-                opacity: 1,
-                duration: 1,
-                ease: 'power2.out',
-            },
-            0
-        );
-
-        // 하단 메시지는 아래에서 위로
-        timeline.to(
-            bottomMessageRef.current,
-            {
-                y: 0,
-                opacity: 1,
-                duration: 1,
-                ease: 'power2.out',
-            },
-            0.5
-        );
-
-        // 컴포넌트 언마운트 시 정리
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
@@ -170,23 +114,12 @@ const TraditionClass = () => {
                 <img src="/images/con3_bg2.png" alt="" />
             </div>
             <div className="s3_center-image">
-                <img
-                    ref={centerImageRef}
-                    src={imageMap[activeImage]}
-                    alt=""
-                    className="main-image"
-                />
+                <img src={imageMap[activeImage]} alt="" className="main-image" />
             </div>
 
             {/* 카드 영역들 */}
             {/* 우측 상단 카드 - 차 향에 머무는 시간 */}
-            <div
-                className={`s3_card s3_card--top-right ${activeImage === 'tea' ? 'active' : ''}`}
-                ref={cardTopRightRef}
-                onMouseEnter={() => handleCardClick('tea')}
-                // onMouseLeave={() => handleCardClick('default')}
-                style={{ cursor: 'pointer' }}
-            >
+            <div className="s3_card s3_card--top-right">
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />
                 </div>
@@ -210,15 +143,7 @@ const TraditionClass = () => {
             </div>
 
             {/* 좌측 하단 카드 - 한국의 시간을 입다 */}
-            <div
-                className={`s3_card s3_card--bottom-left ${
-                    activeImage === 'hanbok' ? 'active' : ''
-                }`}
-                ref={cardBottomLeftRef}
-                onMouseEnter={() => handleCardClick('hanbok')}
-                // onMouseLeave={() => handleCardClick('default')}
-                style={{ cursor: 'pointer' }}
-            >
+            <div className="s3_card s3_card--bottom-left">
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />
                 </div>
@@ -242,15 +167,7 @@ const TraditionClass = () => {
             </div>
 
             {/* 우측 하단 카드 - 오색의 맛을 비비다 */}
-            <div
-                className={`s3_card s3_card--bottom-right ${
-                    activeImage === 'bibimbap' ? 'active' : ''
-                }`}
-                ref={cardBottomRightRef}
-                onMouseEnter={() => handleCardClick('bibimbap')}
-                // onMouseLeave={() => handleCardClick('default')}
-                style={{ cursor: 'pointer' }}
-            >
+            <div className="s3_card s3_card--bottom-right">
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />
                 </div>

@@ -402,9 +402,11 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     .s4_top-text {
         color: $sub5;
         opacity: 70%;
+        width: max-content;
     }
 
     .s4_bottom-text {
+        width: max-content;
         li {
             margin-left: vw(20);
         }

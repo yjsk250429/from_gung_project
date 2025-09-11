@@ -5,18 +5,20 @@ const topItems = ['LIKE NEVER BEFORE ,', 'UNFORGETTABLE ,', 'EXCLUSIVE ,'];
 
 const bottomItems = ['지금까지 몰랐던 한국 , ', '지금 경험해보세요 '];
 
-gsap.set('.s4_top-text', { xPercent: -50 });
-
 const TextBanner = () => {
-    useEffect(() => {
-        gsap.set('.s4_top-text', { xPercent: 0 });
+    const containerRef = useRef(null);
 
-        gsap.to('.s4_top-text', {
-            x: '-50%',
-            repeat: -1, // 무한 반복으로 수정
-            duration: 1,
-            ease: 'linear',
-        });
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.to('.s4_top-text', {
+                x: '-50%',
+                duration: 10,
+                ease: 'linear',
+                repeat: -1,
+            });
+        }, containerRef);
+
+        return () => ctx.revert(); // 모든 애니메이션 자동 정리
     }, []);
 
     return (
@@ -27,9 +29,6 @@ const TextBanner = () => {
                     {/* {topItems.map((item, i) => (
                         <li key={i}>{item}</li>
                     ))} */}
-                    <li>LIKE NEVER BEFORE UNFORGETTABLE EXCLUSIVE</li>
-                    <li>LIKE NEVER BEFORE UNFORGETTABLE EXCLUSIVE</li>
-                    <li>LIKE NEVER BEFORE UNFORGETTABLE EXCLUSIVE</li>
                     <li>LIKE NEVER BEFORE UNFORGETTABLE EXCLUSIVE</li>
                     <li>LIKE NEVER BEFORE UNFORGETTABLE EXCLUSIVE</li>
                 </ul>

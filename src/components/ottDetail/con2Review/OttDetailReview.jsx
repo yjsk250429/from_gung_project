@@ -8,12 +8,12 @@ const OttDetailReview = () => {
     return (
         <section className="ottreview">
             <div className="con2-inner">
-                <div className="review">
+                <div className="review" data-aos="fade-up" data-aos-delay="150">
                     <strong>리뷰</strong>
                     <span>98개</span>
                     <i class="line"></i>
                 </div>
-                <div className="reviewlist">
+                <div className="reviewlist" data-aos="fade-up" data-aos-delay="350">
                     <div className="listbox">
                         <div className="star">
                             <MdOutlineStar />

@@ -1,6 +1,7 @@
 @use '../../styles/utils' as *;
 @use '../../styles/base' as *;
 @use '../../styles/ui' as *;
+@use '../../styles/ui/tourList' as *;
 
 .tourclass{
     position: relative;
@@ -18,5 +19,8 @@
         .recommend{
             @include twoBoxes;
         }
+    }
+    .TourClassList{
+        @include tourList;
     }
 }

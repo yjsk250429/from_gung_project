@@ -1,11 +1,14 @@
 // @use './../utils' as *;
 
-.inner{
-    height: 1000px;
-    ul{
-     
+.tourclass{
+    .inner{
+        height: 1000px;
+        padding-top: 228px;
+        ul{
+        
+        }
     }
-}
-.button{
-    margin-top: 250px;
+    .button{
+        margin-top: 250px;
+    }
 }

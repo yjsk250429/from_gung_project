@@ -8,14 +8,14 @@ const TourClass = () => {
     const tabItems = ['전체', '서울', '인천/경기', '지방'];
 
     return (
-        <>
+        <section className="tourclass">
             <div className="inner">
                 <TourClassTop/>
                 <Tab items={tabItems}/>
                 <TourClassList/>
                 <Button text="더보기" className="default"/>
             </div>
-        </>
+        </section>
     );
 };
 

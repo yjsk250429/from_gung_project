@@ -1,5 +1,5 @@
 @use './../utils' as *;
-@use './../base/fonts' as *;
+@use './../base' as *;
 
 html.is-active {
     overflow-y: hidden;
@@ -8,6 +8,9 @@ html.is-active {
     width: 100%;
     background-color: transparent;
     position:fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 100;
     transition: 0.4s;
     .inner {

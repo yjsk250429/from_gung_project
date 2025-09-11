@@ -12,6 +12,7 @@
         border-radius: vw(10);
         height: vw(400);
         width: vw(300);
+        cursor: pointer;
         &:hover {
             transform: translateY(vw(-10));
             transition: 0.3s ease-in-out;
@@ -25,11 +26,14 @@
             @include font-18px-SB;
                     color: $white;
                     background: $sub3;
-                    padding: vw(15) vw(4);
+                    width: vw(40);
+                    height: vw(50);
+                    text-align: center;
+                    line-height: vw(50);
                     position: absolute;
                     border-radius: 0 0 vw(5) vw(5);
                     top: 0;
-                    left: vw(239);
+                    right:vw(25);
         }
     }
 }

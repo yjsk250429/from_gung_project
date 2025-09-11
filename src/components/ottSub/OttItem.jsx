@@ -9,6 +9,7 @@ const OttItem = ({poster_path, name}) => {
             alt={name}
           />
         )}
+        <span>10p</span>
       </li>
     );
 };

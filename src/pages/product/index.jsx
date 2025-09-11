@@ -15,7 +15,6 @@ const TourClass = () => {
                 <Tab items={tabItems}/>
                 <TourClassList/>
                 <p className="more">
-
                 <Button text="더보기" className="default"/>
                 </p>
             </div>

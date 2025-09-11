@@ -4,9 +4,11 @@ import './style.scss';
 const OttSub = () => {
     
       return (
-        <div>
+        <section className='ottsub'>
+          <div className="inner">
             <OttList/>
-        </div>
+          </div>
+        </section>
       );
     };
     

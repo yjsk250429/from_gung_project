@@ -1,0 +1,22 @@
+@use '../../../styles/utils' as *;
+@use '../../../styles/base' as *;
+
+.OttMainCon1 {
+    width: 100%;
+    background-color: $black;
+    overflow: hidden;
+    .TextLoop {
+        padding-top: vw(200);
+        display: flex;
+        flex-wrap: nowrap;
+        width: max-content;
+        p {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 80px;
+            font-family: $font-sub;
+            color: red;
+            @include font-200px-B;
+        }
+    }
+}

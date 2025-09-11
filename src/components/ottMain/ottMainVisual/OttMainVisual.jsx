@@ -3,7 +3,7 @@ import './style.scss';
 
 const OttMainVisual = () => {
     return (
-        <section>
+        <section className="OttMainVisual">
             <div>
                 <Button text="콘텐츠 전체보기" className="medium" />
                 <strong>{/* 마우스 휠 */}</strong>

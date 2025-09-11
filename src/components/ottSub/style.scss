@@ -1,6 +1,7 @@
 @use '../../styles/base' as *;
 @use '../../styles/utils' as *;
+@use '../../styles/ui/ottListCard' as *;
 
 .ottlist{
- 
+    @include OttlistCard;
 }

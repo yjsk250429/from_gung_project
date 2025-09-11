@@ -3,6 +3,7 @@
 
 @mixin OttlistCard {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     li{
         position: relative;

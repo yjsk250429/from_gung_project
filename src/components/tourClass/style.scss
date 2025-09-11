@@ -1,0 +1,9 @@
+@use '../../styles/utils' as *;
+@use '../../styles/base' as *;
+@use '../../styles/ui' as *;
+
+.top{
+    .recommend{
+        @include twoBoxes;
+    }
+}

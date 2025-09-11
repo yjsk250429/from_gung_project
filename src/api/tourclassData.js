@@ -1,4 +1,4 @@
-export default [
+export const tourclassData = [
   {
     id: 1,
     category: "tour",

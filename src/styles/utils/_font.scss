@@ -1,6 +1,13 @@
 @use './unit' as *;
 //B: bold style. 안 붙어있는 건 normal
 
+@mixin font-200px-B {
+    font-size: vw(200);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(200);
+}
+
 @mixin font-160px-B {
     font-size: vw(160);
     font-weight: 700;

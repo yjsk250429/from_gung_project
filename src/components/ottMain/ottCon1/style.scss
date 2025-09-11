@@ -1,6 +1,15 @@
 @use '../../../styles/utils' as *;
 @use '../../../styles/base' as *;
 
+@keyframes loopRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .ottMainCon1 {
     width: 100%;
     background-color: $black;
@@ -23,6 +32,7 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
+            margin-top: vw(100);
         }
         .ottPosters_last {
             display: flex;
@@ -93,7 +103,6 @@
                 width: 100%;
                 height: vw(920);
                 background-image: url('/public/images/ott/main_01.png');
-                margin-bottom: vw(100);
             }
             &.pic02 {
                 width: vw(750);
@@ -122,10 +131,27 @@
         .jagaeImg {
             width: vw(750);
             height: vw(640);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+
+            .JagaeFlower {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: vw(350);
+                display: block;
+                animation: loopRotate 10s infinite linear;
+
+                img {
+                    animation: loopRotate 10s infinite linear;
+                }
+            }
+
             img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 max-width: vw(350);
             }
         }

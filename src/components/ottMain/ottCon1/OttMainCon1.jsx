@@ -1,10 +1,14 @@
 import './style.scss';
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { CustomEase } from 'gsap/CustomEase';
+
+gsap.registerPlugin(ScrollTrigger);
+CustomEase.create('sameEase', '0.25, 0.1, 0.25, 1');
 
 const OttMainCon1 = () => {
     const textLoopRef = useRef(null);
-
     useEffect(() => {
         if (textLoopRef.current) {
             gsap.set(textLoopRef.current, { xPercent: 0 });
@@ -18,6 +22,68 @@ const OttMainCon1 = () => {
         }
     }, []);
 
+    const pic01Ref = useRef(null);
+    const pic02Ref = useRef(null);
+    const pic03Ref = useRef(null);
+    useEffect(() => {
+        if (pic01Ref.current) {
+            gsap.fromTo(
+                pic01Ref.current,
+                { y: 150, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'sameEase',
+                    scrollTrigger: {
+                        trigger: pic01Ref.current,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse',
+                        markers: true,
+                    },
+                }
+            );
+        }
+
+        if (pic02Ref.current) {
+            gsap.fromTo(
+                pic02Ref.current,
+                { x: -150, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'sameEase',
+                    scrollTrigger: {
+                        trigger: pic02Ref.current,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse',
+                        markers: true,
+                    },
+                }
+            );
+        }
+
+        if (pic03Ref.current) {
+            gsap.fromTo(
+                pic03Ref.current,
+                { x: 150, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'sameEase',
+                    scrollTrigger: {
+                        trigger: pic03Ref.current,
+                        start: 'top 40%',
+                        toggleActions: 'play none none reverse',
+                        markers: true,
+                    },
+                }
+            );
+        }
+    }, []);
+
     return (
         <section className="ottMainCon1">
             <div className="textLoop" ref={textLoopRef}>
@@ -25,7 +91,7 @@ const OttMainCon1 = () => {
                 <p>K-CULTURE CHRONICLES</p>
             </div>
             <div className="inner">
-                <div className="poster pic01">
+                <div className="poster pic01" ref={pic01Ref}>
                     <img
                         className="jagae"
                         src="/images/ott/ottPoster_Jagae_1600.png"
@@ -43,8 +109,9 @@ const OttMainCon1 = () => {
                     </article>
                     <span className="overlay"></span>
                 </div>
+
                 <section className="ottPosters_bottom">
-                    <div className="poster pic02">
+                    <div className="poster pic02" ref={pic02Ref}>
                         <img
                             className="jagae"
                             src="/images/ott/ottPoster_Jagae_750x1060.png"
@@ -65,7 +132,7 @@ const OttMainCon1 = () => {
                         <span className="overlay"></span>
                     </div>
                     <section className="ottPosters_last">
-                        <div className="poster pic03">
+                        <div className="poster pic03" ref={pic03Ref}>
                             <img
                                 className="jagae"
                                 src="/images/ott/ottPoster_Jagae_750x420.png"
@@ -87,7 +154,10 @@ const OttMainCon1 = () => {
                             <span className="overlay"></span>
                         </div>
                         <div className="jagaeImg">
-                            <img src="/images/ott/mainJagae.png" alt="jagae" />
+                            <img src="/images/ott/mainJagae_Dot.png" alt="jagae" />
+                            <div className="JagaeFlower">
+                                <img src="/images/ott/mainJagae_flower.png" alt="jagae" />
+                            </div>
                         </div>
                     </section>
                 </section>

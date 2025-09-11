@@ -1,4 +1,52 @@
-@use '../../styles/utils' as *;
-@use '../../styles/base' as *;
+@use '../../../styles/utils' as *;
+@use '../../../styles/base' as *;
+@use '../../../styles/ui/listCard' as *;
 
 //font-family:$font-sub
+section {
+    width: 100%;
+    background: $black;
+    .con3-inner {
+        padding-top: vw(100);
+        width: vw(1600);
+        height: vw(780);
+        margin: 0 auto;
+        position: relative;
+        .vod {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: vw(40);
+            strong {
+                @include font-30px-B;
+                color: $white;
+            }
+            .line {
+                width: vw(1440);
+                height: vw(1);
+                background: $white;
+            }
+        }
+        .vodlist {
+            display: flex;
+            justify-content: space-between;
+            .vod-img {
+                @include listCard;
+                span {
+                    @include font-18px-SB;
+                    color: $white;
+                    background: $sub3;
+                    padding: vw(15) vw(4);
+                    position: absolute;
+                    border-radius: 0 0 vw(5) vw(5);
+                    top: 0;
+                    left: vw(239);
+                }
+                &:hover {
+                    transform: translateY(vw(-10));
+                    transition: 0.3s ease-in-out;
+                }
+            }
+        }
+    }
+}

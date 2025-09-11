@@ -68,6 +68,11 @@
     font-weight: 400;
 }
 
+@mixin font-25px-SB {
+    font-size: vw(30);
+    font-weight: 700;
+}
+
 @mixin font-24px-B {
     font-size: vw(24);
     font-weight: 700;
@@ -84,6 +89,7 @@
     letter-spacing: vw(-0.3);
     line-height: vw(30);
 }
+
 @mixin font-20px-M {
     font-size: vw(20);
     font-weight: 500;

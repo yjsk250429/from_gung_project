@@ -1,4 +1,110 @@
-@use '../../styles/utils' as *;
-@use '../../styles/base' as *;
+@use '../../../styles/utils' as *;
+@use '../../../styles/base' as *;
 
 //font-family:$font-sub
+
+section {
+    width: 100%;
+    background-color: $black;
+    .con2-inner {
+        padding-top: vw(100);
+        width: vw(1600);
+        height: vw(782);
+        margin: 0 auto;
+        position: relative;
+        .review {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: vw(28);
+            strong {
+                @include font-30px-B;
+                color: $white;
+            }
+            span {
+                @include font-25px-SB;
+                color: $sub3;
+            }
+            .line {
+                width: vw(1430);
+                height: vw(1);
+                background-color: $white;
+            }
+        }
+        .reviewlist {
+            width: vw(1600);
+            height: vw(436);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: vw(24);
+            .listbox {
+                width: vw(516);
+                height: vw(206);
+                border-radius: vw(15);
+                border: vw(1) solid $white;
+
+                padding: vw(20) vw(28);
+                box-sizing: border-box;
+                .star {
+                    @include font-20px-M;
+                    color: $sub3;
+                }
+                .nick {
+                    display: flex;
+                    justify-content: left;
+                    align-items: center;
+                    margin-bottom: vw(20);
+                    span {
+                        @include font-15px-R;
+                        color: $white;
+                        display: flex;
+                        padding: 0 vw(12);
+                        border-right: vw(1) solid $white;
+                        p {
+                            @include font-16px-B;
+                            color: $main2;
+                            margin-left: vw(4);
+                        }
+                        &:nth-child(1) {
+                            padding-left: 0;
+                        }
+                        &:nth-child(4),
+                        &:nth-child(5) {
+                            border: none;
+                        }
+                        &:nth-child(5) {
+                            margin-left: vw(-16);
+                        }
+                    }
+                }
+                .desc {
+                    color: $white;
+                    strong {
+                        @include font-18px-SB;
+                    }
+                    p {
+                        @include font-15px-R;
+                        margin-top: vw(10);
+                    }
+                }
+                .more {
+                    @include font-17px;
+                    color: $white;
+                    display: flex;
+                    justify-content: right;
+                    align-items: center;
+                    cursor: pointer;
+                }
+            }
+        }
+        .morebtn {
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            button {
+                margin-top: vw(100);
+            }
+        }
+    }
+}

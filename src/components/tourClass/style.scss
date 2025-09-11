@@ -2,8 +2,21 @@
 @use '../../styles/base' as *;
 @use '../../styles/ui' as *;
 
-.top{
-    .recommend{
-        @include twoBoxes;
+.tourclass{
+    position: relative;
+    .bg{
+        width: 100%;
+        height: vw(523);
+        position: absolute;
+        top: 200px;
+        background-image: url('/images/tour/bg.png');
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .top{
+        .recommend{
+            @include twoBoxes;
+        }
     }
 }

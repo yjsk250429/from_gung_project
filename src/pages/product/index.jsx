@@ -9,6 +9,7 @@ const TourClass = () => {
 
     return (
         <section className="tourclass">
+            <div className="bg"></div>
             <div className="inner">
                 <TourClassTop/>
                 <Tab items={tabItems}/>

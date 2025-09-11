@@ -1,10 +1,16 @@
+import { FiHeart } from "react-icons/fi";
 
-
-const TourClassItem = () => {
+const TourClassItem = ({id, title, theme, description, period, price, img}) => {
     return (
-        <div>
-            
-        </div>
+        <li>
+            <div className="img-wrap">
+                <img src={img} alt={title} />
+            </div>
+            <div className="title">
+                <strong>{title}</strong>
+                <i><FiHeart /></i>
+            </div>
+        </li>
     );
 };
 

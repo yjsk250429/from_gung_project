@@ -14,8 +14,9 @@ const RoundTap = ({text1='', text2='', bgColor, onClick = () => {}}) => {
     }
     return (
         <ul className='roundTap' style={style}>
-            <li className={active === 0 ? 'on':''} onClick={()=>{handleClick(0);setTour}}>{text1}</li>
-            <li className={active === 1 ? 'on':''} onClick={()=>{handleClick(1);setClass}}>{text2}</li>
+            <li style={{left:active===0?'0':'50%'}}></li>
+            <li onClick={()=>{handleClick(0);setTour();}}><span>{text1}</span></li>
+            <li onClick={()=>{handleClick(1);setClass();}}><span>{text2}</span></li>
         </ul>
     );
 };

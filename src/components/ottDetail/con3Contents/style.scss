@@ -1,6 +1,6 @@
 @use '../../../styles/utils' as *;
 @use '../../../styles/base' as *;
-@use '../../../styles/ui/listCard' as *;
+@use '../../../styles/ui/ottListCard' as *;
 
 //font-family:$font-sub
 .ottDetail {
@@ -28,25 +28,7 @@
             }
         }
         .vodlist {
-            display: flex;
-            justify-content: space-between;
-            .vod-img {
-                @include listCard;
-                span {
-                    @include font-18px-SB;
-                    color: $white;
-                    background: $sub3;
-                    padding: vw(15) vw(4);
-                    position: absolute;
-                    border-radius: 0 0 vw(5) vw(5);
-                    top: 0;
-                    left: vw(239);
-                }
-                &:hover {
-                    transform: translateY(vw(-10));
-                    transition: 0.3s ease-in-out;
-                }
-            }
+            @include OttlistCard;
         }
     }
 }

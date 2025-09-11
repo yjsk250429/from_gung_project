@@ -1,17 +1,16 @@
 @use '../../../styles/utils' as *;
 @use '../../../styles/base' as *;
-
 @keyframes scrollDown {
     0% {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
     }
+    85%,
     100% {
         opacity: 0;
-        transform: translateX(-50%) translateY(10px);
+        transform: translateX(-50%) translateY(8px);
     }
 }
-
 section {
     width: 100%;
     height: 1080px;
@@ -22,14 +21,13 @@ section {
         left: 0;
         width: 100%;
         height: 100%;
-
         display: flex;
         justify-content: center;
         align-items: end;
         .medium {
             margin-top: 620px;
             position: absolute;
-            right: 260px;
+            right: 330px;
             top: 0;
         }
         strong {
@@ -48,11 +46,10 @@ section {
                 border-radius: 100%;
                 display: block;
                 position: absolute;
-                top: 10px;
+                top: 8px;
                 left: 50%;
                 transform: translateX(-50%);
-
-                animation: scrollDown 1.5s infinite ease-in-out;
+                animation: scrollDown 2s infinite ease-in-out;
             }
         }
         p {
@@ -60,7 +57,6 @@ section {
             width: 100%;
             height: 180px;
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-
             position: absolute;
             bottom: 0px;
         }

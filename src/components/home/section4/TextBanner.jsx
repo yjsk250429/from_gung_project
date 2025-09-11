@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const topItems = ['LIKE NEVER BEFORE ,', 'UNFORGETTABLE ,', 'EXCLUSIVE ,'];
 

@@ -8,6 +8,7 @@ button {
     background-size: contain;
     background-repeat: no-repeat;
     font-family: $font-sub;
+    cursor: pointer;
     &.small {
         background-image: url('/images/components/button-small.png');
         width: 120px;

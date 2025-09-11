@@ -1,4 +1,55 @@
-@use '../../styles/utils' as *;
-@use '../../styles/base' as *;
+@use '../../../styles/utils' as *;
+@use '../../../styles/base' as *;
 
 //font-family:$font-sub
+
+section {
+    width: 100%;
+    background-color: $black;
+    .con1-inner {
+        padding-top: vw(100);
+        width: vw(1600);
+        height: vw(360);
+        margin: 0 auto;
+        .cast-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: vw(28);
+            strong {
+                @include font-30px-B;
+                color: $white;
+            }
+            .line {
+                width: vw(1474);
+                height: vw(1);
+                background-color: $white;
+            }
+        }
+        .castlist {
+            display: flex;
+            justify-content: space-between;
+            .castpic {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: vw(150);
+                    height: vw(150);
+                    border-radius: vw(300);
+                    margin-bottom: vw(12);
+                    background-color: slateblue;
+                }
+                span {
+                    @include font-20px-B;
+                    color: $white;
+                }
+                &:hover {
+                    transform: translateY(vw(-10));
+                    transition: 0.3s ease-in-out;
+                }
+            }
+        }
+    }
+}

@@ -16,6 +16,7 @@ import { MdOutlineStarBorderPurple500, MdOutlineStarHalf } from 'react-icons/md'
 const OttDetailVisual = () => {
     return (
         <div className="detailvisual">
+            <div className="grad"></div>
             <div className="bg"></div>
             <div className="left">
                 <div className="episode">
@@ -350,7 +351,6 @@ const OttDetailVisual = () => {
                     </p>
                 </div>
             </div>
-            <div className="inner"></div>
         </div>
     );
 };

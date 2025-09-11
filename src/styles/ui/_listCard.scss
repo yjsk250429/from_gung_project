@@ -1,0 +1,14 @@
+@use '../base' as *;
+@use '../utils' as *;
+
+@mixin listCard {
+    position: relative;
+    background: $white;
+    border-radius: vw(10);
+    height: vw(400);
+    width: vw(300);
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}

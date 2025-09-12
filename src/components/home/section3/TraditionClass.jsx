@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// ScrollTrigger 플러그인 등록
 gsap.registerPlugin(ScrollTrigger);
 
 const TraditionClass = () => {
@@ -11,129 +10,89 @@ const TraditionClass = () => {
     const bottomImageRef = useRef(null);
     const topMessageRef = useRef(null);
     const bottomMessageRef = useRef(null);
-    const centerImageRef = useRef(null); // 현재 이미지
-    const nextImageRef = useRef(null); // 전환용 보조 이미지
+    const centerImageRef = useRef(null);
+    const imageRefs = useRef([]);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    const [activeImage] = useState('default');
-
-    // 이미지 맵핑
-    const imageMap = {
-        default: '/images/con3_img4.png',
-        tea: '/images/con3_img3.png',
-        hanbok: '/images/con3_img1.png',
-        bibimbap: '/images/con3_img2.png',
-    };
-
-    useEffect(() => {
+    useLayoutEffect(() => {
         const section = sectionRef.current;
-        const centerImage = centerImageRef.current;
 
         // 초기 위치 설정
         gsap.set(topImageRef.current, { x: 200, opacity: 0 });
         gsap.set(bottomImageRef.current, { x: -200, opacity: 0 });
         gsap.set(topMessageRef.current, { y: -300, opacity: 0 });
         gsap.set(bottomMessageRef.current, { y: 50, opacity: 0 });
-        gsap.set(centerImage, { scale: 0.5, opacity: 1 });
-        gsap.set(nextImageRef.current, { opacity: 0 });
+        gsap.set(centerImageRef.current, { scale: 0.5, opacity: 0 });
 
-        // 등장 애니메이션
-        const timeline = gsap.timeline({
+        const entryTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: section,
                 start: 'top 100%',
-                end: 'bottom 60%',
+                end: 'bottom 80%',
                 scrub: 0,
                 markers: false,
             },
         });
 
-        timeline.to(topImageRef.current, { x: 0, opacity: 1, duration: 1, ease: 'power2.out' }, 0);
-        timeline.to(
-            bottomImageRef.current,
-            { x: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-            0
-        );
-        timeline.to(
-            topMessageRef.current,
-            { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-            0
-        );
-        timeline.to(
-            bottomMessageRef.current,
-            { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-            0.5
-        );
+        entryTimeline.to(topImageRef.current, { x: 0, opacity: 1, duration: 1 }, 0);
+        entryTimeline.to(bottomImageRef.current, { x: 0, opacity: 1, duration: 1 }, 0);
+        entryTimeline.to(topMessageRef.current, { y: 0, opacity: 1, duration: 1 }, 0);
+        entryTimeline.to(bottomMessageRef.current, { y: 0, opacity: 1, duration: 1 }, 0.5);
+        entryTimeline.to(centerImageRef.current, { scale: 1, opacity: 1, duration: 1.2 }, 0.3);
 
-        // ✅ 이미지 전환 함수 (페이드인·아웃 중심)
-        const fadeImage = (newSrc) => {
-            const current = centerImageRef.current;
-            const next = nextImageRef.current;
+        // 스크롤 트리거 - 고정 + 이미지 변경
+        ScrollTrigger.create({
+            trigger: sectionRef.current,
+            start: 'center center', // 섹션 최상단이 뷰포트 중앙에 도달했을 때 고정 시작
+            end: '+=350%', // 고정 유지할 길이 (스크롤 길이)
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            onUpdate: (self) => {
+                const progress = self.progress;
+                const newIndex = Math.min(Math.floor(progress * 4), 3);
+                if (newIndex !== currentImageIndex) {
+                    setCurrentImageIndex(newIndex);
+                }
+            },
+        });
 
-            next.src = newSrc;
-
-            // 초기 상태: 새 이미지는 투명하게 대기
-            gsap.set(next, { opacity: 0 });
-
-            const tl = gsap.timeline({
-                defaults: { duration: 0.8, ease: 'power4.inOut' },
-                onComplete: () => {
-                    // 애니메이션이 끝난 후 current에 새 이미지를 세팅
-                    current.src = newSrc;
-                    gsap.set(current, { opacity: 1 });
-                    gsap.set(next, { opacity: 0 });
-                },
-            });
-
-            // 현재 이미지는 사라짐
-            tl.to(current, { opacity: 0 });
-
-            // 새 이미지는 겹치면서 등장 (조금 빨리 시작)
-            tl.to(next, { opacity: 1 }, '-=0.4');
-        };
-
-        // 섹션 전체 고정 + 이미지 애니메이션
-        gsap.timeline({
-            scrollTrigger: {
-                trigger: section,
-                start: 'center center',
-                end: '+=1200',
-                scrub: true,
-                pin: true,
-                markers: false,
-                onUpdate: (self) => {
-                    const progress = self.progress;
-
-                    if (progress <= 0.25) {
-                        const scaleProgress = progress / 0.25;
-                        const currentScale = 0.5 + 0.5 * scaleProgress;
-                        gsap.set(centerImage, { scale: currentScale });
-                        if (centerImage.src !== window.location.origin + imageMap.default) {
-                            fadeImage(imageMap.default);
-                        }
-                    } else if (progress > 0.25 && progress <= 0.5) {
-                        gsap.set(centerImage, { scale: 1 });
-                        if (centerImage.src !== window.location.origin + imageMap.tea) {
-                            fadeImage(imageMap.tea);
-                        }
-                    } else if (progress > 0.5 && progress <= 0.75) {
-                        gsap.set(centerImage, { scale: 1 });
-                        if (centerImage.src !== window.location.origin + imageMap.hanbok) {
-                            fadeImage(imageMap.hanbok);
-                        }
-                    } else if (progress > 0.75) {
-                        gsap.set(centerImage, { scale: 1 });
-                        if (centerImage.src !== window.location.origin + imageMap.bibimbap) {
-                            fadeImage(imageMap.bibimbap);
-                        }
-                    }
-                },
+        // Snap to section
+        ScrollTrigger.create({
+            trigger: centerImageRef.current,
+            start: 'center center',
+            end: '+=550%',
+            snap: {
+                snapTo: 1 / 4,
+                duration: { min: 0.1, max: 1 }, // snap 시 속도 조정
+                ease: 'power1.inOut',
             },
         });
 
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
-    }, []);
+    }, [currentImageIndex]);
+
+    // 이미지 전환 애니메이션
+    useLayoutEffect(() => {
+        imageRefs.current.forEach((img, idx) => {
+            if (!img) return;
+            gsap.to(img, {
+                opacity: idx === currentImageIndex ? 1 : 0,
+                y: idx === currentImageIndex ? 0 : 50,
+                duration: 1,
+                ease: 'power2.out',
+            });
+        });
+    }, [currentImageIndex]);
+
+    const imageList = [
+        '/images/con3_img4.png', // default
+        '/images/con3_img3.png', // tea
+        '/images/con3_img1.png', // hanbok
+        '/images/con3_img2.png', // bibimbap
+    ];
 
     return (
         <div className="section3-main" ref={sectionRef}>
@@ -144,45 +103,29 @@ const TraditionClass = () => {
                     Tradition Class
                 </h1>
             </div>
+
             <div className="s3_top-image" ref={topImageRef}>
                 <img src="/images/con3_bg1.png" alt="" />
             </div>
+
             <div className="s3_bottom-image" ref={bottomImageRef}>
                 <img src="/images/con3_bg2.png" alt="" />
             </div>
-            <div className="s3_center-image" style={{ position: 'relative' }}>
-                {/* 현재 이미지 */}
-                <img
-                    ref={centerImageRef}
-                    src={imageMap[activeImage]}
-                    alt="main"
-                    className="main-image"
-                    style={{
-                        maxWidth: '100%',
-                        height: '100%',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                    }}
-                />
-                {/* 보조 이미지 (교차 전환용) */}
-                <img
-                    ref={nextImageRef}
-                    src={imageMap[activeImage]}
-                    alt="fade"
-                    className="main-image"
-                    style={{
-                        maxWidth: '100%',
-                        height: '100%',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        opacity: 0,
-                    }}
-                />
+
+            <div className="s3_center-image" ref={centerImageRef}>
+                {imageList.map((src, idx) => (
+                    <img
+                        key={idx}
+                        ref={(el) => (imageRefs.current[idx] = el)}
+                        src={src}
+                        alt={`image-${idx}`}
+                        className="main-image"
+                        style={{ opacity: 0 }}
+                    />
+                ))}
             </div>
 
-            {/* 카드 영역들 */}
+            {/* Cards 그대로 유지 */}
             <div className="s3_card s3_card--top-right">
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />

@@ -6,6 +6,7 @@ import OttDetailCast from '../../components/ottDetail/con1Cast/OttDetailCast';
 import OttDetailReview from '../../components/ottDetail/con2Review/OttDetailReview';
 import OttDetailContents from '../../components/ottDetail/con3Contents/OttDetailContents';
 import OttDetailVisual from '../../components/ottDetail/ottDetailVisual/OttDetailVisual';
+import reviewsDefault from '../../api/ottReview';
 
 import { fetchDetail } from '../../tmdb/fetchDetail';
 import { seeds } from '../../tmdb/seeds';
@@ -16,6 +17,7 @@ const OttDetail = () => {
     const [sp, setSp] = useSearchParams();
 
     const [data, setData] = useState(null);
+    const [reviews, setReviews] = useState([]);
 
     const [state, setState] = useState({ loading: true, error: null });
 
@@ -38,6 +40,7 @@ const OttDetail = () => {
                     year: seed?.year,
                 });
                 setData(item);
+                setReviews(Array.isArray(reviewsDefault) ? reviewsDefault : []);
                 setState({ loading: false, error: null });
             } catch (e) {
                 setState({ loading: false, error: e?.message || String(e) });
@@ -77,7 +80,7 @@ const OttDetail = () => {
 
             {/* 출연진/리뷰/관련콘텐츠 – 네 컴포넌트가 props 받도록 되어있다면 그대로 전달 */}
             <OttDetailCast cast={(data.cast || []).slice(0, 8)} />
-            <OttDetailReview reviews={data.reviews || []} />
+            <OttDetailReview reviews={reviews} />
             <OttDetailContents items={data.related || []} />
         </div>
     );

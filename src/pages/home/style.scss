@@ -262,7 +262,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
         left: 50%;
         transform: translate(-50%, -50%);
         width: vw(1920);
-        height: vw(820);
+        height: vw(955);
         z-index: 10;
         overflow: hidden;
 
@@ -290,6 +290,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
         box-shadow: vw(0) vw(8) vw(32) rgba(0, 0, 0, 0.1);
         cursor: pointer;
         transition: 0.3s ease;
+        z-index: 50;
 
         // hover 시 나타날 이미지
         .card-hover-image {
@@ -311,7 +312,6 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             position: absolute;
             top: vw(92);
             left: vw(50);
-
             h3 {
                 color: $main1;
                 @include font-55px-B;

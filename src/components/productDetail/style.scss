@@ -1,0 +1,12 @@
+@use '../../styles/base' as *;
+@use '../../styles/utils' as *;
+
+.schedule{
+    strong{
+        @include font-22px-B;
+    }
+    p{
+        @include font-16px;
+        margin-top: vw(10);
+    }
+}

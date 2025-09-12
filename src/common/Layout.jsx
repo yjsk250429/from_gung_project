@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from './header';
 import Footer from './footer';
+import Login from '../components/ui/modal/Login';
 
 const Layout = () => {
     return (
@@ -9,6 +10,7 @@ const Layout = () => {
             <main id="content" className="main">
                 <Outlet />
             </main>
+            <Login/>
             <Footer />
         </div>
     );

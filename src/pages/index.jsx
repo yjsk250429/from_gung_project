@@ -10,7 +10,5 @@ export { default as TourClass } from './product';
 export { default as Tour } from './product';
 export { default as TourClassDetail } from './productDetail';
 export { default as NotFiles } from './notfiles';
-export { default as Join } from './login/Join';
-export { default as Login } from './login/Login';
 export { default as OttSearch } from './ottSearch';
 export { default as TourSearch } from './tourSearch';

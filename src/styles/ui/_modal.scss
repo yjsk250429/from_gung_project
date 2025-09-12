@@ -1,0 +1,52 @@
+@use '../base' as *;
+@use '../utils' as *;
+
+@mixin overlay{
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); // 화면 어둡게
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+@mixin modalLayout{
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: vw(20);
+    background: $white;
+    box-sizing: border-box;
+    z-index: 1001;
+    h3{
+        font-family: $font-sub;
+    }
+    .btns{
+        text-align: center;
+    }
+}
+
+@mixin infoInputs{
+    width: vw(636);
+    height: vw(806);
+    padding:vw(45) 0 vw(60) 0;
+}
+
+@mixin login-agree{
+    width: vw(365);
+    height: vw(445);
+    padding: vw(42) 0;
+}
+
+@mixin complete{
+    width: vw(365);
+    height: vw(250);
+    padding:vw(70) 0 vw(50) 0;
+}
+
+@mixin confirm{
+    width: vw(365);
+    height: vw(220);
+    padding:vw(70) 0 vw(50) 0;
+}

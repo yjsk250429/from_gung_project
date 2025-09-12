@@ -6,6 +6,10 @@ import { MdOutlineCalendarMonth } from "react-icons/md";
 import { LuClock3, LuMapPin } from "react-icons/lu";
 import { IoMapOutline } from "react-icons/io5";
 import { BiCoin } from "react-icons/bi";
+import Schedule from "../../components/productDetail/Schedule";
+import SelectDate from "../../components/booking/SelectDate";
+import Reviews from "../../components/productDetail/Reviews";
+import { useState } from "react";
 
 const TourClassDatail = () => {
     const { tourclassID } = useParams();
@@ -13,7 +17,7 @@ const TourClassDatail = () => {
       const thisitem = tourClass.find((t) => String(t.id) === tourclassID);
       const {id, title, theme=[], description, period, price, time, img, region, place=[]} = thisitem;
       const items = ['투어 일정', '예약하기', '리뷰'];
-      
+      const [activeTab, setActiveTab] = useState(0);
     if (!thisitem) {
         return <p>존재하지 않는 투어/클래스입니다.</p>;
       }
@@ -46,8 +50,13 @@ const TourClassDatail = () => {
                             <li><i><BiCoin /></i>1인 {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 <span>(리워드 xxp 지급)</span></li>
                         </ul>
                     </div>
-                <Tab items={items}/>
-                    
+                    <Tab items={items} onClick={setActiveTab}/>
+                        {activeTab === 0 && <Schedule thisitem={thisitem} />}
+                        {activeTab === 1 && <SelectDate />}
+                        {activeTab === 2 && <Reviews />}
+                    <p className="btns">
+                        
+                    </p>
                 </article>
             </div>
         </section>

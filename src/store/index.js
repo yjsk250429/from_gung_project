@@ -2,6 +2,11 @@ import { create } from 'zustand';
 import { tourclassData } from '../api/tourclassData';
 import { getMovies, getMovieDetails, getMovieCredits, searchMovie } from '../api/tmdbApi';
 
+export const useModalStore = create((set) => ({
+    loginOpen: false,
+    openLogin: () => set({ loginOpen: true }),
+    closeLogin: () => set({ loginOpen: false }),
+  }));
 
 export const useTourClassStore = create((set, get) => ({
     tourClass: tourclassData,

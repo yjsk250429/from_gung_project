@@ -1,12 +1,14 @@
 import { TbSearch } from "react-icons/tb";
+import { useModalStore } from "../../store";
 const UtilBar = () => {
+    const { openLogin } = useModalStore();
     return (
         <div className="util">
         <form >
             <input type="text" /><i><TbSearch /></i>
         </form>
         <ul className="mymenu">
-            <li>로그인</li>
+            <li onClick={openLogin}>로그인</li>
             {/* <li>로그아웃</li> */}
             <li>회원가입</li>
             {/* <li>마이페이지</li> */}

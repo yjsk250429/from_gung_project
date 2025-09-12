@@ -4,8 +4,6 @@ import Layout from '../common/Layout';
 import {
     Brand,
     Home,
-    Join,
-    Login,
     MyPage,
     NotFiles,
     OttDetail,
@@ -48,8 +46,6 @@ export const MyRoutes = () => {
                     <Route path="/ottresults" element={<OttSearch />} />
 
                     <Route path="/mypage" element={<MyPage />} />
-                    {/* <Route path="/login" element={<Login />} />                    
-                    <Route path="/join" element={<Join />} /> */}
 
                     <Route path="*" element={<NotFiles />} />
                 </Route>

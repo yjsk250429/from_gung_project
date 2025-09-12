@@ -87,6 +87,16 @@
                 }
             }
         }
+        .tabs{
+            li{
+                color: $sub2;
+                border-color: $sub2;
+                &.on{
+                    color: $sub3;
+                    border-color: $sub3;
+                }
+            }
+        }
         }
     }
 }

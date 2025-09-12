@@ -9,7 +9,7 @@
     .con2-inner {
         padding-top: vw(100);
         width: vw(1600);
-        height: vw(782);
+        // height: vw(782);
         margin: 0 auto;
         position: relative;
         .review {
@@ -33,17 +33,16 @@
         }
         .reviewlist {
             width: vw(1600);
-            height: vw(436);
+            // height: vw(436);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             gap: vw(24);
             .listbox {
                 width: vw(516);
-                height: vw(206);
+                // height: vw(206);
                 border-radius: vw(15);
                 border: vw(1) solid $white;
-
                 padding: vw(20) vw(28);
                 box-sizing: border-box;
                 .star {
@@ -77,6 +76,55 @@
                             margin-left: vw(-16);
                         }
                     }
+                    .heart {
+                        position: relative;
+                        color: $sub3;
+                        display: inline-flex;
+                        align-items: center;
+                        cursor: pointer;
+                        transition: color 0.2s ease, transform 0.12s ease;
+                        margin-left: vw(8);
+                    }
+                    .heart.on {
+                        color: $sub3;
+                    }
+                    .heart:hover {
+                        color: lighten($sub3, 5%);
+                    }
+                    .heart:active {
+                        transform: scale(0.5);
+                    }
+                    .heart-burst {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%); // 아이콘 중앙에서 터지게
+                        pointer-events: none;
+                    }
+                    /* 🫧 개별 파티클 */
+                    .heart-burst i {
+                        position: absolute;
+                        font-style: normal;
+                        line-height: 1;
+                        font-size: vw(16); // 프로젝트 단위에 맞춰 조절
+                        color: $main2; // 파티클 색
+                        opacity: 0;
+                        transform: translate(0, 0) scale(0.6);
+                        animation: heart-burst var(--dur, 700ms) ease-out forwards;
+                        text-shadow: 0 0 vw(2) rgba(0, 0, 0, 0.15);
+                    }
+
+                    /* 이동을 CSS 변수로 받아서 끝점으로 날아가며 페이드아웃 */
+                    @keyframes heart-burst {
+                        10% {
+                            opacity: 1;
+                            transform: translate(0, 0) scale(1);
+                        }
+                        100% {
+                            transform: translate(var(--tx), var(--ty)) scale(var(--scale, 1));
+                            opacity: 0;
+                        }
+                    }
                 }
                 .desc {
                     color: $white;
@@ -86,6 +134,7 @@
                     p {
                         @include font-15px-R;
                         margin-top: vw(10);
+                        white-space: pre-line;
                     }
                 }
                 .more {
@@ -99,9 +148,10 @@
             }
         }
         .morebtn {
+            position: static;
             display: flex;
             justify-content: center;
-            align-items: start;
+            align-items: center;
             button {
                 margin-top: vw(100);
             }

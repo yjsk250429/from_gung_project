@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
-import OttDetailCast from '../../components/ottDetail/Con1Cast/OttDetailCast';
+import OttDetailCast from '../../components/ottDetail/con1Cast/OttDetailCast';
 import OttDetailReview from '../../components/ottDetail/con2Review/OttDetailReview';
 import OttDetailContents from '../../components/ottDetail/con3Contents/OttDetailContents';
 import OttDetailVisual from '../../components/ottDetail/ottDetailVisual/OttDetailVisual';
@@ -12,16 +12,17 @@ import { seeds } from '../../tmdb/seeds';
 import './style.scss';
 
 const OttDetail = () => {
-    const { mediaType, id } = useParams(); // /vod/:mediaType/:id
+    const { mediaType, ottID } = useParams(); // /vod/:mediaType/:id
     const [sp, setSp] = useSearchParams();
 
     const [data, setData] = useState(null);
+
     const [state, setState] = useState({ loading: true, error: null });
 
     // seed에서 기본 시즌 등 보조정보 찾기
     const seed = useMemo(
-        () => seeds.find((s) => String(s.tmdbId) === String(id) && s.type === mediaType),
-        [id, mediaType]
+        () => seeds.find((s) => String(s.tmdbId) === String(ottID) && s.type === mediaType),
+        [ottID, mediaType]
     );
     const season = Number(sp.get('season')) || seed?.season || 1;
 
@@ -31,7 +32,7 @@ const OttDetail = () => {
                 setState({ loading: true, error: null });
                 const item = await fetchDetail({
                     type: mediaType,
-                    tmdbId: Number(id),
+                    tmdbId: Number(ottID),
                     season,
                     title: seed?.title,
                     year: seed?.year,
@@ -42,7 +43,7 @@ const OttDetail = () => {
                 setState({ loading: false, error: e?.message || String(e) });
             }
         })();
-    }, [mediaType, id, season]);
+    }, [mediaType, ottID, season]);
 
     if (state.loading) return <div style={{ color: '#fff', padding: 24 }}>불러오는 중…</div>;
     if (state.error) return <div style={{ color: '#f66', padding: 24 }}>에러: {state.error}</div>;
@@ -56,6 +57,7 @@ const OttDetail = () => {
                 titleLogo={data.poster} // 로고 없으면 포스터 사용
                 rating={data.rating ?? data.vote_average}
                 year={data.year}
+                overview={data.overview}
                 genres={data.genres}
                 seasonCount={data.seasonsCount || 1}
                 hasSubtitle={!!data.subtitlesAvailable}
@@ -74,7 +76,7 @@ const OttDetail = () => {
             />
 
             {/* 출연진/리뷰/관련콘텐츠 – 네 컴포넌트가 props 받도록 되어있다면 그대로 전달 */}
-            <OttDetailCast cast={(data.cast || []).slice(0, 12)} />
+            <OttDetailCast cast={(data.cast || []).slice(0, 8)} />
             <OttDetailReview reviews={data.reviews || []} />
             <OttDetailContents items={data.related || []} />
         </div>

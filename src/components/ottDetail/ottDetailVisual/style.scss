@@ -79,12 +79,21 @@
                     cursor: pointer;
                     position: relative;
 
-                    img {
-                        width: vw(260);
-                        height: vw(144);
+                    .ep-thumb {
+                        aspect-ratio: 16 / 9; // 필요 시 바꿔도 됨 (예: 3/4)
                         border-radius: vw(12);
-                        display: block;
+                        overflow: hidden;
+                        background: #7e7e7e;
                         margin-bottom: vw(8);
+
+                        img {
+                            width: vw(260);
+                            height: vw(144);
+                            display: block;
+                            object-fit: cover;
+                            object-position: center;
+                            background: none;
+                        }
                     }
                     .icon {
                         img {
@@ -109,11 +118,15 @@
                     strong {
                         @include font-20px-SB;
                         color: $white;
-                        display: block;
+                        display: flex;
                         span {
+                            min-width: 0;
                             @include font-20px-SB;
                             color: $white;
                             margin-left: vw(8);
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
                         }
                     }
                     .date {
@@ -213,6 +226,12 @@
             @include font-20px-R;
             color: $white;
             margin-bottom: vw(20);
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            word-break: keep-all;
         }
         .price {
             color: $white;

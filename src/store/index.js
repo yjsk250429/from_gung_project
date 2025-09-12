@@ -3,18 +3,27 @@ import { tourclassData } from '../api/tourclassData';
 import { getMovies, getMovieDetails, getMovieCredits, searchMovie } from '../api/tmdbApi';
 
 
-export const useTourClassStore = create((set, get)=>{
-    return{
-        tourClass:tourclassData,
-        setTour:()=>set((state)=>({
-            tourClass:state.tourClass.filter((t)=>t.category === 'tour')
-        })),
-        setClass:()=>set((state)=>({
-            tourClass:state.tourClass.filter((c)=>c.category === 'class')
-        }))
-    }
-
-});
+export const useTourClassStore = create((set, get) => ({
+    tourClass: tourclassData,
+    category: 'tour',
+  
+    setCategory: (category) =>
+      set(() => ({
+        category,
+      })),
+  
+    getFiltered: () =>{
+        const { tourClass, category } = get();
+    return tourClass.filter((item) => item.category === category);
+    },
+  }));
+        // setTour:()=>set((state)=>({
+        //     tourClass:state.tourClass.filter((t)=>t.category === 'tour')
+        // })),
+        // setClass:()=>set((state)=>({
+        //     tourClass:state.tourClass.filter((c)=>c.category === 'class')
+        // }))
+    // }));
 
 export const usexxStore = create((set, get) => ({
     // state

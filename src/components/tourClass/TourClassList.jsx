@@ -3,12 +3,16 @@ import TourClassItem from "./TourClassItem";
 
 
 const TourClassList = () => {
-    const tourClass = useTourClassStore((state)=>state.tourClass);
+    const category = useTourClassStore((state) => state.category); 
+  const tourClass = useTourClassStore((state) => state.tourClass);
+    const list = tourClass.filter((item) => item.category === category);
+
+
     return (
         <ul className="TourClassList">
-            {
-                tourClass.map((tourclass)=>(<TourClassItem key={tourclass.id} {...tourclass}/>))
-            }
+           {list.map((tourclass) => (
+                <TourClassItem key={tourclass.id} {...tourclass} />
+  ))}
         </ul>
     );
 };

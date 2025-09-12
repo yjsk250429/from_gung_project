@@ -1,4 +1,5 @@
 import OttList from '../../components/ottSub/OttList';
+import CuratedSageuk from '../../components/tmdb/CuratedSageuk';
 import './style.scss';
 
 const OttSub = () => {
@@ -6,7 +7,8 @@ const OttSub = () => {
       return (
         <section className='ottsub'>
           <div className="inner">
-            <OttList/>
+            {/* <OttList/> */}
+            <CuratedSageuk />
           </div>
         </section>
       );

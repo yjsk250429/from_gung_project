@@ -11,8 +11,8 @@
         border-radius: vw(10);
         height: vw(523);
         width: vw(352);
-        cursor: pointer;
         .img-wrap{
+            cursor: pointer;
             width: vw(352);
             height: vw(461);
             img {
@@ -27,9 +27,11 @@
             strong{
                 @include font-18px-B;
                 display: block;
+                cursor: pointer;
             }
             i{
                 font-size: 24px;
+                cursor: pointer;
             }
         }
     }

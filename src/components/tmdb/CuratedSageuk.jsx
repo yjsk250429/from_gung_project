@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { seeds } from '../../tmdb/seeds';
 import { loadAll } from '../../tmdb/loadAll';
 import './style.scss';
+import { Link } from 'react-router-dom';
 
 const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const STORAGE_KEY = 'ottPoints:v1';
@@ -57,8 +58,10 @@ export default function CuratedSageuk() {
         <ul className="ottlist">
             {items.map((it) => (
                 <li key={`${it.mediaType}-${it.id}`}>
-                    {it.poster && <img src={it.poster} alt="" />}
-                    <span>{it.points}p</span>
+                    <Link to={`/ott/${it.id}`}>
+                        {it.poster && <img src={it.poster} alt="" />}
+                        <span>{it.points}p</span>
+                    </Link>
                 </li>
             ))}
         </ul>

@@ -1,5 +1,6 @@
 @use '../../styles/ui/ottListCard' as *;
 
-.ottlist{
+.ottlist {
     @include OttlistCard;
+    row-gap: 30px;
 }

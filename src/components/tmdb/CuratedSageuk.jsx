@@ -1,20 +1,46 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { seeds } from '../../tmdb/seeds';
 import { loadAll } from '../../tmdb/loadAll';
 import './style.scss';
 
+const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const STORAGE_KEY = 'ottPoints:v1';
+
+// items에 points를 붙이고, 없으면 생성해서 저장
+function attachStablePoints(items) {
+    const map = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    let changed = false;
+
+    const out = items.map((it) => {
+        const key = `${it.mediaType}-${it.id}`;
+        let p = map[key];
+        if (typeof p !== 'number') {
+            p = randInt(30, 55); // 최초 1회만 생성
+            map[key] = p;
+            changed = true;
+        }
+        return { ...it, points: p };
+    });
+
+    if (changed) localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+    return out;
+}
+
 export default function CuratedSageuk() {
     const [items, setItems] = useState([]);
     const [state, setState] = useState({ loading: true, error: null });
+    const did = useRef(false);
 
     useEffect(() => {
+        if (did.current) return;
+        did.current = true;
+
         (async () => {
             try {
                 const hasId = seeds.filter((s) => !!s.tmdbId);
-                console.log('[seeds with id]', hasId.length, hasId);
-                const data = await loadAll(hasId);
-                console.log('[loaded items]', data.length, data);
-                setItems(data);
+                const loaded = await loadAll(hasId); // 순서는 그대로
+                const withPoints = attachStablePoints(loaded); // ← 여기서 고정 포인트 부여
+                setItems(withPoints);
                 setState({ loading: false, error: null });
             } catch (e) {
                 console.error(e);
@@ -28,50 +54,11 @@ export default function CuratedSageuk() {
     if (!items.length) return <p style={{ color: '#fff' }}>데이터 없음 (tmdbId 확인 필요)</p>;
 
     return (
-        <ul className='ottlist'>
+        <ul className="ottlist">
             {items.map((it) => (
-                <li
-                    key={`${it.mediaType}-${it.id}`}
-                >
-                    {it.poster && (
-                        <img
-                            src={it.poster}
-                            alt=""
-                            width={200}
-                            height={300}
-                            style={{ borderRadius: 8 }}
-                        />
-                    )}
-                    <h3 style={{ margin: '8px 0 4px' }}>
-                        {it.title} {it.year ? `(${it.year})` : ''}
-                    </h3>
-                    <p style={{ margin: 0 }}>⭐ {it.rating?.toFixed?.(1) ?? '-'}</p>
-                    <p style={{ opacity: 0.8 }}>{(it.genres || []).join(' / ')}</p>
-                    <p style={{ opacity: 0.8, fontSize: 14, lineHeight: 1.4 }}>{it.overview}</p>
-
-                    {it.mediaType === 'tv' && it.episodes?.length ? (
-                        <ul style={{ marginTop: 8 }}>
-                            {it.episodes.slice(0, 5).map((ep) => (
-                                <li key={ep.ep} style={{ fontSize: 14 }}>
-                                    EP.{ep.ep} {ep.name} — {ep.date}
-                                </li>
-                            ))}
-                        </ul>
-                    ) : null}
-
-                    {it.providers &&
-                        (it.providers.flatrate || it.providers.rent || it.providers.buy) && (
-                            <p style={{ marginTop: 8, fontSize: 13, opacity: 0.8 }}>
-                                제공:{' '}
-                                {[
-                                    ...(it.providers.flatrate || []),
-                                    ...(it.providers.rent || []),
-                                    ...(it.providers.buy || []),
-                                ]
-                                    .filter(Boolean)
-                                    .join(', ')}
-                            </p>
-                        )}
+                <li key={`${it.mediaType}-${it.id}`}>
+                    {it.poster && <img src={it.poster} alt="" />}
+                    <span>{it.points}p</span>
                 </li>
             ))}
         </ul>

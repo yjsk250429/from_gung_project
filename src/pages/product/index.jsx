@@ -1,5 +1,5 @@
 import TourClassList from "../../components/tourClass/TourClassList";
-import TourClassTop from "../../components/tourClass/tourClassTop";
+import TourClassTop from "../../components/tourClass/TourClassTop";
 import Button from "../../components/ui/button/Button";
 import Tab from "../../components/ui/tab/Tab";
 import './style.scss';

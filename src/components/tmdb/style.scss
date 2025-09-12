@@ -1,0 +1,5 @@
+@use '../../styles/ui/ottListCard' as *;
+
+.ottlist{
+    @include OttlistCard;
+}

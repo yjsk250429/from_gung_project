@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import RoundTap from "../ui/roundTap/RoundTap";
 import './style.scss';
-import { useTourClassStore } from "../../store";
 
 const TourRecommend = [
     {id:1, img:'/images/list_top1.jpg', title:'빛으로 물드는 궁궐의 밤', caption:'조선 왕궁의 고요한 아름다움을 느껴보세요', link:'/tourclass/1'},
@@ -14,8 +13,7 @@ const ClassRecommend = [
 
 const TourClassTop = () => {
     const navigate = useNavigate();
-    const tourClass = useTourClassStore((state)=>state.tourClass);
-    const {setTour, setClass} = useTourClassStore();
+
 
     return (
         <article className="top">

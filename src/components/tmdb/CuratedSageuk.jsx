@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { seeds } from '../../tmdb/seeds';
 import { loadAll } from '../../tmdb/loadAll';
+import './style.scss';
 
 export default function CuratedSageuk() {
     const [items, setItems] = useState([]);
@@ -27,17 +28,10 @@ export default function CuratedSageuk() {
     if (!items.length) return <p style={{ color: '#fff' }}>데이터 없음 (tmdbId 확인 필요)</p>;
 
     return (
-        <div
-            style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                gap: 16,
-            }}
-        >
+        <ul className='ottlist'>
             {items.map((it) => (
-                <article
+                <li
                     key={`${it.mediaType}-${it.id}`}
-                    style={{ color: '#fff', background: '#111', padding: 12, borderRadius: 12 }}
                 >
                     {it.poster && (
                         <img
@@ -78,8 +72,8 @@ export default function CuratedSageuk() {
                                     .join(', ')}
                             </p>
                         )}
-                </article>
+                </li>
             ))}
-        </div>
+        </ul>
     );
 }

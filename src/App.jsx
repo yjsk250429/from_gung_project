@@ -1,4 +1,4 @@
-import CuratedSageuk from './components/tmdb/curatedSageuk';
+import CuratedSageuk from './components/tmdb/CuratedSageuk';
 import { MyRoutes } from './routes/MyRoutes';
 import './styles/index.scss';
 
@@ -6,7 +6,7 @@ function App() {
     return (
         <>
             <MyRoutes />
-            <CuratedSageuk />
+            {/* <CuratedSageuk /> */}
         </>
     );
 }

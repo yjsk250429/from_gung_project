@@ -37,6 +37,7 @@ function Stars({ rating = 0 }) {
  * - episodes: [{ ep, name, runtime, date, thumb }]
  * - cast: [{ name, profile }]
  * - homepage / socials (선택)
+ * - overview (string)
  */
 const OttDetailVisual = ({
     backdrop,
@@ -52,16 +53,13 @@ const OttDetailVisual = ({
     homepage,
     instagram,
     facebook,
+    overview = '',
 }) => {
     return (
-        <div
-            className="detailvisual"
-            style={backdrop ? { backgroundImage: `url(${backdrop})` } : undefined}
-        >
+        <div className="detailvisual">
             <div className="grad"></div>
             <div className="bg"></div>
 
-            {/* 좌측: 회차 스와이퍼 */}
             <div className="left">
                 <div className="episode">
                     <strong>회차</strong>
@@ -80,10 +78,16 @@ const OttDetailVisual = ({
                         {episodes.map((ep, idx) => (
                             <SwiperSlide key={ep.ep ?? idx}>
                                 <div className="lists">
-                                    <img
-                                        src={ep.thumb || '/images/placeholder.png'}
-                                        alt="thumnail"
-                                    />
+                                    <div className="ep-thumb">
+                                        {ep.thumb && (
+                                            <img
+                                                src={ep.thumb}
+                                                alt="thumbnail"
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        )}
+                                    </div>
                                     <i className="icon">
                                         <img src="/images/ott/playicon-1.png" alt="play" />
                                     </i>
@@ -119,33 +123,29 @@ const OttDetailVisual = ({
                     </p>
                     <em>공유</em>
                 </div>
-
                 <div className="con2">
                     <strong>{cert || '-'}</strong>
                     <p>{year || '-'}</p>
                     <p>{genres[0] || '-'}</p>
                     <p>{genres[1] || ''}</p>
                     <p>{`시즌 ${seasonCount}개`}</p>
-                    <p>{hasSubtitle ? '자막' : ''}</p>
+                    <p>자막</p>
                 </div>
-
                 {/* 타이틀 로고 없으면 포스터/텍스트로 대체 가능 */}
                 {titleLogo ? <img src={titleLogo} alt="타이틀 로고" /> : null}
-
                 <div className="cast">
                     <strong>출연</strong>
-                    {cast.slice(0, 10).map((c, i) => (
+                    {cast.slice(0, 5).map((c, i) => (
                         <span key={i}>
                             {c.name}
-                            {i < Math.min(cast.length, 10) - 1 ? ',' : ''}
+                            {i < Math.min(cast.length, 5) - 1 ? ',' : ''}
                         </span>
                     ))}
                 </div>
-
+                <div className="desc">{overview || ''}</div>
                 {/* 개요/가격 UI는 네 로직에 맞게 유지 */}
                 {/* <div className="desc">...</div>
             <div className="price">...</div> */}
-
                 <div className="btns">
                     <button className="ep1">1회 무료시청하기</button>
                     <button className="all">

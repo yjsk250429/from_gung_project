@@ -44,10 +44,10 @@ const TraditionClass = () => {
         ScrollTrigger.create({
             trigger: sectionRef.current,
             start: 'center center', // 섹션 최상단이 뷰포트 중앙에 도달했을 때 고정 시작
-            end: '+=350%', // 고정 유지할 길이 (스크롤 길이)
+            end: '+=3650', // 고정 유지할 길이 (스크롤 길이)
             pin: true,
             pinSpacing: true,
-            scrub: 1,
+            scrub: 0.5,
             onUpdate: (self) => {
                 const progress = self.progress;
                 const newIndex = Math.min(Math.floor(progress * 4), 3);
@@ -62,9 +62,10 @@ const TraditionClass = () => {
             trigger: centerImageRef.current,
             start: 'center center',
             end: '+=550%',
+            scrub: 0.5,
             snap: {
                 snapTo: 1 / 4,
-                duration: { min: 0.1, max: 1 }, // snap 시 속도 조정
+                duration: { min: 0.1, max: 0.7 }, // snap 시 속도 조정
                 ease: 'power1.inOut',
             },
         });
@@ -81,7 +82,7 @@ const TraditionClass = () => {
             gsap.to(img, {
                 opacity: idx === currentImageIndex ? 1 : 0,
                 y: idx === currentImageIndex ? 0 : 50,
-                duration: 1,
+                duration: 0.5,
                 ease: 'power2.out',
             });
         });

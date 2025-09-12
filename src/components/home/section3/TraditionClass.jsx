@@ -12,6 +12,7 @@ const TraditionClass = () => {
     const bottomMessageRef = useRef(null);
     const centerImageRef = useRef(null);
     const imageRefs = useRef([]);
+    const cardRefs = useRef([]);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     useLayoutEffect(() => {
@@ -88,6 +89,41 @@ const TraditionClass = () => {
         });
     }, [currentImageIndex]);
 
+    useLayoutEffect(() => {
+        cardRefs.current.forEach((card, idx) => {
+            if (!card) return;
+
+            if (idx === currentImageIndex - 1) {
+                // 등장: 아래에서 올라와서 제자리
+                gsap.fromTo(
+                    card,
+                    {
+                        y: 1000, // 아래에서 시작
+                        display: 'none',
+                    },
+                    {
+                        y: 0, // 제자리로
+                        duration: 0.7,
+                        ease: 'power3.out',
+                        display: 'block',
+                        pointerEvents: 'auto',
+                    }
+                );
+            } else {
+                // 퇴장: 위로 쭉 올라가며 사라짐
+                gsap.to(card, {
+                    y: -1000, // 위로 사라짐
+                    duration: 0.5,
+                    ease: 'power2.in',
+                    pointerEvents: 'none',
+                    onComplete: () => {
+                        gsap.set(card, { display: 'none' });
+                    },
+                });
+            }
+        });
+    }, [currentImageIndex]);
+
     const imageList = [
         '/images/con3_img4.png', // default
         '/images/con3_img3.png', // tea
@@ -127,7 +163,7 @@ const TraditionClass = () => {
             </div>
 
             {/* Cards 그대로 유지 */}
-            <div className="s3_card s3_card--top-right">
+            <div className="s3_card s3_card--top-right" ref={(el) => (cardRefs.current[0] = el)}>
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />
                 </div>
@@ -150,7 +186,7 @@ const TraditionClass = () => {
                 </div>
             </div>
 
-            <div className="s3_card s3_card--bottom-left">
+            <div className="s3_card s3_card--bottom-left" ref={(el) => (cardRefs.current[1] = el)}>
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />
                 </div>
@@ -173,7 +209,7 @@ const TraditionClass = () => {
                 </div>
             </div>
 
-            <div className="s3_card s3_card--bottom-right">
+            <div className="s3_card s3_card--bottom-right" ref={(el) => (cardRefs.current[2] = el)}>
                 <div className="card-hover-image">
                     <img src="/images/con3_hover_navi.png" alt="" />
                 </div>

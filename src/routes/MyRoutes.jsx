@@ -34,6 +34,9 @@ export const MyRoutes = () => {
                              <Route index element={<Ott />} />
                         </Route>
                     */}
+                    <Route path="/vod/:mediaType/:id" element={<OttDetail />} />
+                    {/* ott route */}
+
                     <Route path="/ottmain" element={<OttMain />} />
                     <Route path="/ottsub" element={<OttSub />} />
                     {/* <Route path="/ott/:ottID" element={<OttDetail />} /> */}

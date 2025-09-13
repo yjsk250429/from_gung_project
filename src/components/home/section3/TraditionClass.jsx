@@ -98,7 +98,7 @@ const TraditionClass = () => {
                 gsap.fromTo(
                     card,
                     {
-                        y: 1000, // 아래에서 시작
+                        y: 2000, // 아래에서 시작
                         display: 'none',
                     },
                     {
@@ -112,8 +112,8 @@ const TraditionClass = () => {
             } else {
                 // 퇴장: 위로 쭉 올라가며 사라짐
                 gsap.to(card, {
-                    y: -1000, // 위로 사라짐
-                    duration: 0.5,
+                    y: -2000, // 위로 사라짐
+                    duration: 0.7,
                     ease: 'power2.in',
                     pointerEvents: 'none',
                     onComplete: () => {

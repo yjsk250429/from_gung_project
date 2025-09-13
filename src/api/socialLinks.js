@@ -14,7 +14,12 @@ export const socialLinks = {
 // 기본값(비활성 처리)
 const EMPTY = { homepage: '', instagram: '', facebook: '' };
 
-// 조회 헬퍼
+// 조회 헬퍼 (✅ 타입 기반 예비 매칭 추가)
 export function getSocialLinks(mediaType, ottID) {
-    return socialLinks[`${mediaType}:${ottID}`] || EMPTY;
+    const exact = socialLinks[`${mediaType}:${ottID}`];
+    if (exact) return exact;
+
+    // 🔁 Fallback: 같은 mediaType의 아무 엔트리나 사용 (개발 중 임시 보강)
+    const any = Object.entries(socialLinks).find(([k]) => k.startsWith(`${mediaType}:`));
+    return any ? any[1] : EMPTY;
 }

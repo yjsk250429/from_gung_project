@@ -13,47 +13,8 @@ import { seeds } from '../../tmdb/seeds';
 import { getSocialLinks } from '../../api/socialLinks';
 import './style.scss';
 
-// 테스트용 하드코딩 데이터 (컴포넌트 밖에 선언)
-const TEST_RELATED_DATA = [
-    {
-        id: 550,
-        title: '파이트 클럽',
-        poster_path: '/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
-        backdrop_path: '/52AfXWuXCHn3UjD17rBruA9f5qb.jpg',
-        vote_average: 8.4,
-    },
-    {
-        id: 680,
-        title: '펄프 픽션',
-        poster_path: '/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
-        backdrop_path: '/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg',
-        vote_average: 8.9,
-    },
-    {
-        id: 13,
-        title: '포레스트 검프',
-        poster_path: '/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg',
-        backdrop_path: '/7c9UVPPiTPltouxNVVlq6uO5a9.jpg',
-        vote_average: 8.5,
-    },
-    {
-        id: 155,
-        title: '다크 나이트',
-        poster_path: '/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
-        backdrop_path: '/hkBaDkMWbLaf8B1lsWsKX7Ew3Xq.jpg',
-        vote_average: 9.0,
-    },
-    {
-        id: 497,
-        title: '그린 마일',
-        poster_path: '/velWPhVMQeQKcxggNEU8YmIo52R.jpg',
-        backdrop_path: '/l6hQWH9eDksNJNiXWYRkWqikOdu.jpg',
-        vote_average: 8.6,
-    },
-];
-
 const OttDetail = () => {
-    const { mediaType, ottID } = useParams();
+    const { mediaType, ottID } = useParams(); // /vod/:mediaType/:id
     const [sp] = useSearchParams();
 
     const [data, setData] = useState(null);
@@ -87,6 +48,7 @@ const OttDetail = () => {
         })();
     }, [mediaType, ottID, season, seed?.title, seed?.year]);
 
+    /** ⬇ 훅은 조기 리턴 위에서만 호출 */
     const social = useMemo(() => {
         const m = getSocialLinks(mediaType, ottID);
         return {
@@ -96,43 +58,42 @@ const OttDetail = () => {
         };
     }, [mediaType, ottID, data]);
 
-    // 🚨 임시로 하드코딩된 테스트 데이터 사용
+    // TMDB 관련/유사/추천을 모두 합쳐 정규화 (⚠ 이 페이지에서는 'points' 만들지 않음)
     const relatedList = useMemo(() => {
-        console.log('🔍 Using TEST DATA for relatedList');
-        return TEST_RELATED_DATA;
-
-        // 원래 로직은 주석 처리
-        /*
         if (!data) return [];
         const bucket = [];
+
         const add = (arr) => Array.isArray(arr) && bucket.push(...arr);
+
+        // 다양한 위치의 배열 모아서 한 바구니에
         add(data.related);
         add(data.recommendations);
         add(data.similar);
         add(data.recommendations?.results);
         add(data.similar?.results);
-        
+
+        // 정규화
         const norm = bucket.map((it, idx) => ({
             id: it?.id ?? it?.tmdbId ?? it?.tmdb_id ?? `${idx}`,
             title: it?.title ?? it?.name ?? it?.original_title ?? it?.original_name ?? '',
-            poster_path: it?.poster_path ?? it?.poster ?? it?.image ?? it?.media?.poster_path ?? '',
+            poster_path: it?.poster_path ?? it?.poster ?? it?.image ?? it?.media?.poster_path ?? '', // OttDetailContents.pickPosterPath가 알아서 고름
             backdrop_path: it?.backdrop_path ?? it?.backdrop ?? it?.media?.backdrop_path ?? '',
             profile_path: it?.profile_path ?? it?.profile ?? '',
             vote_average: it?.vote_average ?? it?.rating ?? it?.media?.vote_average,
             popularity: it?.popularity ?? it?.media?.popularity,
+            // 로고 키가 있으면 같이 넣어두면 더 좋다 (OttDetailContents에서 pickPosterPath가 logo도 인식하도록 수정했음)
             logo: it?.logo ?? it?.logo_path ?? it?.media?.logo_path ?? '',
         }));
 
+        // id 기준 중복 제거
         const map = new Map();
         for (const x of norm) {
             const key = String(x.id);
             if (!map.has(key)) map.set(key, x);
         }
         return Array.from(map.values());
-        */
     }, [data]);
-
-    console.log('🎬 Rendering with relatedList:', relatedList);
+    /** ⬆ 훅 끝 */
 
     if (state.loading) return <div style={{ color: '#fff', padding: 24 }}>불러오는 중…</div>;
     if (state.error) return <div style={{ color: '#f66', padding: 24 }}>에러: {state.error}</div>;
@@ -141,8 +102,9 @@ const OttDetail = () => {
     return (
         <div>
             <OttDetailVisual
+                // 비주얼 영역
                 backdrop={data.backdrop}
-                titleLogo={data.poster}
+                titleLogo={data.poster} // 로고 없으면 포스터 사용
                 rating={data.rating ?? data.vote_average}
                 year={data.year}
                 overview={data.overview}
@@ -161,26 +123,13 @@ const OttDetail = () => {
                 social={social}
             />
 
-            {/* 테스트 정보 표시 */}
-            <div
-                style={{
-                    background: '#333',
-                    color: '#fff',
-                    padding: '15px',
-                    margin: '20px',
-                    fontSize: '14px',
-                }}
-            >
-                <h3>🧪 TEST MODE</h3>
-                <div>Using hardcoded test data: {relatedList.length} items</div>
-            </div>
-
+            {/* 출연진/리뷰/관련콘텐츠 */}
             <OttDetailCast cast={(data.cast || []).slice(0, 8)} />
             <OttDetailReview reviews={reviews} />
             <OttDetailContents
-                items={relatedList} // 🧪 테스트 데이터 전달
+                items={relatedList} // ✅ 이 페이지에선 배열만 넘김 (포인트는 내부에서 'ottPoints:v1'로 생성/고정)
                 max={8}
-                seedKey={`${mediaType}:${ottID}`}
+                seedKey={`${mediaType}:${ottID}`} // ✅ 셔플 고정용
             />
         </div>
     );

@@ -124,6 +124,19 @@
                             opacity: 1;
                         }
                     }
+                    .point-badge {
+                        @include font-16px-SB;
+                        color: $white;
+                        background: $sub3;
+                        width: vw(30);
+                        height: vw(38);
+                        text-align: center;
+                        line-height: vw(38);
+                        position: absolute;
+                        border-radius: 0 0 vw(5) vw(5);
+                        top: 0;
+                        right: vw(25);
+                    }
 
                     strong {
                         @include font-20px-SB;

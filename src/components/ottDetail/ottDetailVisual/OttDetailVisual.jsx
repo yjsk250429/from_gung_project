@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import './style.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -10,6 +10,7 @@ import { GoHomeFill } from 'react-icons/go';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { HiPlay } from 'react-icons/hi2';
 import { MdStar, MdStarHalf, MdStarBorder } from 'react-icons/md';
+import { getSocialLinks } from '../../../api/socialLinks';
 
 function Stars({ rating = 0, className = '' }) {
     const n = Number(rating);
@@ -18,6 +19,10 @@ function Stars({ rating = 0, className = '' }) {
     const full = Math.floor(r);
     const half = r - full >= 0.5 ? 1 : 0;
     const empty = Math.max(0, 5 - full - half);
+
+    const idFromPath =
+        (typeof window !== 'undefined' && window.location?.pathname.match(/\/ott\/(\d+)/)?.[1]) ||
+        '';
 
     return (
         <p className={className} aria-label={`평점 ${safe10.toFixed(1)}점 (10점 만점)`}>
@@ -113,6 +118,22 @@ const OttDetailVisual = ({
         });
     };
 
+    // ⬇ 현재 경로에서 id 추출
+    const idFromPath =
+        (typeof window !== 'undefined' && window.location?.pathname.match(/\/ott\/(\d+)/)?.[1]) ||
+        '';
+
+    // ⬇ social 비어있으면 tv/movie 매핑으로 보충
+    const socialFixed = useMemo(() => {
+        const tv = getSocialLinks('tv', idFromPath);
+        const mv = getSocialLinks('movie', idFromPath);
+        return {
+            homepage: social.homepage || tv.homepage || mv.homepage || '',
+            instagram: social.instagram || tv.instagram || mv.instagram || '',
+            facebook: social.facebook || tv.facebook || mv.facebook || '',
+        };
+    }, [social, idFromPath]);
+
     return (
         <div className="detailvisual">
             <div className="grad"></div>
@@ -137,6 +158,9 @@ const OttDetailVisual = ({
                             <SwiperSlide key={ep.ep ?? idx}>
                                 <div className="lists">
                                     <div className="ep-thumb">
+                                        <span className="point-badge" aria-label="포인트 3p">
+                                            3p
+                                        </span>
                                         {ep.thumb && (
                                             <img
                                                 src={ep.thumb}
@@ -250,17 +274,17 @@ const OttDetailVisual = ({
                 <div className="line"></div>
                 <div className="icons">
                     <p>
-                        <a {...linkProps(social.homepage)} aria-label="홈페이지">
+                        <a {...linkProps(socialFixed.homepage)} aria-label="홈페이지">
                             <GoHomeFill />
                         </a>
                     </p>
                     <p>
-                        <a {...linkProps(social.instagram)} aria-label="Instagram">
+                        <a {...linkProps(socialFixed.instagram)} aria-label="Instagram">
                             <RiInstagramFill />
                         </a>
                     </p>
                     <p>
-                        <a {...linkProps(social.facebook)} aria-label="Facebook">
+                        <a {...linkProps(socialFixed.facebook)} aria-label="Facebook">
                             <RiFacebookFill />
                         </a>
                     </p>

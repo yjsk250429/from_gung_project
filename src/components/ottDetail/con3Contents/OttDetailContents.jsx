@@ -176,23 +176,6 @@ const OttDetailContents = ({ items = [], max = 5, seedKey = 'default' }) => {
                     <i className="line"></i>
                 </div>
 
-                {/* 디버깅 정보 표시 */}
-                <div
-                    style={{
-                        background: '#f0f0f0',
-                        padding: '10px',
-                        margin: '10px 0',
-                        fontSize: '12px',
-                        fontFamily: 'monospace',
-                    }}
-                >
-                    <div>Items received: {items?.length || 0}</div>
-                    <div>List processed: {list?.length || 0}</div>
-                    <div>
-                        Items type: {typeof items} (isArray: {Array.isArray(items) ? 'Yes' : 'No'})
-                    </div>
-                </div>
-
                 <ul className="vodlist">
                     {list.length > 0
                         ? list.map((v, i) => (

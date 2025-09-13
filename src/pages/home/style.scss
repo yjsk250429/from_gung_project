@@ -370,18 +370,18 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
 
     // 개별 카드 위치
     .s3_card--top-right {
-        top: vw(850);
-        right: vw(110);
+        top: vw(750);
+        right: vw(-1050);
     }
 
     .s3_card--bottom-left {
-        bottom: vw(555);
-        left: vw(100);
+        bottom: vw(-400);
+        left: vw(1100);
     }
 
     .s3_card--bottom-right {
-        bottom: vw(570);
-        right: vw(360);
+        bottom: vw(-170);
+        right: vw(1150);
     }
 
     // 하단 메시지

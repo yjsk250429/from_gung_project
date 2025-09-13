@@ -1,9 +1,29 @@
-@use '../../styles/base' as *; 
-@use '../../styles/utils' as *; 
+@use '../../styles/base' as *;
+@use '../../styles/utils' as *;
 
-.ottsub{
+.ottsub {
     background: $black;
-    .inner{
-        padding:200px 0;
+    .inner {
+        padding: 200px 0;
+    }
+    .sort {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: vw(18);
+        li {
+            @include font-18px;
+            color: $white !important;
+            margin-bottom: vw(20);
+            i {
+                margin-right: vw(10);
+            }
+        }
+    }
+    p {
+        text-align: center;
+        .button {
+            margin-top: 250px;
+        }
     }
 }

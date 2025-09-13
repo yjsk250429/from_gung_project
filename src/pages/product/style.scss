@@ -1,27 +1,26 @@
 @use '../../styles/utils' as *;
 @use '../../styles/base' as *;
 
-.tourclass{
-    .inner{
+.tourclass {
+    .inner {
         padding: 200px 0;
     }
-    .sort{
+    .sort {
         display: flex;
         justify-content: end;
         align-items: center;
         gap: vw(18);
-        li{
+        li {
             @include font-18px;
-            i{
+            i {
                 margin-right: vw(10);
             }
         }
     }
-    p{
-
+    p {
         text-align: center;
-        .button{
+        .button {
             margin-top: 250px;
         }
     }
-    }
+}

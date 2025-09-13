@@ -1,0 +1,24 @@
+@use '../../../styles/utils' as *;
+@use '../../../styles/base' as *;
+
+.tabs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+    li {
+        transition: 0.3s;
+        height: vw(70);
+        flex: 1;
+        cursor: pointer;
+        @include font-20px-M;
+        border-bottom: 2px solid $sub1;
+        color: $white;
+        &.on {
+            color: $sub3;
+            border-bottom: 2px solid $sub3 !important;
+        }
+    }
+}

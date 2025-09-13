@@ -14,18 +14,18 @@
 
     // 햄버거 버튼
     &--burger {
-        @include desktop {
-            display: none;
+        & {
+            width: rem(25px);
+            height: rem(25px);
+            overflow: hidden;
+            transform: translate(0, 0);
+            margin-right: 10px;
+            position: absolute;
+            right: 0px;
+            @include desktop {
+                display: none;
+            }
         }
-
-        width: rem(25px);
-        height: rem(25px);
-        overflow: hidden;
-        transform: translate(0, 0);
-        margin-right: 10px;
-        position: absolute;
-        right: 0px;
-
         &__top,
         &__middle,
         &__bottom {

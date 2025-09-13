@@ -7,14 +7,6 @@
 
 .card {
     transition: transform 1s;
-
-    @include tablet {
-        // background-color: $white;
-    }
-    @include desktop {
-        // background-color: $white;
-    }
-
     border-radius: rem(10px);
     margin-bottom: 12px;
 
@@ -34,11 +26,13 @@
         border-top-left-radius: rem(10px);
         border-top-right-radius: rem(10px);
 
+        /* ✅ 선언을 중첩 규칙(@include mobile)보다 위로 */
+        width: 100%;
+
         @include mobile {
             border-bottom-left-radius: rem(10px);
             border-bottom-right-radius: rem(10px);
         }
-        width: 100%;
     }
 
     &-info {
@@ -61,6 +55,14 @@
         @include font-14px;
         // color: $desc-font;
     }
+
+    /* ✅ 중첩 규칙(@media 나올 가능성 있는 mixin)은 맨 아래로 */
+    @include tablet {
+        // background-color: $white;
+    }
+    @include desktop {
+        // background-color: $white;
+    }
 }
 
 .card-practice {
@@ -76,6 +78,7 @@
 
     &-info {
         padding: rem(16px);
+
         @include mobile {
             padding: rem(32px);
         }
@@ -89,6 +92,7 @@
 .card-lecturer {
     a {
         @include flexbox($direction: column);
+
         @include mobile {
             flex-direction: row;
             flex-grow: 1;
@@ -123,6 +127,7 @@
     &-info {
         @include flexbox($direction: column);
         padding: rem(16px);
+
         @include mobile {
             @include paddingX(10px);
             width: calc(100vw - 160px);

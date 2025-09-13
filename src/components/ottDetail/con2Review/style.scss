@@ -115,13 +115,19 @@
                     }
 
                     /* 이동을 CSS 변수로 받아서 끝점으로 날아가며 페이드아웃 */
-                    @keyframes heart-burst {
-                        10% {
+                    @keyframes heartBurstAnim {
+                        0% {
+                            transform: translate(-50%, -50%) scale(var(--scale, 1)) translate(0, 0);
                             opacity: 1;
-                            transform: translate(0, 0) scale(1);
+                        }
+                        50% {
+                            transform: translate(-50%, -50%) scale(var(--scale, 1))
+                                translate(calc(var(--tx) * 0.7), calc(var(--ty) * 0.7));
+                            opacity: 0.8;
                         }
                         100% {
-                            transform: translate(var(--tx), var(--ty)) scale(var(--scale, 1));
+                            transform: translate(-50%, -50%) scale(var(--scale, 1))
+                                translate(var(--tx), var(--ty));
                             opacity: 0;
                         }
                     }

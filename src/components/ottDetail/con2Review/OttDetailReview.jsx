@@ -9,25 +9,30 @@ const INITIAL_COUNT = 6; // 처음 6개
 const LOAD_MORE_STEP = 3; // 클릭마다 3개 추가
 
 // 🫧 하트 파티클 컴포넌트 (자동으로 나타났다 사라짐)
+// 🫧 하트 파티클 컴포넌트 (자동으로 나타났다 사라짐)
 const HeartBurst = ({ count = 10, duration = 720 }) => {
     const [alive, setAlive] = useState(true);
     const particles = useMemo(() => {
-        return Array.from({ length: count }).map(() => {
-            const angle = Math.random() * Math.PI * 2;
-            const dist = 18 + Math.random() * 28; // px
-            const scale = 0.8 + Math.random() * 0.6;
-            const dur = duration - 120 + Math.random() * 240;
+        return Array.from({ length: count }).map((_, index) => {
+            const angle = (Math.PI * 2 * index) / count + (Math.random() * 0.5 - 0.25); // 균등 분포 + 약간의 랜덤
+            const dist = 20 + Math.random() * 30; // px
+            const scale = 0.6 + Math.random() * 0.8;
+            const dur = duration - 200 + Math.random() * 400;
+            const delay = Math.random() * 100; // 시작 시간을 약간씩 다르게
+
             return {
                 tx: Math.cos(angle) * dist,
                 ty: Math.sin(angle) * dist,
                 scale,
                 dur,
+                delay,
+                id: `${Date.now()}-${index}`, // 고유한 key 생성
             };
         });
     }, [count, duration]);
 
     useEffect(() => {
-        const t = setTimeout(() => setAlive(false), duration + 120);
+        const t = setTimeout(() => setAlive(false), duration + 300);
         return () => clearTimeout(t);
     }, [duration]);
 
@@ -35,14 +40,24 @@ const HeartBurst = ({ count = 10, duration = 720 }) => {
 
     return (
         <span className="heart-burst" aria-hidden="true">
-            {particles.map((p, i) => (
+            {particles.map((p) => (
                 <i
-                    key={i}
+                    key={p.id}
+                    className="heart-particle"
                     style={{
                         '--tx': `${p.tx}px`,
                         '--ty': `${p.ty}px`,
                         '--dur': `${p.dur}ms`,
                         '--scale': p.scale,
+                        '--delay': `${p.delay}ms`,
+                        position: 'absolute',
+                        left: '50%',
+                        top: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        pointerEvents: 'none',
+                        color: '#ff69b4',
+                        fontSize: '12px',
+                        animation: `heartBurstAnim ${p.dur}ms ease-out ${p.delay}ms forwards`,
                     }}
                 >
                     ♥

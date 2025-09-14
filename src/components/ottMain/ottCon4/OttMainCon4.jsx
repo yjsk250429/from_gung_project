@@ -1,7 +1,7 @@
-import './style.scss';
+import "./style.scss";
 
 const OttMainCon4 = () => {
-    return <div></div>;
+  return <section className="ottMainCon4"></section>;
 };
 
 export default OttMainCon4;

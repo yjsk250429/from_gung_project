@@ -1,11 +1,11 @@
-@use './../utils' as *;
+@use "./../utils" as *;
 
 .inner {
-    width: vw(1600);
-    margin: auto;
-    position: relative;
-    box-sizing: border-box;
-    @include tablet {
-        width: 95%;
-    }
+  width: vw(1600);
+  margin: auto;
+  position: relative;
+  box-sizing: border-box;
+  @include tablet {
+    width: 95%;
+  }
 }

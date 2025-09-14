@@ -1,3 +1,4 @@
+// src/components/ottDetail/ottDetailVisual/OttDetailVisual.jsx
 import React, { useState, useMemo } from 'react';
 import './style.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,15 +16,10 @@ import { getSocialLinks } from '../../../api/socialLinks';
 function Stars({ rating = 0, className = '' }) {
     const n = Number(rating);
     const safe10 = Number.isFinite(n) ? Math.max(0, Math.min(10, n)) : 0;
-    const r = safe10 / 2; // 0~5
+    const r = safe10 / 2;
     const full = Math.floor(r);
     const half = r - full >= 0.5 ? 1 : 0;
     const empty = Math.max(0, 5 - full - half);
-
-    const idFromPath =
-        (typeof window !== 'undefined' && window.location?.pathname.match(/\/ott\/(\d+)/)?.[1]) ||
-        '';
-
     return (
         <p className={className} aria-label={`평점 ${safe10.toFixed(1)}점 (10점 만점)`}>
             {Array.from({ length: full }).map((_, i) => (
@@ -37,7 +33,6 @@ function Stars({ rating = 0, className = '' }) {
     );
 }
 
-// 주소 없으면 비활성(회색) 처리 + 클릭 막기
 function linkProps(url) {
     const ok = !!(url && String(url).trim());
     const base = { 'aria-disabled': !ok, className: ok ? undefined : 'disabled' };
@@ -46,31 +41,104 @@ function linkProps(url) {
         : { href: '#', onClick: (e) => e.preventDefault(), ...base };
 }
 
-// 하트 파티클용 유틸
-function makeBurst(n = 12) {
-    return Array.from({ length: n }, (_, i) => ({
-        id: `${Date.now()}-${i}`,
-        dx: (Math.random() * 2 - 1) * 48, // -48 ~ 48px
-        dy: -(18 + Math.random() * 54), // 위쪽으로
-        rot: Math.floor(Math.random() * 360),
-        scale: 0.8 + Math.random() * 0.6,
-        delay: Math.random() * 0.05,
-    }));
-}
+const normalizeUrl = (u, size = 'original') => {
+    if (!u || typeof u !== 'string') return null;
+    if (/^https?:\/\//.test(u)) return u;
+    if (u.startsWith('/images/')) return u;
+    if (u.startsWith('/')) return `https://image.tmdb.org/t/p/${size}${u}`;
+    return u;
+};
 
-/**
- * props
- * - backdrop, poster, titleLogo
- * - rating (0~10), year, genres (string[])
- * - seasonCount (number), hasSubtitle (boolean), cert (예: '15')
- * - episodes: [{ ep, name, runtime, date, thumb }]
- * - cast: [{ name, profile }]
- * - social: { homepage, instagram, facebook }
- * - overview (string)
- */
+const pickFromArray = (arr, preferLang = 'ko', size = 'original') => {
+    if (!Array.isArray(arr) || arr.length === 0) return null;
+    const normalized = arr.map((x) =>
+        typeof x === 'string'
+            ? { url: x, lang: null }
+            : { url: x.url ?? x.file_path ?? null, lang: x.lang ?? x.iso_639_1 ?? null }
+    );
+    const chosen =
+        normalized.find((x) => x.lang === preferLang && x.url) ||
+        normalized.find((x) => (x.lang == null || x.lang === 'xx') && x.url) ||
+        normalized.find((x) => x.url);
+    return normalizeUrl(chosen?.url, size);
+};
+
+const normalizeGenres = (g) => {
+    if (!g) return [];
+    const toName = (x) => (typeof x === 'string' ? x : x?.name ?? '');
+    const arr = Array.isArray(g) ? g.map(toName) : [toName(g)];
+    return arr
+        .flatMap((s) => String(s).split(/[·,|/]/))
+        .map((s) => s.trim())
+        .filter(Boolean);
+};
+
+// 등급 문자열만 그대로 받으면 OK(부모가 가공해줌). 그래도 혹시 모를 케이스 방지용.
+const normalizeCert = (cert) => {
+    if (cert == null) return '-';
+
+    // 1) 문자열/숫자면 그대로
+    if (typeof cert === 'string' || typeof cert === 'number') {
+        const s = String(cert).trim();
+        return s || '-';
+    }
+
+    // 내부 헬퍼: 노드에서 등급 하나 뽑기
+    const getFromNode = (node) => {
+        if (!node || typeof node !== 'object') return null;
+
+        // 직접 키들
+        const direct = (node.certification ?? node.rating ?? node.label ?? node.name ?? '')
+            .toString()
+            .trim();
+        if (direct) return direct;
+
+        // TMDB 패턴: release_dates / results / ratings / data 배열 내부
+        const arr = node.release_dates ?? node.results ?? node.ratings ?? node.data;
+        if (Array.isArray(arr)) {
+            const found = arr.find((e) => (e?.certification ?? e?.rating ?? '').toString().trim());
+            const s = (found?.certification ?? found?.rating ?? '').toString().trim();
+            if (s) return s;
+        }
+        return null;
+    };
+
+    // 2) 배열이면 KR → US → 기타
+    if (Array.isArray(cert)) {
+        const pickBy = (cc) => {
+            const node = cert.find((n) => (n?.iso_3166_1 ?? n?.country ?? n?.iso) === cc);
+            return node && (getFromNode(node) ?? null);
+        };
+        return pickBy('KR') || pickBy('US') || cert.map(getFromNode).find(Boolean) || '-';
+    }
+
+    // 3) 객체면: 직접값 → {KR/US} 키 → 표준 배열 키(results/release_dates/…)
+    if (typeof cert === 'object') {
+        const direct = getFromNode(cert);
+        if (direct) return direct;
+
+        if (cert.KR) {
+            const s = normalizeCert(Array.isArray(cert.KR) ? cert.KR : [cert.KR]);
+            if (s !== '-') return s;
+        }
+        if (cert.US) {
+            const s = normalizeCert(Array.isArray(cert.US) ? cert.US : [cert.US]);
+            if (s !== '-') return s;
+        }
+
+        const arr = cert.results ?? cert.release_dates ?? cert.ratings ?? cert.data;
+        if (Array.isArray(arr)) return normalizeCert(arr);
+    }
+
+    return '-';
+};
+
 const OttDetailVisual = ({
     backdrop,
     titleLogo,
+    images = {},
+    backdrops = [],
+    logos = [],
     rating,
     year,
     genres = [],
@@ -82,49 +150,71 @@ const OttDetailVisual = ({
     social = { homepage: '', instagram: '', facebook: '' },
     overview = '',
 }) => {
-    const safeRating = (() => {
-        const n = Number(rating);
-        return Number.isFinite(n) ? n : 0;
-    })();
+    const safeRating = Number.isFinite(Number(rating)) ? Number(rating) : 0;
 
-    // 🔴 찜(하트) 상태 + 파티클 생성
+    const bgSrc = useMemo(
+        () =>
+            normalizeUrl(backdrop, 'w1280') ||
+            pickFromArray(images.backdrops, 'ko', 'w1280') ||
+            pickFromArray(backdrops, 'ko', 'w1280') ||
+            null,
+        [backdrop, images, backdrops]
+    );
+
+    const logoSrc = useMemo(
+        () =>
+            normalizeUrl(titleLogo, 'w500') ||
+            pickFromArray(images.logos, 'ko', 'w500') ||
+            pickFromArray(logos, 'ko', 'w500') ||
+            null,
+        [titleLogo, images, logos]
+    );
+
+    const safeCert = useMemo(() => normalizeCert(cert), [cert]);
+    const safeYear = Number.isFinite(Number(year))
+        ? String(year)
+        : (year ?? '').toString().slice(0, 4) || '-';
+
+    const gList = normalizeGenres(genres);
+    const [g0, g1] = [...new Set(gList)].slice(0, 2);
+
+    const safeSeasons =
+        Number.isFinite(Number(seasonCount)) && Number(seasonCount) > 0
+            ? Number(seasonCount)
+            : null;
+
     const [liked, setLiked] = useState(false);
     const [particles, setParticles] = useState([]);
-
     const triggerBurst = () => {
-        // 8방향으로 흩어지는 하트 파티클
-        const count = 8;
-        const dist = 48; // px
+        const count = 8,
+            dist = 48;
         const ps = Array.from({ length: count }).map((_, i) => {
             const angle = (360 / count) * i;
             const rad = (angle * Math.PI) / 180;
-            const dx = Math.cos(rad) * dist;
-            const dy = Math.sin(rad) * dist;
-            const rot = Math.floor(Math.random() * 40 - 20); // -20~20deg
-            const delay = Math.random() * 0.1; // 0 ~ 0.1s
-            const scale = 0.75 + Math.random() * 0.35; // 0.75~1.1
-            return { dx, dy, rot, delay, scale };
+            return {
+                dx: Math.cos(rad) * dist,
+                dy: Math.sin(rad) * dist,
+                rot: Math.floor(Math.random() * 40 - 20),
+                delay: Math.random() * 0.1,
+                scale: 0.75 + Math.random() * 0.35,
+            };
         });
         setParticles(ps);
         setTimeout(() => setParticles([]), 750);
     };
-
-    const onToggleWish = () => {
+    const onToggleWish = () =>
         setLiked((prev) => {
             const next = !prev;
-            // 👉 "빈 → 꽉"으로 바뀔 때만 파티클
             if (!prev && next) triggerBurst();
             return next;
         });
-    };
 
-    // ⬇ 현재 경로에서 id 추출
-    const idFromPath =
-        (typeof window !== 'undefined' && window.location?.pathname.match(/\/ott\/(\d+)/)?.[1]) ||
-        '';
-
-    // ⬇ social 비어있으면 tv/movie 매핑으로 보충
     const socialFixed = useMemo(() => {
+        const idFromPath =
+            (typeof window !== 'undefined' &&
+                window.location?.pathname.match(/\/ott\/(\d+)/)?.[1]) ||
+            '';
+        // 필요 없으면 getSocialLinks 제거해도 됨
         const tv = getSocialLinks('tv', idFromPath);
         const mv = getSocialLinks('movie', idFromPath);
         return {
@@ -132,12 +222,12 @@ const OttDetailVisual = ({
             instagram: social.instagram || tv.instagram || mv.instagram || '',
             facebook: social.facebook || tv.facebook || mv.facebook || '',
         };
-    }, [social, idFromPath]);
+    }, [social]);
 
     return (
         <div className="detailvisual">
-            <div className="grad"></div>
-            <div className="bg"></div>
+            <div className="grad" />
+            <div className="bg" style={bgSrc ? { backgroundImage: `url(${bgSrc})` } : undefined} />
 
             <div className="left">
                 <div className="episode">
@@ -197,7 +287,6 @@ const OttDetailVisual = ({
                         <span>{safeRating.toFixed(1)}</span>
                     </div>
 
-                    {/* 찜(하트) + 파티클 */}
                     <div
                         className={`wish ${liked ? 'on' : ''}`}
                         role="button"
@@ -207,8 +296,6 @@ const OttDetailVisual = ({
                         title="찜"
                     >
                         {liked ? <FaHeart /> : <FaRegHeart />}
-
-                        {/* 클릭으로 '빈→꽉' 전환시에만 렌더 */}
                         {particles.length > 0 && (
                             <div className="burst" aria-hidden="true">
                                 {particles.map((p, i) => (
@@ -237,18 +324,17 @@ const OttDetailVisual = ({
                     <em>공유</em>
                 </div>
 
+                {/* ⬇⬇⬇ 네가 원래 쓰던 con2 마크업 유지 */}
                 <div className="con2">
-                    <strong>{cert || '-'}</strong>
-                    <p>{year || '-'}</p>
-                    <p>{genres[0] || '-'}</p>
-                    <p>{genres[1] || ''}</p>
-                    <p>{`시즌 ${seasonCount}개`}</p>
+                    <strong>{safeCert}</strong>
+                    <p>{safeYear}</p>
+                    <p>{g0 || '-'}</p>
+                    <p>{g1 || ''}</p>
+                    <p>{safeSeasons ? `시즌 ${safeSeasons}개` : '시즌 정보 없음'}</p>
                     <p>자막</p>
                 </div>
 
-                {titleLogo ? (
-                    <img className="title-logo" src={titleLogo} alt="타이틀 로고" />
-                ) : null}
+                {logoSrc ? <img className="title-logo" src={logoSrc} alt="타이틀 로고" /> : null}
 
                 <div className="cast">
                     <strong>출연</strong>
@@ -271,7 +357,7 @@ const OttDetailVisual = ({
             </div>
 
             <div className="bottom">
-                <div className="line"></div>
+                <div className="line" />
                 <div className="icons">
                     <p>
                         <a {...linkProps(socialFixed.homepage)} aria-label="홈페이지">

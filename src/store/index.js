@@ -6,29 +6,29 @@ export const useModalStore = create((set) => ({
     loginOpen: false,
     openLogin: () => set({ loginOpen: true }),
     closeLogin: () => set({ loginOpen: false }),
-  }));
+}));
 
 export const useTourClassStore = create((set, get) => ({
     tourClass: tourclassData,
     category: 'tour',
-  
+
     setCategory: (category) =>
-      set(() => ({
-        category,
-      })),
-  
-    getFiltered: () =>{
+        set(() => ({
+            category,
+        })),
+
+    getFiltered: () => {
         const { tourClass, category } = get();
-    return tourClass.filter((item) => item.category === category);
+        return tourClass.filter((item) => item.category === category);
     },
-  }));
-        // setTour:()=>set((state)=>({
-        //     tourClass:state.tourClass.filter((t)=>t.category === 'tour')
-        // })),
-        // setClass:()=>set((state)=>({
-        //     tourClass:state.tourClass.filter((c)=>c.category === 'class')
-        // }))
-    // }));
+}));
+// setTour:()=>set((state)=>({
+//     tourClass:state.tourClass.filter((t)=>t.category === 'tour')
+// })),
+// setClass:()=>set((state)=>({
+//     tourClass:state.tourClass.filter((c)=>c.category === 'class')
+// }))
+// }));
 
 export const usexxStore = create((set, get) => ({
     // state
@@ -38,6 +38,12 @@ export const usexxStore = create((set, get) => ({
     onReset: () => set({ data: [] }),
 }));
 
+// 드라마/영화 판별 헬퍼
+const isMovieEntity = (it) =>
+    it?.media_type ? it.media_type === 'movie' : !!(it?.title || it?.release_date);
+
+const isDramaEntity = (it) =>
+    it?.media_type ? it.media_type === 'tv' : !!(it?.name || it?.first_air_date);
 
 export const useMovieStore = create((set, get) => ({
     // state
@@ -52,6 +58,18 @@ export const useMovieStore = create((set, get) => ({
     resetMovies: () => set({ movies: [] }),
     resetSearch: () => set({ searchResults: [] }),
     clearError: () => set({ error: null }),
+
+    // ✅ 영화만 필터
+    filterMovies: (source = 'movies') => {
+        const list = get()[source] || [];
+        return Array.isArray(list) ? list.filter(isMovieEntity) : [];
+    },
+
+    // ✅ 드라마만 필터
+    filterDramas: (source = 'movies') => {
+        const list = get()[source] || [];
+        return Array.isArray(list) ? list.filter(isDramaEntity) : [];
+    },
 
     fetchMovies: async ({ category = 'popular', page = 1 }) => {
         set({ loading: true, error: null });
@@ -103,4 +121,3 @@ export const useMovieStore = create((set, get) => ({
         }
     },
 }));
-

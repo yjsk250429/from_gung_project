@@ -440,10 +440,30 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
 /* section5 영역 */
 .section5-main {
     background-color: #f8f8f8;
+    color: #333;
     width: 100%;
+    transition: background-color 0.5s ease, color 0.5s ease;
     height: vw(1100);
     position: relative;
     overflow: hidden;
+
+    * {
+        transition: color 0.5s ease;
+    }
+    &.hovered {
+        background-color: #000;
+
+        .section5-main-title,
+        .section5-subtitle h3,
+        .section5-subtitle p,
+        .cta-text {
+            color: #fff !important;
+        }
+
+        .cta-arrow {
+            color: #fff !important;
+        }
+    }
 
     .section5-container {
         width: 100%;
@@ -476,6 +496,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
                 }
             }
             .section5-cta {
+                width: vw(280);
                 display: flex;
                 gap: vw(15);
                 cursor: pointer;
@@ -503,44 +524,47 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             }
         }
     }
-    .section5-images {
-        position: absolute;
-        left: vw(1000);
-        bottom: vw(170);
-        width: 100%;
-        display: flex;
-        gap: vw(15);
-        align-items: end;
-        .image-container {
-            background-color: #ddd;
-            &.image1 {
-                width: vw(200);
-                height: vw(250);
-            }
+     .section5-images {
+  position: absolute;
+  left: vw(1000);
+  bottom: vw(170);
+  width: 100%;
+  display: flex;
+  gap: vw(15);
+  align-items: flex-end;
 
-            &.image2 {
-                width: vw(250);
-                height: vw(400);
-            }
+  .image-container {
+    overflow: hidden;
+    /* 👇 각 컨테이너의 크기는 항상 고정 */
+    &.image1 { width: vw(200); height: vw(250); }
+    &.image2 { width: vw(250); height: vw(400); }
+    &.image3 { width: vw(350); height: vw(650); }
 
-            &.image3 {
-                width: vw(350);
-                height: vw(650);
-            }
-
-            // 이미지가 들어갈 때를 위한 스타일
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.3s ease;
-            }
-
-            &:hover img {
-                transform: scale(1.05);
-            }
-        }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translateY(100%);    /* ✅ 처음엔 아래로 숨겨진 상태 */
+      transition: transform 0.8s ease;
     }
+
+    &.show img {
+      transform: translateY(0);       /* ✅ show 붙으면 위로 올라옴 */
+    }
+
+    &:hover img {
+      transform: translateY(0) scale(1.05);
+    }
+  }
+
+  /* 순차적 딜레이 */
+  .image1.show img { transition-delay: 0s; }
+  .image2.show img { transition-delay: 0.2s; }
+  .image3.show img { transition-delay: 0.4s; }
+
+}
+   
+
 }
 
 /*

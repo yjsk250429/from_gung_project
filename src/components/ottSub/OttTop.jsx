@@ -27,16 +27,18 @@ export default function OttTop({ activeTop, onTopChange }) {
     const label = isTv ? '드라마' : '영화';
     const list = isTv ? tvRecommend : movieRecommend;
 
-    const openDetail = (id) => navigate(`/ott/${id}`, { state: { mediaType } });
-
+    const openDetail = (id) => {
+        sessionStorage.setItem('ott:lastMediaType', mediaType);
+        navigate(`/ott/${id}`, { state: { mediaType } });
+    };
     return (
         <article className="top">
             <RoundTap
+                mode="media"
                 text1="드라마"
                 text2="영화"
                 bgColor="#d9d9d9"
-                active={top}
-                onChange={setTop}
+                onSelect={({ type }) => setTop(type === 'tv' ? 0 : 1)}
             />
             <span># 지금 주목받는 {label}</span>
 
@@ -50,7 +52,7 @@ export default function OttTop({ activeTop, onTopChange }) {
                         )}
                         <div className="grad" />
                         <div className="text">
-                            <strong>{item.title}</strong>
+                            <strong>{item.title ?? ''}</strong>
                         </div>
                     </li>
                 ))}

@@ -1,128 +1,84 @@
 // src/tmdb/fetchDetail.js
 import { tmdb, img } from './tmdb';
 
-// 제공사 이름만 뽑기
-function pickProviders(wp, country = 'KR') {
-    const r = wp?.results?.[country];
-    if (!r) return;
-    const names = (arr) => arr?.map((v) => v.provider_name);
-    return {
-        flatrate: names(r.flatrate),
-        rent: names(r.rent),
-        buy: names(r.buy),
-    };
-}
+const APPEND_TV = 'aggregate_credits,images,content_ratings,watch/providers,external_ids';
+const APPEND_MOVIE = 'credits,images,releases,watch/providers,external_ids';
 
-// 영화 등급(KR 우선 → US → 기타) 추출
-function pickCertMovie(d, pref = 'KR') {
-    const results = d?.release_dates?.results || [];
-    const by = (cc) => results.find((r) => r.iso_3166_1 === cc)?.release_dates || [];
-    const firstNonEmpty = (arr) => arr?.map((x) => x.certification).find(Boolean);
-    return (
-        firstNonEmpty(by(pref)) ||
-        firstNonEmpty(by('US')) ||
-        firstNonEmpty(results.flatMap((r) => r.release_dates)) ||
-        null
-    );
-}
-
-// TV 등급(KR 우선 → US → 기타) 추출
-function pickCertTV(d, pref = 'KR') {
-    const list = d?.content_ratings?.results || [];
-    return (
-        list.find((x) => x.iso_3166_1 === pref)?.rating ||
-        list.find((x) => x.iso_3166_1 === 'US')?.rating ||
-        list[0]?.rating ||
-        null
-    );
-}
-
-export async function fetchDetail(seed) {
-    if (!seed.tmdbId) throw new Error(`tmdbId missing for ${seed.title}`);
-
-    if (seed.type === 'movie') {
-        const d = await tmdb(`movie/${seed.tmdbId}`, {
-            language: 'ko-KR',
-            append_to_response: 'credits,images,release_dates,watch/providers,external_ids',
-            region: 'KR',
-        });
-
-        return {
-            mediaType: 'movie',
-            id: d.id,
-            title: d.title,
-            overview: d.overview,
-            year: d.release_date?.slice(0, 4),
-            rating: d.vote_average,
-            genres: (d.genres || []).map((g) => g.name),
-            poster: img(d.poster_path),
-            backdrop: img(d.backdrop_path, 'w780'),
-            runtime: d.runtime ?? null,
-            certification: pickCertMovie(d, 'KR'), // ★ 시청연령
-            cast: (d.credits?.cast || []).slice(0, 10).map((c) => ({
-                name: c.name,
-                character: c.character,
-                profile: img(c.profile_path, 'w185'),
-            })),
-            providers: pickProviders(d['watch/providers'], 'KR'),
-            homepage: d.homepage || null,
-            socials: {
-                instagram: d.external_ids?.instagram_id
-                    ? `https://www.instagram.com/${d.external_ids.instagram_id}/`
-                    : null,
-                facebook: d.external_ids?.facebook_id
-                    ? `https://www.facebook.com/${d.external_ids.facebook_id}`
-                    : null,
-            },
-            subtitlesAvailable: null, // TMDB로는 판단 불가
-        };
+const pickByLang = (arr, key = 'file_path', order = ['ko', null, 'en']) => {
+    if (!Array.isArray(arr) || !arr.length) return null;
+    for (const lang of order) {
+        const hit = arr.find((p) => (p.iso_639_1 ?? null) === lang);
+        if (hit?.[key]) return hit[key];
     }
+    return arr[0]?.[key] ?? null;
+};
 
-    // TV
-    const d = await tmdb(`tv/${seed.tmdbId}`, {
+export async function fetchDetail({ type, tmdbId, season }) {
+    const t = type === 'movie' ? 'movie' : 'tv';
+    const append = t === 'tv' ? APPEND_TV : APPEND_MOVIE;
+
+    const base = await tmdb(`${t}/${tmdbId}`, {
         language: 'ko-KR',
-        append_to_response: 'aggregate_credits,images,content_ratings,watch/providers,external_ids',
+        append_to_response: append,
+        include_image_language: 'ko,null,en',
     });
 
-    let episodes;
-    if (seed.season) {
-        const s = await tmdb(`tv/${seed.tmdbId}/season/${seed.season}`, { language: 'ko-KR' });
-        episodes = (s.episodes || []).map((e) => ({
-            ep: e.episode_number,
-            name: e.name,
-            date: e.air_date,
-            thumb: img(e.still_path, 'w300'),
-            runtime: e.runtime ?? e.episode_runtime ?? null,
-        }));
+    const images = base.images || {};
+    const posterPref = pickByLang(images.posters, 'file_path') || base.poster_path || null;
+    const backdropPref = pickByLang(images.backdrops, 'file_path') || base.backdrop_path || null;
+    const logoPref = pickByLang(images.logos, 'logo_path');
+
+    // cast
+    const credits = t === 'tv' ? base.aggregate_credits : base.credits;
+    const cast = Array.isArray(credits?.cast)
+        ? credits.cast.slice(0, 20).map((c) => ({
+              name: c.name ?? c.original_name ?? '',
+              profile: img(c.profile_path, 'w185'),
+              character: c.character ?? c.roles?.[0]?.character ?? '',
+          }))
+        : [];
+
+    // episodes (간단 매핑)
+    let episodes = [];
+    if (t === 'tv' && season) {
+        try {
+            const seasonData = await tmdb(`tv/${tmdbId}/season/${season}`, {
+                language: 'ko-KR',
+                include_image_language: 'ko,null,en',
+            });
+            episodes = Array.isArray(seasonData?.episodes)
+                ? seasonData.episodes.map((ep) => ({
+                      ep: ep.episode_number,
+                      name: ep.name,
+                      runtime: ep.runtime ?? ep.episode_run_time ?? null,
+                      date: ep.air_date,
+                      thumb: img(
+                          pickByLang(ep.images?.stills, 'file_path') || ep.still_path,
+                          'w300'
+                      ),
+                  }))
+                : [];
+        } catch {
+            episodes = [];
+        }
     }
 
     return {
-        mediaType: 'tv',
-        id: d.id,
-        title: d.name,
-        overview: d.overview,
-        year: d.first_air_date?.slice(0, 4),
-        rating: d.vote_average,
-        genres: (d.genres || []).map((g) => g.name),
-        poster: img(d.poster_path),
-        backdrop: img(d.backdrop_path, 'w780'),
-        seasonsCount: d.number_of_seasons ?? null,
-        certification: pickCertTV(d, 'KR'), // ★ 시청연령
-        cast: (d.aggregate_credits?.cast || []).slice(0, 10).map((c) => ({
-            name: c.name,
-            character: c.roles?.[0]?.character,
-            profile: img(c.profile_path, 'w185'),
-        })),
+        id: base.id,
+        mediaType: t,
+        title: base.title ?? base.name ?? base.original_title ?? base.original_name ?? '',
+        year: (base.release_date || base.first_air_date || '').slice(0, 4) || null,
+        overview: base.overview ?? '',
+        genres: base.genres ?? [],
+        rating: base.vote_average ?? null,
+        certification: null, // 필요시 releases/content_ratings에서 추가
+        poster: posterPref ? img(posterPref, 'w500') : null,
+        backdrop: backdropPref ? img(backdropPref, 'w1280') : null,
+        titleLogo: logoPref ? img(logoPref, 'w500') : null,
+        cast,
         episodes,
-        providers: pickProviders(d['watch/providers'], 'KR'),
-        homepage: d.homepage || null,
-        socials: {
-            instagram: d.external_ids?.instagram_id
-                ? `https://www.instagram.com/${d.external_ids.instagram_id}/`
-                : null,
-            facebook: d.external_ids?.facebook_id
-                ? `https://www.facebook.com/${d.external_ids.facebook_id}`
-                : null,
-        },
+        // 추천/유사 원하면 여기서도 합쳐서 반환 가능
+        recommendations: base.recommendations,
+        similar: base.similar,
     };
 }

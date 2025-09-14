@@ -256,29 +256,28 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     }
 
     // 중앙 이미지 영역
-    .s3_center-image {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: vw(1920);
-        height: vw(955);
-        z-index: 10;
-        overflow: hidden;
+.s3_center-image {
+  position: relative;
+  width: 100vw;     
+  height: 100vh;
+  overflow: hidden; 
+}
 
-        .main-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform-origin: center center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-    }
+.s3_center-image .main-image {
+  position: absolute;
+  inset: 0;              
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    
+  object-position: center; 
+  transform: none;        
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+  z-index: 0;
+}
+
+
 
     // 카드 공통 스타일
     .s3_card {
@@ -335,7 +334,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             }
 
             p {
-                color: $sub3;
+                color: $sub5;
                 @include font-20px;
                 opacity: 0.8;
                 transition: color 0.3s ease;
@@ -370,8 +369,8 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
 
     // 개별 카드 위치
     .s3_card--top-right {
-        top: vw(750);
-        right: vw(-1050);
+        top: vw(700);
+        right: vw(-1220);
     }
 
     .s3_card--bottom-left {
@@ -566,6 +565,126 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
    
 
 }
+
+/* section6 영역 */
+.section6-main {
+  position: relative;
+  width: 100%;
+  height: vw(800);
+  overflow: hidden;
+
+  /* 상단 마키(선택) */
+  .section6-text {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: vw(42);
+    overflow: hidden;
+    white-space: nowrap;
+    pointer-events: none;
+
+    .text-box {
+      display: inline-block;
+      color: #fff;
+      mix-blend-mode: multiply;
+      // animation: marquee 28s linear infinite;
+    }
+  }
+
+  /* Matter.js가 내부에 캔버스를 생성해 붙는 래퍼 */
+  .section6-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 클릭 막지 않도록 */
+    opacity: 0;           /* 렌더 캔버스는 숨김 (DOM 아이템만 보이게) */
+    visibility: hidden;
+    z-index: -1;
+  }
+
+  /* 공통 아이템 기본값 */
+  .item {
+    position: absolute;
+    transform: translate(vw(-9999), vw(-9999)); /* init 전 숨김 */
+    will-change: transform;
+    text-align: center;
+    user-select: none;
+    color: #000;
+  }
+
+  /* 말풍선(회색 배경, 검은 선) */
+  .item--bubble {
+    @include font-35px-SB;
+    background: $sub1;
+    color: #666;
+    border-radius: vw(100);
+    padding: vw(50) vw(60);
+  }
+
+  /* 원형 공통 */
+  .item--circle {
+    width: vw(200);
+    height: vw(200);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    line-height: 1;
+    font-weight: 800;
+  }
+
+  /* CTA: +, → (보라색 원 + 흰 글자) */
+  .circle--cta {
+    background: $sub4;   /* 보라색 */
+    color: #fff;
+    border: none;
+    font-size: vw(64);
+  }
+
+  /* 통계 원: 600+ / 500+ / 300+ (흰 배경 + 검은선 + 캡션) */
+  .circle--stat {
+    width: vw(180);
+    height: vw(180);
+    background: #fff;
+    border: vw(2) solid #000;
+    color: #000;
+
+    .circle-stat {
+      display: grid;
+      place-items: center;
+      gap: vw(6);
+    }
+    .num {
+      @include font-35px-B;
+    }
+    .cap {
+      font-style: normal;     /* em 기울임 방지 */
+      font-weight: 700;
+      font-size: vw(16);
+      line-height: 1;
+      opacity: 0.8;
+      letter-spacing: 0.01em;
+    }
+  }
+}
+
+
+
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+
+
+
+
+
+
+
+
+
 
 /*
 @include tablet {

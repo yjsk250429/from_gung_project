@@ -17,6 +17,7 @@
         "framer-motion": "^12.23.12",
         "gsap": "^3.13.0",
         "icons": "^1.0.0",
+        "matter-js": "^0.20.0",
         "middleware": "^1.0.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",

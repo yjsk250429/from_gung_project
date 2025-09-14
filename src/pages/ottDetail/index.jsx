@@ -1,110 +1,110 @@
 // src/pages/ottDetail/index.jsx
 import { useEffect, useMemo, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams, useLocation } from 'react-router-dom';
 
 import OttDetailCast from '../../components/ottDetail/con1Cast/OttDetailCast';
 import OttDetailReview from '../../components/ottDetail/con2Review/OttDetailReview';
 import OttDetailContents from '../../components/ottDetail/con3Contents/OttDetailContents';
 import OttDetailVisual from '../../components/ottDetail/ottDetailVisual/OttDetailVisual';
 import reviewsDefault from '../../api/ottReview';
-
 import { fetchDetail } from '../../tmdb/fetchDetail';
-import { seeds } from '../../tmdb/seeds';
-import { getSocialLinks } from '../../api/socialLinks';
 import './style.scss';
 
-const OttDetail = () => {
-    const { mediaType, ottID } = useParams(); // /vod/:mediaType/:id
+export default function OttDetail() {
+    // /ott/:id 또는 /ott/:ottID 모두 커버
+    const { id: idParam, ottID } = useParams();
+    const id = idParam ?? ottID;
+
+    const location = useLocation();
+    const routeState = location.state; // 리스트에서 넘긴 { mediaType }
     const [sp] = useSearchParams();
 
     const [data, setData] = useState(null);
     const [reviews, setReviews] = useState([]);
-    const [state, setState] = useState({ loading: true, error: null });
+    const [ui, setUi] = useState({ loading: true, error: null });
 
-    // seed에서 기본 시즌 등 보조정보 찾기
-    const seed = useMemo(
-        () => seeds.find((s) => String(s.tmdbId) === String(ottID) && s.type === mediaType),
-        [ottID, mediaType]
-    );
-    const season = Number(sp.get('season')) || seed?.season || 1;
+    if (!id) {
+        return <div style={{ color: '#f66', padding: 24 }}>잘못된 경로입니다. (id/ottID 없음)</div>;
+    }
 
+    // 탭에서 전달한 타입만 사용 (없으면 'tv')
+    const mediaType = routeState?.mediaType === 'movie' ? 'movie' : 'tv';
+    const season = mediaType === 'tv' ? Number(sp.get('season')) || 1 : undefined;
+
+    // 디버그용 (필요없으면 지워도 됨)
     useEffect(() => {
+        // eslint-disable-next-line no-console
+        console.log('[DETAIL] load', { id, mediaType, season });
+    }, [id, mediaType, season]);
+
+    // 상세 데이터 로드 (가장 단순한 형태)
+    useEffect(() => {
+        let alive = true;
         (async () => {
             try {
-                setState({ loading: true, error: null });
+                setUi({ loading: true, error: null });
                 const item = await fetchDetail({
                     type: mediaType,
-                    tmdbId: Number(ottID),
+                    tmdbId: Number(id),
                     season,
-                    title: seed?.title,
-                    year: seed?.year,
                 });
-                setData(item);
+                if (!alive) return;
+                setData(item || null);
                 setReviews(Array.isArray(reviewsDefault) ? reviewsDefault : []);
-                setState({ loading: false, error: null });
+                setUi({ loading: false, error: null });
             } catch (e) {
-                setState({ loading: false, error: e?.message || String(e) });
+                if (!alive) return;
+                setUi({ loading: false, error: e?.message || String(e) });
             }
         })();
-    }, [mediaType, ottID, season, seed?.title, seed?.year]);
-
-    /** ⬇ 훅은 조기 리턴 위에서만 호출 */
-    const social = useMemo(() => {
-        const m = getSocialLinks(mediaType, ottID);
-        return {
-            homepage: m.homepage || data?.homepage || '',
-            instagram: m.instagram || '',
-            facebook: m.facebook || '',
+        return () => {
+            alive = false;
         };
-    }, [mediaType, ottID, data]);
+    }, [mediaType, id, season]);
 
-    // TMDB 관련/유사/추천을 모두 합쳐 정규화 (⚠ 이 페이지에서는 'points' 만들지 않음)
+    // 관련/추천/유사 합치기 (필터 없음, 최소화)
     const relatedList = useMemo(() => {
         if (!data) return [];
         const bucket = [];
-
         const add = (arr) => Array.isArray(arr) && bucket.push(...arr);
-
-        // 다양한 위치의 배열 모아서 한 바구니에
         add(data.related);
         add(data.recommendations);
         add(data.similar);
         add(data.recommendations?.results);
         add(data.similar?.results);
 
-        // 정규화
-        const norm = bucket.map((it, idx) => ({
-            id: it?.id ?? it?.tmdbId ?? it?.tmdb_id ?? `${idx}`,
-            title: it?.title ?? it?.name ?? it?.original_title ?? it?.original_name ?? '',
-            poster_path: it?.poster_path ?? it?.poster ?? it?.image ?? it?.media?.poster_path ?? '', // OttDetailContents.pickPosterPath가 알아서 고름
-            backdrop_path: it?.backdrop_path ?? it?.backdrop ?? it?.media?.backdrop_path ?? '',
-            profile_path: it?.profile_path ?? it?.profile ?? '',
-            vote_average: it?.vote_average ?? it?.rating ?? it?.media?.vote_average,
-            popularity: it?.popularity ?? it?.media?.popularity,
-            // 로고 키가 있으면 같이 넣어두면 더 좋다 (OttDetailContents에서 pickPosterPath가 logo도 인식하도록 수정했음)
-            logo: it?.logo ?? it?.logo_path ?? it?.media?.logo_path ?? '',
-        }));
-
-        // id 기준 중복 제거
-        const map = new Map();
-        for (const x of norm) {
-            const key = String(x.id);
-            if (!map.has(key)) map.set(key, x);
+        const seen = new Set();
+        const out = [];
+        for (const it of bucket) {
+            const rid = it?.id ?? it?.tmdbId ?? it?.tmdb_id;
+            if (rid == null) continue;
+            const key = String(rid);
+            if (seen.has(key)) continue;
+            seen.add(key);
+            out.push({
+                id: rid,
+                title: it?.title ?? it?.name ?? it?.original_title ?? it?.original_name ?? '',
+                poster_path:
+                    it?.poster_path ?? it?.poster ?? it?.image ?? it?.media?.poster_path ?? '',
+                backdrop_path: it?.backdrop_path ?? it?.backdrop ?? it?.media?.backdrop_path ?? '',
+                profile_path: it?.profile_path ?? it?.profile ?? '',
+                vote_average: it?.vote_average ?? it?.rating ?? it?.media?.vote_average,
+                // media_type은 참고만, 여기선 필터 안 함
+                media_type: (it?.media_type || it?.media?.media_type || '').toLowerCase() || null,
+            });
         }
-        return Array.from(map.values());
+        return out;
     }, [data]);
-    /** ⬆ 훅 끝 */
 
-    if (state.loading) return <div style={{ color: '#fff', padding: 24 }}>불러오는 중…</div>;
-    if (state.error) return <div style={{ color: '#f66', padding: 24 }}>에러: {state.error}</div>;
+    if (ui.loading) return <div style={{ color: '#fff', padding: 24 }}>불러오는 중…</div>;
+    if (ui.error) return <div style={{ color: '#f66', padding: 24 }}>에러: {ui.error}</div>;
     if (!data) return <div style={{ color: '#fff', padding: 24 }}>데이터 없음</div>;
 
     return (
-        <div>
+        <div className="ott-detail-page">
             <OttDetailVisual
-                // 비주얼 영역
                 backdrop={data.backdrop}
-                titleLogo={data.poster} // 로고 없으면 포스터 사용
+                titleLogo={data.poster}
                 rating={data.rating ?? data.vote_average}
                 year={data.year}
                 overview={data.overview}
@@ -120,19 +120,12 @@ const OttDetail = () => {
                     thumb: ep.thumb,
                 }))}
                 cast={(data.cast || []).map((c) => ({ name: c.name, profile: c.profile }))}
-                social={social}
+                social={{ homepage: data?.homepage || '', instagram: '', facebook: '' }}
             />
 
-            {/* 출연진/리뷰/관련콘텐츠 */}
             <OttDetailCast cast={(data.cast || []).slice(0, 8)} />
             <OttDetailReview reviews={reviews} />
-            <OttDetailContents
-                items={relatedList} // ✅ 이 페이지에선 배열만 넘김 (포인트는 내부에서 'ottPoints:v1'로 생성/고정)
-                max={8}
-                seedKey={`${mediaType}:${ottID}`} // ✅ 셔플 고정용
-            />
+            <OttDetailContents items={relatedList} max={8} seedKey={`${mediaType}:${id}`} />
         </div>
     );
-};
-
-export default OttDetail;
+}

@@ -1,7 +1,36 @@
-@use '../../styles/base' as *;
 @use '../../styles/utils' as *;
-@use '../../styles/ui/ottListCard' as *;
+@use '../../styles/base' as *;
+@use '../../styles/ui' as *;
+@use '../../styles/ui/tourList' as *;
 
-.ottlist{
-    @include OttlistCard;
+.ottclass {
+    position: relative;
+    .bg {
+        width: 100%;
+        height: vw(523);
+        position: absolute;
+        top: 200px;
+        background-image: url('/images/tourclass/bg.png');
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .top {
+        .recommend {
+            @include twoBoxes;
+        }
+        > span {
+            @include font-20px-B;
+            font-family: 'Arita buri';
+            color: $white;
+            display: block;
+            margin-bottom: vw(20);
+            margin-top: vw(-20);
+            margin-left: vw(89);
+        }
+    }
+    .TourClassList {
+        margin-top: 50px;
+        @include tourList;
+    }
 }

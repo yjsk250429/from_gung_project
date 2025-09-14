@@ -20,7 +20,7 @@ export const seeds = [
         tags: ['sageuk'],
         tmdbId: 66256,
     },
-    { title: '성균관 스캔들', type: 'tv', year: 2010, season: 1, tags: ['sageuk'], tmdbId: 34510 },
+
     {
         title: '신입사관 구해령',
         type: 'tv',
@@ -31,6 +31,7 @@ export const seeds = [
     },
     { title: '옥씨부인전', type: 'tv', year: 2024, season: 1, tags: ['sageuk'], tmdbId: 226649 },
     { title: '혼례대첩', type: 'tv', year: 2023, season: 1, tags: ['sageuk'], tmdbId: 230024 },
+    { title: '킹덤', type: 'ott', year: 2019, season: 1, tags: ['sageuk'], tmdbId: 70593 },
     {
         title: '조선로코 - 녹두전',
         type: 'tv',
@@ -39,9 +40,19 @@ export const seeds = [
         tags: ['sageuk'],
         tmdbId: 93541,
     },
+    { title: '폭군의 셰프', type: 'tv', year: 2025, season: 1, tags: ['sageuk'], tmdbId: 280945 },
+
+    {
+        title: '고려 거란 전쟁',
+        type: 'tv',
+        year: 2023,
+        season: 1,
+        tags: ['sageuk'],
+        tmdbId: 218290,
+    },
     { title: '화랑', type: 'tv', year: 2016, season: 1, tags: ['sageuk'], tmdbId: 66496 },
     { title: '궁', type: 'tv', year: 2006, season: 1, tags: ['sageuk'], tmdbId: 5279 },
-    { title: '킹덤', type: 'ott', year: 2019, season: 1, tags: ['sageuk'], tmdbId: 70593 },
+
     { title: '환혼', type: 'tv', year: 2022, season: 1, tags: ['sageuk'], tmdbId: 135157 },
     { title: '철인왕후', type: 'tv', year: 2020, season: 1, tags: ['sageuk'], tmdbId: 108261 },
     {
@@ -55,7 +66,7 @@ export const seeds = [
     },
     { title: '퐁당퐁당 LOVE', type: 'tv', year: 2015, season: 1, tags: ['sageuk'], tmdbId: 65355 },
     { title: '옥탑방 왕세자', type: 'tv', year: 2012, season: 1, tags: ['sageuk'], tmdbId: 43152 },
-    { title: '폭군의 셰프', type: 'tv', year: 2025, season: 1, tags: ['sageuk'], tmdbId: 280945 },
+
     { title: '낮에 뜨는 달', type: 'tv', year: 2023, season: 1, tags: ['sageuk'], tmdbId: 230924 },
     { title: '귀궁', type: 'tv', year: 2025, season: 1, tags: ['sageuk'], tmdbId: 259486 },
     { title: '청춘월담', type: 'tv', year: 2023, season: 1, tags: ['sageuk'], tmdbId: 154889 },
@@ -75,14 +86,7 @@ export const seeds = [
         tags: ['sageuk'],
         tmdbId: 44964,
     },
-    {
-        title: '고려 거란 전쟁',
-        type: 'tv',
-        year: 2023,
-        season: 1,
-        tags: ['sageuk'],
-        tmdbId: 218290,
-    },
+
     { title: '장영실', type: 'tv', year: 2016, season: 1, tags: ['sageuk'], tmdbId: 64811 },
     { title: '태종 이방원', type: 'tv', year: 2021, season: 1, tags: ['sageuk'], tmdbId: 135751 },
     { title: '불멸의 이순신', type: 'tv', year: 2004, season: 1, tags: ['sageuk'], tmdbId: 14534 },

@@ -73,27 +73,22 @@ const normalizeGenres = (g) => {
         .filter(Boolean);
 };
 
-// 등급 문자열만 그대로 받으면 OK(부모가 가공해줌). 그래도 혹시 모를 케이스 방지용.
+// 디폴트 값을 '전체이용가'로 맞춤 (UI 요구사항)
 const normalizeCert = (cert) => {
-    if (cert == null) return '-';
+    const fallback = '전체이용가';
+    if (cert == null) return fallback;
 
-    // 1) 문자열/숫자면 그대로
     if (typeof cert === 'string' || typeof cert === 'number') {
         const s = String(cert).trim();
-        return s || '-';
+        return s || fallback;
     }
 
-    // 내부 헬퍼: 노드에서 등급 하나 뽑기
     const getFromNode = (node) => {
         if (!node || typeof node !== 'object') return null;
-
-        // 직접 키들
         const direct = (node.certification ?? node.rating ?? node.label ?? node.name ?? '')
             .toString()
             .trim();
         if (direct) return direct;
-
-        // TMDB 패턴: release_dates / results / ratings / data 배열 내부
         const arr = node.release_dates ?? node.results ?? node.ratings ?? node.data;
         if (Array.isArray(arr)) {
             const found = arr.find((e) => (e?.certification ?? e?.rating ?? '').toString().trim());
@@ -103,34 +98,30 @@ const normalizeCert = (cert) => {
         return null;
     };
 
-    // 2) 배열이면 KR → US → 기타
     if (Array.isArray(cert)) {
         const pickBy = (cc) => {
             const node = cert.find((n) => (n?.iso_3166_1 ?? n?.country ?? n?.iso) === cc);
             return node && (getFromNode(node) ?? null);
         };
-        return pickBy('KR') || pickBy('US') || cert.map(getFromNode).find(Boolean) || '-';
+        return pickBy('KR') || pickBy('US') || cert.map(getFromNode).find(Boolean) || fallback;
     }
 
-    // 3) 객체면: 직접값 → {KR/US} 키 → 표준 배열 키(results/release_dates/…)
     if (typeof cert === 'object') {
         const direct = getFromNode(cert);
         if (direct) return direct;
-
         if (cert.KR) {
             const s = normalizeCert(Array.isArray(cert.KR) ? cert.KR : [cert.KR]);
-            if (s !== '-') return s;
+            if (s !== fallback) return s;
         }
         if (cert.US) {
             const s = normalizeCert(Array.isArray(cert.US) ? cert.US : [cert.US]);
-            if (s !== '-') return s;
+            if (s !== fallback) return s;
         }
-
         const arr = cert.results ?? cert.release_dates ?? cert.ratings ?? cert.data;
         if (Array.isArray(arr)) return normalizeCert(arr);
     }
 
-    return '-';
+    return fallback;
 };
 
 const OttDetailVisual = ({
@@ -144,7 +135,9 @@ const OttDetailVisual = ({
     genres = [],
     seasonCount = 1,
     hasSubtitle = false,
+    // ⬇ props 호환: cert 우선, 없으면 기존 contentRating를 사용
     cert,
+    contentRating,
     episodes = [],
     cast = [],
     social = { homepage: '', instagram: '', facebook: '' },
@@ -170,7 +163,9 @@ const OttDetailVisual = ({
         [titleLogo, images, logos]
     );
 
-    const safeCert = useMemo(() => normalizeCert(cert), [cert]);
+    // ⬇ 연령등급 안전화 (cert || contentRating)
+    const safeCert = useMemo(() => normalizeCert(cert ?? contentRating), [cert, contentRating]);
+
     const safeYear = Number.isFinite(Number(year))
         ? String(year)
         : (year ?? '').toString().slice(0, 4) || '-';
@@ -205,7 +200,7 @@ const OttDetailVisual = ({
     const onToggleWish = () =>
         setLiked((prev) => {
             const next = !prev;
-            if (!prev && next) triggerBurst();
+            if (!prev && next) triggerBurst(); // ON으로 바뀔 때만 파티클
             return next;
         });
 
@@ -214,7 +209,6 @@ const OttDetailVisual = ({
             (typeof window !== 'undefined' &&
                 window.location?.pathname.match(/\/ott\/(\d+)/)?.[1]) ||
             '';
-        // 필요 없으면 getSocialLinks 제거해도 됨
         const tv = getSocialLinks('tv', idFromPath);
         const mv = getSocialLinks('movie', idFromPath);
         return {
@@ -224,15 +218,18 @@ const OttDetailVisual = ({
         };
     }, [social]);
 
+    const epCount = Array.isArray(episodes) ? episodes.length : 0;
+
     return (
         <div className="detailvisual">
             <div className="grad" />
             <div className="bg" style={bgSrc ? { backgroundImage: `url(${bgSrc})` } : undefined} />
 
             <div className="left">
+                {/* 회차 */}
                 <div className="episode">
                     <strong>회차</strong>
-                    <p>({`총 ${episodes.length}회`})</p>
+                    <p>({`총 ${epCount}회`})</p>
                 </div>
 
                 <div className="swiper">
@@ -244,37 +241,38 @@ const OttDetailVisual = ({
                         modules={[Scrollbar]}
                         className="episodeSwiper"
                     >
-                        {episodes.map((ep, idx) => (
-                            <SwiperSlide key={ep.ep ?? idx}>
-                                <div className="lists">
-                                    <div className="ep-thumb">
-                                        <span className="point-badge" aria-label="포인트 3p">
-                                            3p
-                                        </span>
-                                        {ep.thumb && (
-                                            <img
-                                                src={ep.thumb}
-                                                alt="thumbnail"
-                                                loading="lazy"
-                                                decoding="async"
-                                            />
-                                        )}
+                        {Array.isArray(episodes) &&
+                            episodes.map((ep, idx) => (
+                                <SwiperSlide key={ep?.ep ?? idx}>
+                                    <div className="lists">
+                                        <div className="ep-thumb">
+                                            <span className="point-badge" aria-label="포인트 3p">
+                                                3p
+                                            </span>
+                                            {ep?.thumb && (
+                                                <img
+                                                    src={ep.thumb}
+                                                    alt="thumbnail"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                />
+                                            )}
+                                        </div>
+                                        <i className="icon">
+                                            <img src="/images/ott/playicon-1.png" alt="play" />
+                                        </i>
+                                        <strong>
+                                            {`EP.${ep?.ep ?? idx + 1} `}
+                                            <span>{ep?.name || ''}</span>
+                                        </strong>
+                                        <div className="date">
+                                            <p>{ep?.runtime ? `${ep.runtime}분` : ''}</p>
+                                            <p>|</p>
+                                            <p>{ep?.date || ''}</p>
+                                        </div>
                                     </div>
-                                    <i className="icon">
-                                        <img src="/images/ott/playicon-1.png" alt="play" />
-                                    </i>
-                                    <strong>
-                                        {`EP.${ep.ep} `}
-                                        <span>{ep.name || ''}</span>
-                                    </strong>
-                                    <div className="date">
-                                        <p>{ep.runtime ? `${ep.runtime}분` : ''}</p>
-                                        <p>|</p>
-                                        <p>{ep.date || ''}</p>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                        ))}
+                                </SwiperSlide>
+                            ))}
                     </Swiper>
                 </div>
             </div>
@@ -324,14 +322,14 @@ const OttDetailVisual = ({
                     <em>공유</em>
                 </div>
 
-                {/* ⬇⬇⬇ 네가 원래 쓰던 con2 마크업 유지 */}
+                {/* 연령/연도/장르/시즌/자막 표기 */}
                 <div className="con2">
                     <strong>{safeCert}</strong>
                     <p>{safeYear}</p>
                     <p>{g0 || '-'}</p>
                     <p>{g1 || ''}</p>
                     <p>{safeSeasons ? `시즌 ${safeSeasons}개` : '시즌 정보 없음'}</p>
-                    <p>자막</p>
+                    <p>{hasSubtitle ? '자막' : '자막 없음'}</p>
                 </div>
 
                 {logoSrc ? <img className="title-logo" src={logoSrc} alt="타이틀 로고" /> : null}

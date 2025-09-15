@@ -88,9 +88,7 @@
                     .heart.on {
                         color: $sub3;
                     }
-                    .heart:hover {
-                        color: lighten($sub3, 5%);
-                    }
+
                     .heart:active {
                         transform: scale(0.5);
                     }

@@ -222,7 +222,7 @@ export default function OttDetail() {
     }));
 
     // ✅ 시청연령 문자열(훅 아님)
-    const certStr = computeCertString(data, mediaType);
+    const safeCert = computeCertString(data, mediaType);
 
     return (
         <div className={`ott-detail ${mediaType || data.mediaType || ''}`}>
@@ -230,19 +230,23 @@ export default function OttDetail() {
                 // ✅ seed 우선 적용
                 backdrop={visualOverrides.backdrop}
                 titleLogo={visualOverrides.titleLogo}
-                images={data.images}
-                backdrops={data.backdrops}
-                logos={data.logos}
+                // ✅ 이미지 소스(있으면 전달)
+                images={data.images || {}}
+                backdrops={data.backdrops || []}
+                logos={data.logos || []}
+                // ✅ 평점/연도/장르/시즌
                 rating={rating}
                 year={year}
-                overview={data.overview}
+                overview={data.overview || ''}
                 genres={genreText}
                 seasonCount={mediaType === 'tv' ? seasonCount || 1 : undefined}
                 hasSubtitle={!!data.subtitlesAvailable}
-                // ✅ 통합 가공된 시청연령 문자열
-                cert={certStr}
+                // ✅ 시청연령(문자열)
+                cert={safeCert}
+                // ✅ 회차/출연
                 episodes={episodesSafe}
                 cast={castSafe}
+                // ✅ 소셜(홈페이지만 우선)
                 social={{ homepage: data?.homepage || '', instagram: '', facebook: '' }}
             />
 

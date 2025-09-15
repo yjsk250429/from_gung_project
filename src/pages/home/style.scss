@@ -198,6 +198,12 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             z-index: 0;
         }
     }
+    .default {
+        position: absolute;
+        bottom: vw(352);
+        right: vw(460);
+        color: #fff;
+    }
 }
 
 /* section1 영역 */

@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Button from '../../ui/button/Button';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,6 +62,25 @@ const Mainvisual = () => {
                 );
             });
         }, containerRef);
+        const SPEED = 0.4;
+        gsap.set('.main_bg img', { willChange: 'transform' });
+        gsap.to('.main_bg img', {
+            y: (i) => (i % 2 === 0 ? 14 : 22), // 서로 다른 폭으로 살짝 떠오르게
+
+            duration: (i) => (i % 2 === 0 ? 3.6 : 4.2) * SPEED,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+            force3D: true,
+            scrollTrigger: {
+                trigger: containerRef.current, // 보일 때만 움직이고,
+                start: 'top 100%', // 화면 하단에 닿을 때 시작
+                end: 'bottom top', // 화면 위로 사라지면 정지
+                toggleActions: 'play pause resume pause',
+            },
+            // 살짝 지연을 줘서 서로 안 겹치게
+            delay: (i) => i * 0.2,
+        });
 
         return () => ctx.revert();
     }, []);
@@ -116,6 +136,7 @@ const Mainvisual = () => {
                 </p>
                 <img src="/images/mainvisual/visual_text1.png" alt="" />
             </div>
+            <Button text="더보기" className="default" />
         </div>
     );
 };

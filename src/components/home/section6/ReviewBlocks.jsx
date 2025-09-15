@@ -199,13 +199,9 @@ const ReviewBlocks = () => {
             trigger: container,
             start: 'top bottom',
             end: 'bottom top',
-            onToggle: (self) => (self.isActive ? init() : destroy()),
+            invalidateOnRefresh: true,
             onEnter: () => init(),
             onEnterBack: () => init(),
-            onLeave: () => destroy(),
-            onLeaveBack: () => destroy(),
-            onRefresh: (self) => (self.isActive ? init() : destroy()),
-            invalidateOnRefresh: true,
         });
 
         const onResize = () => {

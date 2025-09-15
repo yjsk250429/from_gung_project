@@ -6,31 +6,39 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: vw(50);
-    li{
+    li {
         position: relative;
-        border-radius: vw(10);
         height: vw(523);
         width: vw(352);
-        .img-wrap{
+        .img-wrap {
             cursor: pointer;
             width: vw(352);
-            height: vw(461);
+            height: vw(460);
+            border-radius: vw(10);
+            overflow: hidden;
+            margin-bottom: vw(10);
             img {
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
+                object-position: center;
             }
         }
-        .title{
+        .title {
             width: 100%;
             display: flex;
             justify-content: space-between;
-            strong{
-                @include font-18px-B;
+            strong {
                 display: block;
+                width: 90%;
+                word-break: keep-all;
+                overflow-wrap: break-word;
+
+                @include font-18px-B;
                 cursor: pointer;
             }
-            i{
-                font-size: 24px;
+            i {
+                font-size: vw(24);
                 cursor: pointer;
             }
         }

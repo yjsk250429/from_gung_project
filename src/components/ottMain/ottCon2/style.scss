@@ -1,27 +1,27 @@
-@use "../../../styles/utils" as *;
-@use "../../../styles/base" as *;
+@use '../../../styles/utils' as *;
+@use '../../../styles/base' as *;
 
 .ottMainCon2 {
-  width: 100%;
-  background-color: $black;
-  overflow: hidden;
-  .inner {
-    margin: vw(200) auto;
-    display: flex;
-    height: vw(560);
-    gap: vw(10);
-    article {
-      flex: 1;
-      border-radius: vw(15);
-      cursor: pointer;
-      overflow: hidden;
-      img {
-        transform: scale(1);
-        transition: transform 0.5s ease;
-      }
-      &:hover img {
-        transform: scale(1.05);
-      }
+    width: 100%;
+    background-color: $black;
+    overflow: hidden;
+    .inner {
+        margin: vw(200) auto;
+        display: flex;
+        height: vw(560);
+        gap: vw(10);
+        .con2Poster {
+            flex: 1;
+            border-radius: vw(15);
+            cursor: pointer;
+            overflow: hidden;
+            img {
+                transform: scale(1);
+                transition: transform 0.5s ease;
+            }
+            &:hover img {
+                transform: scale(1.05);
+            }
+        }
     }
-  }
 }

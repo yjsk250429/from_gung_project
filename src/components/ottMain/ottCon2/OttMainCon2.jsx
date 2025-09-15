@@ -32,19 +32,34 @@ const OttMainCon2 = () => {
     return (
         <section className="ottMainCon2">
             <div className="inner">
-                <article className="myDearest_01" onClick={() => navigate('/ott/tv/206693')}>
+                <article
+                    className="con2Poster myDearest_01"
+                    onClick={() => navigate('/ott/tv/206693')}
+                >
                     <img src="/images/ott/main_4-1.png" alt="myDearest_poster" />
                 </article>
-                <article className="myDearest_02" onClick={() => navigate('/ott/tv/206693')}>
+                <article
+                    className="con2Poster myDearest_02"
+                    onClick={() => navigate('/ott/tv/206693')}
+                >
                     <img src="/images/ott/main_4-2.png" alt="myDearest_poster" />
                 </article>
-                <article className="myDearest_03" onClick={() => navigate('/ott/tv/206693')}>
+                <article
+                    className="con2Poster myDearest_03"
+                    onClick={() => navigate('/ott/tv/206693')}
+                >
                     <img src="/images/ott/main_4-3.png" alt="myDearest_poster" />
                 </article>
-                <article className="myDearest_04" onClick={() => navigate('/ott/tv/206693')}>
+                <article
+                    className="con2Poster myDearest_04"
+                    onClick={() => navigate('/ott/tv/206693')}
+                >
                     <img src="/images/ott/main_4-4.png" alt="myDearest_poster" />
                 </article>
-                <article className="myDearest_05" onClick={() => navigate('/ott/tv/206693')}>
+                <article
+                    className="con2Poster myDearest_05"
+                    onClick={() => navigate('/ott/tv/206693')}
+                >
                     <img src="/images/ott/main_4-5.png" alt="myDearest_poster" />
                 </article>
             </div>

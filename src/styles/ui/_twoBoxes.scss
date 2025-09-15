@@ -7,25 +7,27 @@
     align-items: center;
     gap: vw(35);
     margin-bottom: vw(150);
-    li{
+    li {
         border-radius: vw(10);
         width: vw(693);
         height: vw(320);
         position: relative;
         overflow: hidden;
         cursor: pointer;
-        &:hover{
-            img{
+        &:hover {
+            img {
                 transform: scale(1.1);
             }
         }
-        img{
+        img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            object-position: center;
             transition: 1s;
         }
-        .grad{
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 19.59%, #000 115.78%);
+        .grad {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 19.59%, #000 115.78%);
             position: absolute;
             width: 100%;
             height: 100%;
@@ -33,23 +35,23 @@
             left: 50%;
             transform: translate(-50%);
         }
-        .text{
+        .text {
             position: absolute;
             bottom: 10%;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
-            strong{
+            strong {
                 color: $white;
                 font-family: $font-sub;
                 display: block;
                 text-align: center;
                 @include font-32px-B;
             }
-            em{
+            em {
                 color: $white;
                 @include font-18px;
             }
         }
     }
-};
+}

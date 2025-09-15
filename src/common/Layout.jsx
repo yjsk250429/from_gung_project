@@ -5,6 +5,8 @@ import Login from '../components/ui/modal/Login';
 import JoinAgree from '../components/ui/modal/JoinAgree';
 import RewardCheck from '../components/ui/modal/RewardCheck';
 import StampNotice from '../components/ui/modal/StampNotice';
+import JoinInfo from '../components/ui/modal/JoinInfo';
+import JoinComplete from '../components/ui/modal/JoinComplete';
 
 const Layout = () => {
     return (
@@ -17,6 +19,8 @@ const Layout = () => {
             <JoinAgree/>
             <RewardCheck/>
             <StampNotice/>
+            <JoinInfo/>
+            <JoinComplete/>
             <Footer />
         </div>
     );

@@ -11,6 +11,7 @@ const RoundTap = ({
     mode = 'tour',
     onSelect = () => {}, // 탭 선택 결과를 부모로 전달
 }) => {
+    
     const { category, setCategory } = useTourClassStore();
     const filterMovies = useMovieStore((s) => s.filterMovies);
     const filterDramas = useMovieStore((s) => s.filterDramas);

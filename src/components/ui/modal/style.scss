@@ -38,22 +38,36 @@
         .findId{
             display: flex;
             justify-content: space-between;
-            margin-bottom: vw(40);
+            margin-bottom: vw(24);
             margin-top: vw(8);
+            color: #616161;
             span{
                 @include font-14px;
             }
+        }
+        .btns{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: vw(8);
         }
         .bottom{
             margin-top: vw(40);
             display: flex;
             justify-content: space-between;
             li{
-                @include font-16px;
+                @include font-16px-SB;
+                cursor: pointer;
                 &:first-child{
-                  
+                    display: flex;
+                    align-items: center;
+                    gap: vw(4);
+                    color: #3C1E1E;
                 }
-                &:last-child{}
+                &:last-child{
+                    text-decoration: underline;
+                    color: #616161;
+                }
             }
         }
        

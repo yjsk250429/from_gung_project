@@ -82,6 +82,73 @@ const Mainvisual = () => {
             delay: (i) => i * 0.2,
         });
 
+        // 메인 이미지 효과
+        // ===== main_banner: 인트로 + 플로팅 =====
+        gsap.set(['.banner_line img', '.banner_image img'], {
+            transformOrigin: '50% 50%',
+            willChange: 'transform',
+        });
+
+        // 1) 둥실둥실(무한) 트윈을 미리 만들어두고 일단 정지
+        const floatLine = gsap.to('.banner_line img', {
+            y: 10,
+            rotation: 3, // 살짝 좌우로 흔들리게
+            duration: 15,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+            paused: true,
+        });
+
+        const floatImage = gsap.to('.banner_image img', {
+            y: 12,
+            duration: 4.6,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+            paused: true,
+            stagger: { each: 0.15 },
+        });
+
+        // 2) 인트로 타임라인 (작았다가 커지기)
+        //   - 원형 라인은 커지면서 1바퀴 회전
+        //   - 이미지들은 팝업처럼 커짐
+        const tlBanner = gsap.timeline({
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: 'top 100%',
+                end: 'bottom top',
+                toggleActions: 'restart reset restart reset',
+                invalidateOnRefresh: true,
+                // 위로 되돌아가면 플로팅 초기화
+                onLeaveBack: () => {
+                    floatLine.pause(0);
+                    floatImage.pause(0);
+                },
+            },
+        });
+
+        // 원형 라인: 축소→확대 + 회전
+        tlBanner.fromTo(
+            '.banner_line img',
+            { scale: 0.1, rotation: 0 },
+            { scale: 1, rotation: 360, duration: 0.5, ease: 'power3.out' }
+        );
+
+        // 메인 이미지: 축소→확대 (살짝 튀어나오는 느낌)
+        tlBanner.fromTo(
+            '.banner_image img',
+            { scale: 0.1, y: 20 },
+            { scale: 1, y: 0, duration: 0.9, ease: 'back.out(1.6)', stagger: 0.15 },
+            '-=0.3' // 라인 커질 때 겹치게 약간 당김
+        );
+
+        // 인트로 끝나면 둥실둥실 시작
+        tlBanner.add(() => {
+            floatLine.play();
+            floatImage.play();
+        });
+
         return () => ctx.revert();
     }, []);
 
@@ -106,8 +173,8 @@ const Mainvisual = () => {
 
             <div className="main_banner">
                 <div className="banner_line">
-                    <img src="/images/mainvisual/visual_main1.png" alt="" />
-                    <img src="/images/mainvisual/visual_main2.png" alt="" />
+                    {/* <img src="/images/mainvisual/visual_main1.png" alt="" /> */}
+                    <img src="/images/mainvisual/visual_main4.png" alt="" />
                 </div>
                 <div className="banner_image">
                     <img src="/images/mainvisual/visual_main0.png" alt="" />

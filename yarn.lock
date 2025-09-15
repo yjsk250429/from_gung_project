@@ -781,7 +781,7 @@ ansi-styles@^4.1.0:
 
 aos@^2.3.4:
   version "2.3.4"
-  resolved "https://registry.npmjs.org/aos/-/aos-2.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/aos/-/aos-2.3.4.tgz#eb1c29f5c1806a197cf6323080747547edd3db8e"
   integrity sha512-zh/ahtR2yME4I51z8IttIt4lC1Nw0ktsFtmeDzID1m9naJnWXhCoARaCgNOGXb5CLy3zm+wqmRAEgMYB5E2HUw==
   dependencies:
     classlist-polyfill "^1.0.3"
@@ -1462,7 +1462,7 @@ math-intrinsics@^1.1.0:
 
 matter-js@^0.20.0:
   version "0.20.0"
-  resolved "https://registry.npmjs.org/matter-js/-/matter-js-0.20.0.tgz"
+  resolved "https://registry.yarnpkg.com/matter-js/-/matter-js-0.20.0.tgz#dc3c95c40ea5ef8937788a2770c3f97223b352ed"
   integrity sha512-iC9fYR7zVT3HppNnsFsp9XOoQdQN2tUyfaKg4CHLH8bN+j6GT4Gw7IH2rP0tflAebrHFw730RR3DkVSZRX8hwA==
 
 micromatch@^4.0.5:

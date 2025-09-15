@@ -28,6 +28,13 @@
             margin-top: vw(-20);
             margin-left: vw(89);
         }
+        .roundTap {
+            li {
+                &:first-child {
+                    background: $sub3;
+                }
+            }
+        }
     }
     .TourClassList {
         margin-top: 50px;

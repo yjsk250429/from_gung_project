@@ -9,9 +9,16 @@ export const useModalStore = create((set) => ({
     loginOpen: false,
     joinOpen:false,
     joinInfoOpen:false,
+    joinComOpen:false,
     rewardOpen:false,
     stampNoticeOpen:false,
 
+    openJoinCom: () => set({ joinComOpen: true }),
+    closeJoinCom: () => set({ joinComOpen: false }),
+    
+    openJoinInfo: () => set({ joinInfoOpen: true }),
+    closeJoinInfo: () => set({ joinInfoOpen: false }),
+    
     openStampNotice: () => set({ stampNoticeOpen: true }),
     closeStampNotice: () => set({ stampNoticeOpen: false }),
     
@@ -25,6 +32,8 @@ export const useModalStore = create((set) => ({
     closeJoin: () => set({ joinOpen: false }),
 
     switchToJoin: () => set({ loginOpen: false, joinOpen: true }),
+    switchToJoinInfo: () => set({ joinOpen: false, joinInfoOpen: true }),
+    switchToJoinCom: () => set({ joinInfoOpen: false, joinComOpen: true }),
 }));
 
 export const useTourClassStore = create((set, get) => ({

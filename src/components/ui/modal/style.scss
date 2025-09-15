@@ -17,9 +17,55 @@
         background-image: url('/images/components/bg_flower.png');
         @include infoInputs;
     }
+    &.joinComplete{
+        background-image: url('/images/components/bg_flower.png');
+        @include complete;
+        text-align: center;
+        h3{
+            margin-bottom: vw(40);
+        }
+        .btns{
+            display: flex;
+            gap: vw(8);
+            justify-content: center;
+        }
+    }
     &.joinInfo{
         background-image: url('/images/components/bg_flower.png');
         @include infoInputs;
+        h3{
+            margin-bottom: vw(80);
+            position: relative;
+            span{
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                @include font-16px;
+                font-weight: 400;
+            }
+        }
+        form{
+       
+            label{
+                text-align:right;
+                margin-right: vw(120);
+                display: block;
+                @include font-16px;
+                margin-bottom: vw(36);
+                input[type="text"],
+            input[type="password"]{
+                @include inputStyle;
+                margin-left: vw(24);
+                }
+            }
+            .btns{
+                margin-top: vw(97);
+                display: flex;
+                justify-content: center;
+                gap: vw(8);
+            }
+        }
+
     }
     &.login{
         @include login-agree;

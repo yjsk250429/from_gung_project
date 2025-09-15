@@ -4,7 +4,7 @@ import './style.scss';
 
 
 const JoinAgree = () => {
-    const { joinOpen, closeJoin } = useModalStore();
+    const { joinOpen, closeJoin, switchToJoinInfo } = useModalStore();
     if (!joinOpen) return null;
 
     return (
@@ -39,7 +39,7 @@ const JoinAgree = () => {
 
             <p className="btns">
                     <Button text="취소" className="small" onClick={closeJoin}/>
-                    <Button text="다음으로" className="small"/>
+                    <Button text="다음으로" className="small" onClick={switchToJoinInfo}/>
                 </p>
             </form>
         </div>

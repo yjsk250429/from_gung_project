@@ -604,10 +604,9 @@ export const tourclassData = [
     {
         id: 39,
         category: 'tour',
-        title: '한글에서 한옥까지: 오감으로 즐기는 한국문화 하루여행',
+        title: '한글에서 한옥까지, 한국문화 오감 여행',
         theme: ['역사', '힐링'],
-        description:
-            '국립한글박물관에서 시작해 전통음식·공예·한옥길까지 한국의 멋을 오롯이 체험하는 하루 투어',
+        description: '한글박물관부터 전통음식·공예·한옥길까지 한국 멋 체험 하루 투어',
         period: '하루',
         time: '상시예약',
         region: '서울시 용산구',
@@ -619,10 +618,9 @@ export const tourclassData = [
     {
         id: 40,
         category: 'tour',
-        title: '놀며 배우는 한국문화 하루여행: 어린이 민속 체험 투어',
+        title: '놀며 배우는 한국문화: 어린이 민속 체험 하루여행',
         theme: ['역사', '융합'],
-        description:
-            '국립민속박물관 어린이박물관에서 시작해 전통놀이·공예·간식까지 즐기는 어린이 맞춤 한국문화 체험',
+        description: '어린이박물관에서 시작하는 전통놀이·공예·간식 체험 투어',
         period: '하루',
         time: '상시예약',
         region: '서울시 종로구',
@@ -634,10 +632,9 @@ export const tourclassData = [
     {
         id: 41,
         category: 'tour',
-        title: '예술과 한옥정원, 그리고 손끝 체험: 석파정 한국문화 1박 2일',
+        title: '예술과 한옥정원, 그리고 손끝 체험',
         theme: ['예술', '융합'],
-        description:
-            '석파정 서울미술관과 전통 정원, 북촌 공예체험과 고궁 산책까지 세대별로 즐기는 한국문화 종합 투어',
+        description: '석파정과 북촌 공예, 고궁 산책을 아우르는 한국문화 투어',
         period: '하루',
         time: '상시예약',
         region: '서울시 종로구',

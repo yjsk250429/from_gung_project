@@ -4,7 +4,7 @@
 @mixin tourList {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    // justify-content: flex-start;
     gap: vw(50);
     li {
         position: relative;
@@ -17,11 +17,78 @@
             border-radius: vw(10);
             overflow: hidden;
             margin-bottom: vw(10);
+            position: relative;
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
                 object-position: center;
+            }
+            .tourclassInfo {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: vw(40);
+                z-index: 1;
+
+                width: vw(272);
+                display: block;
+
+                color: $white;
+
+                .tourclassThemes {
+                    display: flex;
+                    gap: vw(10);
+                    margin-bottom: vw(10);
+                    .tourclassTheme {
+                        width: vw(46);
+                        height: vw(24);
+                        border-radius: vw(100);
+
+                        @include font-14px;
+                        text-align: center;
+                        line-height: vw(24);
+                        &.history {
+                            background: $sub4;
+                        }
+                        &.art {
+                            background: $main1;
+                        }
+                        &.healing {
+                            background: $sub3;
+                        }
+                        &.life {
+                            background: #23a33f;
+                        }
+                        &.fusion {
+                            background: $blue;
+                        }
+                    }
+                }
+                h4 {
+                    @include font-22px-B;
+                    width: 100%;
+                    margin-bottom: vw(56);
+                    overflow-wrap: break-word;
+                    word-break: break-word;
+                }
+                h5 {
+                    @include font-18px;
+                }
+                .period {
+                    display: flex;
+                }
+            }
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                display: block;
+                width: 100%;
+                height: 100%;
+                opacity: 1;
+                background-color: rgba(0, 0, 0, 0.5);
             }
         }
         .title {

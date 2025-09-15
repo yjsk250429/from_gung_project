@@ -1,4 +1,3 @@
-// components/ottDetail/Con1Cast/OttDetailCast.jsx
 import './style.scss';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w185';

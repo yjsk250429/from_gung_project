@@ -1,0 +1,14 @@
+@use '../base' as *;
+@use '../utils' as *;
+
+@mixin inputStyle{
+    border: 1px solid #b1b1b1;
+    border-radius: vw(4);
+    width: vw(256);
+    height: vw(35);
+    &:focus{
+        border: 1px solid $sub3;
+        outline:none;
+    }
+
+}

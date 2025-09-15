@@ -7,8 +7,24 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 export const useModalStore = create((set) => ({
     loginOpen: false,
+    joinOpen:false,
+    joinInfoOpen:false,
+    rewardOpen:false,
+    stampNoticeOpen:false,
+
+    openStampNotice: () => set({ stampNoticeOpen: true }),
+    closeStampNotice: () => set({ stampNoticeOpen: false }),
+    
+    openReward: () => set({ rewardOpen: true }),
+    closeReward: () => set({ rewardOpen: false }),
+    
     openLogin: () => set({ loginOpen: true }),
     closeLogin: () => set({ loginOpen: false }),
+
+    openJoin: () => set({ joinOpen: true }),
+    closeJoin: () => set({ joinOpen: false }),
+
+    switchToJoin: () => set({ loginOpen: false, joinOpen: true }),
 }));
 
 export const useTourClassStore = create((set, get) => ({

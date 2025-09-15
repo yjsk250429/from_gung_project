@@ -7,6 +7,12 @@
     @include overlay;
 .modal{
     @include modalLayout;
+    &.stampNotice{
+        @include stampPopup;
+        background-image: url('/images/components/frame.png');
+        background-repeat: no-repeat;
+        
+    }
     &.editInfo{
         background-image: url('/images/components/bg_flower.png');
         @include infoInputs;
@@ -23,17 +29,17 @@
         }
         label{
             @include font-16px;
-            input[type="text"]{
+            input[type="text"],
+            input[type="password"]{
                 display: block;
                 @include inputStyle;
                 margin: auto;
                 
             }
-            &:first-child{
-                input[type="text"]{
-                    margin-bottom: vw(16);
-                }
+            input[type="text"]{
+                margin-bottom: vw(16);
             }
+            
         }
         .findId{
             display: flex;
@@ -41,6 +47,12 @@
             margin-bottom: vw(24);
             margin-top: vw(8);
             color: #616161;
+            label{
+                @include font-15px;
+                input[type="checkbox"]{
+                    margin-right: vw(4);
+                }
+            }
             span{
                 @include font-14px;
             }
@@ -75,7 +87,109 @@
     &.joinAgree{
         background-image: url('/images/components/bg_tree.png');
         @include login-agree;
+        h3{
+            margin-bottom: vw(20);
+        }
+        form{
+            label{
+                display: block;
+                span{
+                    color: $main1;
+                    @include font-16px-SB;
+                }
+                input[type="checkbox"]{
+                    margin-right: vw(8);
+                }
+                &:first-child{
+                    margin-bottom: vw(18);
+                    @include font-18px-SB;
+                }
+                &:not(:first-child){
+                    @include font-16px;
+                    margin-bottom: vw(20);
+                    text-indent: vw(10);
+                }
+            }
+            .btns{
+                margin-top: vw(36);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: vw(4);
+
+            }
+        }
     }
 
 }
+}
+.rewardModal{
+    background: #f7f7f8cc;
+    width: vw(310);
+    height: vw(270);
+    position: absolute;
+    top:6%;
+    right: 8%;
+    @include modalLayout;
+    z-index: 1000;
+    padding:vw(18) vw(18);
+    @include dropShadwMobile_login;
+    background-image: url('/images/components/lion.png');
+    background-repeat: no-repeat;
+    background-position: 100% 0;
+    background-size: contain;
+    .myreward,
+    .attendance{
+        strong{
+            color: $main1;
+            @include font-20px-SB;
+            span{
+                cursor: pointer;
+                margin-left: vw(10);
+                @include font-16px;
+                text-decoration: underline;
+                color: #818181;
+            }
+        }
+    }
+    .myreward{
+        margin-bottom: vw(20);
+        ul{
+            width: 100%;
+            height: vw(45);
+            background: $white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: vw(8);
+            padding: 0 vw(15);
+            li{
+                img{
+                    width: vw(20);
+                }
+                &:last-child{
+                    span{
+                        @include font-16px-SB;
+                    }
+                }
+            }
+        }
+    }
+    .attendance{
+        strong{
+            span{
+                cursor: pointer;
+            }
+        }
+        ul{
+            background: $white;
+            border-radius: vw(8);
+            width: 100%;
+            height: vw(116);
+           display: flex; 
+           flex-wrap: wrap;
+           gap: vw(12);
+           padding: vw(26) vw(28);
+        }
+    }
 }

@@ -1,2 +1,64 @@
-@use "../../../styles/utils" as *;
-@use "../../../styles/base" as *;
+@use '../../../styles/utils' as *;
+@use '../../../styles/base' as *;
+
+.ottMainCon4 {
+    width: 100%;
+    height: vw(1000);
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out;
+
+    .slider-container {
+        width: 100%;
+        height: vw(680);
+        overflow: hidden;
+
+        .slick-slide {
+            transform: scale(0.8);
+            div {
+                width: vw(900);
+                height: vw(680);
+                border-radius: vw(30);
+                outline: none;
+                overflow: hidden;
+
+                .posterImg {
+                    width: 100%;
+                    height: vw(440);
+                    object-fit: cover;
+                }
+                .ottInfo {
+                    padding: 30px;
+                    box-sizing: border-box;
+                    .titleLogo {
+                        margin-bottom: vw(20);
+                    }
+                    p {
+                        color: $white;
+                        @include font-14px;
+                    }
+                }
+            }
+        }
+
+        .slick-center {
+            transform: scale(1);
+            transition: all 0.3s ease;
+        }
+
+        .slick-prev,
+        .slick-next {
+            z-index: 10;
+
+            &:before {
+                font-size: 30px;
+            }
+        }
+    }
+}

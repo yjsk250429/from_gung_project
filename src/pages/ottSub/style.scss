@@ -5,6 +5,16 @@
     background: $black;
     .inner {
         padding: 200px 0;
+        .tabs {
+            li {
+                color: $white;
+                border-color: $sub2;
+                &.on {
+                    color: $sub3;
+                    border-color: $sub3;
+                }
+            }
+        }
     }
     .sort {
         display: flex;
@@ -13,7 +23,6 @@
         gap: vw(18);
         li {
             @include font-18px;
-            color: $white !important;
             margin-bottom: vw(20);
             i {
                 margin-right: vw(10);

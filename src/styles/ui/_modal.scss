@@ -36,7 +36,7 @@
 @mixin login-agree{
     width: vw(365);
     height: vw(445);
-    padding: vw(42) 0;
+    padding: vw(42) vw(55);
 }
 
 @mixin complete{

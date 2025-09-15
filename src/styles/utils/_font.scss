@@ -28,10 +28,12 @@
     letter-spacing: vw(-0.3);
     line-height: vw(140);
 }
+
 @mixin font-70px {
     font-size: vw(70);
     font-weight: 500;
 }
+
 @mixin font-75px-B {
     font-size: vw(75);
     font-weight: 700;

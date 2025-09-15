@@ -27,6 +27,7 @@
                 border-radius: vw(30);
                 outline: none;
                 overflow: hidden;
+                @include ottMainDropShadow;
 
                 .posterImg {
                     width: 100%;
@@ -34,8 +35,12 @@
                     object-fit: cover;
                 }
                 .ottInfo {
+                    height: vw(240);
                     padding: 30px;
                     box-sizing: border-box;
+
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px) saturate(120%);
                     .titleLogo {
                         margin-bottom: vw(20);
                     }

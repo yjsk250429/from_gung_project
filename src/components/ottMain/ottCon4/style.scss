@@ -28,16 +28,33 @@
                 outline: none;
                 overflow: hidden;
                 @include ottMainDropShadow;
+                position: relative;
 
                 .posterImg {
                     width: 100%;
                     height: vw(440);
                     object-fit: cover;
                 }
+                span {
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: vw(40);
+                    height: vw(50);
+                    border-radius: 0 0 vw(5) vw(5);
+                    background: $sub3;
+                    top: 0;
+                    left: vw(40);
+
+                    color: $white;
+                    @include font-18px-SB;
+                }
                 .ottInfo {
                     height: vw(240);
                     padding: 30px;
                     box-sizing: border-box;
+                    position: relative;
 
                     background: rgba(255, 255, 255, 0.1);
                     backdrop-filter: blur(10px) saturate(120%);
@@ -47,6 +64,11 @@
                     p {
                         color: $white;
                         @include font-14px;
+                    }
+                    button {
+                        position: absolute;
+                        bottom: vw(30);
+                        right: vw(30);
                     }
                 }
             }

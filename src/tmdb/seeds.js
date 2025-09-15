@@ -1,4 +1,4 @@
-// src/tmdb/seeds.js
+// src/tmdb/seeds.jsTV
 export const seeds = [
     // TV
     {
@@ -246,6 +246,7 @@ export const seeds = [
     { title: '대왕의 꿈', type: 'tv', year: 2012, season: 1, tags: ['sageuk'], tmdbId: 66719 },
     { title: '불의 여신 정이', type: 'tv', year: 2013, season: 1, tags: ['sageuk'], tmdbId: 51866 },
     { title: '무사 백동수', type: 'tv', year: 2011, season: 1, tags: ['sageuk'], tmdbId: 40016 },
+    { title: '원경', type: 'tv', year: 2025, season: 1, tags: ['sageuk'], tmdbId: 226103 },
 
     // Movie
     {

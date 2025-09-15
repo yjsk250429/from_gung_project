@@ -1,110 +1,48 @@
-// src/components/tmdb/CuratedSageuk.jsx
-import { useEffect, useRef, useState, useMemo } from 'react';
-import { loadAll } from '../../tmdb/loadAll';
 import './style.scss';
+import { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useMovieStore } from '../../store';
+import { isMovieEntity, isDramaEntity } from '../../store';
 
-const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-function attachStablePoints(
-    items,
-    {
-        seedKey = 'curated',
-        range = [30, 55],
-        storageKey = 'ottPoints:v1',
-        keyFn = (it) => `${it.mediaType}-${it.id}`,
-    } = {}
-) {
-    const [min, max] = range;
-    const map = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    let changed = false;
-
-    const out = items.map((it) => {
-        const key = `${seedKey}:${keyFn(it)}`;
-        let p = map[key];
-        if (typeof p !== 'number') {
-            p = randInt(min, max);
-            map[key] = p;
-            changed = true;
-        }
-        return { ...it, points: p };
-    });
-
-    if (changed) localStorage.setItem(storageKey, JSON.stringify(map));
-    return out;
-}
-
-export default function CuratedSageuk() {
-    const [items, setItems] = useState([]);
-    const [state, setState] = useState({ loading: true, error: null });
-
-    // ⬇ 탭 상태를 세션에서 복원 (0=tv, 1=movie)
-    const initialTop = useMemo(() => (sessionStorage.getItem('ott:lastTop') === '1' ? 1 : 0), []);
-    const [top, setTop] = useState(initialTop);
-    const did = useRef(false);
+const CuratedSageuk = () => {
+    const curatedLoading = useMovieStore((s) => s.curatedLoading);
+    const curatedError = useMovieStore((s) => s.curatedError);
+    const curated = useMovieStore((s) => s.curated);
+    const mediaCategory = useMovieStore((s) => s.mediaCategory);
 
     useEffect(() => {
-        if (did.current) return;
-        did.current = true;
-        (async () => {
-            try {
-                const loaded = await loadAll(); // seed 기반
-                const withPoints = attachStablePoints(loaded, {
-                    seedKey: 'curated',
-                    range: [30, 55],
-                    storageKey: 'ottPoints:v1',
-                    keyFn: (it) => `${(it.mediaType || '').toLowerCase()}-${it.id}`,
-                });
-                setItems(withPoints);
-                setState({ loading: false, error: null });
-            } catch (e) {
-                console.error(e);
-                setState({ loading: false, error: e?.message || String(e) });
-            }
-        })();
+        useMovieStore.getState().initCurated();
     }, []);
 
-    // ⬇ 탭 바뀌면 세션에 저장
-    useEffect(() => {
-        sessionStorage.setItem('ott:lastTop', String(top));
-    }, [top]);
+    const filtered = useMemo(() => {
+        const list = Array.isArray(curated) ? curated : [];
+        return mediaCategory === 'movie' ? list.filter(isMovieEntity) : list.filter(isDramaEntity);
+    }, [curated, mediaCategory]);
 
-    if (state.loading) return <p style={{ color: '#fff' }}>불러오는 중…</p>;
-    if (state.error) return <p style={{ color: '#f66' }}>에러: {state.error}</p>;
-    if (!items.length) return <p style={{ color: '#fff' }}>데이터 없음 (seed 확인 필요)</p>;
-
-    const mediaType = top === 0 ? 'tv' : 'movie';
-    const filtered = items.filter((it) => (it.mediaType || '').toLowerCase() === mediaType);
+    if (curatedLoading) return <p style={{ color: '#fff' }}>불러오는 중…</p>;
+    if (curatedError) return <p style={{ color: '#f66' }}>에러: {curatedError}</p>;
+    if (!filtered.length) return <p style={{ color: '#fff' }}>데이터 없음 (seed 확인 필요)</p>;
 
     return (
-        <>
-            {/* 간단 탭 (원하는 UI로 바꿔도 됨) */}
-            <div className="mini-tabs" style={{ display: 'flex', gap: 8, margin: '0 0 12px' }}>
-                <button onClick={() => setTop(0)} className={top === 0 ? 'on' : ''}>
-                    드라마
-                </button>
-                <button onClick={() => setTop(1)} className={top === 1 ? 'on' : ''}>
-                    영화
-                </button>
-            </div>
-
-            <ul className="ottlist">
-                {filtered.map((it) => (
-                    <li key={`${it.mediaType}-${it.id}`}>
-                        {/* ⬇ 상세로 갈 때 mediaType 같이 넘겨서 /ott/:ottID에서 정확히 처리 */}
-                        <Link to={`/ott/${it.id}`} state={{ mediaType }}>
+        <ul className="ottlist">
+            {filtered.map((it) => {
+                const mediaType = String(it.mediaType || '').toLowerCase(); // 'tv' | 'movie'
+                return (
+                    <li key={`${mediaType}-${it.id}`}>
+                        <Link to={`/ott/${mediaType}/${it.id}`}>
                             {it.poster ? (
-                                <img src={it.poster} alt="" />
+                                <img src={it.poster} alt={it.title} />
                             ) : (
                                 <div className="img-fallback">No Image</div>
                             )}
-                            {typeof it.points === 'number' && (
-                                <span className="points-badge">{it.points}p</span>
-                            )}
+
+                            <span className="points-badge">{it.points}p</span>
                         </Link>
                     </li>
-                ))}
-            </ul>
-        </>
+                );
+            })}
+        </ul>
     );
-}
+};
+
+export default CuratedSageuk;

@@ -13,7 +13,7 @@ const pickByLang = (arr, key = 'file_path', order = ['ko', null, 'en']) => {
     return arr[0]?.[key] ?? null;
 };
 
-export async function fetchDetail({ type, tmdbId, season }) {
+async function fetchCore({ type, tmdbId, season }) {
     const t = type === 'movie' ? 'movie' : 'tv';
     const append = t === 'tv' ? APPEND_TV : APPEND_MOVIE;
 
@@ -77,8 +77,34 @@ export async function fetchDetail({ type, tmdbId, season }) {
         titleLogo: logoPref ? img(logoPref, 'w500') : null,
         cast,
         episodes,
-        // 추천/유사 원하면 여기서도 합쳐서 반환 가능
         recommendations: base.recommendations,
         similar: base.similar,
     };
+}
+
+/**
+ * 🔀 타입이 불확실하거나 잘못된 경우에도 안전하게 상세를 가져오는 스마트 함수
+ * 우선 주어진 type으로 시도 → 실패(404 등) 시 반대 타입으로 폴백
+ */
+export async function fetchDetailSmart({ tmdbId, type, season }) {
+    if (type === 'movie' || type === 'tv') {
+        try {
+            return await fetchCore({ type, tmdbId, season });
+        } catch (e) {
+            // 주어진 타입이 실패하면 반대 타입 폴백 시도
+            const alt = type === 'movie' ? 'tv' : 'movie';
+            return await fetchCore({ type: alt, tmdbId, season });
+        }
+    }
+    // type 미지정이면 tv 먼저 → 실패 시 movie
+    try {
+        return await fetchCore({ type: 'tv', tmdbId, season });
+    } catch {
+        return await fetchCore({ type: 'movie', tmdbId, season });
+    }
+}
+
+// 기존 시그니처 유지용(명시 타입으로만 호출하고 싶을 때)
+export async function fetchDetail({ type, tmdbId, season }) {
+    return fetchCore({ type, tmdbId, season });
 }

@@ -39,7 +39,7 @@ export const MyRoutes = () => {
                     <Route path="/ottmain" element={<OttMain />} />
                     <Route path="/ottsub" element={<OttSub />} />
 
-                    <Route path="ott/:ottID" element={<OttDetail />} />
+                    <Route path="ott/:mediaType/:ottID" element={<OttDetail />} />
                     {/* <Route path="/vod/:medsiaType/:id" element={<OttDetail />} /> */}
                     {/* <Route path="/ott/ottdetail" element={<OttDetail />} /> */}
                     <Route path="/ottresults" element={<OttSearch />} />

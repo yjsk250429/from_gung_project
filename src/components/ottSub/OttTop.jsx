@@ -33,13 +33,7 @@ export default function OttTop({ activeTop, onTopChange }) {
     };
     return (
         <article className="top">
-            <RoundTap
-                mode="media"
-                text1="드라마"
-                text2="영화"
-                bgColor="#d9d9d9"
-                onSelect={({ type }) => setTop(type === 'tv' ? 0 : 1)}
-            />
+            <RoundTap mode="media" text1="드라마" text2="영화" bgColor="#353535" />
             <span># 지금 주목받는 {label}</span>
 
             <ul className="recommend">

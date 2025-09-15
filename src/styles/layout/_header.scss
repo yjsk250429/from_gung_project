@@ -1,5 +1,5 @@
-@use './../utils' as *;
-@use './../base' as *;
+@use '../utils' as *;
+@use '../base' as *;
 
 html.is-active {
     overflow-y: hidden;
@@ -42,12 +42,12 @@ html.is-active {
                 margin-left: 100px;
                 position: relative;
                 a {
-                    font-size: 20px;
+                    @include font-20px-M;
                     transition: 0.3s;
                     color: #fff;
                     span{
-                        @include font-20px-B;
                         font-family: $font-sub;
+                        font-weight: 600;
                     }
                     &:hover {
                         color: tomato;
@@ -213,7 +213,6 @@ html.is-active {
     }
 
     @include tablet {
-        // background: pink;
         .inner {
             height: 70px;
             width: 100%;

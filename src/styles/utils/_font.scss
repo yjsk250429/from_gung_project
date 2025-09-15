@@ -29,17 +29,16 @@
     line-height: vw(140);
 }
 
-<<<<<<< HEAD
 @mixin font-70px {
     font-size: vw(70);
     font-weight: 500;
-=======
+}
+
 @mixin font-75px-B {
     font-size: vw(75);
     font-weight: 700;
     letter-spacing: vw(-0.3);
     line-height: vw(95);
->>>>>>> b4ca796fa780151b679b3fecab0445da8fc4ebf4
 }
 
 @mixin font-55px-B {

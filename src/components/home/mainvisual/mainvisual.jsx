@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Button from '../../ui/button/Button';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,6 +62,92 @@ const Mainvisual = () => {
                 );
             });
         }, containerRef);
+        const SPEED = 0.4;
+        gsap.set('.main_bg img', { willChange: 'transform' });
+        gsap.to('.main_bg img', {
+            y: (i) => (i % 2 === 0 ? 14 : 22), // 서로 다른 폭으로 살짝 떠오르게
+
+            duration: (i) => (i % 2 === 0 ? 3.6 : 4.2) * SPEED,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+            force3D: true,
+            scrollTrigger: {
+                trigger: containerRef.current, // 보일 때만 움직이고,
+                start: 'top 100%', // 화면 하단에 닿을 때 시작
+                end: 'bottom top', // 화면 위로 사라지면 정지
+                toggleActions: 'play pause resume pause',
+            },
+            // 살짝 지연을 줘서 서로 안 겹치게
+            delay: (i) => i * 0.2,
+        });
+
+        // 메인 이미지 효과
+        // ===== main_banner: 인트로 + 플로팅 =====
+        gsap.set(['.banner_line img', '.banner_image img'], {
+            transformOrigin: '50% 50%',
+            willChange: 'transform',
+        });
+
+        // 1) 둥실둥실(무한) 트윈을 미리 만들어두고 일단 정지
+        const floatLine = gsap.to('.banner_line img', {
+            y: 10,
+            rotation: 3, // 살짝 좌우로 흔들리게
+            duration: 15,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+            paused: true,
+        });
+
+        const floatImage = gsap.to('.banner_image img', {
+            y: 12,
+            duration: 4.6,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+            paused: true,
+            stagger: { each: 0.15 },
+        });
+
+        // 2) 인트로 타임라인 (작았다가 커지기)
+        //   - 원형 라인은 커지면서 1바퀴 회전
+        //   - 이미지들은 팝업처럼 커짐
+        const tlBanner = gsap.timeline({
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: 'top 100%',
+                end: 'bottom top',
+                toggleActions: 'restart reset restart reset',
+                invalidateOnRefresh: true,
+                // 위로 되돌아가면 플로팅 초기화
+                onLeaveBack: () => {
+                    floatLine.pause(0);
+                    floatImage.pause(0);
+                },
+            },
+        });
+
+        // 원형 라인: 축소→확대 + 회전
+        tlBanner.fromTo(
+            '.banner_line img',
+            { scale: 0.1, rotation: 0 },
+            { scale: 1, rotation: 360, duration: 0.5, ease: 'power3.out' }
+        );
+
+        // 메인 이미지: 축소→확대 (살짝 튀어나오는 느낌)
+        tlBanner.fromTo(
+            '.banner_image img',
+            { scale: 0.1, y: 20 },
+            { scale: 1, y: 0, duration: 0.9, ease: 'back.out(1.6)', stagger: 0.15 },
+            '-=0.3' // 라인 커질 때 겹치게 약간 당김
+        );
+
+        // 인트로 끝나면 둥실둥실 시작
+        tlBanner.add(() => {
+            floatLine.play();
+            floatImage.play();
+        });
 
         return () => ctx.revert();
     }, []);
@@ -86,8 +173,8 @@ const Mainvisual = () => {
 
             <div className="main_banner">
                 <div className="banner_line">
-                    <img src="/images/mainvisual/visual_main1.png" alt="" />
-                    <img src="/images/mainvisual/visual_main2.png" alt="" />
+                    {/* <img src="/images/mainvisual/visual_main1.png" alt="" /> */}
+                    <img src="/images/mainvisual/visual_main4.png" alt="" />
                 </div>
                 <div className="banner_image">
                     <img src="/images/mainvisual/visual_main0.png" alt="" />
@@ -116,6 +203,7 @@ const Mainvisual = () => {
                 </p>
                 <img src="/images/mainvisual/visual_text1.png" alt="" />
             </div>
+            <Button text="더보기" className="default" />
         </div>
     );
 };

@@ -28,6 +28,11 @@
         "react-router-dom": "^7.8.2",
         "react-slick": "^0.31.0",
         "sass": "^1.89.2",
+<<<<<<< HEAD
+        "scrollmagic": "^2.0.8",
+        "scrollmagic-plugin-gsap": "^1.0.4",
+=======
+>>>>>>> b4ca796fa780151b679b3fecab0445da8fc4ebf4
         "slick-carousel": "^1.8.1",
         "styled-components": "^6.1.19",
         "styled-reset": "^4.5.2",

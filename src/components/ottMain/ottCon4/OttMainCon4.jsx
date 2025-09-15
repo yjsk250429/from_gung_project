@@ -82,11 +82,11 @@ const OttMainCon4 = () => {
                                 src={slide.posterImg}
                                 alt={`slide ${idx + 1}`}
                             />
-                            <div className="ottInfo">
+                            <article className="ottInfo">
                                 <img className="titleLogo" src={slide.titleLogo} alt="title-logo" />
                                 <p>{slide.description01}</p>
                                 <p>{slide.description02}</p>
-                            </div>
+                            </article>
                         </div>
                     ))}
                 </Slider>

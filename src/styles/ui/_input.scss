@@ -6,8 +6,9 @@
     border-radius: vw(4);
     width: vw(256);
     height: vw(35);
+    padding-left: vw(10);
+    @include font-15px;
     &:focus{
-        border: 1px solid $sub3;
         outline:none;
     }
 

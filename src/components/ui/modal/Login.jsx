@@ -3,7 +3,7 @@ import Button from "../button/Button";
 import './style.scss';
 
 const Login = () => {
-    const { loginOpen, closeLogin } = useModalStore();
+    const { loginOpen, closeLogin, switchToJoin } = useModalStore();
     if (!loginOpen) return null;
 
     return (
@@ -15,7 +15,7 @@ const Login = () => {
                     <input type="text" />
                 </label>
                 <label htmlFor="">비밀번호
-                    <input type="text" />
+                    <input type="password" />
                 </label>
                 <p className="findId">
                 <label htmlFor="">
@@ -30,7 +30,7 @@ const Login = () => {
             </form>
             <ul className="bottom">
                 <li><img src="/images/components/kakaologin.png" alt="kakaologin" />카카오 계정으로 로그인</li>
-                <li>회원가입</li>
+                <li onClick={switchToJoin}>회원가입</li>
             </ul>
         </div>
         </div>

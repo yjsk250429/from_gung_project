@@ -59,3 +59,24 @@
     margin-right: initial;
     width: 100vw;
 }
+
+// DropShadow
+@mixin ottMainDropShadow {
+    box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+@mixin dropShadwMain1 {
+    box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.8);
+}
+@mixin dropShadwMain2 {
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.45);
+}
+@mixin dropShadwOtt1 {
+    box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.8);
+}
+@mixin dropShadwOtt2 {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7);
+}
+@mixin dropShadwMobile_login {
+    box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.1);
+}

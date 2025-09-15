@@ -79,7 +79,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             img:nth-child(1) {
                 width: vw(692);
                 object-fit: cover;
-                top: vw(316);
+                top: vw(120);
                 left: vw(235);
             }
             img:nth-child(2) {
@@ -197,6 +197,12 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             right: vw(145);
             z-index: 0;
         }
+    }
+    .default {
+        position: absolute;
+        bottom: vw(352);
+        right: vw(460);
+        color: #fff;
     }
 }
 

@@ -3,7 +3,7 @@ import OttTop from '../../components/ottSub/OttTop';
 import CuratedSageuk from '../../components/tmdb/CuratedSageuk';
 import './style.scss';
 
-import Tab from '../../components/ui/tab/TabTour';
+import Tab from '../../components/ui/tab/Tab';
 import { IoIosList } from 'react-icons/io';
 import { BiSortAlt2 } from 'react-icons/bi';
 

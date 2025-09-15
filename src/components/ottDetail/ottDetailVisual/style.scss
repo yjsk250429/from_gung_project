@@ -159,7 +159,7 @@
                         justify-content: right;
                         align-items: center;
                         p {
-                            @include font-14px-R;
+                            @include font-14px;
                             color: $white;
                             margin-left: vw(10);
                         }

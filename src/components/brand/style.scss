@@ -1,0 +1,147 @@
+.intro {
+    width: 100%;
+    height: vw(1000);
+    .inner {
+        width: 100%;
+
+        /**
+ * Variabbles
+ */
+
+        // Layout
+        $title-width: 80;
+
+        // transition
+        $transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        $transition-fast: 0.2s cubic-bezier(0.77, 0, 0.175, 1);
+
+        // Ink transition
+        $frameWidth: 1440;
+        $frameHeight: 900;
+
+        /**
+ * Functions
+ */
+
+        @function rem($pixel) {
+            @return $pixel / 16 + rem;
+        }
+
+        /**
+ * Mixins
+ */
+
+        @mixin frame-size($imageWidth, $framePortrait: false) {
+            @if $framePortrait == false {
+                height: ($frameHeight * $imageWidth / $frameWidth);
+                width: $imageWidth;
+            } @else {
+                height: $imageWidth;
+                width: ($frameHeight * $imageWidth / $frameWidth);
+            }
+        }
+
+        /**
+ * Styles
+ */
+
+        body {
+            background-color: hsla(52, 40%, 96%, 1);
+        }
+
+        p {
+            margin: rem(20) 0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .o-page {
+            overflow: hidden;
+            width: 100vw;
+        }
+
+        .o-main {
+            margin: 0 auto;
+            max-width: rem(600);
+            padding: rem(20);
+        }
+
+        .o-container {
+            margin: rem(20) 0;
+        }
+
+        .c-transition {
+            @include frame-size(400px);
+            margin: rem(80) 0;
+            overflow: hidden;
+            position: relative;
+
+            &::before {
+                background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/204808/ink-photo-frame.png');
+                background-size: 100% 100%;
+                background-position: 50% 50%;
+                content: '';
+                height: 100%;
+                position: absolute;
+                width: 100%;
+            }
+
+            &::after {
+                //animation: ink-transition 1.5s steps(39) 0.5s forwards;
+                background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/204808/ink-transition-sprite.png');
+                background-size: 100% 100%;
+                content: '';
+                height: 100%;
+                left: 50%;
+                position: absolute;
+                top: 0;
+                transform: translateX(-1.25%);
+                width: 4000%;
+            }
+
+            &.is-active::after {
+                animation: ink-transition 2s steps(39) 0.5s forwards;
+            }
+        }
+
+        .c-transition--large {
+            @include frame-size(600px);
+        }
+
+        .c-transition--center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .c-transition__img {
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            width: 100%;
+
+            .is-active & {
+                opacity: 1;
+            }
+
+            .c-transition--img-top & {
+                object-position: 50% 0;
+            }
+        }
+
+        @keyframes ink-transition {
+            0% {
+                transform: translateX(-1.25%);
+            }
+
+            99% {
+                transform: translateX(-98.75%);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(-98.75%);
+                opacity: 0;
+            }
+        }
+    }
+}

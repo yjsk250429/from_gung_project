@@ -12,7 +12,7 @@ const INITIAL_COUNT = 8;
 const STEP = 8;
 
 const TourClass = () => {
-    const tabItems = ['전체', '서울', '인천/경기', '지방'];
+    const tabItems = ['전체', '서울', '인천/경기', '기타'];
 
     // 카테고리/데이터 길이 계산 (버튼 레이블/동작에 필요)
     const category = useTourClassStore((s) => s.category);

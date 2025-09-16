@@ -1,6 +1,6 @@
 // components/ottSub/OttTop.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RoundTap from '../ui/roundTap/RoundTap';
 import './style.scss';
 
@@ -29,7 +29,7 @@ export default function OttTop({ activeTop, onTopChange }) {
 
     const openDetail = (id) => {
         sessionStorage.setItem('ott:lastMediaType', mediaType);
-        navigate(`/ott/${id}`, { state: { mediaType } });
+        navigate(`/ott/${mediaType}/${id}`, { state: { mediaType } });
     };
     return (
         <article className="top">

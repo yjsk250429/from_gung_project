@@ -1,9 +1,16 @@
+import { useState } from 'react';
 import './style.scss';
+import ReservationSection from './sections/ReservationSection.jsx';
+import WishlistSection from './sections/WishlistSection.jsx';
+import ReviewSection from './sections/ReviewSection.jsx';
+import InquirySection from './sections/InquirySection.jsx';
 
 const MyPagemain = () => {
+    const [activeMenu, setActiveMenu] = useState('reservation');
+    const isWishlistOpen = activeMenu === 'wishlist';
+
     return (
         <div className="MyPagemain_main">
-            {/* 좌측 사이드바 */}
             <aside className="mypage_sidebar">
                 <div className="profile">
                     <div className="profile_img">
@@ -12,23 +19,65 @@ const MyPagemain = () => {
                     <div className="profile_info">
                         <p className="nickname">닉네임</p>
                         <p className="username">(이름)</p>
-                        <button className="btn_edit">회원정보 수정 ✎</button>
+                        <button className="btn_edit" type="button">
+                            <span>회원정보 수정</span>
+                            <img src="/images/mypage/pen.png" alt="" />
+                        </button>
                     </div>
                 </div>
 
                 <nav className="mypage_menu">
-                    <button className="active">나의 예약 내역</button>
-                    <button>찜 목록</button>
-                    <button>투어 / 클래스</button>
-                    <button>OTT</button>
-                    <button>내가 쓴 리뷰</button>
-                    <button>1:1 문의사항</button>
+                    <button
+                        type="button"
+                        className={activeMenu === 'reservation' ? 'active' : ''}
+                        onClick={() => setActiveMenu('reservation')}
+                    >
+                        나의 예약 내역
+                    </button>
+
+                    {/* 찜 목록 (서브메뉴 토글 트리거) */}
+                    <button
+                        type="button"
+                        className={isWishlistOpen ? 'active' : ''}
+                        onClick={() => setActiveMenu('wishlist')}
+                        aria-expanded={isWishlistOpen}
+                        aria-controls="wishlist-submenu"
+                    >
+                        찜 목록
+                    </button>
+
+                    {/* ✅ 찜 목록 클릭 시에만 나타나는 서브 메뉴 */}
+                    {isWishlistOpen && (
+                        <div id="wishlist-submenu" className="submenu">
+                            <button type="button" className="sub">
+                                투어 / 클래스
+                            </button>
+                            <button type="button" className="sub">
+                                OTT
+                            </button>
+                        </div>
+                    )}
+
+                    <button
+                        type="button"
+                        className={activeMenu === 'review' ? 'active' : ''}
+                        onClick={() => setActiveMenu('review')}
+                    >
+                        내가 쓴 리뷰
+                    </button>
+
+                    <button
+                        type="button"
+                        className={activeMenu === 'inquiry' ? 'active' : ''}
+                        onClick={() => setActiveMenu('inquiry')}
+                    >
+                        1:1 문의사항
+                    </button>
                 </nav>
             </aside>
 
             {/* 우측 컨텐츠 */}
             <section className="mypage_content">
-                {/* 상단 현황 카드 */}
                 <div className="status_cards">
                     <div className="reward">
                         <p className="reward_title">리워드 현황</p>
@@ -47,35 +96,10 @@ const MyPagemain = () => {
                     </div>
                 </div>
 
-                {/* 예약 내역 */}
-                <div className="reservation">
-                    <h2>나의 예약 내역</h2>
-                    <div className="reservation_list">
-                        <div className="reservation_item">
-                            <div className="thumb"></div>
-                            <div className="info">
-                                <p className="title">조선왕조 이야기, 궁궐을 걷다</p>
-                                <p className="date">
-                                    예약일: 2025.09.08 관람일: 2025.09.04(수)~2025.09.28(일)
-                                </p>
-                                <p className="num">예약번호: 2025090801057</p>
-                            </div>
-                            <button className="btn_cancel">예약 취소</button>
-                        </div>
-
-                        <div className="reservation_item">
-                            <div className="thumb"></div>
-                            <div className="info">
-                                <p className="title">조선왕조 이야기, 궁궐을 걷다</p>
-                                <p className="date">
-                                    예약일: 2025.09.08 관람일: 2025.09.04(수)~2025.09.28(일)
-                                </p>
-                                <p className="num">예약번호: 2025090801057</p>
-                            </div>
-                            <button className="btn_cancel">예약 취소</button>
-                        </div>
-                    </div>
-                </div>
+                {activeMenu === 'reservation' && <ReservationSection />}
+                {activeMenu === 'wishlist' && <WishlistSection />}
+                {activeMenu === 'review' && <ReviewSection />}
+                {activeMenu === 'inquiry' && <InquirySection />}
             </section>
         </div>
     );

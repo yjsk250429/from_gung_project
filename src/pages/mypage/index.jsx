@@ -1,9 +1,9 @@
-import MyPagemain from "../../components/mypage/MyPagemain";
+import MyPagemain from '../../components/mypage/MyPagemain';
 
 const MyPage = () => {
     return (
         <>
-         <MyPagemain/>   
+            <MyPagemain />
         </>
     );
 };

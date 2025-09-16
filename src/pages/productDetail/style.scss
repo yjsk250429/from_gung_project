@@ -1,32 +1,32 @@
 @use '../../styles/base' as *;
 @use '../../styles/utils' as *;
 
-.tourclassDetail{
-    .inner{
-        padding:vw(200) 0;
+.tourclassDetail {
+    .inner {
+        padding: vw(200) 0;
         display: flex;
         justify-content: space-between;
-        .left{
+        .left {
             background-image: url('/images/tourclass/bg_cloud.png');
             background-position: 0 0;
             background-repeat: no-repeat;
-            .img-wrap{
+            .img-wrap {
                 width: vw(598);
                 height: vw(700);
                 overflow: hidden;
-                img{
+                img {
                     width: 100%;
                     height: 100%;
                     transform: scale(1.1);
                 }
             }
         }
-        .right{
+        .right {
             width: vw(925);
-            .theme{
+            .theme {
                 display: flex;
                 gap: vw(5);
-                li{
+                li {
                     width: vw(56);
                     height: vw(28);
                     color: $white;
@@ -35,68 +35,69 @@
                     line-height: vw(28);
                     text-align: center;
                     text-indent: vw(-2);
-                    &.history{
+                    &.history {
                         background: $sub4;
                     }
-                    &.art{
+                    &.art {
                         background: $main1;
                     }
-                    &.healing{
+                    &.healing {
                         background: $sub3;
                     }
-                    &.life{
-                        background: #23A33F;
+                    &.life {
+                        background: #23a33f;
                     }
-                    &.fusion{
+                    &.fusion {
                         background: $blue;
                     }
                 }
             }
-            .basic-info{
+            .basic-info {
                 margin-bottom: vw(80);
-                h3{
+                h3 {
                     margin-top: vw(12);
                     padding-bottom: vw(26);
                     margin-bottom: vw(20);
-                width: 100%;
-                border-bottom: 1px solid $sub1;
-                position: relative;
-                font-family: $font-sub;
-                @include font-40px-SB;
-                .rate{
-                    @include font-18px-B;
-                    position: absolute;
-                    right: 0;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    color: $sub3;
-                }
-            }
-            .details{
-                color: $sub5;
-                display: flex;
-                gap: vw(20);
-                li{
-                    @include font-16px-B;
+                    width: 100%;
+                    border-bottom: 1px solid $sub1;
                     position: relative;
-                    padding-left:vw(20);
-                    i{
+                    font-family: $font-sub;
+                    @include font-40px-SB;
+                    .rate {
+                        @include font-18px-B;
                         position: absolute;
-                        left: 0;
-                        top: 7%;                    }
+                        right: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: $sub3;
+                    }
+                }
+                .details {
+                    color: $sub5;
+                    display: flex;
+                    gap: vw(200);
+                    li {
+                        @include font-16px-B;
+                        position: relative;
+                        padding-left: vw(20);
+                        i {
+                            position: absolute;
+                            left: 0;
+                            top: 7%;
+                        }
+                    }
                 }
             }
-        }
-        .tabs{
-            li{
-                color: $sub2;
-                border-color: $sub2;
-                &.on{
-                    color: $sub3;
-                    border-color: $sub3;
+            .tabs {
+                li {
+                    color: $sub2;
+                    border-color: $sub2;
+                    &.on {
+                        color: $sub3;
+                        border-color: $sub3;
+                    }
                 }
             }
-        }
         }
     }
 }

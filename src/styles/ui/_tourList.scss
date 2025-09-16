@@ -3,10 +3,10 @@
 
 @mixin tourList {
     padding: 0 vw(20);
-    display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: vw(50);
     li {
         position: relative;
         width: vw(352);

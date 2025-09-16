@@ -23,25 +23,14 @@ export const MyRoutes = () => {
                     <Route index element={<Home />} />
 
                     <Route path="/brand" element={<Brand />} />
-
-                    {/* 투어 */}
                     <Route path="/tourclass" element={<TourClass />} />
                     <Route path="/tourclass/:tourclassID" element={<TourClassDetail />} />
                     <Route path="/tourresults" element={<TourSearch />} />
 
-                    {/* OTT */}
-                    {/* 
-                        추후 OTT에 다크모드 적용 예정
-                        <Route path="/ott" element={<Layout theme="dark" />} >
-                             <Route index element={<Ott />} />
-                        </Route>
-                        */}
                     <Route path="/ottmain" element={<OttMain />} />
                     <Route path="/ottsub" element={<OttSub />} />
 
                     <Route path="ott/:mediaType/:ottID" element={<OttDetail />} />
-                    {/* <Route path="/vod/:medsiaType/:id" element={<OttDetail />} /> */}
-                    {/* <Route path="/ott/ottdetail" element={<OttDetail />} /> */}
                     <Route path="/ottresults" element={<OttSearch />} />
 
                     <Route path="/mypage" element={<MyPage />} />

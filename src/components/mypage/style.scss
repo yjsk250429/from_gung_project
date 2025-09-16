@@ -5,31 +5,30 @@
     font-family: $font-main;
     display: flex;
     width: vw(1920);
-    min-height: vw(900);
-    margin-top: vw(100);
+    min-height: vw(1465);
+    margin-top: vw(380);
     background: #fff;
 
     .mypage_sidebar {
-        width: vw(300);
-        background: #f9f9f9;
+        width: vw(385);
+        height: vw(735);
+        background: $sub1;
         border-radius: vw(12);
         padding: vw(24);
         display: flex;
         flex-direction: column;
         align-items: center;
-
+        overflow: visible;
         .profile {
             text-align: center;
             margin-bottom: vw(40);
-
             .profile_img {
                 width: vw(240);
                 height: vw(240);
                 border-radius: 50%;
-                background: #ddd;
-                margin: 0 auto vw(16);
+                background: #666;
                 overflow: hidden;
-
+                margin: calc(-1 * (#{vw(120)} + #{vw(24)})) auto vw(16);
                 img {
                     width: 100%;
                     height: 100%;
@@ -38,8 +37,7 @@
             }
 
             .nickname {
-                font-size: vw(20);
-                font-weight: bold;
+                @include font-30px-B;
             }
 
             .username {
@@ -86,35 +84,78 @@
 
     .mypage_content {
         flex: 1;
-        padding: vw(24) vw(48);
-
+        padding: vw(24) vw(36);
+        padding-top: 0;
         .status_cards {
             display: flex;
-            gap: vw(16);
-            margin-bottom: vw(40);
+            gap: vw(36);
+            margin-bottom: vw(100);
 
-            .reward, .coupon {
+            .reward,
+            .coupon {
                 flex: 1;
                 padding: vw(24);
                 border-radius: vw(12);
-
-                .title {
-                    font-size: vw(18);
-                    margin-bottom: vw(12);
-                }
-                .value {
-                    font-size: vw(28);
-                    font-weight: bold;
-                }
             }
 
             .reward {
+                width: vw(570);
+                height: vw(150);
                 background: #2c2c7c;
                 color: #fff;
+                position: relative;
+                overflow: hidden;
+                .reward_title {
+                    @include font-22px-B;
+                }
+                .reward_value {
+                    text-align: right;
+                    span {
+                        @include font-48px;
+                    }
+                }
+                img {
+                    position: absolute;
+                }
+                .reward_bg1 {
+                    top: vw(60);
+                    left: 0;
+                    width: vw(120);
+                    object-fit: cover;
+                }
+                .reward_bg2 {
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    object-fit: cover;
+                    z-index: 1;
+                }
             }
             .coupon {
+                width: vw(570);
+                height: vw(150);
                 background: #fdd;
-                color: #333;
+                color: $main1;
+                position: relative;
+                overflow: hidden;
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    object-fit: cover;
+                    z-index: 1;
+                    opacity: 50%;
+                }
+                .coupon_title {
+                    @include font-22px-B;
+                }
+                .coupon_value {
+                    text-align: right;
+                    span {
+                        @include font-48px;
+                    }
+                }
             }
         }
 
@@ -150,7 +191,8 @@
                             font-size: vw(18);
                             font-weight: bold;
                         }
-                        .date, .num {
+                        .date,
+                        .num {
                             font-size: vw(14);
                             color: #555;
                         }

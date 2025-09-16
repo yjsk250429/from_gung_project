@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import TourClassList from '../../components/tourClass/TourClassList';
 import TourClassTop from '../../components/tourClass/TourClassTop';
 import Button from '../../components/ui/button/Button';
@@ -8,6 +9,7 @@ import { BiSortAlt2 } from 'react-icons/bi';
 
 const TourClass = () => {
     const tabItems = ['전체', '서울', '인천/경기', '지방'];
+    const [showAll, setShowAll] = useState(false);
 
     return (
         <section className="tourclass">
@@ -15,6 +17,7 @@ const TourClass = () => {
             <div className="inner">
                 <TourClassTop />
                 <Tab items={tabItems} />
+
                 <ul className="sort">
                     <li>
                         <i>
@@ -29,9 +32,17 @@ const TourClass = () => {
                         정렬
                     </li>
                 </ul>
-                <TourClassList />
+
+                {/* 리스트: showAll 여부로 8개/전체 전환 */}
+                <TourClassList showAll={showAll} />
+
                 <p className="more">
-                    <Button text="더보기" className="default" />
+                    <Button
+                        text={showAll ? '접기' : '더보기'}
+                        className="default"
+                        onClick={() => setShowAll((v) => !v)}
+                        aria-pressed={showAll}
+                    />
                 </p>
             </div>
         </section>

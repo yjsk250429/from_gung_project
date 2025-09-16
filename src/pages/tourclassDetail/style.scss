@@ -50,6 +50,18 @@
                     &.fusion {
                         background: $blue;
                     }
+                    &.making {
+                        width: vw(70);
+                        background: $sub4;
+                    }
+                    &.cooking {
+                        width: vw(80);
+                        background: $sub3;
+                    }
+                    &.experience {
+                        width: vw(80);
+                        background: #23a33f;
+                    }
                 }
             }
             .basic-info {

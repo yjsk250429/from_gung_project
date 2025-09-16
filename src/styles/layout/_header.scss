@@ -7,12 +7,21 @@ html.is-active {
 #header {
     width: 100%;
     background-color: transparent;
-    position:fixed;
+    position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
     transition: 0.4s;
+    &.show {
+        transform: translate(-50%, 0); // 원래 위치
+        opacity: 1;
+    }
+
+    &.hide {
+        transform: translate(-50%, -100%); // 위로 사라짐
+        opacity: 0;
+    }
     .inner {
         height: 100px;
         display: flex;
@@ -45,7 +54,7 @@ html.is-active {
                     @include font-20px-M;
                     transition: 0.3s;
                     color: #fff;
-                    span{
+                    span {
                         font-family: $font-sub;
                         font-weight: 600;
                     }
@@ -57,18 +66,18 @@ html.is-active {
         }
     }
 
-    .util{
+    .util {
         display: flex;
         align-items: center;
         gap: 20px;
-        form{
+        form {
             border: 1px solid #fff;
             border-radius: 50px;
             width: 140px;
             height: 30px;
             position: relative;
-            
-            input[type="text"]{
+
+            input[type='text'] {
                 background: none;
                 border: none;
                 width: 130px;
@@ -79,12 +88,12 @@ html.is-active {
                 left: 0;
                 top: 50%;
                 transform: translateY(-50%);
-                &:focus{
+                &:focus {
                     outline: none;
                     box-shadow: none;
                 }
             }
-            i{
+            i {
                 font-size: 16px;
                 position: absolute;
                 right: 10px;
@@ -93,46 +102,46 @@ html.is-active {
                 color: #fff;
             }
         }
-        ul{
+        ul {
             display: flex;
-            li{
-                color:#fff;
+            li {
+                color: #fff;
             }
-            &.mymenu{
-                gap:20px;
-                li{
+            &.mymenu {
+                gap: 20px;
+                li {
                     cursor: pointer;
                     font-size: 16px;
-                   &:first-child{
-                    position: relative;
-                        &::after{
-                        content: "";
-                        display:block;
-                        width: 1px;
-                        height: 14px;
-                        background: #fff;
-                        position: absolute;
-                        right: -10px;
-                        top: 50%;
-                        transform: translateY(-60%);
+                    &:first-child {
+                        position: relative;
+                        &::after {
+                            content: '';
+                            display: block;
+                            width: 1px;
+                            height: 14px;
+                            background: #fff;
+                            position: absolute;
+                            right: -10px;
+                            top: 50%;
+                            transform: translateY(-60%);
                         }
                     }
                 }
             }
-            &.reward{
+            &.reward {
                 cursor: pointer;
                 gap: 12px;
-                background:rgba($color:#fff, $alpha: 0.1);
+                background: rgba($color: #fff, $alpha: 0.1);
                 width: 110px;
                 height: 22px;
                 border-radius: 50px;
                 justify-content: center;
                 align-items: center;
-                li{
+                li {
                     font-size: 16px;
                     display: flex;
                     align-items: center;
-                    img{
+                    img {
                         margin-top: -2px;
                         margin-right: 6px;
                         display: block;
@@ -143,55 +152,55 @@ html.is-active {
         }
     }
 
-    &.on{
+    &.on {
         background-color: #fff;
-        h1{
-            a{
-                img{
+        h1 {
+            a {
+                img {
                     filter: invert(1);
                 }
             }
         }
-        .nav{
-            ul{
-                li{
-                    a{
+        .nav {
+            ul {
+                li {
+                    a {
                         color: #000;
-                        &:hover{
+                        &:hover {
                             color: tomato;
                         }
                     }
                 }
             }
         }
-        .util{
-            form{
+        .util {
+            form {
                 border-color: #000;
-                input[type="text"]{
+                input[type='text'] {
                     color: #000;
                 }
-                i{
+                i {
                     color: #000;
                 }
             }
-            ul{
-                li{
+            ul {
+                li {
                     color: #000;
                 }
-                &.mymenu{
-                    li{
-                        &:first-child{
-                            &::after{
+                &.mymenu {
+                    li {
+                        &:first-child {
+                            &::after {
                                 background: #000;
                             }
                         }
                     }
                 }
-                &.reward{
-                    background:rgba($color: #000000, $alpha: 0.1);
-                    li{
-                        img{
-                            filter:invert(1);
+                &.reward {
+                    background: rgba($color: #000000, $alpha: 0.1);
+                    li {
+                        img {
+                            filter: invert(1);
                         }
                     }
                 }
@@ -227,6 +236,60 @@ html.is-active {
             margin-left: 40px;
             a {
                 font-size: 16px;
+            }
+        }
+    }
+    &.light {
+        h1 {
+            a {
+                img {
+                    filter: invert(1);
+                }
+            }
+        }
+        .nav {
+            ul {
+                li {
+                    a {
+                        color: #000;
+                        &:hover {
+                            color: tomato;
+                        }
+                    }
+                }
+            }
+        }
+        .util {
+            form {
+                border-color: #000;
+                input[type='text'] {
+                    color: #000;
+                }
+                i {
+                    color: #000;
+                }
+            }
+            ul {
+                li {
+                    color: #000;
+                }
+                &.mymenu {
+                    li {
+                        &:first-child {
+                            &::after {
+                                background: #000;
+                            }
+                        }
+                    }
+                }
+                &.reward {
+                    background: rgba($color: #000, $alpha: 0.1);
+                    li {
+                        img {
+                            filter: invert(1);
+                        }
+                    }
+                }
             }
         }
     }

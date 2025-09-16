@@ -6,18 +6,22 @@ import { MdOutlineCalendarMonth } from 'react-icons/md';
 import { LuClock3, LuMapPin } from 'react-icons/lu';
 import { IoMapOutline } from 'react-icons/io5';
 import { BiCoin } from 'react-icons/bi';
-import Schedule from '../../components/productDetail/Schedule';
+import Schedule from '../../components/tourclassDetail/Schedule';
 import SelectDate from '../../components/booking/SelectDate';
-import Reviews from '../../components/productDetail/Reviews';
+import Reviews from '../../components/tourclassDetail/Reviews';
 import { useState } from 'react';
 
 const TourClassDatail = () => {
     const { tourclassID } = useParams();
     const tourClass = useTourClassStore((state) => state.tourClass);
     const thisitem = tourClass.find((t) => String(t.id) === tourclassID);
-    const { title, theme = [], period, price, time, region, place = [] } = thisitem;
+    const { category, title, theme = [], period, price, time, region, place = [] } = thisitem;
     const items = ['투어 일정', '예약하기', '리뷰'];
     const [activeTab, setActiveTab] = useState(0);
+
+    const REWARD_UNIT = 2000;
+    const reward = Math.ceil(price / REWARD_UNIT);
+
     if (!thisitem) {
         return <p>존재하지 않는 투어/클래스입니다.</p>;
     }
@@ -45,6 +49,12 @@ const TourClassDatail = () => {
                                         ? 'life'
                                         : tm === '융합'
                                         ? 'fusion'
+                                        : tm === '만들기'
+                                        ? 'making'
+                                        : tm === '요리하기'
+                                        ? 'cooking'
+                                        : tm === '체험하기'
+                                        ? 'experience'
                                         : ''
                                 }
                             >
@@ -80,14 +90,14 @@ const TourClassDatail = () => {
                                 <i>
                                     <LuMapPin />
                                 </i>
-                                {place.length}개 명소
+                                {category === 'tour' ? `${place.length}개 명소` : `${place[0]}`}
                             </li>
                             <li>
                                 <i>
                                     <BiCoin />
                                 </i>
                                 1인 {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원{' '}
-                                <span>(리워드 xxp 지급)</span>
+                                <span>(리워드 {reward}p 지급)</span>
                             </li>
                         </ul>
                     </div>

@@ -2,12 +2,14 @@ import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Button from '../../ui/button/Button';
+import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Mainvisual = () => {
     const containerRef = useRef(null);
     const starRefs = useRef([]);
+    const navigate = useNavigate();
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
@@ -207,7 +209,7 @@ const Mainvisual = () => {
                 </p>
                 <img src="/images/mainvisual/visual_text1.png" alt="text" />
             </div>
-            <Button text="더보기" className="default" />
+            <Button text="더보기" className="default" onClick={() => navigate('/tourclass')} />
         </div>
     );
 };

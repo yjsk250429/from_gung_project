@@ -1,244 +1,73 @@
 @use '../../styles/utils' as *;
 @use '../../styles/base' as *;
 
-//font-family:$font-sub
-
-.intro {
-    overflow: hidden;
+.brandIntro {
     width: 100%;
-    background-image: url('/images/brand/brand_bg.png');
-
-    .inner {
-        width: vw(1600);
-        height: vw(3000);
-        margin: auto;
-        margin-top: vw(80);
-        position: relative;
-    }
-}
-
-.o-container {
-    .c-author {
-        position: absolute;
-        top: vw(343);
-        left: vw(551);
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        img {
-            width: vw(308);
-            height: vw(106);
-            margin-bottom: vw(20);
-        }
-        .c-author_desc {
-            @include font-32px-SB;
-            font-family: $font-sub;
-        }
-    }
-}
-
-// Ink transition 애니메이션 - 물감 이미지용
-.c-transition {
-    width: vw(817);
-    height: vw(583);
-    overflow: hidden;
-    position: relative;
-    top: vw(120);
-    left: 50%;
-    transform: translateX(-50%);
-
-    &::before {
-        background-image: url('/images/brand/ink-photo-frame.png');
-        background-size: 100% 100%;
-        background-position: 50% 50%;
-        content: '';
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        pointer-events: none;
-        transition: opacity 0.25s ease;
-        opacity: 0;
-    }
-
-    &::after {
-        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/204808/ink-transition-sprite.png');
-        background-size: 100% 100%;
-        content: '';
-        height: 100%;
-        left: 50%;
-        position: absolute;
-        top: 0;
-        transform: translateX(-1.25%);
-        width: 4000%;
-    }
-
-    &.is-active::after {
-        animation: ink-transition steps(39) 2s forwards;
-    }
-}
-
-.c-transition__img {
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    width: 100%;
-
-    .is-active & {
-        opacity: 1;
-    }
-    &.is-active::after {
-        animation: ink-transition 2s steps(39) 0.5s forwards;
-    }
-    &.is-active::before {
-        opacity: 0;
-        transition-delay: 2.5s; // 잉크 애니 끝난 다음에 사라지게
-    }
-
-    .c-transition--img-top & {
-        object-position: 50% 0;
-    }
-}
-
-.con2 {
-    width: vw(1920);
     height: vw(1000);
-    position: relative;
-    margin-left: vw(-160);
-    margin-top: vw(200);
-
-    span,
-    img,
-    .flower {
-        opacity: 0;
-        transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    &.is-visible {
-        span {
-            opacity: 1;
-            transform: translateY(0);
-            &:first-of-type {
-                @include font-48px;
-                font-family: $font-sub;
-                display: flex;
-                position: absolute;
-                top: vw(194);
-                left: vw(160);
-                z-index: 3;
-                animation: move 1s ease-out;
-                transition-delay: 0.2s; // 약간의 지연
-            }
-
-            &:last-of-type {
-                @include font-48px;
-                font-family: $font-sub;
-                display: flex;
-                position: absolute;
-                top: vw(194);
-                left: vw(160);
-                z-index: 3;
-                margin-left: vw(136);
-                margin-top: vw(80);
-                animation: move2 1s 0.7s ease-out forwards;
-                transition-delay: 0.7s; // 첫 번째 span 이후에
-            }
-        }
-
-        img {
-            opacity: 1;
-            transform: translateY(0);
-            transition-delay: 0.2s;
-        }
-
-        .flower {
-            opacity: 1;
-            transform: translateY(0);
-            transition-delay: 0.3s;
-        }
-        .desc {
-            width: vw(886);
-            height: vw(217);
-            position: absolute;
-            top: vw(571);
-            left: vw(160);
-            p {
-                @include font-24px-R;
-                display: flex;
-                flex-direction: column;
-                margin-bottom: vw(15);
-                color: $dark-gray;
-            }
-        }
-    }
-
-    span {
-        @include font-48px;
-        font-family: $font-sub;
+    background-image: url('/images/brand/brand_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    .con1_brandLogo {
+        width: 100%;
+        height: 100%;
         display: flex;
-        position: absolute;
-        top: vw(194);
-        left: vw(160);
-        z-index: 3;
+        justify-content: center;
+        align-items: center;
+        .brandLogo {
+            width: vw(810);
+            height: vw(580);
 
-        &:last-of-type {
-            margin-left: vw(136);
-            margin-top: vw(92);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            background-image: url('/images/brand/ink_pink.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                // background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/204808/ink-transition-sprite.png');
+                background-image: url('/images/brand/ink-transition-sprite02.png');
+                background-size: 4000% 100%;
+                animation: ink-transition 2s steps(39) forwards;
+
+                -webkit-mask-image: url('/images/brand/brand_bg.png');
+            }
+
+            @keyframes ink-transition {
+                0% {
+                    background-position: 0 0;
+                    opacity: 1;
+                }
+                97% {
+                    background-position: -3900% 0;
+                    opacity: 1;
+                }
+                100% {
+                    background-position: -3900% 0;
+                    opacity: 0;
+                }
+            }
+
+            img {
+                z-index: 1;
+                width: vw(308);
+                margin-bottom: vw(20);
+            }
+            h4 {
+                z-index: 1;
+                @include font-32px-SB;
+                font-family: $font-sub;
+            }
         }
-    }
-
-    img {
-        width: vw(622);
-        height: vw(444);
-        position: absolute;
-        left: vw(-101);
-        top: vw(27);
-    }
-
-    .flower {
-        width: vw(385);
-        height: vw(556);
-        position: absolute;
-        top: 0;
-        left: vw(1535);
-    }
-}
-
-@keyframes ink-transition {
-    0% {
-        transform: translateX(-1.25%);
-    }
-
-    99% {
-        transform: translateX(-98.75%);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateX(-98.75%);
-        opacity: 0;
-    }
-}
-
-@keyframes move {
-    from {
-        margin-left: vw(-1000);
-        opacity: 0;
-    }
-
-    to {
-        left: vw(160);
-        opacity: 1;
-    }
-}
-
-@keyframes move2 {
-    from {
-        margin-left: vw(-1000);
-        opacity: 0;
-    }
-
-    to {
-        left: vw(160);
-        opacity: 1;
     }
 }

@@ -3,9 +3,9 @@ import './style.scss';
 
 const Brand = () => {
     return (
-        <div>
+        <>
             <BrandIntro />
-        </div>
+        </>
     );
 };
 

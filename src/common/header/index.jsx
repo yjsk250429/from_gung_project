@@ -8,9 +8,12 @@ const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const path = location.pathname;
-
     const isLightPage =
-        path.startsWith('/tourclass') || path.startsWith('/brand') || path.startsWith('/mypage');
+        path.startsWith('/brand') ||
+        path.startsWith('/mypage') ||
+        path.startsWith('/tourclass') ||
+        path.startsWith('/tourresults') ||
+        path.startsWith('*');
 
     useEffect(() => {
         let lastScrollY = window.scrollY;

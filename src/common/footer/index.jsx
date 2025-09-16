@@ -1,18 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
+    const location = useLocation();
+    const path = location.pathname;
+    const isDarkPage =
+        path.startsWith('/ottmain') ||
+        path.startsWith('/ott') ||
+        path.startsWith('/ottsub') ||
+        path.startsWith('/ottresults');
     return (
-        <footer id="footer">
-            <div className="footer_bg">
-            </div>
+        <footer id="footer" className={isDarkPage ? 'dark' : ''}>
+            <div className="footer_bg"></div>
             <div className="inner">
                 <div className="top">
-                <h2><Link to="/"><img src="/images/logo.png" alt="fromgung" /></Link></h2>
-                <ul className="policy">
-                    <li>개인정보처리방침</li>
-                    <li>유튜브</li>
-                    <li>인스타그램</li>
-                </ul>
+                    <h2>
+                        <Link to="/">
+                            <img src="/images/logo.png" alt="fromgung" />
+                        </Link>
+                    </h2>
+                    <ul className="policy">
+                        <li>개인정보처리방침</li>
+                        <li>유튜브</li>
+                        <li>인스타그램</li>
+                    </ul>
                 </div>
                 <div className="bottom">
                     <ul className="info">

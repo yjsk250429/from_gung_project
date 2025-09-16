@@ -5,7 +5,10 @@
     width: 100%;
     position: relative;
     height: 300px;
-    .footer_bg{
+    &.dark {
+        background-color: #000;
+    }
+    .footer_bg {
         position: absolute;
         top: 0;
         left: 0;
@@ -20,60 +23,60 @@
         padding: 65px 0 22px 0;
         height: 300px;
     }
-    .top{
+    .top {
         padding-bottom: 20px;
         border-bottom: 1px solid $white;
         display: flex;
         justify-content: space-between;
         align-items: end;
         h2 {
-            a{
-                img{
+            a {
+                img {
                     width: 170px;
                 }
             }
         }
-        .policy{
-        display: flex;
-        gap: 44px;
-        align-items: center;
-        // justify-content: end;
-        li{
-            color:$white;
-            @include font-16px;
-            position: relative;
-            font-weight: 300;
-            &:not(:last-child){
-                &::after{
-                    content: "";
-                    display: block;
-                    width: 1px;
-                    height: 16px;
-                    background: $white;
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    right: -23px;
+        .policy {
+            display: flex;
+            gap: 44px;
+            align-items: center;
+            // justify-content: end;
+            li {
+                color: $white;
+                @include font-16px;
+                position: relative;
+                font-weight: 300;
+                &:not(:last-child) {
+                    &::after {
+                        content: '';
+                        display: block;
+                        width: 1px;
+                        height: 16px;
+                        background: $white;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        right: -23px;
+                    }
                 }
             }
         }
     }
-    }
-    .bottom{
+    .bottom {
         padding-top: 20px;
-        .info{
+        .info {
             display: flex;
             gap: 22px;
             justify-content: end;
-            color:$white;
+            color: $white;
             margin-bottom: 60px;
-            li{
+            li {
                 @include font-16px;
                 position: relative;
                 font-weight: 300;
-                &:not(:last-child){
-                    &::after{
-                        content: "";
+                &:not(:last-child) {
+                    &::after {
+                        content: '';
                         display: block;
                         width: 1px;
                         height: 16px;
@@ -86,9 +89,9 @@
                 }
             }
         }
-        .copy{
+        .copy {
             @include font-16px;
-            color:$white;
+            color: $white;
             display: flex;
             justify-content: end;
             font-weight: 300;

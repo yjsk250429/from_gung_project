@@ -1,200 +1,200 @@
-@use "../base" as *;
-@use "../utils" as *;
+@use '../base' as *;
+@use '../utils' as *;
 
 @mixin tourList {
-  padding: 0 vw(20);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+    padding: 0 vw(20);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-  li {
-    position: relative;
-    width: vw(352);
-    margin-bottom: vw(60);
-    .img-wrap {
-      cursor: pointer;
-      width: vw(352);
-      height: vw(460);
-      border-radius: vw(10);
-      overflow: hidden;
-      margin-bottom: vw(12);
-      position: relative;
-
-      img {
-        transform: scale(1);
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-      }
-      .tourclassInfo {
-        opacity: 0;
-
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: vw(40);
-        z-index: 2;
-
-        width: vw(272);
-        display: block;
-
-        color: $white;
-
-        .tourclassThemes {
-          display: flex;
-          gap: vw(8);
-          margin-bottom: vw(10);
-          .tourclassTheme {
-            padding: vw(1) vw(14);
-            border-radius: vw(100);
-
-            @include font-14px;
-            text-align: center;
-            line-height: vw(24);
-            &.history {
-              background: $sub4;
-            }
-            &.art {
-              background: $main1;
-            }
-            &.healing {
-              background: $sub3;
-            }
-            &.life {
-              background: #23a33f;
-            }
-            &.fusion {
-              background: $blue;
-            }
-            &.making {
-              background: $sub4;
-            }
-            &.cooking {
-              background: $sub3;
-            }
-            &.experience {
-              background: #23a33f;
-            }
-          }
-        }
-        h4 {
-          @include font-22px-B;
-          width: 100%;
-          height: vw(140);
-
-          white-space: pre-wrap;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow-wrap: break-word;
-          word-break: keep-all;
-          overflow: hidden;
-        }
-        .period {
-          @include font-16px;
-          display: flex;
-          align-items: center;
-          margin-bottom: vw(5);
-
-          dt {
-            i {
-              margin-right: vw(4);
-              vertical-align: middle;
-            }
-            margin-right: vw(16);
-          }
-          dd {
+    li {
+        position: relative;
+        width: vw(352);
+        margin-bottom: vw(60);
+        .img-wrap {
+            cursor: pointer;
+            width: vw(352);
+            height: vw(460);
+            border-radius: vw(10);
+            overflow: hidden;
+            margin-bottom: vw(12);
             position: relative;
-            &::after {
-              content: "";
-              width: vw(2);
-              height: vw(16);
-              background: $white;
-              position: absolute;
-              top: 50%;
-              left: vw(-8);
-              transform: translate(-50%, -50%);
+
+            img {
+                transform: scale(1);
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
             }
-          }
+            .tourclassInfo {
+                opacity: 0;
+
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: vw(40);
+                z-index: 2;
+
+                width: vw(272);
+                display: block;
+
+                color: $white;
+
+                .tourclassThemes {
+                    display: flex;
+                    gap: vw(8);
+                    margin-bottom: vw(10);
+                    .tourclassTheme {
+                        padding: vw(1) vw(14);
+                        border-radius: vw(100);
+
+                        @include font-14px;
+                        text-align: center;
+                        line-height: vw(24);
+                        &.history {
+                            background: $sub4;
+                        }
+                        &.art {
+                            background: $main1;
+                        }
+                        &.healing {
+                            background: $sub3;
+                        }
+                        &.life {
+                            background: #23a33f;
+                        }
+                        &.fusion {
+                            background: $blue;
+                        }
+                        &.making {
+                            background: $sub4;
+                        }
+                        &.cooking {
+                            background: $sub3;
+                        }
+                        &.experience {
+                            background: #23a33f;
+                        }
+                    }
+                }
+                h4 {
+                    @include font-22px-B;
+                    width: 100%;
+                    height: vw(140);
+
+                    white-space: pre-wrap;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow-wrap: break-word;
+                    word-break: keep-all;
+                    overflow: hidden;
+                }
+                .period {
+                    @include font-16px;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: vw(5);
+
+                    dt {
+                        i {
+                            margin-right: vw(4);
+                            vertical-align: middle;
+                        }
+                        margin-right: vw(16);
+                    }
+                    dd {
+                        position: relative;
+                        &::after {
+                            content: '';
+                            width: vw(2);
+                            height: vw(16);
+                            background: $white;
+                            position: absolute;
+                            top: 50%;
+                            left: vw(-8);
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                }
+                h5 {
+                    @include font-16px;
+                    width: 100%;
+                    margin-bottom: vw(20);
+
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow-wrap: break-word;
+                    word-break: keep-all;
+                    overflow: hidden;
+                }
+                h6 {
+                    @include font-20px-B;
+                }
+            }
+            .hoverImg {
+                opacity: 0;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+
+                display: block;
+                width: 100%;
+                height: 100%;
+
+                img {
+                    object-fit: contain;
+                    scale: 0.95;
+                }
+            }
+            .overlay {
+                opacity: 0;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+
+            .tourclassInfo,
+            .hoverImg,
+            .overlay {
+                transition: opacity 0.2s ease-in-out;
+            }
+
+            &:hover {
+                .tourclassInfo {
+                    opacity: 1;
+                }
+                .hoverImg {
+                    opacity: 0.4;
+                }
+                .overlay {
+                    opacity: 1;
+                }
+            }
         }
-        h5 {
-          @include font-16px;
-          width: 100%;
-          margin-bottom: vw(20);
-
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow-wrap: break-word;
-          word-break: keep-all;
-          overflow: hidden;
+        .title {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            strong {
+                display: block;
+                @include font-18px-B;
+                cursor: pointer;
+            }
+            i {
+                font-size: vw(24);
+                cursor: pointer;
+            }
         }
-        h6 {
-          @include font-20px-B;
-        }
-      }
-      .hoverImg {
-        opacity: 0;
-
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-
-        display: block;
-        width: 100%;
-        height: 100%;
-
-        img {
-          object-fit: contain;
-          scale: 0.95;
-        }
-      }
-      .overlay {
-        opacity: 0;
-
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        display: block;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-      }
-
-      .tourclassInfo,
-      .hoverImg,
-      .overlay {
-        transition: opacity 0.2s ease-in-out;
-      }
-
-      &:hover {
-        .tourclassInfo {
-          opacity: 1;
-        }
-        .hoverImg {
-          opacity: 0.4;
-        }
-        .overlay {
-          opacity: 1;
-        }
-      }
     }
-    .title {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      strong {
-        display: block;
-        @include font-18px-B;
-        cursor: pointer;
-      }
-      i {
-        font-size: vw(24);
-        cursor: pointer;
-      }
-    }
-  }
 }

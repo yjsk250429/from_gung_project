@@ -31,12 +31,19 @@ const MyPagemain = () => {
                 {/* 상단 현황 카드 */}
                 <div className="status_cards">
                     <div className="reward">
-                        <p className="title">리워드 현황</p>
-                        <p className="value">10 <span>전</span></p>
+                        <p className="reward_title">리워드 현황</p>
+                        <p className="reward_value">
+                            <span>10</span> 전
+                        </p>
+                        <img className="reward_bg1" src="/images/mypage/reward1.png" alt="" />
+                        <img className="reward_bg2" src="/images/mypage/reward2.png" alt="" />
                     </div>
                     <div className="coupon">
-                        <p className="title">보유 쿠폰</p>
-                        <p className="value">5 <span>장</span></p>
+                        <p className="coupon_title">보유 쿠폰</p>
+                        <p className="coupon_value">
+                            <span>5</span> 장
+                        </p>
+                        <img className="reward_bg2" src="/images/mypage/reward2.png" alt="" />
                     </div>
                 </div>
 
@@ -48,7 +55,9 @@ const MyPagemain = () => {
                             <div className="thumb"></div>
                             <div className="info">
                                 <p className="title">조선왕조 이야기, 궁궐을 걷다</p>
-                                <p className="date">예약일: 2025.09.08 관람일: 2025.09.04(수)~2025.09.28(일)</p>
+                                <p className="date">
+                                    예약일: 2025.09.08 관람일: 2025.09.04(수)~2025.09.28(일)
+                                </p>
                                 <p className="num">예약번호: 2025090801057</p>
                             </div>
                             <button className="btn_cancel">예약 취소</button>
@@ -58,7 +67,9 @@ const MyPagemain = () => {
                             <div className="thumb"></div>
                             <div className="info">
                                 <p className="title">조선왕조 이야기, 궁궐을 걷다</p>
-                                <p className="date">예약일: 2025.09.08 관람일: 2025.09.04(수)~2025.09.28(일)</p>
+                                <p className="date">
+                                    예약일: 2025.09.08 관람일: 2025.09.04(수)~2025.09.28(일)
+                                </p>
                                 <p className="num">예약번호: 2025090801057</p>
                             </div>
                             <button className="btn_cancel">예약 취소</button>

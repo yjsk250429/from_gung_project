@@ -7,8 +7,10 @@ const Header = () => {
     const [visible, setVisible] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
-    const lightPages = ['/tourclass', '/brand', '/mypage'];
-    const isLightPage = lightPages.includes(location.pathname);
+    const path = location.pathname;
+
+    const isLightPage =
+        path.startsWith('/tourclass') || path.startsWith('/brand') || path.startsWith('/mypage');
 
     useEffect(() => {
         let lastScrollY = window.scrollY;

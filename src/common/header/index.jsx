@@ -4,7 +4,7 @@ import UtilBar from './UtilBar';
 import { useEffect, useState } from 'react';
 
 const Header = () => {
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(true);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const path = location.pathname;
@@ -36,6 +36,7 @@ const Header = () => {
         };
 
         window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 

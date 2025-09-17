@@ -24,8 +24,8 @@ const Login = () => {
                     <span>아이디/비밀번호 찾기</span>
                 </p>
                 <p className="btns">
-                    <Button text="취소" className="small" onClick={closeLogin}/>
-                    <Button text="로그인" className="small"/>
+                    <Button text="취소" className="small gray" onClick={closeLogin}/>
+                    <Button text="로그인" className="small main1"/>
                 </p>
             </form>
             <ul className="bottom">

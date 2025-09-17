@@ -7,6 +7,7 @@ import Tab from '../../components/ui/tab/Tab';
 import './style.scss';
 import { IoIosList } from 'react-icons/io';
 import { BiSortAlt2 } from 'react-icons/bi';
+import { FaCheck } from "react-icons/fa6";
 
 const INITIAL_COUNT = 8;
 const STEP = 8;
@@ -15,17 +16,21 @@ const TourClass = () => {
     const tabItems = ['전체', '서울', '인천/경기', '기타'];
     const themeTaps = [ '전체', '역사', '예술', '라이프', '힐링', '융합'];
     const dayTaps = [ '전체', '하루', '1박 2일', '2박 3일'];
+    const sortTaps = ['최신순', '인기순', '추천순', '리뷰순'];
     const setRegionCategory = useTourClassStore((s) => s.setRegionCategory);
     const category = useTourClassStore((s) => s.category);
     const regionCategory = useTourClassStore((s) => s.regionCategory);
     const tourClass = useTourClassStore((s) => s.tourClass);
 
     const [filterOpen, setFilterOpen] = useState(false);
+    const [sortOpen, setSortOpen] = useState(false);
     const [selected1, setSeleted1] = useState(0);
     const [selected2, setSeleted2] = useState(0);
+    const [selected3, setSeleted3] = useState(0);
 
     const filterRef = useRef(null);
-    
+    const sortRef = useRef(null);
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (filterRef.current && !filterRef.current.contains(e.target)) {
@@ -44,6 +49,7 @@ const TourClass = () => {
     };
   }, [filterOpen]);
 
+  
     const filteredList = useMemo(() => {
         // 1차: 투어/클래스
         let filtered = tourClass.filter((item) => item.category === category);
@@ -94,10 +100,9 @@ const TourClass = () => {
             <div className="inner">
                 <TourClassTop />
                 <Tab items={tabItems} onClick={(index) => setRegionCategory(tabItems[index])}/>
-
                 <ul className="sort">
                     <li ref={filterRef}>
-                        <span onClick={()=>setFilterOpen((prev)=>!prev)}> <i>
+                        <span onClick={()=>setFilterOpen((prev)=>!prev)}><i>
                             <IoIosList />
                         </i>필터</span>
                         <ul className={ filterOpen ? 'filterBox on' : 'filterBox'}>
@@ -122,10 +127,18 @@ const TourClass = () => {
                         </ul>
                     </li>
                     <li>
-                        
-                        <span><i>
+                        <span onClick={()=>setSortOpen((prev)=>!prev)}><i>
                             <BiSortAlt2 />
-                        </i>인기순</span>
+                        </i>최신순</span>
+                        <ul className={ sortOpen ? "sortBox on" : "sortBox"}>
+                            {
+                                sortTaps.map((t, index)=>
+                                    <li onClick={()=>setSeleted3(index)}><i>{
+                                        selected3 === index && <FaCheck />
+                                    }</i><span>{t}</span></li>
+                                )
+                            }
+                        </ul>
                     </li>
                 </ul>
 
@@ -137,7 +150,7 @@ const TourClass = () => {
                     <p className="more">
                         <Button
                             text={atEnd ? '접기' : '더보기'}
-                            className="default"
+                            className="default main1"
                             onClick={handleMoreOrFold}
                             aria-pressed={atEnd}
                         />

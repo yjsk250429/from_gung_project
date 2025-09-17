@@ -54,8 +54,8 @@ const JoinInfo = () => {
                     </select>
             </label>
             <p className="btns">
-            <Button text="취소" className="small" onClick={closeJoinInfo}/>
-            <Button text="가입하기" className="small" onClick={switchToJoinCom}/>
+            <Button text="취소" className="small gray" onClick={closeJoinInfo}/>
+            <Button text="가입하기" className="small main1" onClick={switchToJoinCom}/>
             </p>
             </form>
         </div>

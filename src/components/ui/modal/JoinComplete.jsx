@@ -23,8 +23,8 @@ const JoinComplete = () => {
                     환영합니다
                 </h3>
                 <p className="btns">
-                    <Button text="홈으로" className="small" onClick={goHome}/>
-                    <Button text="로그인" className="small" onClick={onLogin}/>
+                    <Button text="홈으로" className="small gray" onClick={goHome}/>
+                    <Button text="로그인" className="small main1" onClick={onLogin}/>
                 </p>
             </div>
         </div>

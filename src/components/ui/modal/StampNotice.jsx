@@ -16,7 +16,7 @@ const StampNotice = () => {
                 <li>둘, 화면 우측 상단 아이콘에서 출석 현황을 확인하세요.</li>
                 <li>셋, 도장 <span>10개</span>를 모아서 <span>체험/클래스 이용권</span>을 받으세요.</li>
             </ul>
-            <Button text='닫기' className='small' onClick={closeStampNotice}/>
+            <Button text='닫기' className='small white' onClick={closeStampNotice}/>
             </div>
         </div>
     );

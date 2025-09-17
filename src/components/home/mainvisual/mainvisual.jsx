@@ -209,7 +209,7 @@ const Mainvisual = () => {
                 </p>
                 <img src="/images/mainvisual/visual_text1.png" alt="text" />
             </div>
-            <Button text="더보기" className="default" onClick={() => navigate('/tourclass')} />
+            <Button text="더보기" className="default white" onClick={() => navigate('/tourclass')} />
         </div>
     );
 };

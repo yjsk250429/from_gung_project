@@ -1,69 +1,73 @@
-@use "../../styles/utils" as *;
-@use "../../styles/base" as *;
+@use '../../styles/utils' as *;
+@use '../../styles/base' as *;
 
 .brandIntro {
-  width: 100%;
-  height: vw(1000);
-  background-image: url("/images/brand/brand_bg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  .brandIntro_con1 {
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .brandLogo {
-      width: vw(810);
-      height: vw(580);
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      background-image: url("/images/brand/ink_pink.png");
-      background-repeat: no-repeat;
-      background-size: cover;
-
-      position: relative;
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
+    height: vw(1000);
+    background-image: url('/images/brand/brand_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    .con1_brandLogo {
         width: 100%;
         height: 100%;
-        // background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/204808/ink-transition-sprite.png');
-        background-image: url("/images/brand/ink-transition-sprite03_24000.png");
-        background-size: 3000% 100%;
-        animation: ink-transition 2s steps(29) forwards;
-      }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .brandLogo {
+            width: vw(810);
+            height: vw(580);
 
-      @keyframes ink-transition {
-        0% {
-          background-position: 0 0;
-          opacity: 1;
-        }
-        97% {
-          background-position: -2900% 0;
-          opacity: 1;
-        }
-        100% {
-          background-position: -2900% 0;
-          opacity: 0;
-        }
-      }
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
 
-      img {
-        width: vw(308);
-        margin-bottom: vw(20);
-      }
-      h4 {
-        @include font-32px-SB;
-        font-family: $font-sub;
-      }
+            background-image: url('/images/brand/ink_pink.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                // background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/204808/ink-transition-sprite.png');
+                background-image: url('/images/brand/ink-transition-sprite02.png');
+                background-size: 4000% 100%;
+                animation: ink-transition 2s steps(39) forwards;
+
+                -webkit-mask-image: url('/images/brand/brand_bg.png');
+            }
+
+            @keyframes ink-transition {
+                0% {
+                    background-position: 0 0;
+                    opacity: 1;
+                }
+                97% {
+                    background-position: -3900% 0;
+                    opacity: 1;
+                }
+                100% {
+                    background-position: -3900% 0;
+                    opacity: 0;
+                }
+            }
+
+            img {
+                z-index: 0;
+                width: vw(308);
+                margin-bottom: vw(20);
+            }
+            h4 {
+                z-index: 0;
+                @include font-32px-SB;
+                font-family: $font-sub;
+            }
+        }
     }
-  }
 }

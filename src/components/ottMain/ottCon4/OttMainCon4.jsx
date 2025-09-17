@@ -98,7 +98,7 @@ const OttMainCon4 = () => {
                                 <p>{slide.description02}</p>
                                 <Button
                                     text="재생"
-                                    className="small"
+                                    className="small white"
                                     onClick={() => navigate(slide.navigateLink)}
                                 />
                             </article>

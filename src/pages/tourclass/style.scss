@@ -5,6 +5,15 @@
   .inner {
     padding: 200px 0;
   }
+  .tabs{
+    li{
+      color: gray;
+      &.on{
+        color: $main1;
+        border-color: $main1;
+      }
+    }
+  }
   .sort {
     display: flex;
     justify-content: end;
@@ -23,6 +32,42 @@
           left: 0;
           top: 50%;
           transform: translateY(-43%);
+        }
+      }
+      &:last-child{
+        position: relative;
+        .sortBox{
+          width: vw(90);
+          height: vw(140);
+          position: absolute;
+          right: 0;
+          top: 100%;
+          z-index: 100;
+          display: none;
+          &.on{
+            display: block;
+          }
+          li{
+            background: #e7e7e7;
+            text-align: right;
+            padding: vw(8) vw(16);
+            @include font-16px;
+            border-bottom: 1px solid #999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            i{
+              font-size: vw(12);
+            }
+            >span{
+              cursor: pointer;
+            }
+            &:last-child{
+              border-bottom-right-radius: vw(10);
+              border-bottom-left-radius: vw(10);
+              border: none;
+            }
+          }
         }
       }
       .filterBox{

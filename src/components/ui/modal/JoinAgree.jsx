@@ -38,8 +38,8 @@ const JoinAgree = () => {
                 </label>
 
             <p className="btns">
-                    <Button text="취소" className="small" onClick={closeJoin}/>
-                    <Button text="다음으로" className="small" onClick={switchToJoinInfo}/>
+                    <Button text="취소" className="small gray" onClick={closeJoin}/>
+                    <Button text="다음으로" className="small main1" onClick={switchToJoinInfo}/>
                 </p>
             </form>
         </div>

@@ -1,128 +1,170 @@
-@use '../../../styles/utils' as *;
-@use '../../../styles/base' as *;
+@use "../../../styles/utils" as *;
+@use "../../../styles/base" as *;
 
 .brandIntro {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 
-    &::before {
-        content: '';
-        position: fixed; // 화면 고정
+  &::before {
+    content: "";
+    position: fixed; // 화면 고정
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/images/brand/brand_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -1; // 뒤로 보내기
+  }
+
+  .con1-section {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .brandLogo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .logoBox {
+      width: vw(810);
+      height: vw(580);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      background-image: url("/images/brand/ink_pink.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
         top: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-image: url('/images/brand/brand_bg.png');
+        width: 100%;
+        height: 100%;
+        // background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/204808/ink-transition-sprite.png');
+        background-image: url("/images/brand/ink-transition-sprite03_24000.png");
+        background-size: 3000% 100%;
+        animation: ink-transition 2.2s steps(29) forwards;
+      }
+
+      @keyframes ink-transition {
+        0% {
+          background-position: 0 0;
+          opacity: 1;
+        }
+        97% {
+          background-position: -2900% 0;
+          opacity: 1;
+        }
+        100% {
+          background-position: -2900% 0;
+          opacity: 0;
+        }
+      }
+
+      img {
+        z-index: 0;
+        width: vw(308);
+        margin-bottom: vw(20);
+      }
+      h4 {
+        z-index: 0;
+        @include font-32px-SB;
+        font-family: $font-sub;
+      }
+    }
+  }
+
+  .brandStory {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    .brandStoryWrap {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .brandStory_left {
+        padding: vw(150);
+        box-sizing: border-box;
+        background-image: url("/images/brand/ink_pink_sub.png");
         background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        z-index: -1; // 뒤로 보내기
-    }
+        background-size: 42%;
+        background-position: -5% -2%;
 
-    .con1-section {
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    .brandLogo {
-        width: 100%;
+        .title {
+          width: vw(940);
+          h4 {
+            font-family: $font-sub;
+            @include font-48px;
+            &:last-of-type {
+              margin-top: vw(14);
+              text-align: right;
+            }
+          }
+        }
+        .sentence {
+          margin-top: vw(200);
+          p {
+            @include font-24px-R;
+            margin-bottom: vw(18);
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+      .brandStory_right {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        .logoBox {
-            width: vw(810);
-            height: vw(580);
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            background-image: url('/images/brand/ink_pink.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-
-            position: relative;
-
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                // background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/204808/ink-transition-sprite.png');
-                background-image: url('/images/brand/ink-transition-sprite03_24000.png');
-                background-size: 3000% 100%;
-                animation: ink-transition 2s steps(29) forwards;
-            }
-
-            @keyframes ink-transition {
-                0% {
-                    background-position: 0 0;
-                    opacity: 1;
-                }
-                97% {
-                    background-position: -2900% 0;
-                    opacity: 1;
-                }
-                100% {
-                    background-position: -2900% 0;
-                    opacity: 0;
-                }
-            }
-
-            img {
-                z-index: 0;
-                width: vw(308);
-                margin-bottom: vw(20);
-            }
-            h4 {
-                z-index: 0;
-                @include font-32px-SB;
-                font-family: $font-sub;
-            }
+        align-items: flex-start;
+        justify-content: end;
+        img {
+          width: 90%;
         }
+      }
     }
+  }
 
-    .brandStory {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        .brandStory_left {
-            height: 100%;
-            padding: vw(160);
-            background-image: url('/images/brand/ink_pink.png');
-            background-repeat: no-repeat;
-            background-size: 40%;
-            background-position: -20% 0%;
-            .title {
-                h4 {
-                    font-family: $font-sub;
-                    @include font-48px;
-                    &:last-of-type {
-                        margin-top: vw(10);
-                        padding-left: vw(140);
-                    }
-                }
-            }
-            .sentence {
-                margin-top: vw(200);
-                p {
-                    margin-bottom: vw(15);
-                }
-            }
-        }
-        .brandStory_right {
-            height: 100%;
-            display: flex;
-            align-items: flex-start;
-        }
-    }
+  .brandSlogan {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    .brandSlogan {
-        width: 100%;
-        background-color: red;
+    position: relative;
+    h3 {
+      width: vw(1100);
+      @include font-70px;
+      font-family: $font-sub;
+      font-weight: 600;
+      color: #333;
+      line-height: vw(110);
+      &:first-of-type {
+        text-align: left;
+      }
+      &:last-of-type {
+        margin-top: vw(10);
+        text-align: right;
+      }
     }
+    span {
+      position: absolute;
+      bottom: 0;
+      display: block;
+      width: 100%;
+      height: vw(400);
+      background: linear-gradient(to bottom, transparent, $white);
+    }
+  }
 }

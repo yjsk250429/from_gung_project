@@ -1,2 +1,263 @@
-@use '../../../styles/utils' as *;
-@use '../../../styles/base' as *;
+@use "../../../styles/utils" as *;
+@use "../../../styles/base" as *;
+
+.brandGuide {
+  width: 100%;
+  height: 100vh;
+  background: $white;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: relative;
+  .guideTitle {
+    margin: vw(50) 0 0 vw(80);
+    h3 {
+      @include font-40px-SB;
+      margin-bottom: vw(20);
+      font-family: $font-sub;
+      font-weight: 700;
+    }
+    h4 {
+      @include font-20px-SB;
+      font-family: $font-sub;
+    }
+  }
+
+  .guideBg {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    span {
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      img {
+        position: absolute;
+        width: auto;
+        height: auto;
+        &.bg-left {
+          top: 72%;
+          transform: translate(0%, -50%);
+          animation: bg-left_position 3s ease-in-out infinite alternate;
+        }
+        @keyframes bg-left_position {
+          0% {
+            transform: translateY(-50%);
+          }
+          100% {
+            transform: translateY(-45%);
+          }
+        }
+
+        &.bg-centerL {
+          top: 30%;
+          left: 40%;
+          transform: translate(-50%, -50%);
+          animation: bg-centerL_position 5s ease-in-out infinite alternate;
+        }
+        @keyframes bg-centerL_position {
+          0% {
+            transform: translate(-50%, -50%);
+          }
+          100% {
+            transform: translate(-48%, -50%);
+          }
+        }
+
+        &.bg-center {
+          top: 55%;
+          left: 55%;
+          transform: translate(-50%, -50%);
+        }
+        &.bg-centerR {
+          top: 68%;
+          left: 77%;
+          transform: translate(-50%, -50%);
+          animation: bg-centerR_position 8s ease-in-out infinite alternate;
+        }
+        @keyframes bg-centerR_position {
+          0% {
+            transform: translate(-50%, -50%);
+          }
+          100% {
+            transform: translate(-54%, -50%);
+          }
+        }
+
+        &.con2_bg-right {
+          top: 30%;
+          right: 0;
+          transform: translate(0%, -50%);
+          animation: bg-right_position 4s ease-in-out infinite alternate;
+        }
+        @keyframes bg-right_position {
+          0% {
+            transform: translateY(-50%);
+          }
+          100% {
+            transform: translateY(-55%);
+          }
+        }
+      }
+    }
+  }
+
+  .guideStepWrap {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    .Steps {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      .stepBox {
+        width: vw(200);
+        height: vw(200);
+        border-radius: vw(10);
+        background-color: rgba(241, 239, 238, 0.8);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+        strong {
+          @include font-70px;
+          font-weight: 900;
+          line-height: vw(70);
+          color: $sub5;
+        }
+        p {
+          margin-top: vw(20);
+          @include font-20px-B;
+        }
+        img {
+          position: absolute;
+          opacity: 0;
+        }
+      }
+
+      .activeBox {
+        width: vw(200);
+        height: vw(200);
+        border-radius: vw(10);
+        background-color: #315392;
+
+        strong {
+          @include font-70px;
+          font-weight: 900;
+          line-height: vw(70);
+          color: $main2;
+          transform: translateY(-106%);
+        }
+        p {
+          margin-top: vw(20);
+          @include font-20px-B;
+          color: $sub2;
+          transform: translateY(-280%);
+        }
+        img {
+          position: absolute;
+          bottom: vw(-40);
+          right: vw(20);
+          opacity: 1;
+        }
+      }
+
+      &.step01 {
+        top: 76%;
+        left: 10%;
+      }
+      &.step02 {
+        top: 52%;
+        left: 28%;
+      }
+      &.step03 {
+        top: 42%;
+        left: 53%;
+      }
+      &.step04 {
+        top: 62%;
+        left: 72%;
+      }
+      &.step05 {
+        top: 40%;
+        left: 90%;
+      }
+    }
+  }
+
+  &.active {
+    .guideBg {
+      .bg-road {
+        animation: fadeImg 20s linear infinite normal;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 400%;
+        height: 100%;
+        z-index: 1;
+        background: linear-gradient(
+          to right,
+          transparent 60%,
+          $white 75%,
+          $white 100%
+        );
+        pointer-events: none;
+        animation: fadeReveal 20s linear infinite normal;
+      }
+    }
+  }
+
+  @keyframes fadeImg {
+    0% {
+      opacity: 1;
+    }
+    30%,
+    95% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeReveal {
+    0% {
+      transform: translateX(-75%);
+      opacity: 1;
+    }
+    30%,
+    95% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

@@ -4,7 +4,7 @@
 .roundTap{
     width: vw(552);
     height: vw(48);
-    border-radius: vw(24);
+    border-radius: vw(50);
     display: flex;
     flex:1;
     margin: auto;
@@ -19,13 +19,12 @@
             top: 0;
             width: vw(276);
             height: 100%;
-            border-radius: 24px;
+            border-radius: vw(50);
         }
     &:not(:first-child){
         width: vw(276);
         height: 100%;
-        border-radius: 24px;
-        // text-align: center;
+        border-radius: vw(50);
         cursor: pointer;
         transition: 0.3s;
         position: relative;

@@ -13,21 +13,45 @@ const STEP = 8;
 
 const TourClass = () => {
     const tabItems = ['전체', '서울', '인천/경기', '기타'];
-
-    // 카테고리/데이터 길이 계산 (버튼 레이블/동작에 필요)
+    const setRegionCategory = useTourClassStore((s) => s.setRegionCategory);
     const category = useTourClassStore((s) => s.category);
+    const regionCategory = useTourClassStore((s) => s.regionCategory);
     const tourClass = useTourClassStore((s) => s.tourClass);
-    const totalInCategory = useMemo(
-        () => tourClass.filter((item) => item.category === category).length,
-        [tourClass, category]
-    );
 
+
+    const filteredList = useMemo(() => {
+        // 1차: 투어/클래스
+        let filtered = tourClass.filter((item) => item.category === category);
+    
+        // 2차: 지역
+        if (regionCategory === '전체') return filtered;
+        if (regionCategory === '서울') {
+          return filtered.filter((item) => item.region.includes('서울'));
+        }
+        if (regionCategory === '인천/경기') {
+          return filtered.filter(
+            (item) => item.region.includes('인천') || item.region.includes('경기')
+          );
+        }
+        if (regionCategory === '기타') {
+          return filtered.filter(
+            (item) =>
+              !item.region.includes('서울') &&
+              !item.region.includes('인천') &&
+              !item.region.includes('경기')
+          );
+        }
+        return filtered;
+      }, [tourClass, category, regionCategory]);
+
+
+    const totalInCategory = filteredList.length;
     const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
     // 탭(카테고리) 바뀌면 다시 8개로 리셋
     useEffect(() => {
         setVisibleCount(INITIAL_COUNT);
-    }, [category]);
+    }, [category, filteredList]);
 
     const atEnd = visibleCount >= totalInCategory; // 끝까지 보여줬는지
     const canToggle = totalInCategory > INITIAL_COUNT; // 전체가 8개 이하면 버튼 숨김
@@ -47,7 +71,7 @@ const TourClass = () => {
             <div className="bg"></div>
             <div className="inner">
                 <TourClassTop />
-                <Tab items={tabItems} />
+                <Tab items={tabItems} onClick={(index) => setRegionCategory(tabItems[index])}/>
 
                 <ul className="sort">
                     <li>
@@ -65,7 +89,7 @@ const TourClass = () => {
                 </ul>
 
                 {/* 리스트: limit 개수만 표시 */}
-                <TourClassList limit={visibleCount} />
+                <TourClassList list={filteredList} limit={visibleCount} />
 
                 {/* 전체가 8개 초과일 때만 버튼 표시 */}
                 {canToggle && (

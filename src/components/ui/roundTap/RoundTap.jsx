@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 const RoundTap = ({ text1 = '', text2 = '', bgColor }) => {
-    const { category, setCategory } = useTourClassStore();
+    const { setCategory } = useTourClassStore();
     const setMediaCategory = useMovieStore((s) => s.setMediaCategory);
     const [isRight, setIsRight] = useState(false);
 

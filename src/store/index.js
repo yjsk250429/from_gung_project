@@ -39,16 +39,14 @@ export const useModalStore = create((set) => ({
 export const useTourClassStore = create((set, get) => ({
     tourClass: tourclassData,
     category: 'tour',
+    regionCategory: '전체',
 
     setCategory: (category) =>
         set(() => ({
             category,
         })),
+    setRegionCategory: (regionCategory) => set({ regionCategory }),
 
-    getFiltered: () => {
-        const { tourClass, category } = get();
-        return tourClass.filter((item) => item.category === category);
-    },
 }));
 
 // export const usexxStore = create((set, get) => ({

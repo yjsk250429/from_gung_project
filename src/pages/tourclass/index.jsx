@@ -13,11 +13,16 @@ const STEP = 8;
 
 const TourClass = () => {
     const tabItems = ['전체', '서울', '인천/경기', '기타'];
+    const themeTaps = [ '전체', '역사', '예술', '라이프', '힐링', '융합'];
+    const dayTaps = [ '전체', '하루', '1박 2일', '2박 3일'];
     const setRegionCategory = useTourClassStore((s) => s.setRegionCategory);
     const category = useTourClassStore((s) => s.category);
     const regionCategory = useTourClassStore((s) => s.regionCategory);
     const tourClass = useTourClassStore((s) => s.tourClass);
 
+    const [filterOpen, setFilterOpen] = useState(false);
+    const [selected1, setSeleted1] = useState(0);
+    const [selected2, setSeleted2] = useState(0);
 
     const filteredList = useMemo(() => {
         // 1차: 투어/클래스
@@ -75,16 +80,35 @@ const TourClass = () => {
 
                 <ul className="sort">
                     <li>
-                        <i>
+                        <span onClick={()=>setFilterOpen((prev)=>!prev)}> <i>
                             <IoIosList />
-                        </i>
-                        필터
+                        </i>필터</span>
+                        <ul className={ filterOpen ? 'filterBox on' : 'filterBox'}>
+                            <li><span>테마별</span>
+                                <ul className='themeTaps'>
+                                    {
+                                        themeTaps.map((t, index)=>
+                                            <li className={selected1=== index ? 'on' : ''} onClick={()=>setSeleted1(index)}>{t}</li>
+                                        )
+                                    }
+                                </ul>
+                            </li>
+                            <li><span>일정별</span>
+                            <ul className='dayTaps'>
+                                    {
+                                        dayTaps.map((t, index)=>
+                                            <li className={selected2=== index ? 'on' : ''} onClick={()=>setSeleted2(index)}>{t}</li>
+                                        )
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <i>
+                        
+                        <span><i>
                             <BiSortAlt2 />
-                        </i>
-                        정렬
+                        </i>인기순</span>
                     </li>
                 </ul>
 

@@ -25,6 +25,7 @@ const TourClassDatail = () => {
     if (!thisitem) {
         return <p>존재하지 않는 투어/클래스입니다.</p>;
     }
+    
     return (
         <section className="tourclassDetail">
             <div className="inner">
@@ -65,7 +66,7 @@ const TourClassDatail = () => {
                     <div className="basic-info">
                         <h3>
                             {title}
-                            <span className="rate">평점</span>
+                            <span className="rate">평점 ★★★★★</span>
                         </h3>
                         <ul className="details">
                             <li>

@@ -6,10 +6,29 @@
         padding: vw(200) 0;
         display: flex;
         justify-content: space-between;
-        .left {
-            background-image: url('/images/tourclass/bg_cloud.png');
-            background-position: 0 0;
+        position: relative;
+        &::before, &::after{
+            content: "";
+            display: block;
+            position: absolute;
             background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: cover;
+            width: vw(154);
+            height: vw(67);
+        }
+        &::before{
+            left: vw(-110);
+            bottom: vw(930);
+            background-image: url('/images/tourclass/bg_cloud.png');
+        }
+        &::after{
+            right: vw(-110);
+            bottom: vw(100);
+            background-image: url('/images/tourclass/bg_cloud.png');
+            transform: scaleX(-1);
+        }
+        .left {
             .img-wrap {
                 width: vw(598);
                 height: vw(700);

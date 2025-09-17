@@ -23,7 +23,8 @@ const Intro = () => {
 
           const params = new URLSearchParams(location.search);
           const to = params.get("from") || "/home";
-          navigate(to, { replace: true });
+          navigate("/home", { replace: true });
+
         });
     }, rootRef);
 

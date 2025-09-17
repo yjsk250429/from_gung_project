@@ -2,6 +2,7 @@
 @use '../../../styles/utils' as *;
 @use '../../../styles/ui/tourList' as *;
 
+// 찜목록
 .wishlist {
     h2 {
         @include font-22px-B;
@@ -139,3 +140,96 @@
         }
     }
 }
+
+// 내가 쓴 리뷰
+.reviews {
+  width: 100%;
+  margin-top: vw(40);
+  overflow: hidden;
+
+  h2 {
+    @include font-22px-B;
+        margin: 0 0 vw(20);
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: vw(16);
+    color: #333;
+
+    .thead {
+  display: grid;
+  /* 번호, 날짜, 내용, 제목, 카테고리 → 비율로 분배 */
+  grid-template-columns: 0.7fr 1.2fr 3fr 1.5fr 1.2fr;
+
+  background-color: #f5f5f5;
+  padding: vw(12) vw(20);
+  font-weight: 500;
+  border-bottom: vw(1) solid #ddd;
+
+  span {
+    text-align: center;
+    font-size: vw(16);
+  }
+}
+
+
+    .tbody {
+      padding: vw(40) vw(20);
+      text-align: center;
+      color: #666;
+
+      &.empty {
+        font-size: vw(14);
+      }
+    }
+  }
+}
+
+// 1대1 문의사항
+.inquiry {
+  width: 100%;
+  margin-top: vw(40);
+  overflow: hidden;
+
+  h2 {
+    @include font-22px-B;
+    margin: 0 0 vw(20);
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: vw(16);
+    color: #333;
+
+    .thead {
+      display: grid;
+      /* 번호, 날짜, 내용, 답변상태 → 4칸 비율 */
+grid-template-columns: 0.7fr 1.2fr 4.5fr 1.2fr;
+
+
+      background-color: #f5f5f5;
+      padding: vw(12) vw(20);
+      font-weight: 500;
+      border-bottom: vw(1) solid #ddd;
+
+      span {
+        text-align: center;
+        font-size: vw(16);
+      }
+    }
+
+    .tbody {
+      padding: vw(40) vw(20);
+      text-align: center;
+      color: #666;
+
+      &.empty {
+        font-size: vw(14);
+      }
+    }
+  }
+}
+

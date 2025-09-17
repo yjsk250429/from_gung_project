@@ -17,16 +17,16 @@ const RewardCheck = () => {
             <div className="attendance">
             <strong>출석 도장<span onClick={openStampNotice}><i><BsQuestionCircleFill /></i></span></strong>
             <ul>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
-                <li><img src="/images/components/stamp_default.png" alt="stamp" /></li>
+                <li className='on'></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
             </div>
         </div>

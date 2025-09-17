@@ -9,13 +9,81 @@
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: vw(18);
-    li {
-      @include font-18px;
-      i {
-        margin-right: vw(10);
+    gap: vw(45);
+    >li {
+      position: relative;
+      >span{
+        cursor: pointer;
+        @include font-18px;
+        display: block;
+        position: relative;
+        padding-left: vw(25);
+        i {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-43%);
+        }
+      }
+      .filterBox{
+        width: vw(393);
+        height: vw(370);
+        background: #e7e7e7;
+        padding: vw(30) vw(30);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: stretch;
+        border-radius: vw(10);
+        border: 1px solid #999;
+        display: none;
+        &.on{
+          display: block;
+          position: absolute;
+          z-index: 100;
+          right: 0;
+          top: 100%;
+        }
+        >li{
+          &:first-child{
+            padding-bottom: vw(30);
+            border-bottom: 1px solid #969696;
+          }
+          &:last-child{
+            padding-top: vw(20);
+          }
+          span{
+            @include font-16px-M;
+          }
+          .themeTaps,
+          .dayTaps{
+            margin-top: vw(15);
+            display: flex;
+            flex-wrap: wrap;
+            gap: vw(10);
+            >li{
+              padding: vw(4) vw(14);
+              box-sizing: border-box;
+              border: 1px solid #666;
+              border-radius: vw(50);
+              @include font-15px;
+              background: $white;
+              color: #666;
+              cursor: pointer;
+              &:first-child{
+                margin-right: vw(215);
+              }
+              &.on{
+                border-color: $sub3;
+                background: rgba(244, 155, 171, 0.10);
+              }
+            }
+          }
+        }
       }
     }
+
   }
   p {
     text-align: center;

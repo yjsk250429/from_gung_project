@@ -1,33 +1,33 @@
-@use '../../../styles/base' as *;
-@use '../../../styles/utils' as *;
+@use "../../../styles/base" as *;
+@use "../../../styles/utils" as *;
 
 button {
-    position: relative;
-    background: none;
-    background-position: 0 0;
-    background-size: contain;
-    background-repeat: no-repeat;
-    font-family: $font-sub;
-    cursor: pointer;
-    &.small {
-        background-image: url('/images/components/button-small.png');
-        width: 120px;
-        height: 32px;
-        color: $main1;
-        @include font-12px-SB;
-    }
-    &.default {
-        background-image: url('/images/components/button-default.png');
-        width: 150px;
-        height: 40px;
-        color: $main1;
-        @include font-15px-SB;
-    }
-    &.medium {
-        background-image: url('/images/components/button-medium.png');
-        width: 190px;
-        height: 50px;
-        color: $white;
-        @include font-18px-SB;
-    }
+  position: relative;
+  background: none;
+  background-position: 0 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-family: $font-sub;
+  cursor: pointer;
+  &.small {
+    background-image: url("/images/components/button-small.png");
+    width: 120px;
+    height: 32px;
+    color: $main1;
+    @include font-12px-SB;
+  }
+  &.default {
+    background-image: url("/images/components/button-default.png");
+    width: 150px;
+    height: 40px;
+    color: $main1;
+    @include font-15px-SB;
+  }
+  &.medium {
+    background-image: url("/images/components/button-medium.png");
+    width: 190px;
+    height: 50px;
+    color: $white;
+    @include font-18px-SB;
+  }
 }

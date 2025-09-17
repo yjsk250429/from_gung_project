@@ -5,6 +5,78 @@ import { loadAll } from '../tmdb/loadAll';
 import { attachStablePoints  } from '../utils/points';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
+const memberData = [
+    {
+      id: 1,
+      name: '홍길동',
+      userId: 'abc1234',
+      password: 'abc1234!',
+      nickName: '궁으로간닷',
+      tel: {
+        first: '010',
+        middle: '0000',
+        last: '0000',
+      },
+      birth: {
+        year: '1999',
+        month: '01',
+        date: '01',
+      },
+    },
+  ];
+  
+  // 초기값 로드
+  const initialMembers = localStorage.getItem('members')
+    ? JSON.parse(localStorage.getItem('members'))
+    : memberData;
+  
+  const initialAuthed = localStorage.getItem('authed')
+    ? JSON.parse(localStorage.getItem('authed'))
+    : false;
+  
+  const initialUser = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
+    : null;
+  
+  let no = initialMembers.length + 1;
+  
+  export const useAuthStore = create((set, get) => ({
+    members: initialMembers,
+    authed: initialAuthed,
+    user: initialUser,
+  
+    // 로그인
+    login: ({ email, password }) => {
+      const { members } = get();
+      const item = members.find((member) => member.email === email);
+      if (item && item.password === password) {
+        set({ authed: true, user: item });
+        localStorage.setItem('authed', JSON.stringify(true));
+        localStorage.setItem('user', JSON.stringify(item));
+      } else {
+        set({ authed: false, user: null });
+        localStorage.setItem('authed', JSON.stringify(false));
+        localStorage.setItem('user', JSON.stringify(null));
+      }
+    },
+  
+    // 로그아웃
+    logout: () => {
+      set({ authed: false, user: null });
+      localStorage.setItem('authed', JSON.stringify(false));
+      localStorage.setItem('user', JSON.stringify(null));
+    },
+  
+    // 회원가입
+    signup: (user) => {
+      const { members } = get();
+      const newUser = { ...user, id: no++ };
+      const updatedMembers = [...members, newUser];
+      set({ members: updatedMembers });
+      localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+  }));
+
 export const useModalStore = create((set) => ({
     loginOpen: false,
     joinOpen:false,

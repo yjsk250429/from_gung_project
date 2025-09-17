@@ -1,13 +1,14 @@
-import { BrandGuide, BrandIntro } from '../../components/brand';
-import './style.scss';
+import { BrandGuide, BrandIntro, BrandQuestion } from "../../components/brand";
+import "./style.scss";
 
 const Brand = () => {
-    return (
-        <>
-            <BrandIntro />
-            <BrandGuide />
-        </>
-    );
+  return (
+    <>
+      <BrandIntro />
+      <BrandGuide />
+      <BrandQuestion />
+    </>
+  );
 };
 
 export default Brand;

@@ -69,20 +69,26 @@ html.is-active {
     .util {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: vw(20);
         form {
             border: 1px solid #fff;
-            border-radius: 50px;
-            width: 140px;
-            height: 30px;
+            border-radius: vw(50);
+            width: vw(140);
+            height: vw(30);
             position: relative;
-
+            transition: 0.4s ease-out;
+            &.on{
+                width: vw(240);
+                input[type='text'] {
+                    width: vw(230);
+                }
+            }
             input[type='text'] {
                 background: none;
                 border: none;
-                width: 130px;
-                height: 30px;
-                padding: 0 20px 0 10px;
+                width: vw(130);
+                height: vw(30);
+                padding: 0 vw(20) 0 vw(10);
                 color: #fff;
                 position: absolute;
                 left: 0;
@@ -94,9 +100,9 @@ html.is-active {
                 }
             }
             i {
-                font-size: 16px;
+                font-size: vw(16);
                 position: absolute;
-                right: 10px;
+                right: vw(10);
                 top: 50%;
                 transform: translateY(-45%);
                 color: #fff;
@@ -108,20 +114,20 @@ html.is-active {
                 color: #fff;
             }
             &.mymenu {
-                gap: 20px;
+                gap: vw(20);
                 li {
                     cursor: pointer;
-                    font-size: 16px;
+                    @include font-16px;
                     &:first-child {
                         position: relative;
                         &::after {
                             content: '';
                             display: block;
-                            width: 1px;
-                            height: 14px;
+                            width: vw(1);
+                            height: vw(14);
                             background: #fff;
                             position: absolute;
-                            right: -10px;
+                            right: vw(-10);
                             top: 50%;
                             transform: translateY(-60%);
                         }
@@ -130,22 +136,22 @@ html.is-active {
             }
             &.reward {
                 cursor: pointer;
-                gap: 12px;
+                gap: vw(12);
                 background: rgba($color: #fff, $alpha: 0.1);
-                width: 110px;
-                height: 22px;
-                border-radius: 50px;
+                width: vw(110);
+                height: vw(22);
+                border-radius: vw(50);
                 justify-content: center;
                 align-items: center;
                 li {
-                    font-size: 16px;
+                    @include font-16px;
                     display: flex;
                     align-items: center;
                     img {
-                        margin-top: -2px;
-                        margin-right: 6px;
+                        margin-top: vw(-2);
+                        margin-right: vw(6);
                         display: block;
-                        height: 15px;
+                        height: vw(15);
                     }
                 }
             }
@@ -211,31 +217,31 @@ html.is-active {
     .top-menu {
         position: absolute;
         right: 0;
-        top: 10px;
+        top: vw(10);
         display: flex;
         li {
-            margin-left: 25px;
+            margin-left: vw(25);
             a {
-                font-size: 15px;
+                @include font-15px;
             }
         }
     }
 
     @include tablet {
         .inner {
-            height: 70px;
+            height: vw(70);
             width: 100%;
         }
         h1 {
-            left: 10px;
+            left: vw(10);
             a img {
-                width: 40px;
+                width: vw(40);
             }
         }
         .nav ul li {
-            margin-left: 40px;
+            margin-left: vw(40);
             a {
-                font-size: 16px;
+                font-size: vw(16);
             }
         }
     }

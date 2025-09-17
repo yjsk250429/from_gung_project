@@ -21,6 +21,8 @@
         background-image: url('/images/components/bg_flower.png');
         @include complete;
         text-align: center;
+        background-size: 75%;
+        background-position: 200% 600%;
         h3{
             margin-bottom: vw(40);
         }
@@ -32,6 +34,7 @@
     }
     &.joinInfo{
         background-image: url('/images/components/bg_flower.png');
+        background-position: -40% -25%;
         @include infoInputs;
         h3{
             margin-bottom: vw(80);
@@ -132,6 +135,7 @@
     }
     &.joinAgree{
         background-image: url('/images/components/bg_tree.png');
+        background-position: 100% 10%;
         @include login-agree;
         h3{
             margin-bottom: vw(20);
@@ -170,11 +174,10 @@
 }
 }
 .rewardModal{
-    background: #f7f7f8cc;
     width: vw(310);
     height: vw(270);
     position: fixed;
-    top:6%;
+    top:7.5%;
     right: 8%;
     @include modalLayout;
     z-index: 1000;
@@ -182,13 +185,14 @@
     @include dropShadwMobile_login;
     background-image: url('/images/components/lion.png');
     background-repeat: no-repeat;
-    background-position: 100% 0;
-    background-size: contain;
+    background-position: 150% 0%;
+    background-color: $sub1;
+    @include ottMainDropShadow;
     .myreward,
     .attendance{
         strong{
             color: $main1;
-            @include font-20px-SB;
+            @include font-18px-SB;
             span{
                 cursor: pointer;
                 margin-left: vw(10);
@@ -199,7 +203,7 @@
         }
     }
     .myreward{
-        margin-bottom: vw(20);
+        margin-bottom: vw(10);
         ul{
             width: 100%;
             height: vw(45);
@@ -211,7 +215,7 @@
             padding: 0 vw(15);
             li{
                 img{
-                    width: vw(20);
+                    width: vw(15);
                 }
                 &:last-child{
                     span{
@@ -233,9 +237,23 @@
             width: 100%;
             height: vw(116);
            display: flex; 
+           justify-content: center;
+           align-items: center;
            flex-wrap: wrap;
            gap: vw(12);
-           padding: vw(26) vw(28);
+           padding: vw(26) vw(20);
+           li{
+            background-image: url("/images/components/stamp_default.png");
+            background-position: 0 0;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: vw(35.21);
+            height: vw(24);
+            &.on{
+                background-image: url("/images/components/stamp_on.png");
+
+            }
+           }
         }
     }
 }

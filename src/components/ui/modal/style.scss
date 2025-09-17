@@ -173,7 +173,7 @@
     background: #f7f7f8cc;
     width: vw(310);
     height: vw(270);
-    position: absolute;
+    position: fixed;
     top:6%;
     right: 8%;
     @include modalLayout;

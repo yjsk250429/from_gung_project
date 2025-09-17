@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTourClassStore } from '../../components/tourClass/../../store';
 import TourClassList from '../../components/tourClass/TourClassList';
 import TourClassTop from '../../components/tourClass/TourClassTop';
@@ -23,6 +23,26 @@ const TourClass = () => {
     const [filterOpen, setFilterOpen] = useState(false);
     const [selected1, setSeleted1] = useState(0);
     const [selected2, setSeleted2] = useState(0);
+
+    const filterRef = useRef(null);
+    
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (filterRef.current && !filterRef.current.contains(e.target)) {
+        setFilterOpen(false);
+      }
+    };
+
+    if (filterOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [filterOpen]);
 
     const filteredList = useMemo(() => {
         // 1차: 투어/클래스
@@ -53,20 +73,17 @@ const TourClass = () => {
     const totalInCategory = filteredList.length;
     const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-    // 탭(카테고리) 바뀌면 다시 8개로 리셋
     useEffect(() => {
         setVisibleCount(INITIAL_COUNT);
     }, [category, filteredList]);
 
-    const atEnd = visibleCount >= totalInCategory; // 끝까지 보여줬는지
-    const canToggle = totalInCategory > INITIAL_COUNT; // 전체가 8개 이하면 버튼 숨김
+    const atEnd = visibleCount >= totalInCategory; 
+    const canToggle = totalInCategory > INITIAL_COUNT; 
 
     const handleMoreOrFold = () => {
         if (atEnd) {
-            // 접기
             setVisibleCount(INITIAL_COUNT);
         } else {
-            // 더보기 (8개씩 증가, 끝 넘지 않게)
             setVisibleCount((c) => Math.min(c + STEP, totalInCategory));
         }
     };
@@ -79,7 +96,7 @@ const TourClass = () => {
                 <Tab items={tabItems} onClick={(index) => setRegionCategory(tabItems[index])}/>
 
                 <ul className="sort">
-                    <li>
+                    <li ref={filterRef}>
                         <span onClick={()=>setFilterOpen((prev)=>!prev)}> <i>
                             <IoIosList />
                         </i>필터</span>

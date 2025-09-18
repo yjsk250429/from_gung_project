@@ -43,6 +43,7 @@
     width: vw(365);
     height: vw(250);
     padding:vw(70) vw(60) vw(50) vw(60);
+    text-align: center;
     h3{
         color: $main1;
         @include font-24px-SB;
@@ -54,8 +55,16 @@
     width: vw(365);
     height: vw(220);
     padding:vw(70) 0 vw(50) 0;
+    text-align: center;
     h3{
         color: $main1;
+        margin-bottom: vw(40);
+        @include font-24px-SB;
+    }
+    .btns{
+        display: flex;
+        justify-content: center;
+        gap: vw(8);
     }
 }
 

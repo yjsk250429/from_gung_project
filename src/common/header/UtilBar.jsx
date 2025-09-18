@@ -4,11 +4,17 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
 const UtilBar = () => {
-    const { openLogin, openJoin, openReward, closeReward } = useModalStore();
+    const { openLogin, openJoin, openReward, closeReward, openLogoutCom} = useModalStore();
+
     const authed = useAuthStore((s) => s.authed);
     const logout = useAuthStore((s) => s.logout);
     const [searchOn, setSearchOn] = useState(false);
     const formRef = useRef(null);
+    const onLogout = ()=>{
+      logout();
+      openLogoutCom();
+    }
+
     useEffect(() => {
         const handleClickOutside = (e) => {
           if (formRef.current && !formRef.current.contains(e.target)) {
@@ -31,7 +37,7 @@ const UtilBar = () => {
             {
                 authed ? 
             <>
-            <li onClick={logout}>로그아웃</li>
+            <li onClick={onLogout}>로그아웃</li>
             <li><Link to='/mypage'>마이페이지</Link></li>
             </>
             :

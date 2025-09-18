@@ -12,6 +12,7 @@ const memberData = [
       userId: 'abc1234',
       password: 'abc1234!',
       nickName: '궁으로간닷',
+      profile:'/images/mypage/honggildong.png',
       tel: {
         first: '010',
         middle: '0000',
@@ -46,9 +47,9 @@ const memberData = [
     user: initialUser,
   
     // 로그인
-    login: ({ email, password }) => {
+    login: ({ userId, password }) => {
       const { members } = get();
-      const item = members.find((member) => member.email === email);
+      const item = members.find((member) => member.userId === userId);
       if (item && item.password === password) {
         set({ authed: true, user: item });
         localStorage.setItem('authed', JSON.stringify(true));
@@ -79,11 +80,19 @@ const memberData = [
 
 export const useModalStore = create((set) => ({
     loginOpen: false,
+    loginComOpen:false,
+    logoutComOpen: false,
     joinOpen:false,
     joinInfoOpen:false,
     joinComOpen:false,
     rewardOpen:false,
     stampNoticeOpen:false,
+
+    openLoginCom: () => set({ loginComOpen: true }),
+    closeLoginCom: () => set({ loginComOpen: false }),
+    
+    openLogoutCom: () => set({ logoutComOpen: true }),
+    closeLogoutCom: () => set({ logoutComOpen: false }),
 
     openJoinCom: () => set({ joinComOpen: true }),
     closeJoinCom: () => set({ joinComOpen: false }),
@@ -106,6 +115,8 @@ export const useModalStore = create((set) => ({
     switchToJoin: () => set({ loginOpen: false, joinOpen: true }),
     switchToJoinInfo: () => set({ joinOpen: false, joinInfoOpen: true }),
     switchToJoinCom: () => set({ joinInfoOpen: false, joinComOpen: true }),
+    switchToLogoutCom: () => set({ loginComOpen: false, logoutComOpen: true }),
+    switchToLogin: () => set({ logoutComOpen: false, loginOpen: true }),
 }));
 
 export const useTourClassStore = create((set, get) => ({

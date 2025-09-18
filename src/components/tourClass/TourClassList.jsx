@@ -1,6 +1,6 @@
 import TourClassItem from './TourClassItem';
 
-const TourClassList = ({ list=[], limit = 8 }) => {
+const TourClassList = ({ list = [], limit = 8 }) => {
     const visible = list.slice(0, limit);
 
     return (

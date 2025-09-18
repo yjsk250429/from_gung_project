@@ -240,6 +240,11 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     background-size: cover;
     margin: 0 auto;
     overflow: hidden;
+    .image-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
     .top-text {
         @include font-105px-B;
         padding-top: vw(170);
@@ -810,7 +815,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
 .section6-main {
     position: relative;
     width: 100%;
-    height: vw(1000);
+    height: vw(900);
     overflow: hidden;
     .section5_bg {
         position: absolute;

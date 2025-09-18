@@ -2,13 +2,13 @@
 @use '../../styles/base' as *;
 
 .MyPagemain_main {
-    font-family: $font-main;
-    display: flex;
-    width: vw(1600);
-    min-height: vw(1465);
-    background: #fff;
-    margin: 0 auto;
-    margin-top: vw(380);
+    .inner{
+        font-family: $font-main;
+        display: flex;
+        min-height: vw(1465);
+        background: #fff;
+        padding-top: vw(300);
+    }
 
     .mypage_sidebar {
         width: vw(385);

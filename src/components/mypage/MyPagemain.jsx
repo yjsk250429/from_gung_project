@@ -4,21 +4,25 @@ import ReservationSection from './sections/ReservationSection.jsx';
 import WishlistSection from './sections/WishlistSection.jsx';
 import ReviewSection from './sections/ReviewSection.jsx';
 import InquirySection from './sections/InquirySection.jsx';
+import { useAuthStore } from '../../store/index.js';
 
 const MyPagemain = () => {
     const [activeMenu, setActiveMenu] = useState('reservation');
     const isWishlistOpen = activeMenu === 'wishlist';
-
+    const user = useAuthStore((s) => s.user);
     return (
         <div className="MyPagemain_main">
+            <div className="inner">
+
+           
             <aside className="mypage_sidebar">
                 <div className="profile">
                     <div className="profile_img">
-                        <img src="/images/common/profile_placeholder.png" alt="프로필 이미지" />
+                        <img src={user?.profile || "/images/common/profile_placeholder.png"} alt="프로필 이미지" />
                     </div>
                     <div className="profile_info">
-                        <p className="nickname">닉네임</p>
-                        <p className="username">(이름)</p>
+                        <p className="nickname">{user?.nickName || "닉네임"}</p>
+                        <p className="username">({user?.name || "이름"})</p>
                         <button className="btn_edit" type="button">
                             <span>회원정보 수정</span>
                             <img src="/images/mypage/pen.png" alt="" />
@@ -82,7 +86,7 @@ const MyPagemain = () => {
                     <div className="reward">
                         <p className="reward_title">리워드 현황</p>
                         <p className="reward_value">
-                            <span>10</span> 전
+                            <span>{user?.reward??0}</span> 전
                         </p>
                         <img className="reward_bg1" src="/images/mypage/reward1.png" alt="" />
                         <img className="reward_bg2" src="/images/mypage/reward2.png" alt="" />
@@ -90,7 +94,7 @@ const MyPagemain = () => {
                     <div className="coupon">
                         <p className="coupon_title">보유 쿠폰</p>
                         <p className="coupon_value">
-                            <span>5</span> 장
+                            <span>{user?.coupon??0}</span> 장
                         </p>
                         <img className="reward_bg2" src="/images/mypage/reward2.png" alt="" />
                     </div>
@@ -101,6 +105,7 @@ const MyPagemain = () => {
                 {activeMenu === 'review' && <ReviewSection />}
                 {activeMenu === 'inquiry' && <InquirySection />}
             </section>
+            </div>
         </div>
     );
 };

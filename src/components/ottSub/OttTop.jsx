@@ -1,6 +1,6 @@
 // components/ottSub/OttTop.jsx
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import RoundTap from '../ui/roundTap/RoundTap';
 import './style.scss';
 
@@ -14,26 +14,34 @@ const movieRecommend = [
     { id: 634649, img: '/images/ott/movie_1.png' },
 ];
 
-// ⬇️ 부모가 넘겨주면 제어모드, 안 넘기면 내부 상태로 동작
 export default function OttTop({ activeTop, onTopChange }) {
-    const [internal, setInternal] = useState(0); // 0=TV, 1=MOVIE
+    // 내부 상태: 'tv' or 'movie'
+    const [internal, setInternal] = useState('tv');
     const navigate = useNavigate();
 
-    const top = typeof activeTop === 'number' ? activeTop : internal;
-    const setTop = onTopChange ?? setInternal;
+    // 현재 상태: props로 제어 가능하거나 내부 상태 사용
+    const selected = typeof activeTop === 'string' ? activeTop : internal;
+    const setSelected = onTopChange ?? setInternal;
 
-    const isTv = top === 0;
-    const mediaType = isTv ? 'tv' : 'movie';
-    const label = isTv ? '드라마' : '영화';
-    const list = isTv ? tvRecommend : movieRecommend;
+    const list = selected === 'tv' ? tvRecommend : movieRecommend;
+    const label = selected === 'tv' ? '드라마' : '영화';
 
     const openDetail = (id) => {
-        sessionStorage.setItem('ott:lastMediaType', mediaType);
-        navigate(`/ott/${mediaType}/${id}`, { state: { mediaType } });
+        sessionStorage.setItem('ott:lastMediaType', selected);
+        navigate(`/ott/${selected}/${id}`, { state: { mediaType: selected } });
     };
+
     return (
         <article className="top">
-            <RoundTap mode="media" text1="드라마" text2="영화" bgColor="#353535" />
+            <RoundTap
+                text1="드라마"
+                value1="tv"
+                text2="영화"
+                value2="movie"
+                bgColor="#353535"
+                selected={selected}
+                onChange={setSelected}
+            />
             <span># 지금 주목받는 {label}</span>
 
             <ul className="recommend">

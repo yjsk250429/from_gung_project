@@ -812,7 +812,14 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     width: 100%;
     height: vw(1000);
     overflow: hidden;
-
+    .section5_bg {
+        position: absolute;
+        top: 0;
+        opacity: 0.5;
+        img {
+            width: 100%;
+        }
+    }
     /* 상단 마키(선택) */
     .section6-text {
         position: absolute;

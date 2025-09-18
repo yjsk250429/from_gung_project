@@ -1,100 +1,89 @@
-@use "../../../styles/base" as *;
-@use "../../../styles/utils" as *;
+@use '../../../styles/base' as *;
+@use '../../../styles/utils' as *;
 
 button {
-  position: relative;
-  background: none;
-  background-position: 0 0;
-  background-size: contain;
-  background-repeat: no-repeat;
-  font-family: $font-sub;
-  cursor: pointer;
-  &.small {
-    width: 120px;
-    height: 32px;
-    @include font-12px-SB;
-    &.main1{
-      background-image: url("/images/components/button-small-main1.png");
-      color: $main1;
+    position: relative;
+    background: none;
+    background-position: 0 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    font-family: $font-sub;
+    cursor: pointer;
+    &.small {
+        width: vw(120);
+        height: vw(32);
+        @include font-12px-SB;
+        &.main1 {
+            background-image: url('/images/components/button-small-main1.png');
+            color: $main1;
+        }
+        &.gray {
+            background-image: url('/images/components/button-small-gray.png');
+            color: gray;
+        }
+        &.sub2 {
+            background-image: url('/images/components/button-small-sub2.png');
+            color: $sub2;
+        }
+        &.sub3 {
+            background-image: url('/images/components/button-small-sub3.png');
+            color: $sub3;
+        }
+        &.white {
+            background-image: url('/images/components/button-small-white.png');
+            color: $white;
+        }
     }
-    &.gray{
-      background-image: url("/images/components/button-small-gray.png");
-      color: gray;
+    &.default {
+        width: vw(150);
+        height: vw(40);
+        color: $main1;
+        @include font-15px-SB;
+        &.main1 {
+            background-image: url('/images/components/button-default-main1.png');
+            color: $main1;
+        }
+        &.gray {
+            background-image: url('/images/components/button-default-gray.png');
+            color: gray;
+        }
+        &.sub2 {
+            background-image: url('/images/components/button-default-sub2.png');
+            color: $sub2;
+        }
+        &.sub3 {
+            background-image: url('/images/components/button-default-sub3.png');
+            color: $sub3;
+        }
+        &.white {
+            background-image: url('/images/components/button-default-white.png');
+            color: $white;
+        }
     }
-    &.sub2{
-      background-image: url("/images/components/button-small-sub2.png");
-      color: $sub2;
+    &.big {
+        width: vw(188);
+        height: vw(50);
+        color: $white;
+        @include font-18px-SB;
+        &.main1 {
+            background-image: url('/images/components/button-big-main1.png');
+            color: $main1;
+        }
+        &.gray {
+            background-image: url('/images/components/button-big-gray.png');
+            color: gray;
+        }
+        &.sub2 {
+            background-image: url('/images/components/button-big-sub2.png');
+            color: $sub2;
+        }
+        &.sub3 {
+            background-image: url('/images/components/button-big-sub3.png');
+            color: $sub3;
+        }
+        &.white {
+            background-image: url('/images/components/button-big-white.png');
+            color: $white;
+        }
     }
-    &.sub3{
-      background-image: url("/images/components/button-small-sub3.png");
-      color: $sub3;
-    }
-    &.white{
-      background-image: url("/images/components/button-small-white.png");
-      color: $white;
-    }
-
-  }
-  &.default {
-    width: 150px;
-    height: 40px;
-    color: $main1;
-    @include font-15px-SB;
-    &.main1{
-      background-image: url("/images/components/button-default-main1.png");
-      color: $main1;
-
-    }
-    &.gray{
-      background-image: url("/images/components/button-default-gray.png");
-      color: gray;
-
-    }
-    &.sub2{
-      background-image: url("/images/components/button-default-sub2.png");
-      color: $sub2;
-
-    }
-    &.sub3{
-      background-image: url("/images/components/button-default-sub3.png");
-      color: $sub3;
-
-    }
-    &.white{
-      background-image: url("/images/components/button-default-white.png");
-      color: $white;
-
-    }
-  }
-  &.big {
-    width: 188px;
-    height: 50px;
-    color: $white;
-    @include font-18px-SB;
-    &.main1{
-      background-image: url("/images/components/button-big-main1.png");
-      color: $main1;
-
-    }
-    &.gray{
-      background-image: url("/images/components/button-big-gray.png");
-      color: gray;
-
-    }
-    &.sub2{
-      background-image: url("/images/components/button-big-sub2.png");
-      color: $sub2;
-
-    }
-    &.sub3{
-      background-image: url("/images/components/button-big-sub3.png");
-      color: $sub3;
-
-    }
-    &.white{
-      background-image: url("/images/components/button-big-white.png");
-      color: $white;
-
-    }
-  }
 }

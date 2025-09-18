@@ -220,8 +220,11 @@ const ReviewBlocks = () => {
 
     return (
         <section className="section6-main" ref={containerRef}>
+            <div className="section5_bg">
+                <img src="/images/con6_bg1.png" alt="" />
+            </div>
             <div className="section6-text">
-                <div className="text-box">UI/UX WEB DESIGN FRONT-END DEVELOPER</div>
+                <div className="text-box"></div>
             </div>
             <div className="section6-canvas" ref={canvasRef} />
 

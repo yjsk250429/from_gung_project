@@ -1,37 +1,51 @@
-
 .intro {
-  pointer-events: none; 
-  position: fixed;
-  inset: 0;
-  z-index: 9999; 
-  background: #000; 
-  perspective: vw(1200);
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+    perspective: vw(1200);
+
+    // 영상은 가장 밑에
+    .intro_video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0; // 맨 뒤
+    }
+
+    // 문은 영상 위에
+    .doors {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        pointer-events: none;
+        z-index: 2; // 영상 위, 최상단
+
+        .door {
+            width: 50vw;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            will-change: transform;
+            backface-visibility: hidden;
+            box-shadow: inset 0 0 vw(40) rgba(0, 0, 0, 0.25);
+        }
+
+        .door-left {
+            background-image: url('/images/door1.png');
+        }
+
+        .door-right {
+            background-image: url('/images/door2.png');
+        }
+    }
 }
-
-.doors {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  pointer-events: none; 
-}
-
-.door {
-  width: 50vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  will-change: transform;
-  backface-visibility: hidden;
-
-
-  box-shadow: inset 0 0 vw(40) rgba(0,0,0,0.25);
-}
-
-
-.door-left  { background-image: url('/images/door2.png'); }
-.door-right { background-image: url('/images/door1.png'); }
-
 
 @media (max-width: 768px) {
-  .door { background-position: center; }
+    .door {
+        background-position: center;
+    }
 }

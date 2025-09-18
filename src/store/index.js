@@ -61,6 +61,9 @@ export const useAuthStore = create((set, get) => ({
     }
     },
 
+    //로그아웃
+    logout: () => { set({ authed: false, user: null }); localStorage.setItem('authed', JSON.stringify(false)); localStorage.setItem('user', JSON.stringify(null)); },
+
     // 회원가입
     signup: (user) => {
         const { members } = get();

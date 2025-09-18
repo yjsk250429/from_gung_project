@@ -1,18 +1,23 @@
 import { TbSearch } from "react-icons/tb";
 import { useAuthStore, useModalStore } from "../../store";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
 const UtilBar = () => {
     const { openLogin, openJoin, openReward, closeReward, openLogoutCom} = useModalStore();
-
+    const navigate = useNavigate();
+    const location = useLocation();
     const authed = useAuthStore((s) => s.authed);
     const logout = useAuthStore((s) => s.logout);
     const [searchOn, setSearchOn] = useState(false);
     const formRef = useRef(null);
+    const protectedPaths = ["/mypage",];
     const onLogout = ()=>{
       logout();
       openLogoutCom();
+      if (protectedPaths.some((path) => location.pathname.startsWith(path))) {
+        navigate("/");
+      }
     }
 
     useEffect(() => {

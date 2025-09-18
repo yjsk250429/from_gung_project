@@ -1,21 +1,24 @@
 @use '../../../styles/utils' as *;
 @use '../../../styles/base' as *;
 
-.tabs{
+.tabs {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     margin-bottom: 30px;
-    li{
+    li {
         transition: 0.3s;
         height: vw(70);
-        flex:1;
+        flex: 1;
         cursor: pointer;
         @include font-20px-M;
         border-bottom: 2px solid $sub1;
-        &.on{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.on {
             border-bottom: 2px solid #000;
         }
     }

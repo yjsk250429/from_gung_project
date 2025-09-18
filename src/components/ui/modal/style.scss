@@ -44,6 +44,33 @@
     &.editInfo{
         background-image: url('/images/components/bg_flower.png');
         @include infoInputs;
+        background-color: $main1;
+        color: $white;
+        h3{
+            margin-bottom: vw(50);
+            position: relative;
+       
+        }
+        form{
+            label{
+                text-align:right;
+                margin-right: vw(120);
+                display: block;
+                @include font-16px;
+                margin-bottom: vw(36);
+                input[type="text"],
+            input[type="password"]{
+                @include inputStyle;
+                margin-left: vw(24);
+                }
+            }
+            .btns{
+                // margin-top: vw(97);
+                display: flex;
+                justify-content: center;
+                gap: vw(8);
+            }
+        }
     }
     &.joinComplete{
         background-image: url('/images/components/bg_flower.png');

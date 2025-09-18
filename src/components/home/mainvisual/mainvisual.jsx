@@ -59,7 +59,7 @@ const Mainvisual = () => {
                 tlBottom.fromTo(
                     el,
                     { y: 200 },
-                    { y: 0, duration: 0.7, ease: 'power2.out' },
+                    { y: 0, duration: 0.7, ease: 'power2.out', delay: 2 },
                     i * 0.18
                 );
             });
@@ -100,7 +100,7 @@ const Mainvisual = () => {
 
             const floatImage = gsap.to('.banner_image img', {
                 y: 12,
-                duration: 4.6,
+                duration: 2.6,
                 ease: 'sine.inOut',
                 yoyo: true,
                 repeat: -1,
@@ -125,14 +125,14 @@ const Mainvisual = () => {
             tlBanner.fromTo(
                 '.banner_line img',
                 { scale: 0.1, rotation: 0 },
-                { scale: 1, rotation: 360, duration: 0.5, ease: 'power3.out' }
+                { scale: 1, rotation: 360, duration: 2.5, ease: 'power3.out', delay: 0.6 }
             );
 
             tlBanner.fromTo(
                 '.banner_image img',
                 { scale: 0.001, y: 20 },
-                { scale: 1, y: 0, duration: 0.9, ease: 'back.out(1.6)', stagger: 0.15 },
-                '-=0.3'
+                { scale: 1, y: 0, duration: 0.9, ease: 'back.out(1.6)', stagger: 0.15, delay: 0.6 },
+                '-=1.5'
             );
 
             tlBanner.add(() => {
@@ -209,7 +209,11 @@ const Mainvisual = () => {
                 </p>
                 <img src="/images/mainvisual/visual_text1.png" alt="text" />
             </div>
-            <Button text="더보기" className="default white" onClick={() => navigate('/tourclass')} />
+            <Button
+                text="더보기"
+                className="default white"
+                onClick={() => navigate('/tourclass')}
+            />
         </div>
     );
 };

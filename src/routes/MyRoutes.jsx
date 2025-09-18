@@ -15,16 +15,12 @@ import {
     TourSearch,
 } from '../pages';
 import ScrollToTop from '../components/ui/scrolltotop/ScrollToTop';
-import Intro from '../components/ui/intro/intro';
 
 export const MyRoutes = () => {
     return (
         <BrowserRouter>
             <ScrollToTop />
             <Routes>
-                {/* 첫 진입은 Intro 페이지 */}
-                <Route path="/" element={<Intro />} />
-
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
 

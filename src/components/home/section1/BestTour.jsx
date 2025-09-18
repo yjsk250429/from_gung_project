@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Draggable } from 'gsap/Draggable';
 import { InertiaPlugin } from 'gsap/InertiaPlugin';
+import { Link } from 'react-router-dom';
 import tourItems from '../../../api/mainData';
 
 // GSAP 플러그인 등록
@@ -39,6 +40,7 @@ const BestTour = () => {
                 inertia: true,
                 edgeResistance: 0.85,
                 dragResistance: 0.3,
+                dragClickables: true,
             });
 
             // 텍스트 애니메이션 (위 → 아래)
@@ -87,14 +89,22 @@ const BestTour = () => {
             <div className="image-grid" ref={gridRef}>
                 {tourItems.map((item, index) => (
                     <div className="image-box" key={item.id}>
-                        <div className="top-font" data-index={index + 1}>
-                            <p>{item.text}</p>
-                        </div>
-                        <img src={item.img} alt={item.label} />
-                        <div className="overlay">
-                            <img src="/images/con1_hover.png" alt="icon" className="overlay-icon" />
-                            <span className="label">{item.label}</span>
-                        </div>
+                        <Link
+                            to={`/tourclass/${item.id}`} // ✅ 라우트: /tourclass/:id
+                            className="image-link"
+                            aria-label={`${item.label} 상세보기`}
+                            draggable={false}
+                        >
+                            <div className="top-font" data-index={index + 1}>
+                                <p>{item.text}</p>
+                            </div>
+                            <img src={item.img} alt={item.label} draggable={false} />
+                            <div className="overlay">
+                                <img src="/images/con1_hover.png" alt="" className="overlay-icon" />
+                                + <span className="label">{item.label}</span>+{' '}
+                            </div>
+                            +{' '}
+                        </Link>
                     </div>
                 ))}
             </div>

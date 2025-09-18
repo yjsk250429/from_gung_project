@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RoundTap from '../ui/roundTap/RoundTap';
 import './style.scss';
+import { useTourClassStore } from '../../store';
 
 const TourRecommend = [
     {
@@ -38,13 +39,22 @@ const ClassRecommend = [
 
 const TourClassTop = () => {
     const navigate = useNavigate();
-    const [selectedTab, setSelectedTab] = useState('tour');
+    const category = useTourClassStore((s) => s.category); // 전역 상태에서 현재 탭 읽기
+    const setCategory = useTourClassStore((s) => s.setCategory);
 
-    const handleTabChange = (tabValue) => {
-        setSelectedTab(tabValue);
-    };
+    const recommendList = category === 'tour' ? TourRecommend : ClassRecommend;
 
-    const recommendList = selectedTab === 'tour' ? TourRecommend : ClassRecommend;
+    useEffect(() => {
+        setCategory('tour');
+    }, [setCategory]);
+
+    useEffect(() => {
+        const preloadImages = [...TourRecommend, ...ClassRecommend].map((item) => item.img);
+        preloadImages.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
 
     return (
         <article className="top">
@@ -54,14 +64,13 @@ const TourClassTop = () => {
                 text2="클래스"
                 value2="class"
                 bgColor="#d9d9d9"
-                selected={selectedTab}
-                onChange={handleTabChange}
+                selected={category}
             />
             <ul className="recommend">
                 {recommendList.map((item) => (
                     <li key={item.id} onClick={() => navigate(item.link)}>
                         <img src={item.img} alt={item.title} />
-                        <div className="grad"></div>
+                        <div className="grad" />
                         <div className="text">
                             <strong>{item.title}</strong>
                             <em>{item.caption}</em>

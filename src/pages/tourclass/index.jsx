@@ -8,12 +8,15 @@ import './style.scss';
 import { IoIosList } from 'react-icons/io';
 import { BiSortAlt2 } from 'react-icons/bi';
 import { FaCheck } from 'react-icons/fa6';
+import { MdErrorOutline } from 'react-icons/md';
 
 const INITIAL_COUNT = 8;
 const STEP = 8;
 
 const TourClass = () => {
     const category = useTourClassStore((s) => s.category);
+    const setRegionCategory = useTourClassStore((s) => s.setRegionCategory);
+    const regionCategory = useTourClassStore((s) => s.regionCategory);
 
     const tabItems = useMemo(() => {
         if (category === 'tour') {
@@ -27,10 +30,9 @@ const TourClass = () => {
 
     const themeTaps = ['전체', '역사', '예술', '라이프', '힐링', '융합'];
     const dayTaps = ['전체', '하루', '1박 2일', '2박 3일'];
-    const sortTaps = ['최신순', '인기순', '추천순', '리뷰순'];
-    const setRegionCategory = useTourClassStore((s) => s.setRegionCategory);
-    const regionCategory = useTourClassStore((s) => s.regionCategory);
+    const sortTaps = ['최신순', '오래된순', '평점순', '리뷰순'];
     const tourClass = useTourClassStore((s) => s.tourClass);
+    const activeIndex = tabItems.findIndex((item) => item === regionCategory);
 
     const [filterOpen, setFilterOpen] = useState(false);
     const [sortOpen, setSortOpen] = useState(false);
@@ -42,13 +44,23 @@ const TourClass = () => {
     const sortRef = useRef(null);
 
     useEffect(() => {
+        setRegionCategory('전체');
+        setSeleted1(0);
+        setSeleted2(0);
+        setSeleted3(0);
+    }, [category, setRegionCategory]);
+
+    useEffect(() => {
         const handleClickOutside = (e) => {
             if (filterRef.current && !filterRef.current.contains(e.target)) {
                 setFilterOpen(false);
             }
+            if (sortRef.current && !sortRef.current.contains(e.target)) {
+                setSortOpen(false);
+            }
         };
 
-        if (filterOpen) {
+        if (filterOpen || sortOpen) {
             document.addEventListener('mousedown', handleClickOutside);
         } else {
             document.removeEventListener('mousedown', handleClickOutside);
@@ -57,7 +69,7 @@ const TourClass = () => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [filterOpen]);
+    }, [filterOpen, sortOpen]);
 
     const filteredList = useMemo(() => {
         // 1차: 투어/클래스 카테고리 필터
@@ -65,39 +77,59 @@ const TourClass = () => {
 
         // 2차: category에 따라 필터 다르게 적용
         if (category === 'tour') {
-            if (regionCategory === '전체') return filtered;
-            if (regionCategory === '서울') {
-                return filtered.filter((item) => item.region.includes('서울'));
-            }
-            if (regionCategory === '인천/경기') {
-                return filtered.filter(
-                    (item) => item.region.includes('인천') || item.region.includes('경기')
-                );
-            }
-            if (regionCategory === '기타') {
-                return filtered.filter(
-                    (item) =>
-                        !item.region.includes('서울') &&
-                        !item.region.includes('인천') &&
-                        !item.region.includes('경기')
-                );
+            if (regionCategory !== '전체') {
+                if (regionCategory === '서울') {
+                    filtered = filtered.filter((item) => item.region.includes('서울'));
+                } else if (regionCategory === '인천/경기') {
+                    filtered = filtered.filter(
+                        (item) => item.region.includes('인천') || item.region.includes('경기')
+                    );
+                } else if (regionCategory === '기타') {
+                    filtered = filtered.filter(
+                        (item) =>
+                            !item.region.includes('서울') &&
+                            !item.region.includes('인천') &&
+                            !item.region.includes('경기')
+                    );
+                }
             }
         } else if (category === 'class') {
-            // 클래스 카테고리일 때
-            if (regionCategory === '전체') return filtered;
-            if (regionCategory === '만들기') {
-                return filtered.filter((item) => item.theme.includes('만들기'));
-            }
-            if (regionCategory === '요리하기') {
-                return filtered.filter((item) => item.theme.includes('요리하기'));
-            }
-            if (regionCategory === '체험하기') {
-                return filtered.filter((item) => item.theme.includes('체험하기'));
+            if (regionCategory !== '전체') {
+                if (regionCategory === '만들기') {
+                    filtered = filtered.filter((item) => item.theme.includes('만들기'));
+                }
+                if (regionCategory === '요리하기') {
+                    filtered = filtered.filter((item) => item.theme.includes('요리하기'));
+                }
+                if (regionCategory === '체험하기') {
+                    filtered = filtered.filter((item) => item.theme.includes('체험하기'));
+                }
             }
         }
 
-        return filtered;
-    }, [tourClass, category, regionCategory]);
+        // 3차 필터: 테마 (themeTaps[selected1]) - "전체" 제외
+        const selectedTheme = themeTaps[selected1];
+        if (selectedTheme !== '전체') {
+            filtered = filtered.filter((item) => item.theme?.includes(selectedTheme));
+        }
+
+        //  4차 필터: 일정 (dayTaps[selected2]) - "전체" 제외
+        const selectedDay = dayTaps[selected2];
+        if (selectedDay !== '전체') {
+            filtered = filtered.filter((item) => item.period === selectedDay);
+        }
+
+        //정렬
+        let sorted = [...filtered];
+
+        if (selected3 === 0) {
+            sorted.sort((a, b) => a.id - b.id);
+        } else if (selected3 === 1) {
+            sorted.sort((a, b) => b.id - a.id);
+        }
+
+        return sorted;
+    }, [tourClass, category, regionCategory, selected1, selected2, selected3]);
 
     const totalInCategory = filteredList.length;
     const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
@@ -122,7 +154,11 @@ const TourClass = () => {
             <div className="bg"></div>
             <div className="inner">
                 <TourClassTop />
-                <Tab items={tabItems} onClick={(index) => setRegionCategory(tabItems[index])} />
+                <Tab
+                    items={tabItems}
+                    activeIndex={activeIndex === -1 ? 0 : activeIndex}
+                    onClick={(index) => setRegionCategory(tabItems[index])}
+                />
                 <ul className="sort">
                     {category === 'tour' && (
                         <li ref={filterRef}>
@@ -164,16 +200,20 @@ const TourClass = () => {
                             </ul>
                         </li>
                     )}
-                    <li>
+                    <li ref={sortRef}>
                         <span onClick={() => setSortOpen((prev) => !prev)}>
                             <i>
                                 <BiSortAlt2 />
                             </i>
-                            최신순
+                            {sortTaps[selected3]}
                         </span>
                         <ul className={sortOpen ? 'sortBox on' : 'sortBox'}>
                             {sortTaps.map((t, index) => (
-                                <li key={t} onClick={() => setSeleted3(index)}>
+                                <li
+                                    key={t}
+                                    onClick={() => setSeleted3(index)}
+                                    className={selected3 === index ? 'sortSelected' : ''}
+                                >
                                     <i>{selected3 === index && <FaCheck />}</i>
                                     <span>{t}</span>
                                 </li>
@@ -183,7 +223,16 @@ const TourClass = () => {
                 </ul>
 
                 {/* 리스트: limit 개수만 표시 */}
-                <TourClassList list={filteredList} limit={visibleCount} />
+                {filteredList.length > 0 ? (
+                    <TourClassList list={filteredList} limit={visibleCount} />
+                ) : (
+                    <div className="empty-message">
+                        <i>
+                            <MdErrorOutline />
+                        </i>
+                        해당 조건에 맞는 결과가 없습니다.
+                    </div>
+                )}
 
                 {/* 전체가 8개 초과일 때만 버튼 표시 */}
                 {canToggle && (

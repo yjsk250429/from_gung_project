@@ -7,6 +7,34 @@
     @include overlay;
 .modal{
     @include modalLayout;
+    &.logoutComplete{
+        @include confirm;
+        background-image: url('/images/components/bg_flower.png');
+        background-size: 80%;
+        background-position: 210% 230%;
+    }
+    &.loginComplete{
+        @include complete;
+        background-image: url('/images/components/bg_flower.png');
+        background-size: 80%;
+        background-position: 220% 350%;
+        h3{
+            margin-bottom: vw(20);
+        }
+        em{
+            @include font-16px;
+            img{
+                margin-left: vw(4);
+            }
+        }
+        .btns{
+            display: flex;
+            justify-content: center;
+            gap: vw(8);
+            margin-top: vw(20);
+
+        }
+    }
     &.stampNotice{
         @include stampPopup;
         background-image: url('/images/components/frame.png');
@@ -72,9 +100,10 @@
     }
     &.login{
         @include login-agree;
+        position: relative;
         h3{
             text-align: center;
-            margin-bottom: vw(30);
+            margin-bottom: vw(20);
         }
         label{
             @include font-16px;
@@ -83,10 +112,18 @@
                 display: block;
                 @include inputStyle;
                 margin: auto;
-                
+                &.error-input {
+                    border: 1px solid $sub3 !important;
+                    animation: shake 0.3s ease;
+                  }
+               
             }
             input[type="text"]{
-                margin-bottom: vw(16);
+                margin-bottom: vw(4);
+            }
+            .error{
+                color: $sub3;
+                @include font-14px;
             }
             
         }
@@ -113,7 +150,7 @@
             gap: vw(8);
         }
         .bottom{
-            margin-top: vw(40);
+            margin-top: vw(50);
             display: flex;
             justify-content: space-between;
             li{
@@ -133,6 +170,14 @@
         }
        
     }
+    @keyframes shake {
+        0%   { transform: translateX(0); }
+        20%  { transform: translateX(-4px); }
+        40%  { transform: translateX(4px); }
+        60%  { transform: translateX(-4px); }
+        80%  { transform: translateX(4px); }
+        100% { transform: translateX(0); }
+      }
     &.joinAgree{
         background-image: url('/images/components/bg_tree.png');
         background-position: 100% 10%;

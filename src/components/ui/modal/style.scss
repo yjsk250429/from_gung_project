@@ -44,6 +44,7 @@
     &.editInfo{
         background-image: url('/images/components/bg_flower.png');
         @include infoInputs;
+        
     }
     &.joinComplete{
         background-image: url('/images/components/bg_flower.png');

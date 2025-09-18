@@ -58,6 +58,7 @@ export const useAuthStore = create((set, get) => ({
         set({ authed: false, user: null });
         localStorage.setItem('authed', JSON.stringify(false));
         localStorage.setItem('user', JSON.stringify(null));
+    }
     },
 
     // 회원가입
@@ -72,7 +73,6 @@ export const useAuthStore = create((set, get) => ({
 
 export const useModalStore = create((set) => ({
     loginOpen: false,
-
     loginComOpen:false,
     logoutComOpen: false,
     joinOpen:false,

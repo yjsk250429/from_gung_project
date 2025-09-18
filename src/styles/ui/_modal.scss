@@ -31,6 +31,9 @@
     width: vw(636);
     height: vw(806);
     padding:vw(45) vw(50) vw(60) vw(50);
+    h3{
+        @include font-30px-M;
+    }
 }
 
 @mixin login-agree{

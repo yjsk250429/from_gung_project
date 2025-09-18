@@ -1,5 +1,5 @@
 import './style.scss';
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -8,38 +8,64 @@ gsap.registerPlugin(ScrollTrigger);
 const BrandGuide = () => {
     const guideRef = useRef(null);
 
+    /**
+     * A) 기존: IntersectionObserver로 섹션/배경 이미지 활성화 토글 (원래 애니메이션 유지)
+     */
+    useEffect(() => {
+        const el = guideRef.current;
+        if (!el) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                const road = el.querySelector('.bg-road');
+                if (entry.isIntersecting) {
+                    el.classList.add('active');
+                    road?.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                    road?.classList.remove('active');
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        observer.observe(el);
+        return () => observer.unobserve(el);
+    }, []);
+
+    /**
+     * B) 추가: GSAP ScrollTrigger로 pin + 스텝 진행(1→5), snap
+     *  - 기존 클래스/스타일은 건드리지 않고 stepBox의 activeBox만 컨트롤
+     */
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
             const el = guideRef.current;
-            const q = gsap.utils.selector(el);
+            if (!el) return;
 
+            const q = gsap.utils.selector(el);
             const boxes = gsap.utils.toArray(q('.guideStepWrap .stepBox'));
             if (!boxes.length) return;
 
+            // 초기 상태 세팅 (첫 번째 강조, 나머지 살짝 축소/투명)
             const setActive = (i) => {
                 boxes.forEach((b, idx) => b.classList.toggle('activeBox', idx === i));
                 gsap.to(boxes, { opacity: 0.35, scale: 0.96, duration: 0.25, overwrite: 'auto' });
                 gsap.to(boxes[i], { opacity: 1, scale: 1, duration: 0.35, overwrite: 'auto' });
             };
-            const road = q('.bg-road')[0];
-            const setRoad = (on) => road && road.classList.toggle('active', on);
-
             gsap.set(boxes, { opacity: 0.35, scale: 0.96 });
             setActive(0);
-            setRoad(true);
 
-            // 핀 고정 + 스텝 진행
             let lastIndex = -1;
+
             ScrollTrigger.create({
                 trigger: el,
                 start: 'top top',
-                end: () => '+=' + window.innerHeight * (boxes.length - 1), // 스텝당 한 화면
-                scrub: 0.5,
+                end: () => '+=' + window.innerHeight * (boxes.length - 1), // 스텝당 한 화면 길이
+                scrub: 0.6, // 살짝 부드럽게
                 pin: true,
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
-                    // 진행도 → 인덱스 (0 ~ steps-1)
                     const idx = Math.min(
                         boxes.length - 1,
                         Math.floor(self.progress * boxes.length)
@@ -49,14 +75,17 @@ const BrandGuide = () => {
                         lastIndex = idx;
                     }
                 },
-                // 드래그/휠을 놓으면 각 스텝 지점에 착— 스냅
+                // 놓으면 각 스텝 경계로 스냅
                 snap: {
-                    snapTo: (value) => Math.round(value * (boxes.length - 1)) / (boxes.length - 1),
-                    duration: { min: 0.1, max: 0.4 },
+                    snapTo: (v) => Math.round(v * (boxes.length - 1)) / (boxes.length - 1),
+                    duration: { min: 0.25, max: 0.5 },
                     ease: 'power1.out',
                 },
-                onLeave: () => setRoad(false),
-                onEnterBack: () => setRoad(true),
+                // (선택) IO에서 하던 배경 on/off를 스크롤 경계에서도 보정하고 싶을 때:
+                onEnter: () => el.querySelector('.bg-road')?.classList.add('active'),
+                onLeaveBack: () => el.querySelector('.bg-road')?.classList.add('active'),
+                onLeave: () => el.querySelector('.bg-road')?.classList.remove('active'),
+                onEnterBack: () => el.querySelector('.bg-road')?.classList.add('active'),
             });
         }, guideRef);
 

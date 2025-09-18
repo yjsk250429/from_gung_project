@@ -101,9 +101,9 @@ const BestTour = () => {
                             <img src={item.img} alt={item.label} draggable={false} />
                             <div className="overlay">
                                 <img src="/images/con1_hover.png" alt="" className="overlay-icon" />
-                                + <span className="label">{item.label}</span>+{' '}
+                                <span className="label">{item.label}</span>{' '}
                             </div>
-                            +{' '}
+                            {' '}
                         </Link>
                     </div>
                 ))}

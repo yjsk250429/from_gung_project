@@ -15,7 +15,7 @@ const TourClassDatail = () => {
     const { tourclassID } = useParams();
     const tourClass = useTourClassStore((state) => state.tourClass);
     const thisitem = tourClass.find((t) => String(t.id) === tourclassID);
-    const { category, title, theme = [], period, price, time, region, place = [] } = thisitem;
+    const { img, category, title, theme = [], period, price, time, region, place = [] } = thisitem;
     const items = ['투어 일정', '예약하기', '리뷰'];
     const [activeTab, setActiveTab] = useState(0);
 
@@ -25,13 +25,13 @@ const TourClassDatail = () => {
     if (!thisitem) {
         return <p>존재하지 않는 투어/클래스입니다.</p>;
     }
-    
+
     return (
         <section className="tourclassDetail">
             <div className="inner">
                 <article className="left">
                     <div className="img-wrap">
-                        <img src="/images/con1_default.png" alt={title} />
+                        <img src={img} alt={title} />
                     </div>
                 </article>
                 <article className="right">

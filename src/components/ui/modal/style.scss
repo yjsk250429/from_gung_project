@@ -43,21 +43,64 @@
     }
     &.editInfo{
         background-image: url('/images/components/bg_flower.png');
+        background-position: -35% -23%;
         @include infoInputs;
         background-color: $main1;
         color: $white;
         h3{
             margin-bottom: vw(50);
-            position: relative;
-       
+        }
+        dl{
+            display: flex;
+            justify-content: center;
+            gap: vw(24);
+            margin-left: vw(-180);
+            margin-bottom: vw(30);
+            dt,dd{
+                @include font-16px;
+            }
         }
         form{
             label{
                 text-align:right;
-                margin-right: vw(120);
+                margin-right: vw(100);
                 display: block;
                 @include font-16px;
-                margin-bottom: vw(36);
+                margin-bottom: vw(40);
+                &:last-of-type{
+                    text-align:left;
+                    margin-left: vw(140);
+                    input[type="checkbox"]{
+                        margin-right: vw(8);
+                    }
+                    span{
+                        color: $sub3;
+                    }
+                    p{
+                        @include font-14px;
+                        padding-left: vw(26);
+                    }
+                }
+                &:nth-child(4){
+                    margin-bottom: vw(60);
+                    select{
+                        width: vw(70);
+                        border: 1px solid #b1b1b1;
+                        border-radius: vw(4);
+                        height: vw(35);
+                        padding-left: vw(10);
+                        @include font-15px;
+                        margin-left: vw(24);
+                        margin-right: vw(8);
+                    }
+                    input[type="text"]{
+                        width: vw(70);
+                        margin-left: vw(8);
+                        &:not(:last-child){
+                            margin-right: vw(8);
+                        }
+                    }
+                }
                 input[type="text"],
             input[type="password"]{
                 @include inputStyle;
@@ -65,7 +108,7 @@
                 }
             }
             .btns{
-                // margin-top: vw(97);
+                margin-top: vw(50);
                 display: flex;
                 justify-content: center;
                 gap: vw(8);

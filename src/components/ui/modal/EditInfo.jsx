@@ -9,18 +9,18 @@ const EditInfo = () => {
         <div className="modal-overlay">
         <div className="modal editInfo">
             <h3>회원정보 수정</h3>
-            <ul className='id'>
-                <li>아이디</li>
-                <li>abc1234</li>
-            </ul>
-            <ul className='name'>
-                <li>이름</li>
-                <li>홍길동</li>
-            </ul>
-            <ul className='birthday'>
-                <li>생년월일</li>
-                <li>1999.01.01</li>
-            </ul>
+           <dl>
+            <dt>아이디</dt>
+            <dd>abc1234</dd>
+            </dl>
+            <dl>
+            <dt>이름</dt>
+            <dd>홍길동</dd>
+            </dl>
+            <dl>
+            <dt>생년월일</dt>
+            <dd>1999.01.01</dd>
+           </dl>
 
             <form>
             <label htmlFor="">
@@ -37,11 +37,17 @@ const EditInfo = () => {
             </label>
             <label htmlFor="">
                 연락처
+                <select name="first" id="">
+                        <option value="010">010</option>
+                        <option value="">011</option>
+                        <option value="">012</option>
+                    </select>-
+                <input type="text" />-
                 <input type="text" />
             </label>
             <label htmlFor="">
                 <input type="checkbox" />
-                <span>(선택)</span> 이벤트·혜택 정보 수신 동의
+                <span>(선택)</span> 이벤트 · 혜택 정보 수신 동의
                 <p>수신거부 2025.09.04 17:32</p>
             </label>
 

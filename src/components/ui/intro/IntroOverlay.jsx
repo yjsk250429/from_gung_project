@@ -5,7 +5,12 @@ import './style.scss';
 const IntroOverlay = ({ onFinish }) => {
     const rootRef = useRef(null);
 
+    // 오직 '/'에서만 렌더/실행
+    const isRoot = typeof window !== 'undefined' && window.location.pathname === '/';
+
     useEffect(() => {
+        if (!isRoot) return; // 홈이 아니면 아예 실행 X
+
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
 
@@ -13,20 +18,25 @@ const IntroOverlay = ({ onFinish }) => {
                 .set('.door-right', { rotateY: 0, transformOrigin: 'right center' })
                 .to('.door-left', { rotateY: -100, duration: 1.6 }, 0.2)
                 .to('.door-right', { rotateY: 100, duration: 1.6 }, 0.2)
-                .to(rootRef.current, { opacity: 0, duration: 0.5, ease: 'power1.out', delay: 1.3 })
+                .to(rootRef.current, {
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: 'power1.out',
+                    delay: 1.3,
+                })
                 .add(() => {
-                    // 비디오 쓰면 GPU 점유 끊기
                     const vid = rootRef.current?.querySelector('video');
                     try {
                         vid?.pause();
                     } catch (e) {}
-                    // ✅ 오버레이만 내리고 App이 2-RAF 뒤 'intro:done'을 보냄
                     onFinish?.();
                 });
         }, rootRef);
 
         return () => ctx.revert();
-    }, [onFinish]);
+    }, [isRoot, onFinish]);
+
+    if (!isRoot) return null; // 홈이 아니면 컴포넌트 자체를 렌더하지 않음
 
     return (
         <div className="intro-overlay" ref={rootRef}>

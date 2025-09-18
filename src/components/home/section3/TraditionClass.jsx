@@ -171,7 +171,7 @@ export default function TraditionClass() {
                     { y: 2000, display: 'none' },
                     {
                         y: 0,
-                        duration: 0.4,
+                        duration: 0.5,
                         ease: 'power3.out',
                         display: 'block',
                         pointerEvents: 'auto',
@@ -179,8 +179,8 @@ export default function TraditionClass() {
                 );
             } else {
                 gsap.to(card, {
-                    y: -2500,
-                    duration: 0.3,
+                    y: -2100,
+                    duration: 0.4,
                     ease: 'power2.in',
                     pointerEvents: 'none',
                     onComplete: () => gsap.set(card, { display: 'none' }),

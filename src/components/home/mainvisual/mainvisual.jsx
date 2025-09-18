@@ -50,7 +50,7 @@ const Mainvisual = () => {
                     trigger: containerRef.current,
                     start: 'top 100%',
                     end: 'bottom top',
-                    toggleActions: 'restart reset restart reset',
+                    toggleActions: 'play pause resume pause',
                     invalidateOnRefresh: true,
                 },
             });
@@ -113,12 +113,33 @@ const Mainvisual = () => {
                     trigger: containerRef.current,
                     start: 'top 100%',
                     end: 'bottom top',
-                    toggleActions: 'restart reset restart reset',
+                    toggleActions: 'play none none none',
                     invalidateOnRefresh: true,
                     onLeaveBack: () => {
                         floatLine.pause(0);
                         floatImage.pause(0);
                     },
+                },
+            });
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: 'top 100%',
+                end: 'bottom top',
+                onEnter: () => {
+                    floatLine.play();
+                    floatImage.play();
+                },
+                onEnterBack: () => {
+                    floatLine.play();
+                    floatImage.play();
+                },
+                onLeave: () => {
+                    floatLine.pause(0);
+                    floatImage.pause(0);
+                },
+                onLeaveBack: () => {
+                    floatLine.pause(0);
+                    floatImage.pause(0);
                 },
             });
 

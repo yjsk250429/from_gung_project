@@ -88,7 +88,7 @@
                         border: 1px solid #b1b1b1;
                         border-radius: vw(4);
                         height: vw(35);
-                        padding-left: vw(10);
+                        padding-left: vw(4);
                         @include font-15px;
                         margin-left: vw(24);
                         margin-right: vw(8);
@@ -146,13 +146,49 @@
             }
         }
         form{
-       
             label{
                 text-align:right;
                 margin-right: vw(120);
                 display: block;
                 @include font-16px;
                 margin-bottom: vw(36);
+                &:nth-child(6){
+                    select{
+                        width: vw(70);
+                        border: 1px solid #b1b1b1;
+                        border-radius: vw(4);
+                        height: vw(35);
+                        padding-left: vw(4);
+                        @include font-15px;
+                        margin-left: vw(24);
+                        margin-right: vw(8);
+                    }
+                    input[type="text"]{
+                        width: vw(70);
+                        margin-left: vw(8);
+                        &:not(:last-child){
+                            margin-right: vw(8);
+                        }
+                    }
+                }
+                &:nth-child(7){
+                    margin-right: vw(118);
+                    select{
+                        width: vw(55);
+                        border: 1px solid #b1b1b1;
+                        border-radius: vw(4);
+                        height: vw(35);
+                        padding-left: vw(4);
+                        @include font-15px;
+                        margin-right: vw(4);
+                        margin-left: vw(12);
+                        &:first-child{
+                            width: vw(70);
+                            margin-left: vw(24);
+                        }
+                    }
+                }
+               
                 input[type="text"],
             input[type="password"]{
                 @include inputStyle;

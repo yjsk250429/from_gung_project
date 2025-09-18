@@ -7,18 +7,28 @@ import Tab from '../../components/ui/tab/Tab';
 import './style.scss';
 import { IoIosList } from 'react-icons/io';
 import { BiSortAlt2 } from 'react-icons/bi';
-import { FaCheck } from "react-icons/fa6";
+import { FaCheck } from 'react-icons/fa6';
 
 const INITIAL_COUNT = 8;
 const STEP = 8;
 
 const TourClass = () => {
-    const tabItems = ['전체', '서울', '인천/경기', '기타'];
-    const themeTaps = [ '전체', '역사', '예술', '라이프', '힐링', '융합'];
-    const dayTaps = [ '전체', '하루', '1박 2일', '2박 3일'];
+    const category = useTourClassStore((s) => s.category);
+
+    const tabItems = useMemo(() => {
+        if (category === 'tour') {
+            return ['전체', '서울', '인천/경기', '기타'];
+        } else if (category === 'class') {
+            return ['전체', '만들기', '요리하기', '체험하기'];
+        } else {
+            return ['전체'];
+        }
+    }, [category]);
+
+    const themeTaps = ['전체', '역사', '예술', '라이프', '힐링', '융합'];
+    const dayTaps = ['전체', '하루', '1박 2일', '2박 3일'];
     const sortTaps = ['최신순', '인기순', '추천순', '리뷰순'];
     const setRegionCategory = useTourClassStore((s) => s.setRegionCategory);
-    const category = useTourClassStore((s) => s.category);
     const regionCategory = useTourClassStore((s) => s.regionCategory);
     const tourClass = useTourClassStore((s) => s.tourClass);
 
@@ -31,50 +41,63 @@ const TourClass = () => {
     const filterRef = useRef(null);
     const sortRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (filterRef.current && !filterRef.current.contains(e.target)) {
-        setFilterOpen(false);
-      }
-    };
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (filterRef.current && !filterRef.current.contains(e.target)) {
+                setFilterOpen(false);
+            }
+        };
 
-    if (filterOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
+        if (filterOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [filterOpen]);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [filterOpen]);
 
-  
     const filteredList = useMemo(() => {
-        // 1차: 투어/클래스
+        // 1차: 투어/클래스 카테고리 필터
         let filtered = tourClass.filter((item) => item.category === category);
-    
-        // 2차: 지역
-        if (regionCategory === '전체') return filtered;
-        if (regionCategory === '서울') {
-          return filtered.filter((item) => item.region.includes('서울'));
-        }
-        if (regionCategory === '인천/경기') {
-          return filtered.filter(
-            (item) => item.region.includes('인천') || item.region.includes('경기')
-          );
-        }
-        if (regionCategory === '기타') {
-          return filtered.filter(
-            (item) =>
-              !item.region.includes('서울') &&
-              !item.region.includes('인천') &&
-              !item.region.includes('경기')
-          );
-        }
-        return filtered;
-      }, [tourClass, category, regionCategory]);
 
+        // 2차: category에 따라 필터 다르게 적용
+        if (category === 'tour') {
+            if (regionCategory === '전체') return filtered;
+            if (regionCategory === '서울') {
+                return filtered.filter((item) => item.region.includes('서울'));
+            }
+            if (regionCategory === '인천/경기') {
+                return filtered.filter(
+                    (item) => item.region.includes('인천') || item.region.includes('경기')
+                );
+            }
+            if (regionCategory === '기타') {
+                return filtered.filter(
+                    (item) =>
+                        !item.region.includes('서울') &&
+                        !item.region.includes('인천') &&
+                        !item.region.includes('경기')
+                );
+            }
+        } else if (category === 'class') {
+            // 클래스 카테고리일 때
+            if (regionCategory === '전체') return filtered;
+            if (regionCategory === '만들기') {
+                return filtered.filter((item) => item.theme.includes('만들기'));
+            }
+            if (regionCategory === '요리하기') {
+                return filtered.filter((item) => item.theme.includes('요리하기'));
+            }
+            if (regionCategory === '체험하기') {
+                return filtered.filter((item) => item.theme.includes('체험하기'));
+            }
+        }
+
+        return filtered;
+    }, [tourClass, category, regionCategory]);
 
     const totalInCategory = filteredList.length;
     const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
@@ -83,8 +106,8 @@ const TourClass = () => {
         setVisibleCount(INITIAL_COUNT);
     }, [category, filteredList]);
 
-    const atEnd = visibleCount >= totalInCategory; 
-    const canToggle = totalInCategory > INITIAL_COUNT; 
+    const atEnd = visibleCount >= totalInCategory;
+    const canToggle = totalInCategory > INITIAL_COUNT;
 
     const handleMoreOrFold = () => {
         if (atEnd) {
@@ -99,45 +122,62 @@ const TourClass = () => {
             <div className="bg"></div>
             <div className="inner">
                 <TourClassTop />
-                <Tab items={tabItems} onClick={(index) => setRegionCategory(tabItems[index])}/>
+                <Tab items={tabItems} onClick={(index) => setRegionCategory(tabItems[index])} />
                 <ul className="sort">
-                    <li ref={filterRef}>
-                        <span onClick={()=>setFilterOpen((prev)=>!prev)}><i>
-                            <IoIosList />
-                        </i>필터</span>
-                        <ul className={ filterOpen ? 'filterBox on' : 'filterBox'}>
-                            <li><span>테마별</span>
-                                <ul className='themeTaps'>
-                                    {
-                                        themeTaps.map((t, index)=>
-                                            <li className={selected1=== index ? 'on' : ''} onClick={()=>setSeleted1(index)}>{t}</li>
-                                        )
-                                    }
-                                </ul>
-                            </li>
-                            <li><span>일정별</span>
-                            <ul className='dayTaps'>
-                                    {
-                                        dayTaps.map((t, index)=>
-                                            <li className={selected2=== index ? 'on' : ''} onClick={()=>setSeleted2(index)}>{t}</li>
-                                        )
-                                    }
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                    {category === 'tour' && (
+                        <li ref={filterRef}>
+                            <span onClick={() => setFilterOpen((prev) => !prev)}>
+                                <i>
+                                    <IoIosList />
+                                </i>
+                                필터
+                            </span>
+                            <ul className={filterOpen ? 'filterBox on' : 'filterBox'}>
+                                <li>
+                                    <span>테마별</span>
+                                    <ul className="themeTaps">
+                                        {themeTaps.map((t, index) => (
+                                            <li
+                                                key={t}
+                                                className={selected1 === index ? 'on' : ''}
+                                                onClick={() => setSeleted1(index)}
+                                            >
+                                                {t}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span>일정별</span>
+                                    <ul className="dayTaps">
+                                        {dayTaps.map((t, index) => (
+                                            <li
+                                                key={t}
+                                                className={selected2 === index ? 'on' : ''}
+                                                onClick={() => setSeleted2(index)}
+                                            >
+                                                {t}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    )}
                     <li>
-                        <span onClick={()=>setSortOpen((prev)=>!prev)}><i>
-                            <BiSortAlt2 />
-                        </i>최신순</span>
-                        <ul className={ sortOpen ? "sortBox on" : "sortBox"}>
-                            {
-                                sortTaps.map((t, index)=>
-                                    <li onClick={()=>setSeleted3(index)}><i>{
-                                        selected3 === index && <FaCheck />
-                                    }</i><span>{t}</span></li>
-                                )
-                            }
+                        <span onClick={() => setSortOpen((prev) => !prev)}>
+                            <i>
+                                <BiSortAlt2 />
+                            </i>
+                            최신순
+                        </span>
+                        <ul className={sortOpen ? 'sortBox on' : 'sortBox'}>
+                            {sortTaps.map((t, index) => (
+                                <li key={t} onClick={() => setSeleted3(index)}>
+                                    <i>{selected3 === index && <FaCheck />}</i>
+                                    <span>{t}</span>
+                                </li>
+                            ))}
                         </ul>
                     </li>
                 </ul>

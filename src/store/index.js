@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { tourclassData } from '../api/tourclassData';
 import { getMovies, getMovieDetails, getMovieCredits, searchMovie } from '../api/tmdbApi';
 import { loadAll } from '../tmdb/loadAll';
-import { attachStablePoints  } from '../utils/points';
+import { attachStablePoints } from '../utils/points';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 const memberData = [
@@ -26,28 +26,26 @@ const memberData = [
       reward:0,
       coupon:0,
     },
-  ];
-  
-  // 초기값 로드
-  const initialMembers = localStorage.getItem('members')
+];
+
+// 초기값 로드
+const initialMembers = localStorage.getItem('members')
     ? JSON.parse(localStorage.getItem('members'))
     : memberData;
-  
-  const initialAuthed = localStorage.getItem('authed')
+
+const initialAuthed = localStorage.getItem('authed')
     ? JSON.parse(localStorage.getItem('authed'))
     : false;
-  
-  const initialUser = localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
-    : null;
-  
-  let no = initialMembers.length + 1;
-  
-  export const useAuthStore = create((set, get) => ({
+
+const initialUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+let no = initialMembers.length + 1;
+
+export const useAuthStore = create((set, get) => ({
     members: initialMembers,
     authed: initialAuthed,
     user: initialUser,
-  
+
     // 로그인
     login: ({ userId, password }) => {
       const { members } = get();
@@ -60,25 +58,18 @@ const memberData = [
         set({ authed: false, user: null });
         localStorage.setItem('authed', JSON.stringify(false));
         localStorage.setItem('user', JSON.stringify(null));
-      }
+    }
     },
-  
-    // 로그아웃
-    logout: () => {
-      set({ authed: false, user: null });
-      localStorage.setItem('authed', JSON.stringify(false));
-      localStorage.setItem('user', JSON.stringify(null));
-    },
-  
+
     // 회원가입
     signup: (user) => {
-      const { members } = get();
-      const newUser = { ...user, id: no++ };
-      const updatedMembers = [...members, newUser];
-      set({ members: updatedMembers });
-      localStorage.setItem('members', JSON.stringify(updatedMembers));
+        const { members } = get();
+        const newUser = { ...user, id: no++ };
+        const updatedMembers = [...members, newUser];
+        set({ members: updatedMembers });
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
     },
-  }));
+}));
 
 export const useModalStore = create((set) => ({
     loginOpen: false,
@@ -89,7 +80,11 @@ export const useModalStore = create((set) => ({
     joinComOpen:false,
     rewardOpen:false,
     stampNoticeOpen:false,
+    editInfoOpen:false,
 
+    openEditInfo: () => set({ editInfoOpen: true }),
+    closeEditInfo: () => set({ editInfoOpen: false }),
+    
     openLoginCom: () => set({ loginComOpen: true }),
     closeLoginCom: () => set({ loginComOpen: false }),
     
@@ -98,16 +93,16 @@ export const useModalStore = create((set) => ({
 
     openJoinCom: () => set({ joinComOpen: true }),
     closeJoinCom: () => set({ joinComOpen: false }),
-    
+
     openJoinInfo: () => set({ joinInfoOpen: true }),
     closeJoinInfo: () => set({ joinInfoOpen: false }),
-    
+
     openStampNotice: () => set({ stampNoticeOpen: true }),
     closeStampNotice: () => set({ stampNoticeOpen: false }),
-    
+
     openReward: () => set({ rewardOpen: true }),
     closeReward: () => set({ rewardOpen: false }),
-    
+
     openLogin: () => set({ loginOpen: true }),
     closeLogin: () => set({ loginOpen: false }),
 
@@ -126,12 +121,8 @@ export const useTourClassStore = create((set, get) => ({
     category: 'tour',
     regionCategory: '전체',
 
-    setCategory: (category) =>
-        set(() => ({
-            category,
-        })),
+    setCategory: (category) => set({ category }),
     setRegionCategory: (regionCategory) => set({ regionCategory }),
-
 }));
 
 // export const usexxStore = create((set, get) => ({

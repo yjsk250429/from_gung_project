@@ -4,17 +4,16 @@ import ReservationSection from './sections/ReservationSection.jsx';
 import WishlistSection from './sections/WishlistSection.jsx';
 import ReviewSection from './sections/ReviewSection.jsx';
 import InquirySection from './sections/InquirySection.jsx';
-import { useAuthStore } from '../../store/index.js';
+import { useAuthStore, useModalStore } from '../../store/index.js';
 
 const MyPagemain = () => {
     const [activeMenu, setActiveMenu] = useState('reservation');
+     const { openEditInfo } = useModalStore();
     const isWishlistOpen = activeMenu === 'wishlist';
     const user = useAuthStore((s) => s.user);
     return (
         <div className="MyPagemain_main">
             <div className="inner">
-
-           
             <aside className="mypage_sidebar">
                 <div className="profile">
                     <div className="profile_img">
@@ -23,7 +22,7 @@ const MyPagemain = () => {
                     <div className="profile_info">
                         <p className="nickname">{user?.nickName || "닉네임"}</p>
                         <p className="username">({user?.name || "이름"})</p>
-                        <button className="btn_edit" type="button">
+                        <button className="btn_edit" type="button" onClick={openEditInfo}>
                             <span>회원정보 수정</span>
                             <img src="/images/mypage/pen.png" alt="" />
                         </button>

@@ -1,22 +1,19 @@
-import { useState } from 'react';
 import './style.scss';
 
-const Tab = ({ items = [], onClick = () => {}}) => {
-    const [activeTab, setActiveTab] = useState(0);
-    const handleclick = (index) =>{
-        setActiveTab(index);
-        onClick(index);
-    };
-
-  return (
-    <ul className="tabs">
-      {items.map((text, index) => (
-        <li key={index} onClick={() => handleclick(index)} className={activeTab===index? 'on':''}>
-          {text}
-        </li>
-      ))}
-    </ul>
-  );
+const Tab = ({ items = [], activeIndex = 0, onClick = () => {} }) => {
+    return (
+        <ul className="tabs">
+            {items.map((text, index) => (
+                <li
+                    key={index}
+                    onClick={() => onClick(index)}
+                    className={activeIndex === index ? 'on' : ''}
+                >
+                    {text}
+                </li>
+            ))}
+        </ul>
+    );
 };
 
 export default Tab;

@@ -9,8 +9,7 @@ const JoinInfo = () => {
         <div className="modal-overlay">
         <div className="modal joinInfo">
             <h3>회원정보 입력 <span>* 필수항목</span></h3>
-            <form action="">
-
+            <form>
             <label htmlFor="">
                 이름*
                 <input type="text" />

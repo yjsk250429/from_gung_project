@@ -35,7 +35,7 @@ const TourClassDatail = () => {
                     </div>
                 </article>
                 <article className="right">
-                    <ul className="theme">
+                    {/* <ul className="theme">
                         {theme.map((tm, i) => (
                             <li
                                 key={i}
@@ -62,8 +62,8 @@ const TourClassDatail = () => {
                                 {tm}
                             </li>
                         ))}
-                    </ul>
-                    <div className="basic-info">
+                    </ul> */}
+                    {/* <div className="basic-info">
                         <h3>
                             {title}
                             <span className="rate">평점 ★★★★★</span>
@@ -97,11 +97,12 @@ const TourClassDatail = () => {
                                 <i>
                                     <BiCoin />
                                 </i>
-                                1인 {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원{' '}
+                                1인 {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
                                 <span>(리워드 {reward}p 지급)</span>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
+
                     <Tab items={items} onClick={setActiveTab} />
                     {activeTab === 0 && <Schedule thisitem={thisitem} />}
                     {activeTab === 1 && <SelectDate />}

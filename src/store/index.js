@@ -23,6 +23,8 @@ const memberData = [
         month: '01',
         date: '01',
       },
+      reward:0,
+      coupon:0,
     },
   ];
   

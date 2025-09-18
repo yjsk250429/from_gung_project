@@ -1,156 +1,152 @@
-import "./style.scss";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import './style.scss';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const BrandIntro = () => {
-  const containerRef = useRef(null);
-  const branchRef = useRef(null);
-  const storyRef = useRef(null);
-  const sloganRef = useRef(null);
+    const containerRef = useRef(null);
+    const branchRef = useRef(null);
+    const storyRef = useRef(null);
+    const sloganRef = useRef(null);
 
-  useEffect(() => {
-    if (branchRef.current) {
-      gsap.to(branchRef.current, {
-        rotation: 3,
-        transformOrigin: "100% 5%",
-        duration: 3,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    if (storyRef.current) {
-      const titles = storyRef.current.querySelectorAll(".title h4");
-      const paragraphs = storyRef.current.querySelectorAll(".sentence p");
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: storyRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reset",
-          //   markers: true,
-        },
-      });
-
-      tl.fromTo(
-        storyRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.4 }
-      );
-
-      tl.fromTo(
-        titles,
-        { x: -50, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power1.out",
-          stagger: 0.5,
+    useEffect(() => {
+        if (branchRef.current) {
+            gsap.to(branchRef.current, {
+                rotation: 3,
+                transformOrigin: '100% 5%',
+                duration: 3,
+                ease: 'sine.inOut',
+                yoyo: true,
+                repeat: -1,
+            });
         }
-      );
+    }, []);
 
-      tl.fromTo(
-        paragraphs,
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power1.out",
-          stagger: 0.2,
-        },
-        0.6
-      );
-    }
+    useEffect(() => {
+        if (storyRef.current) {
+            const titles = storyRef.current.querySelectorAll('.title h4');
+            const paragraphs = storyRef.current.querySelectorAll('.sentence p');
 
-    if (sloganRef.current) {
-      const [line1, line2] = sloganRef.current.querySelectorAll("h3");
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: storyRef.current,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reset',
+                    //   markers: true,
+                },
+            });
 
-      gsap.fromTo(
-        line1,
-        { x: -100, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sloganRef.current,
-            start: "top 60%",
-            toggleActions: "play none none reset",
-          },
+            tl.fromTo(storyRef.current, { opacity: 0 }, { opacity: 1, duration: 0.4 });
+
+            tl.fromTo(
+                titles,
+                { x: -50, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power1.out',
+                    stagger: 0.5,
+                }
+            );
+
+            tl.fromTo(
+                paragraphs,
+                { y: 20, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'power1.out',
+                    stagger: 0.2,
+                },
+                0.6
+            );
         }
-      );
 
-      gsap.fromTo(
-        line2,
-        { x: 100, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          delay: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sloganRef.current,
-            start: "top 60%",
-            toggleActions: "play none none reset",
-          },
+        if (sloganRef.current) {
+            const [line1, line2] = sloganRef.current.querySelectorAll('h3');
+
+            gsap.fromTo(
+                line1,
+                { x: -100, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: sloganRef.current,
+                        start: 'top 60%',
+                        toggleActions: 'play none none reset',
+                    },
+                }
+            );
+
+            gsap.fromTo(
+                line2,
+                { x: 100, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1,
+                    delay: 0.8,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: sloganRef.current,
+                        start: 'top 60%',
+                        toggleActions: 'play none none reset',
+                    },
+                }
+            );
         }
-      );
-    }
-  }, []);
+    }, []);
 
-  return (
-    <section className="brandIntro" ref={containerRef}>
-      <div className="con1-section brandLogo">
-        <div className="logoBox">
-          <img src="/images/logo_2.png" alt="" />
-          <h4>K-컬처 역사 여행 × OTT 콘텐츠 플랫폼</h4>
-        </div>
-      </div>
-      <div className="con1-section brandStory">
-        <article className="brandStoryWrap">
-          <div className="brandStory_left" ref={storyRef}>
-            <div className="title">
-              <h4>과거의 숨결과 오늘의 감각이 어우러진,</h4>
-              <h4>한국만의 특별한 경험을 찾고 계신가요?</h4>
+    return (
+        <section className="brandIntro" ref={containerRef}>
+            <div className="con1-section brandLogo">
+                <div className="logoBox">
+                    <img src="/images/logo_2.png" alt="" />
+                    <h4>K-컬처 역사 여행 × OTT 콘텐츠 플랫폼</h4>
+                </div>
             </div>
-            <div className="sentence">
-              <p>
-                궁궐, 박물관, 전통 공간 속에서 한국의 이야기를 따라가며 특별한
-                여정을 시작해 보세요.
-              </p>
-              <p>한복과 다도, 음악과 공예 같은 체험이 전통의 깊이를 느끼고,</p>
-              <p>
-                현장에서의 감동은 OTT 콘텐츠로 이어져 언제 어디서든 한국 문화와
-                다시 이어집니다.
-              </p>
-              <p>
-                ‘궁에서 온’은 전통과 현대를 아우르는 문화융합 콘텐츠로
-                사용자에게 특별한 경험을 제공합니다.
-              </p>
+            <div className="con1-section brandStory">
+                <article className="brandStoryWrap">
+                    <div className="brandStory_left" ref={storyRef}>
+                        <div className="title">
+                            <h4>과거의 숨결과 오늘의 감각이 어우러진,</h4>
+                            <h4>한국만의 특별한 경험을 찾고 계신가요?</h4>
+                        </div>
+                        <div className="sentence">
+                            <p>
+                                궁궐, 박물관, 전통 공간 속에서 한국의 이야기를 따라가며 특별한
+                                여정을 시작해 보세요.
+                            </p>
+                            <p>한복과 다도, 음악과 공예 같은 체험이 전통의 깊이를 느끼고,</p>
+                            <p>
+                                현장에서의 감동은 OTT 콘텐츠로 이어져 언제 어디서든 한국 문화와 다시
+                                이어집니다.
+                            </p>
+                            <p>
+                                ‘궁에서 온’은 전통과 현대를 아우르는 문화융합 콘텐츠로 사용자에게
+                                특별한 경험을 제공합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="brandStory_right">
+                        <img src="/images/brand/flower.png" alt="flower" ref={branchRef} />
+                    </div>
+                </article>
             </div>
-          </div>
-          <div className="brandStory_right">
-            <img src="/images/brand/flower.png" alt="flower" ref={branchRef} />
-          </div>
-        </article>
-      </div>
-      <div className="con1-section brandSlogan" ref={sloganRef}>
-        <h3>과거로의 시간 여행,</h3>
-        <h3>전통의 숨결을 따라 걷다.</h3>
-        <span className="gradation"></span>
-      </div>
-    </section>
-  );
+            <div className="con1-section brandSlogan" ref={sloganRef}>
+                <h3>과거로의 시간 여행,</h3>
+                <h3>전통의 숨결을 따라 걷다.</h3>
+                <span className="gradation"></span>
+            </div>
+        </section>
+    );
 };
 
 export default BrandIntro;

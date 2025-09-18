@@ -80,8 +80,11 @@ export const useModalStore = create((set) => ({
     joinComOpen:false,
     rewardOpen:false,
     stampNoticeOpen:false,
+    editInfoOpen:false,
 
-
+    openEditInfo: () => set({ editInfoOpen: true }),
+    closeEditInfo: () => set({ editInfoOpen: false }),
+    
     openLoginCom: () => set({ loginComOpen: true }),
     closeLoginCom: () => set({ loginComOpen: false }),
     

@@ -34,7 +34,7 @@
         align-items: flex-start;
         min-height: 100vh;
         .left {
-            position:sticky;
+            position: sticky;
             top: vw(150);
             .img-wrap {
                 width: vw(598);
@@ -49,14 +49,15 @@
                 &::before {
                     content: '';
                     background-image: url('/images/tourclass/tourclassDetail_line.png');
-                    background-size: auto;
+                    background-size: cover;
                     background-position: center;
                     background-repeat: no-repeat;
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: vw(564);
+                    height: vw(664);
                     pointer-events: none;
                     z-index: 1;
                     opacity: 0.3;
@@ -64,14 +65,15 @@
                 &::after {
                     content: '';
                     background-image: url('/images/tourclass/tourclassDetail_line.png');
-                    background-size: auto;
+                    background-size: cover;
                     background-position: center;
                     background-repeat: no-repeat;
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: vw(564);
+                    height: vw(664);
                     mix-blend-mode: overlay;
                     pointer-events: none;
                     z-index: 2;
@@ -88,7 +90,6 @@
                     color: $white;
                     padding: vw(6) vw(15);
                     border-radius: vw(100);
-
                     @include font-16px-SB;
                     text-align: center;
                     line-height: vw(16);
@@ -154,24 +155,23 @@
                     }
                 }
             }
-            .group{
+            .group {
                 position: sticky;
                 height: vw(700);
-                top: vw(130);
+                top: vw(150);
                 z-index: 10;
                 .tabs {
                     li {
-                    color: $sub2;
-                    border-color: $sub2;
-                    font-weight: 600;
-                    &.on {
-                        color: $sub3;
-                        border-color: $sub3;
+                        color: $sub2;
+                        border-color: $sub2;
+                        font-weight: 600;
+                        &.on {
+                            color: $sub3;
+                            border-color: $sub3;
+                        }
                     }
                 }
             }
-            
-        }
         }
     }
 }

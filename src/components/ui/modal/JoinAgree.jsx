@@ -6,16 +6,24 @@ import "./style.scss";
 const JoinAgree = () => {
   const { joinOpen, closeJoin, switchToJoinInfo } = useModalStore();
 
-  const [agreements, setAgreements] = useState({
+  const initialAgreements = {
     all: false,
-    age: false, // (필수) 만 14세 이상
-    terms: false, // (필수) 서비스 이용약관
-    ott: false, // (필수) OTT 이용약관
-    privacy: false, // (필수) 개인정보
-    marketing: false, // (선택) 이벤트·혜택
-  });
+    age: false,
+    terms: false,
+    ott: false,
+    privacy: false,
+    marketing: false,
+  };
+
+  const [agreements, setAgreements] = useState(initialAgreements);
+  const [errorMessage, setErrorMessage] = useState("");
 
   if (!joinOpen) return null;
+
+  const resetForm = () => {
+    setAgreements(initialAgreements);
+    setErrorMessage("");
+  };
 
   const handleChange = (key) => {
     const updated = { ...agreements, [key]: !agreements[key] };
@@ -25,31 +33,50 @@ const JoinAgree = () => {
     updated.all = age && terms && ott && privacy && marketing;
 
     setAgreements(updated);
+
+    // 필수 체크 다 되면 에러 메시지 제거
+    if (updated.age && updated.terms && updated.ott && updated.privacy) {
+      setErrorMessage("");
+    }
   };
 
-  // 전체동의 핸들러
   const handleAllChange = () => {
     const newValue = !agreements.all;
-    setAgreements({
+    const updated = {
       all: newValue,
       age: newValue,
       terms: newValue,
       ott: newValue,
       privacy: newValue,
       marketing: newValue,
-    });
+    };
+    setAgreements(updated);
+
+    // 전체동의 시 에러 메시지 제거
+    if (newValue) setErrorMessage("");
   };
 
-  // 필수 체크 여부 확인
   const isRequiredChecked =
     agreements.age && agreements.terms && agreements.ott && agreements.privacy;
 
-  // 다음으로 클릭 → 선택항목만 store에 저장
   const handleNext = () => {
-    if (!isRequiredChecked) return;
-    // 선택항목만 데이터에 반영 (마이페이지 수정 가능)
+    if (!isRequiredChecked) {
+      setErrorMessage("* 필수 항목에 동의해주세요.");
+      return;
+    }
+    setErrorMessage("");
+
+    // 선택항목만 store에 반영
     useAuthStore.getState().updateMarketing(agreements.marketing);
+
+    // 다음 단계로 이동 + 상태 초기화
     switchToJoinInfo();
+    resetForm();
+  };
+
+  const handleCancel = () => {
+    closeJoin();
+    resetForm(); // 모달 닫으면서 초기화
   };
 
   return (
@@ -106,13 +133,20 @@ const JoinAgree = () => {
             <span>(선택)</span> 이벤트 · 혜택 정보 수신 동의
           </label>
 
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
           <p className="btns">
-            <Button text="취소" className="small gray" onClick={closeJoin} />
+            <Button
+              text="취소"
+              className="small gray"
+              onClick={handleCancel}
+              type="button"
+            />
             <Button
               text="다음으로"
               className="small main1"
               onClick={handleNext}
-              disabled={!isRequiredChecked}
+              type="button"
             />
           </p>
         </form>

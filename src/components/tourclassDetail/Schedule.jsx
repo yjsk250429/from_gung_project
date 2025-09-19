@@ -2,6 +2,7 @@ import { FiDownload} from 'react-icons/fi';
 import { FaHeart } from "react-icons/fa";
 import './style.scss';
 
+
 const Schedule = ({thisitem}) => {
     const {id, title, theme=[], description, period, price, time, img, region, place=[]} = thisitem;
 

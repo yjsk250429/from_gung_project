@@ -34,5 +34,27 @@
         justify-content: end;
         align-items: center;
         margin-top: vw(70);
+        gap: vw(10);
+        button{
+            width: vw(160);
+            height: vw(48);
+            background: $main1;
+            border: none;
+            @include font-18px-SB;
+            font-family: $font-main;
+            color: $white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i{
+                display: block;
+                padding-top: vw(4);
+                margin-right: vw(8);
+            }
+            &:first-child{
+                color: $main1;
+                background: $sub1;
+            }
+        }
     }
 }

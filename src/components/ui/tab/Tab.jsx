@@ -1,6 +1,7 @@
 import './style.scss';
 
 const Tab = ({ items = [], activeIndex = 0, onClick = () => {} }) => {
+    
     return (
         <ul className="tabs">
             {items.map((text, index) => (

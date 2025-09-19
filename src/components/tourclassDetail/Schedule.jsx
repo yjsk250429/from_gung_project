@@ -1,4 +1,5 @@
-import { FiDownload, FiHeart } from 'react-icons/fi';
+import { FiDownload} from 'react-icons/fi';
+import { FaHeart } from "react-icons/fa";
 import './style.scss';
 
 const Schedule = ({thisitem}) => {
@@ -18,9 +19,9 @@ const Schedule = ({thisitem}) => {
                 </ul>
             </div>
             <p className="btns">
-                            <button><i><FiHeart /></i>투어 찜하기</button>
-                            <button><i><FiDownload /></i>쿠폰 받기</button>
-                        </p>
+                <button><i><FaHeart /></i>투어 찜하기</button>
+                <button><i><FiDownload /></i>쿠폰 받기</button>
+            </p>
         </div>
     );
 };

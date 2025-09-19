@@ -3,12 +3,11 @@
 
 .tourclassDetail {
     position: relative;
-
     &::before,
     &::after {
         content: '';
         display: block;
-        position: absolute;
+        position: fixed;
         background-repeat: no-repeat;
         background-position: 0 0;
         background-size: cover;
@@ -17,7 +16,7 @@
     }
     &::before {
         left: vw(40);
-        top: vw(110);
+        top: vw(100);
         background-image: url('/images/tourclass/bg_cloud.png');
     }
     &::after {
@@ -28,7 +27,7 @@
     }
 
     .inner {
-        padding: vw(200) 0;
+        padding: vw(150) 0;
         display: flex;
         justify-content: space-between;
         position: relative;
@@ -36,7 +35,7 @@
         min-height: 100vh;
         .left {
             position:sticky;
-            top: vw(100);
+            top: vw(150);
             .img-wrap {
                 width: vw(598);
                 height: vw(700);
@@ -81,7 +80,7 @@
         }
         .right {
             width: vw(924);
-            height: vw(1500);
+            height: vw(1200);
             .theme {
                 display: flex;
                 gap: vw(8);
@@ -157,7 +156,8 @@
             }
             .group{
                 position: sticky;
-                top: vw(100);
+                height: vw(700);
+                top: vw(130);
                 z-index: 10;
                 .tabs {
                     li {

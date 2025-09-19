@@ -6,10 +6,8 @@ import { MdOutlineCalendarMonth } from 'react-icons/md';
 import { LuClock3, LuMapPin } from 'react-icons/lu';
 import { IoMapOutline } from 'react-icons/io5';
 import { BiCoin } from 'react-icons/bi';
-import Schedule from '../../components/tourclassDetail/Schedule';
-import SelectDate from '../../components/booking/SelectDate';
-import Reviews from '../../components/tourclassDetail/Reviews';
 import { useState } from 'react';
+import { Reviews, Schedule, SelectDate } from '../../components/tourclassDetail';
 
 const TourClassDatail = () => {
     const { tourclassID } = useParams();

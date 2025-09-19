@@ -46,7 +46,7 @@ const IntroOverlay = ({ onFinish }) => {
             </div>
             <video
                 className="intro_video"
-                src="/images/intro2.mov"
+                src="/images/intro1.mp4"
                 autoPlay
                 muted
                 loop

@@ -1,0 +1,106 @@
+@use '../../styles/utils' as *;
+@use '../../styles/base' as *;
+@use '../../styles/ui' as *;
+@use '../../styles/ui/tourList' as *;
+
+.tour-search-page {
+    position: relative;
+    margin-bottom: vw(150);
+    .search-top {
+        width: 100%;
+        height: vw(380);
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        img {
+            top: 0;
+            position: absolute;
+            opacity: 15%;
+        }
+        .search-caption {
+            position: absolute;
+            top: vw(150);
+            @include font-30px-M;
+            font-family: $font-sub;
+            color: $black;
+            text-align: center;
+            strong {
+                font-family: $font-sub;
+                @include font-30px-B;
+                color: $black;
+            }
+        }
+    }
+
+    .search-section {
+        width: vw(1600);
+        margin: 0 auto;
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: vw(20);
+
+            .section-title {
+                @include font-35px-B;
+                color: #000;
+            }
+
+            .more-btn {
+                @include font-14px-B;
+                color: $black;
+                font-family: $font-main;
+                background: none;
+                border: none;
+                cursor: pointer;
+                transition: color 0.2s;
+                &:hover {
+                    color: $main1;
+                }
+            }
+        }
+
+        /* 리스트 중앙 정렬 */
+        .section-list {
+            display: flex;
+            justify-content: flex-start;
+        }
+        .TourClassList {
+            @include tourList;
+        }
+
+        /* 카드 하단 텍스트 + 하트 */
+        .TourClassList > li .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: vw(10);
+
+            strong {
+                @include font-16px-B;
+                color: #000;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 85%;
+            }
+
+            i {
+                font-size: vw(20);
+                color: #000;
+                cursor: pointer;
+            }
+        }
+
+        .empty.small {
+            margin: vw(16) 0 vw(40);
+            text-align: center;
+            p {
+                @include font-16px-B;
+                color: rgba($black, 0.8);
+            }
+        }
+    }
+}

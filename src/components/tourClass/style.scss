@@ -3,9 +3,9 @@
 @use '../../styles/ui' as *;
 @use '../../styles/ui/tourList' as *;
 
-.tourclass{
+.tourclass {
     position: relative;
-    .bg{
+    .bg {
         width: 100%;
         height: vw(523);
         position: absolute;
@@ -15,12 +15,12 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
-    .top{
-        .recommend{
+    .top {
+        .recommend {
             @include twoBoxes;
         }
     }
-    .TourClassList{
+    .TourClassList {
         margin-top: 50px;
         @include tourList;
     }

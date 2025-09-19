@@ -1,0 +1,129 @@
+@use '../../../styles/base' as *;
+@use '../../../styles/utils' as *;
+
+.schedule {
+    width: 100%;
+    height: vw(600);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url('/images/tourclass/detailScheduleBg.png');
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+
+    .description {
+        h3 {
+            @include font-22px-B;
+            font-weight: 700;
+        }
+        h4 {
+            @include font-16px;
+            font-weight: 400;
+            margin-top: vw(10);
+        }
+    }
+    .pics {
+        margin-top: vw(60);
+        position: relative;
+        height: vw(325);
+        width: vw(1076);
+        overflow: hidden;
+        .days {
+            position: absolute;
+            display: flex;
+            gap: vw(22);
+
+            .day {
+                strong {
+                    display: inline-block;
+                    margin-bottom: vw(10);
+                }
+                ul {
+                    display: flex;
+                    align-items: center;
+                    gap: vw(22);
+                    li {
+                        overflow: hidden;
+                        width: vw(232);
+                        height: vw(232);
+                        border-radius: vw(20);
+                        position: relative;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                        h5 {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            z-index: 2;
+                            color: $sub3;
+                            opacity: 0;
+                            transition: opacity 0.2s ease;
+                        }
+                        p {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            margin: 0;
+                            z-index: 1;
+                            display: inline-block;
+                            width: 100%;
+                            height: 100%;
+                            background-color: $black;
+                            opacity: 0;
+                            transition: opacity 0.2s ease;
+                        }
+                        &:hover {
+                            h5 {
+                                opacity: 1;
+                            }
+                            p {
+                                opacity: 0.8;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .btns {
+        display: flex;
+        justify-content: end;
+        align-content: end;
+        // margin-top: vw(60);
+        gap: vw(10);
+        button {
+            width: vw(160);
+            height: vw(48);
+            background: $main1;
+            border: none;
+            @include font-18px-SB;
+            font-family: $font-main;
+            color: $white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i {
+                display: block;
+                padding-top: vw(4);
+                margin-right: vw(8);
+            }
+            &:first-child {
+                color: $main1;
+                background: $sub1;
+            }
+            &:hover {
+                &:first-child {
+                    color: $sub3;
+                }
+                &:last-child {
+                    background: $sub3;
+                }
+            }
+        }
+    }
+}

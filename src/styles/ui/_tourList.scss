@@ -2,7 +2,6 @@
 @use '../utils' as *;
 
 @mixin tourList {
-    padding: 0 vw(20);
     flex-wrap: wrap;
     display: grid;
     grid-template-columns: repeat(4, 1fr);

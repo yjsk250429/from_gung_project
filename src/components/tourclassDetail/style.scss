@@ -3,12 +3,58 @@
 
 .schedule {
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
     strong {
         @include font-22px-B;
     }
     p {
         @include font-16px;
         margin-top: vw(10);
+    }
+    .pics{
+        margin-top: vw(90);
+        position: relative;
+        height: vw(240);
+        width: vw(924);
+        overflow: hidden;
+        ul{
+            display: flex;
+            gap: vw(60);
+            position: absolute;
+            li{
+                overflow: hidden;
+                width: vw(232);
+                height: vw(232);
+                border-radius: vw(20);
+            }
+        }
+    }
+    .btns{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-top: vw(70);
+        gap: vw(10);
+        button{
+            width: vw(160);
+            height: vw(48);
+            background: $main1;
+            border: none;
+            @include font-18px-SB;
+            font-family: $font-main;
+            color: $white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i{
+                display: block;
+                padding-top: vw(4);
+                margin-right: vw(8);
+            }
+            &:first-child{
+                color: $main1;
+                background: $sub1;
+            }
+        }
     }
 }

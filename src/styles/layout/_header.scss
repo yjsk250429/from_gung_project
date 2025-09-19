@@ -77,7 +77,7 @@ html.is-active {
             height: vw(30);
             position: relative;
             transition: 0.4s ease-out;
-            &.on{
+            &.on {
                 width: vw(240);
                 input[type='text'] {
                     width: vw(230);
@@ -99,6 +99,21 @@ html.is-active {
                     box-shadow: none;
                 }
             }
+            .search-btn {
+                position: absolute;
+                right: vw(8);
+                top: 50%;
+                transform: translateY(-50%);
+                width: vw(20);
+                height: vw(20);
+                background: none;
+                border: none;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
             i {
                 font-size: vw(16);
                 position: absolute;
@@ -112,7 +127,7 @@ html.is-active {
             display: flex;
             li {
                 color: #fff;
-                a{
+                a {
                     color: #fff;
                 }
             }
@@ -195,7 +210,7 @@ html.is-active {
             ul {
                 li {
                     color: #000;
-                    a{
+                    a {
                         color: #000;
                     }
                 }
@@ -284,7 +299,7 @@ html.is-active {
             ul {
                 li {
                     color: #000;
-                    a{
+                    a {
                         color: #000;
                     }
                 }

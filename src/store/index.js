@@ -109,21 +109,21 @@ const memberData = [
 
 export const useModalStore = create((set) => ({
     loginOpen: false,
-    loginComOpen:false,
+    loginComOpen: false,
     logoutComOpen: false,
-    joinOpen:false,
-    joinInfoOpen:false,
-    joinComOpen:false,
-    rewardOpen:false,
-    stampNoticeOpen:false,
-    editInfoOpen:false,
+    joinOpen: false,
+    joinInfoOpen: false,
+    joinComOpen: false,
+    rewardOpen: false,
+    stampNoticeOpen: false,
+    editInfoOpen: false,
 
     openEditInfo: () => set({ editInfoOpen: true }),
     closeEditInfo: () => set({ editInfoOpen: false }),
-    
+
     openLoginCom: () => set({ loginComOpen: true }),
     closeLoginCom: () => set({ loginComOpen: false }),
-    
+
     openLogoutCom: () => set({ logoutComOpen: true }),
     closeLogoutCom: () => set({ logoutComOpen: false }),
 

@@ -25,7 +25,6 @@ const OttSub = () => {
                         정렬
                     </li>
                 </ul>
-
                 <CuratedSageuk />
             </div>
         </section>

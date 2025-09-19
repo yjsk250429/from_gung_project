@@ -14,15 +14,27 @@ const reviews = [
     '한복 체험이 정말 특별했어요!',
     '여행이 조금 타이트했지만 알찬 여행이었어요.',
     '다도 체험으로 한국 문화를 더 깊게 이해할 수 있었어요.',
+    '경치가 너무 멋졌어요!',
+    '가이드가 친절하고 설명이 알기 쉬웠어요.',
+    '전통 음식 투어 덕분에 맛집을 알게 됐어요.',
+    '사진 찍기 좋은 포인트가 많아 인생샷 건졌어요.',
+    '도자기 만들기가 색다른 경험이었어요.',
+    '한복 체험이 정말 특별했어요!',
+    '여행이 조금 타이트했지만 알찬 여행이었어요.',
+    '다도 체험으로 한국 문화를 더 깊게 이해할 수 있었어요.',
 ];
 
 const stats = [
     { label: '600+', caption: 'Reservation' },
     { label: '500+', caption: 'review' },
     { label: '300+', caption: 'Rebook' },
+    { label: '600+', caption: 'Reservation' },
+    { label: '500+', caption: 'review' },
+    { label: '300+', caption: 'Rebook' },
+    { label: '600+', caption: 'Reservation' },
 ];
 
-const ctas = ['+', '→'];
+const ctas = ['+', '→', '→'];
 
 const ReviewBlocks = () => {
     const containerRef = useRef(null);
@@ -69,7 +81,7 @@ const ReviewBlocks = () => {
             engine = Engine.create();
 
             // ▼▼▼ 속도/강도 완화 설정 ▼▼▼
-            engine.world.gravity.y = 10; // 기본 1 → 더 약한 중력
+            engine.world.gravity.y = 20; // 기본 1 → 더 약한 중력
             engine.timing.timeScale = 0.77; // 전체 시뮬 느리게
             // ▲▲▲
 

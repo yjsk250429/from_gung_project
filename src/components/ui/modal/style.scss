@@ -3,376 +3,398 @@
 @use '../../../styles/ui/modal' as *;
 @use '../../../styles/ui/input' as *;
 
-.modal-overlay{
+.modal-overlay {
     @include overlay;
-.modal{
-    @include modalLayout;
-    position: relative;
-    &.logoutComplete{
-        @include confirm;
-        background-image: url('/images/components/bg_flower.png');
-        background-size: 80%;
-        background-position: 210% 230%;
-    }
-    &.loginComplete{
-        @include complete;
-        background-image: url('/images/components/bg_flower.png');
-        background-size: 80%;
-        background-position: 220% 350%;
-        h3{
-            margin-bottom: vw(20);
-        }
-        em{
-            @include font-16px;
-            img{
-                margin-left: vw(4);
-            }
-        }
-        .btns{
-            display: flex;
-            justify-content: center;
-            gap: vw(8);
-            margin-top: vw(20);
-
-        }
-    }
-    &.stampNotice{
-        @include stampPopup;
-        background-image: url('/images/components/frame.png');
-        background-repeat: no-repeat;
-        
-    }
-    &.editInfo{
-        background-image: url('/images/components/bg_flower.png');
-        background-position: -35% -23%;
-        @include infoInputs;
-        background-color: $main1;
-        color: $white;
-        h3{
-            margin-bottom: vw(50);
-        }
-        dl{
-            display: flex;
-            justify-content: center;
-            gap: vw(24);
-            margin-left: vw(-180);
-            margin-bottom: vw(30);
-            dt,dd{
-                @include font-16px;
-            }
-        }
-        form{
-            label{
-                text-align:right;
-                margin-right: vw(100);
-                display: block;
-                @include font-16px;
-                margin-bottom: vw(40);
-                &:last-of-type{
-                    text-align:left;
-                    margin-left: vw(140);
-                    input[type="checkbox"]{
-                        margin-right: vw(8);
-                    }
-                    span{
-                        color: $sub3;
-                    }
-                    p{
-                        @include font-14px;
-                        padding-left: vw(26);
-                    }
-                }
-                &:nth-child(4){
-                    margin-bottom: vw(60);
-                    select{
-                        width: vw(70);
-                        border: 1px solid #b1b1b1;
-                        border-radius: vw(4);
-                        height: vw(35);
-                        padding-left: vw(4);
-                        @include font-15px;
-                        margin-left: vw(24);
-                        margin-right: vw(8);
-                    }
-                    input[type="text"]{
-                        width: vw(70);
-                        margin-left: vw(8);
-                        &:not(:last-child){
-                            margin-right: vw(8);
-                        }
-                    }
-                }
-                input[type="text"],
-            input[type="password"]{
-                @include inputStyle;
-                margin-left: vw(24);
-                }
-            }
-            .btns{
-                margin-top: vw(50);
-                display: flex;
-                justify-content: center;
-                gap: vw(8);
-            }
-        }
-    }
-    &.joinComplete{
-        background-image: url('/images/components/bg_flower.png');
-        @include complete;
-        text-align: center;
-        background-size: 75%;
-        background-position: 200% 600%;
-        h3{
-            margin-bottom: vw(40);
-        }
-        .btns{
-            display: flex;
-            gap: vw(8);
-            justify-content: center;
-        }
-    }
-    &.joinInfo{
-        background-image: url('/images/components/bg_flower.png');
-        background-position: -40% -25%;
-        @include infoInputs;
-        .error-message{
-            @include font-14px;
-            color: $sub3;
-            text-align:center;
-            position: absolute;
-            left: vw(160);
-        }
-        .required{
-            text-align: center;
-        }
-        h3{
-            margin-bottom: vw(80);
-            position: relative;
-            span{
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                @include font-16px;
-                font-weight: 400;
-            }
-        }
-        form{
-            label{
-                position: relative;
-                text-align:right;
-                margin-right: vw(120);
-                display: block;
-                @include font-16px;
-                margin-bottom: vw(36);
-                &:nth-child(3){
-                    .idcheck{
-                        position: absolute;
-                        width: vw(65);
-                        @include font-14px;
-                        font-family: $font-main;
-                        border: 1px solid #000;
-                        height: vw(35);
-                        border-radius: vw(4);
-                        margin-left: vw(6);
-                    }
-                }
-                &:nth-child(6){
-                    select{
-                        width: vw(70);
-                        border: 1px solid #b1b1b1;
-                        border-radius: vw(4);
-                        height: vw(35);
-                        padding-left: vw(4);
-                        @include font-15px;
-                        margin-left: vw(24);
-                        margin-right: vw(8);
-                    }
-                    input[type="text"]{
-                        width: vw(70);
-                        margin-left: vw(8);
-                        &:not(:last-child){
-                            margin-right: vw(8);
-                        }
-                    }
-                }
-                &:nth-child(7){
-                    margin-right: vw(118);
-                    select{
-                        width: vw(55);
-                        border: 1px solid #b1b1b1;
-                        border-radius: vw(4);
-                        height: vw(35);
-                        padding-left: vw(4);
-                        @include font-15px;
-                        margin-right: vw(4);
-                        margin-left: vw(12);
-                        &:first-child{
-                            width: vw(70);
-                            margin-left: vw(24);
-                        }
-                    }
-                }
-               
-                input[type="text"],
-            input[type="password"]{
-                @include inputStyle;
-                margin-left: vw(24);
-                }
-            }
-            .btns{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: vw(8);
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                bottom: vw(35);
-            }
-        }
-
-    }
-    &.login{
-        @include login-agree;
+    .modal {
+        @include modalLayout;
         position: relative;
-        h3{
-            text-align: center;
-            margin-bottom: vw(20);
+        &.logoutComplete {
+            @include confirm;
+            background-image: url('/images/components/bg_flower.png');
+            background-size: 80%;
+            background-position: 210% 230%;
         }
-        label{
-            @include font-16px;
-            input[type="text"],
-            input[type="password"]{
-                display: block;
-                @include inputStyle;
-                margin: auto;
-                &.error-input {
-                    border: 1px solid $sub3 !important;
-                    animation: shake 0.3s ease;
-                  }
-               
+        &.loginComplete {
+            @include complete;
+            background-image: url('/images/components/bg_flower.png');
+            background-size: 80%;
+            background-position: 220% 350%;
+            h3 {
+                margin-bottom: vw(20);
             }
-            input[type="text"]{
-                margin-bottom: vw(4);
-            }
-            .error{
-                color: $sub3;
-                @include font-14px;
-            }
-            
-        }
-        .findId{
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: vw(24);
-            margin-top: vw(8);
-            color: #616161;
-            label{
-                @include font-15px;
-                input[type="checkbox"]{
-                    margin-right: vw(4);
+            em {
+                @include font-16px;
+                img {
+                    margin-left: vw(4);
                 }
             }
-            span{
-                @include font-14px;
+            .btns {
+                display: flex;
+                justify-content: center;
+                gap: vw(8);
+                margin-top: vw(20);
             }
         }
-        .btns{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: vw(8);
+        &.stampNotice {
+            @include stampPopup;
+            background-image: url('/images/components/frame.png');
+            background-repeat: no-repeat;
         }
-        .bottom{
-            margin-top: vw(50);
-            display: flex;
-            justify-content: space-between;
-            li{
-                @include font-16px-SB;
-                cursor: pointer;
-                &:first-child{
-                    display: flex;
-                    align-items: center;
-                    gap: vw(4);
-                    color: #3C1E1E;
-                }
-                &:last-child{
-                    text-decoration: underline;
-                    color: #616161;
-                }
+        &.editInfo {
+            background-image: url('/images/components/bg_flower.png');
+            background-position: -35% -23%;
+            @include infoInputs;
+            background-color: $main1;
+            color: $white;
+            h3 {
+                margin-bottom: vw(50);
             }
-        }
-       
-    }
-    @keyframes shake {
-        0%   { transform: translateX(0); }
-        20%  { transform: translateX(-4px); }
-        40%  { transform: translateX(4px); }
-        60%  { transform: translateX(-4px); }
-        80%  { transform: translateX(4px); }
-        100% { transform: translateX(0); }
-      }
-    &.joinAgree{
-        background-image: url('/images/components/bg_tree.png');
-        background-position: 100% 10%;
-        @include login-agree;
-        h3{
-            margin-bottom: vw(20);
-        }
-        form{
-            label{
-                display: block;
-                span{
-                    color: $main1;
-                    @include font-16px-SB;
-                }
-                input[type="checkbox"]{
-                    margin-right: vw(8);
-                }
-                &:first-child{
-                    margin-bottom: vw(18);
-                    @include font-18px-SB;
-                }
-               
-                &:not(:first-child){
+            dl {
+                display: flex;
+                justify-content: center;
+                gap: vw(24);
+                margin-left: vw(-180);
+                margin-bottom: vw(30);
+                dt,
+                dd {
                     @include font-16px;
-                    margin-bottom: vw(20);
-                    text-indent: vw(10);
                 }
-               
             }
-            .error-message{
+            form {
+                label {
+                    text-align: right;
+                    margin-right: vw(100);
+                    display: block;
+                    @include font-16px;
+                    margin-bottom: vw(40);
+                    &:last-of-type {
+                        text-align: left;
+                        margin-left: vw(140);
+                        input[type='checkbox'] {
+                            margin-right: vw(8);
+                        }
+                        span {
+                            color: $sub3;
+                        }
+                        p {
+                            @include font-14px;
+                            padding-left: vw(26);
+                        }
+                    }
+                    &:nth-child(4) {
+                        margin-bottom: vw(60);
+                        select {
+                            width: vw(70);
+                            border: 1px solid #b1b1b1;
+                            border-radius: vw(4);
+                            height: vw(35);
+                            padding-left: vw(4);
+                            @include font-15px;
+                            margin-left: vw(24);
+                            margin-right: vw(8);
+                        }
+                        input[type='text'] {
+                            width: vw(70);
+                            margin-left: vw(8);
+                            &:not(:last-child) {
+                                margin-right: vw(8);
+                            }
+                        }
+                    }
+                    input[type='text'],
+                    input[type='password'] {
+                        @include inputStyle;
+                        margin-left: vw(24);
+                    }
+                }
+                .btns {
+                    margin-top: vw(50);
+                    display: flex;
+                    justify-content: center;
+                    gap: vw(8);
+                }
+            }
+        }
+        &.joinComplete {
+            background-image: url('/images/components/bg_flower.png');
+            @include complete;
+            text-align: center;
+            background-size: 75%;
+            background-position: 200% 600%;
+            h3 {
+                margin-bottom: vw(40);
+            }
+            .btns {
+                display: flex;
+                gap: vw(8);
+                justify-content: center;
+            }
+        }
+        &.joinInfo {
+            background-image: url('/images/components/bg_flower.png');
+            background-position: -40% -25%;
+            @include infoInputs;
+            h3 {
+                margin-bottom: vw(80);
+                position: relative;
+                span {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    @include font-16px;
+                    font-weight: 400;
+                }
+            }
+            form {
+                label {
+                    position: relative;
+                    text-align: right;
+                    margin-right: vw(120);
+                    display: block;
+                    @include font-16px;
+                    margin-bottom: vw(36);
+                    &:nth-child(3) {
+                        .idcheck {
+                            position: absolute;
+                            width: vw(65);
+                            @include font-14px;
+                            font-family: $font-main;
+                            border: 1px solid #b1b1b1;
+                            background: #efefef;
+                            height: vw(35);
+                            border-radius: vw(4);
+                            margin-left: vw(6);
+                        }
+                    }
+                    &:nth-child(6) {
+                        select {
+                            width: vw(70);
+                            border: 1px solid #b1b1b1;
+                            border-radius: vw(4);
+                            height: vw(35);
+                            padding-left: vw(4);
+                            @include font-15px;
+                            margin-left: vw(24);
+                            margin-right: vw(8);
+                        }
+                        input[type='text'] {
+                            width: vw(70);
+                            margin-left: vw(8);
+                            &:not(:last-child) {
+                                margin-right: vw(8);
+                            }
+                        }
+                    }
+                    &:nth-child(7) {
+                        margin-right: vw(118);
+                        select {
+                            width: vw(55);
+                            border: 1px solid #b1b1b1;
+                            border-radius: vw(4);
+                            height: vw(35);
+                            padding-left: vw(4);
+                            @include font-15px;
+                            margin-right: vw(4);
+                            margin-left: vw(12);
+                            &:first-child {
+                                width: vw(70);
+                                margin-left: vw(24);
+                            }
+                        }
+                    }
+
+                    input[type='text'],
+                    input[type='password'] {
+                        @include inputStyle;
+                        margin-left: vw(24);
+                    }
+                    .error-message,
+                    .info-message {
+                        @include font-14px;
+                        color: $sub3;
+                        position: absolute;
+                        left: vw(160);
+                    }
+                    .idcheck-message {
+                        @include font-14px;
+                        color: $sub3; // 기본은 에러색
+                        position: absolute;
+                        left: vw(160);
+                        &.success {
+                            color: $light-green; // 성공 시 초록색
+                        }
+                    }
+                    .pw-message {
+                        @include font-14px;
+                        position: absolute;
+                        left: vw(160);
+                        &.success {
+                            color: $light-green; // 성공 시 초록색
+                        }
+
+                        &.error {
+                            color: $sub3; // 불일치할 때 기존 에러색
+                        }
+                    }
+                }
+                .btns {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: vw(8);
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    bottom: vw(35);
+                }
+            }
+            input.error,
+            select.error {
+                border: 1px solid $sub3 !important;
+            }
+            input.shake {
+                animation: shake 0.3s ease;
+            }
+
+            input[class*='shake-'],
+            select[class*='shake-'] {
+                animation: shake 0.3s ease;
+            }
+
+            .required {
+                @include font-16px;
                 color: $sub3;
                 text-align: center;
+            }
+        }
+        &.login {
+            @include login-agree;
+            position: relative;
+            h3 {
+                text-align: center;
+                margin-bottom: vw(20);
+            }
+            label {
                 @include font-16px;
-                animation: shake 0.3s ease;
-                margin-top: vw(-4);
+                input[type='text'],
+                input[type='password'] {
+                    display: block;
+                    @include inputStyle;
+                    margin: auto;
+                    &.error-input {
+                        border: 1px solid $sub3 !important;
+                        animation: shake 0.3s ease;
+                    }
                 }
-            .btns{
-                position: absolute;
-                bottom: vw(30);
-                left: 50%;
-                transform: translateX(-50%);
+                input[type='text'] {
+                    margin-bottom: vw(4);
+                }
+                .error {
+                    color: $sub3;
+                    @include font-14px;
+                }
+            }
+            .findId {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: vw(24);
+                margin-top: vw(8);
+                color: #616161;
+                label {
+                    @include font-15px;
+                    input[type='checkbox'] {
+                        margin-right: vw(4);
+                    }
+                }
+                span {
+                    @include font-14px;
+                }
+            }
+            .btns {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: vw(4);
+                gap: vw(8);
+            }
+            .bottom {
+                margin-top: vw(50);
+                display: flex;
+                justify-content: space-between;
+                li {
+                    @include font-16px-SB;
+                    cursor: pointer;
+                    &:first-child {
+                        display: flex;
+                        align-items: center;
+                        gap: vw(4);
+                        color: #3c1e1e;
+                    }
+                    &:last-child {
+                        text-decoration: underline;
+                        color: #616161;
+                    }
+                }
+            }
+        }
 
+        &.joinAgree {
+            background-image: url('/images/components/bg_tree.png');
+            background-position: 100% 10%;
+            @include login-agree;
+            h3 {
+                margin-bottom: vw(20);
+            }
+            form {
+                label {
+                    display: block;
+                    span {
+                        color: $main1;
+                        @include font-16px-SB;
+                    }
+                    input[type='checkbox'] {
+                        margin-right: vw(8);
+                    }
+                    &:first-child {
+                        margin-bottom: vw(18);
+                        @include font-18px-SB;
+                    }
+
+                    &:not(:first-child) {
+                        @include font-16px;
+                        margin-bottom: vw(20);
+                        text-indent: vw(10);
+                    }
+                }
+                .error-message {
+                    color: $sub3;
+                    text-align: center;
+                    @include font-16px;
+                    animation: shake 0.3s ease;
+                    margin-top: vw(-4);
+                }
+                .btns {
+                    position: absolute;
+                    bottom: vw(30);
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: vw(4);
+                }
             }
         }
     }
-
 }
-}
-.rewardModal{
+.rewardModal {
     width: vw(310);
     height: vw(270);
     position: fixed;
-    top:7.5%;
+    top: 7.5%;
     right: 8%;
     @include modalLayout;
     z-index: 1000;
-    padding:vw(18) vw(18);
+    padding: vw(18) vw(18);
     @include dropShadwMobile_login;
     background-image: url('/images/components/lion.png');
     background-repeat: no-repeat;
@@ -380,11 +402,11 @@
     background-color: $sub1;
     @include ottMainDropShadow;
     .myreward,
-    .attendance{
-        strong{
+    .attendance {
+        strong {
             color: $main1;
             @include font-18px-SB;
-            span{
+            span {
                 cursor: pointer;
                 margin-left: vw(10);
                 @include font-16px;
@@ -393,9 +415,9 @@
             }
         }
     }
-    .myreward{
+    .myreward {
         margin-bottom: vw(10);
-        ul{
+        ul {
             width: 100%;
             height: vw(45);
             background: $white;
@@ -404,47 +426,66 @@
             align-items: center;
             border-radius: vw(8);
             padding: 0 vw(15);
-            li{
-                img{
+            li {
+                img {
                     width: vw(15);
                 }
-                &:last-child{
-                    span{
+                &:last-child {
+                    span {
                         @include font-16px-SB;
                     }
                 }
             }
         }
     }
-    .attendance{
-        strong{
-            span{
+    .attendance {
+        strong {
+            span {
                 cursor: pointer;
             }
         }
-        ul{
+        ul {
             background: $white;
             border-radius: vw(8);
             width: 100%;
             height: vw(116);
-           display: flex; 
-           justify-content: center;
-           align-items: center;
-           flex-wrap: wrap;
-           gap: vw(12);
-           padding: vw(26) vw(20);
-           li{
-            background-image: url("/images/components/stamp_default.png");
-            background-position: 0 0;
-            background-repeat: no-repeat;
-            background-size: cover;
-            width: vw(35.21);
-            height: vw(24);
-            &.on{
-                background-image: url("/images/components/stamp_on.png");
-
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: vw(12);
+            padding: vw(26) vw(20);
+            li {
+                background-image: url('/images/components/stamp_default.png');
+                background-position: 0 0;
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: vw(35.21);
+                height: vw(24);
+                &.on {
+                    background-image: url('/images/components/stamp_on.png');
+                }
             }
-           }
         }
+    }
+}
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-4px);
+    }
+    40% {
+        transform: translateX(4px);
+    }
+    60% {
+        transform: translateX(-4px);
+    }
+    80% {
+        transform: translateX(4px);
+    }
+    100% {
+        transform: translateX(0);
     }
 }

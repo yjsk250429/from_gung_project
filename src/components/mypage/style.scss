@@ -2,7 +2,7 @@
 @use '../../styles/base' as *;
 
 .MyPagemain_main {
-    .inner{
+    .inner {
         font-family: $font-main;
         display: flex;
         min-height: vw(1465);
@@ -20,6 +20,7 @@
         flex-direction: column;
         align-items: center;
         overflow: visible;
+        position: relative;
         .profile {
             text-align: center;
             margin-bottom: vw(40);
@@ -114,6 +115,15 @@
                     border-radius: vw(10);
                 }
             }
+        }
+        .deleteAccount {
+            @include font-16px;
+            color: #666;
+            text-decoration: underline;
+            position: absolute;
+            bottom: vw(30);
+            right: vw(40);
+            cursor: pointer;
         }
     }
 

@@ -278,81 +278,85 @@ const OttDetailVisual = ({
             </div>
 
             {/* 중앙: 타이틀/정보 */}
-            <div className="title">
-                <div className="con1">
-                    <div className="star">
-                        <Stars rating={safeRating} />
-                        <span>{safeRating.toFixed(1)}</span>
+            <section className="title-area">
+                <div className="title">
+                    <div className="con1">
+                        <div className="star">
+                            <Stars rating={safeRating} />
+                            <span>{safeRating.toFixed(1)}</span>
+                        </div>
+
+                        <div
+                            className={`wish ${liked ? 'on' : ''}`}
+                            role="button"
+                            aria-pressed={liked}
+                            aria-label="찜"
+                            onClick={onToggleWish}
+                            title="찜"
+                        >
+                            {liked ? <FaHeart /> : <FaRegHeart />}
+                            {particles.length > 0 && (
+                                <div className="burst" aria-hidden="true">
+                                    {particles.map((p, i) => (
+                                        <span
+                                            key={i}
+                                            className="particle"
+                                            style={{
+                                                '--dx': `${p.dx}px`,
+                                                '--dy': `${p.dy}px`,
+                                                '--rot': `${p.rot}deg`,
+                                                '--delay': `${p.delay}s`,
+                                                '--scale': p.scale,
+                                            }}
+                                        >
+                                            <FaHeart />
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        <em>찜</em>
+
+                        <p title="공유">
+                            <RiShare2Line />
+                        </p>
+                        <em>공유</em>
                     </div>
 
-                    <div
-                        className={`wish ${liked ? 'on' : ''}`}
-                        role="button"
-                        aria-pressed={liked}
-                        aria-label="찜"
-                        onClick={onToggleWish}
-                        title="찜"
-                    >
-                        {liked ? <FaHeart /> : <FaRegHeart />}
-                        {particles.length > 0 && (
-                            <div className="burst" aria-hidden="true">
-                                {particles.map((p, i) => (
-                                    <span
-                                        key={i}
-                                        className="particle"
-                                        style={{
-                                            '--dx': `${p.dx}px`,
-                                            '--dy': `${p.dy}px`,
-                                            '--rot': `${p.rot}deg`,
-                                            '--delay': `${p.delay}s`,
-                                            '--scale': p.scale,
-                                        }}
-                                    >
-                                        <FaHeart />
-                                    </span>
-                                ))}
-                            </div>
-                        )}
+                    {/* 연령/연도/장르/시즌/자막 표기 */}
+                    <div className="con2">
+                        <strong>{safeCert}</strong>
+                        <p>{safeYear}</p>
+                        <p>{g0 || '-'}</p>
+                        <p>{g1 || ''}</p>
+                        <p>{safeSeasons ? `시즌 ${safeSeasons}개` : '시즌 정보 없음'}</p>
+                        <p>{hasSubtitle ? '자막' : '자막 없음'}</p>
                     </div>
-                    <em>찜</em>
 
-                    <p title="공유">
-                        <RiShare2Line />
-                    </p>
-                    <em>공유</em>
+                    {logoSrc ? (
+                        <img className="title-logo" src={logoSrc} alt="타이틀 로고" />
+                    ) : null}
+
+                    <div className="cast">
+                        <strong>출연</strong>
+                        {cast.slice(0, 5).map((c, i) => (
+                            <span key={i}>
+                                {c.name}
+                                {i < Math.min(cast.length, 5) - 1 ? ',' : ''}
+                            </span>
+                        ))}
+                    </div>
+
+                    <div className="desc">{overview || ''}</div>
+
+                    <div className="btns">
+                        <button className="ep1">1회 무료시청하기</button>
+                        <button className="all">
+                            <HiPlay /> 재생하기
+                        </button>
+                    </div>
                 </div>
-
-                {/* 연령/연도/장르/시즌/자막 표기 */}
-                <div className="con2">
-                    <strong>{safeCert}</strong>
-                    <p>{safeYear}</p>
-                    <p>{g0 || '-'}</p>
-                    <p>{g1 || ''}</p>
-                    <p>{safeSeasons ? `시즌 ${safeSeasons}개` : '시즌 정보 없음'}</p>
-                    <p>{hasSubtitle ? '자막' : '자막 없음'}</p>
-                </div>
-
-                {logoSrc ? <img className="title-logo" src={logoSrc} alt="타이틀 로고" /> : null}
-
-                <div className="cast">
-                    <strong>출연</strong>
-                    {cast.slice(0, 5).map((c, i) => (
-                        <span key={i}>
-                            {c.name}
-                            {i < Math.min(cast.length, 5) - 1 ? ',' : ''}
-                        </span>
-                    ))}
-                </div>
-
-                <div className="desc">{overview || ''}</div>
-
-                <div className="btns">
-                    <button className="ep1">1회 무료시청하기</button>
-                    <button className="all">
-                        <HiPlay /> 재생하기
-                    </button>
-                </div>
-            </div>
+            </section>
 
             <div className="bottom">
                 <div className="line" />

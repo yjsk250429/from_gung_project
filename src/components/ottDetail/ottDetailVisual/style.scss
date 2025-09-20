@@ -168,217 +168,230 @@
             }
         }
     }
-
-    .title {
-        width: vw(598);
-        height: vw(580);
+    .title-area {
+        width: vw(600);
+        height: vw(700);
         position: absolute;
-        top: vw(238);
+        top: vw(150);
         left: vw(444);
-        filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.6));
 
-        .con1 {
-            color: $white;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            line-height: 1;
-            gap: vw(8);
-            margin-bottom: vw(8);
-            /* ⭐ 평점 별: 가로 정렬 보장 */
-            .star {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .title {
+            width: vw(598);
+            height: auto;
+            position: absolute;
+            filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.6));
+            margin: auto;
+
+            .con1 {
+                color: $white;
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
-                gap: vw(6);
-                margin: 0;
-
-                p {
-                    @include font-24px-R;
-                    line-height: 1;
+                line-height: 1;
+                gap: vw(8);
+                margin-bottom: vw(8);
+                /* ⭐ 평점 별: 가로 정렬 보장 */
+                .star {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: vw(6);
                     margin: 0;
 
-                    display: inline-flex; /* ← 세로정렬 방지 */
-                    align-items: center;
-                    gap: vw(2);
+                    p {
+                        @include font-24px-R;
+                        line-height: 1;
+                        margin: 0;
+
+                        display: inline-flex; /* ← 세로정렬 방지 */
+                        align-items: center;
+                        gap: vw(2);
+                    }
+                    span {
+                        @include font-20px;
+                        margin-right: vw(10);
+                    }
                 }
-                span {
+
+                /* 💗 찜(하트) */
+                .wish {
+                    position: relative;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+
+                    svg {
+                        transition: transform 0.2s ease, color 0.2s ease;
+                    }
+                    &.on svg {
+                        transform: scale(1.06);
+                        color: #ff5a79;
+                    }
+                    &:active svg {
+                        transform: scale(0.92);
+                    }
+
+                    /* 파티클 컨테이너 */
+                    .burst {
+                        position: absolute;
+                        inset: 0;
+                        pointer-events: none;
+                        z-index: 2;
+                    }
+                    .burst .particle {
+                        --dx: 0px;
+                        --dy: -40px;
+                        --rot: 0deg;
+                        --delay: 0s;
+                        --scale: 1;
+
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 0;
+                        height: 0;
+                        transform: translate(-50%, -50%);
+                        opacity: 0;
+                        animation: heart-burst 0.7s ease-out forwards;
+                        animation-delay: var(--delay);
+
+                        svg {
+                            transform: rotate(var(--rot)) scale(var(--scale));
+                            color: #ff5a79;
+                            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+                        }
+                    }
+                }
+
+                .share {
                     @include font-20px;
-                    margin-right: vw(10);
+                }
+                em {
+                    @include font-17px;
                 }
             }
 
-            /* 💗 찜(하트) */
-            .wish {
-                position: relative;
-                display: inline-flex;
+            .con2 {
+                display: flex;
+                justify-content: left;
                 align-items: center;
-                justify-content: center;
-                cursor: pointer;
+                margin-bottom: vw(20);
 
-                svg {
-                    transition: transform 0.2s ease, color 0.2s ease;
+                strong {
+                    @include font-20px-M;
+                    background-color: $sub4;
+                    color: $white;
+                    border-radius: vw(5);
+                    width: vw(30);
+                    height: vw(30);
+                    text-align: center;
+                    line-height: vw(30);
                 }
-                &.on svg {
-                    transform: scale(1.06);
-                    color: #ff5a79;
-                }
-                &:active svg {
-                    transform: scale(0.92);
-                }
+                p {
+                    @include font-16px;
+                    color: $white;
+                    border-right: vw(1) solid $white;
+                    padding: 0 vw(10);
+                    margin: 0;
+                    line-height: vw(20);
+                    height: vw(20);
 
-                /* 파티클 컨테이너 */
-                .burst {
-                    position: absolute;
-                    inset: 0;
-                    pointer-events: none;
-                    z-index: 2;
-                }
-                .burst .particle {
-                    --dx: 0px;
-                    --dy: -40px;
-                    --rot: 0deg;
-                    --delay: 0s;
-                    --scale: 1;
-
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 0;
-                    height: 0;
-                    transform: translate(-50%, -50%);
-                    opacity: 0;
-                    animation: heart-burst 0.7s ease-out forwards;
-                    animation-delay: var(--delay);
-
-                    svg {
-                        transform: rotate(var(--rot)) scale(var(--scale));
-                        color: #ff5a79;
-                        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+                    &:last-child {
+                        border: none;
                     }
                 }
             }
 
-            .share {
-                @include font-20px;
-            }
-            em {
-                @include font-17px;
-            }
-        }
+            .title-logo {
+                // width: auto;
+                // height: vw(200);
+                width: vw(400);
+                height: auto;
+                object-fit: contain;
+                display: block;
 
-        .con2 {
-            display: flex;
-            justify-content: left;
-            align-items: center;
-            margin-bottom: vw(20);
+                margin: vw(30) 0;
+            }
 
-            strong {
-                @include font-20px-M;
-                background-color: $sub4;
+            .cast {
+                display: flex;
                 color: $white;
-                border-radius: vw(5);
-                width: vw(30);
-                height: vw(30);
-                text-align: center;
-                line-height: vw(30);
-            }
-            p {
-                @include font-16px;
-                color: $white;
-                border-right: vw(1) solid $white;
-                padding: 0 vw(10);
-                margin: 0;
-                line-height: vw(20);
-                height: vw(20);
-
-                &:last-child {
-                    border: none;
+                margin-bottom: vw(12);
+                strong {
+                    @include font-20px-R;
+                    margin-right: vw(20);
+                }
+                span {
+                    @include font-20px-R;
+                    margin-right: vw(4);
                 }
             }
-        }
 
-        .title-logo {
-            width: vw(476);
-            height: vw(264);
-            object-fit: fill; /* 비율 무시하고 박스 꽉 채우기 */
-            display: block;
-            margin-bottom: vw(20);
-        }
-
-        .cast {
-            display: flex;
-            color: $white;
-            margin-bottom: vw(12);
-            strong {
+            .desc {
                 @include font-20px-R;
-                margin-right: vw(20);
-            }
-            span {
-                @include font-20px-R;
-                margin-right: vw(4);
-            }
-        }
-
-        .desc {
-            @include font-20px-R;
-            color: $white;
-            margin-bottom: vw(20);
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
-            word-break: keep-all;
-        }
-
-        .price {
-            color: $white;
-            display: flex;
-            justify-content: left;
-            align-items: center;
-            margin-bottom: vw(0);
-            span {
-                @include font-15px-R;
-                margin-right: vw(4);
-            }
-            em {
-                margin: vw(8);
-            }
-            strong {
-                @include font-20px-B;
-            }
-        }
-
-        .btns {
-            display: flex;
-            gap: vw(16);
-
-            .ep1 {
                 color: $white;
-                @include font-18px-B;
-                font-family: $font-sub;
-                width: vw(184);
-                height: vw(44);
-                padding: vw(11) vw(26);
-                background-color: $main1;
-                border: none;
-                display: flex;
-                text-align: center;
-                align-items: center;
+                margin-bottom: vw(20);
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+                word-break: keep-all;
             }
-            .all {
-                color: $main1;
-                @include font-18px-B;
-                font-family: $font-sub;
-                width: vw(164);
-                height: vw(44);
-                padding: vw(11) vw(37);
-                border: none;
-                background-color: $white;
+
+            .price {
+                color: $white;
                 display: flex;
-                text-align: center;
+                justify-content: left;
                 align-items: center;
-                gap: vw(4);
+                margin-bottom: vw(0);
+                span {
+                    @include font-15px-R;
+                    margin-right: vw(4);
+                }
+                em {
+                    margin: vw(8);
+                }
+                strong {
+                    @include font-20px-B;
+                }
+            }
+
+            .btns {
+                display: flex;
+                gap: vw(16);
+
+                .ep1 {
+                    color: $white;
+                    @include font-18px-B;
+                    font-family: $font-sub;
+                    width: vw(184);
+                    height: vw(44);
+                    padding: vw(11) vw(26);
+                    background-color: $main1;
+                    border: none;
+                    display: flex;
+                    text-align: center;
+                    align-items: center;
+                }
+                .all {
+                    color: $main1;
+                    @include font-18px-B;
+                    font-family: $font-sub;
+                    width: vw(164);
+                    height: vw(44);
+                    padding: vw(11) vw(37);
+                    border: none;
+                    background-color: $white;
+                    display: flex;
+                    text-align: center;
+                    align-items: center;
+                    gap: vw(4);
+                }
             }
         }
     }

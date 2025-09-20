@@ -184,6 +184,10 @@ const JoinInfo = () => {
         const idErr = validateUserId(form.userId);
         if (idErr) newErrors.userId = idErr;
 
+        if (!idChecked) {
+            newErrors.userId = '아이디 중복확인을 해주세요.';
+        }
+
         const pwErr = validatePassword(form.password);
         if (pwErr) newErrors.password = pwErr;
 
@@ -204,7 +208,7 @@ const JoinInfo = () => {
             userId: form.userId,
             password: form.password,
             nickName: finalNick,
-            profile: '/images/mypage/default.png',
+            profile: '/images/mypage/honggildong.png',
             tel: form.tel,
             birth: form.birth,
             reward: 0,

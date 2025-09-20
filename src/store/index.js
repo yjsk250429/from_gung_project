@@ -7,105 +7,115 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 const memberData = [
     {
-      id: 1,
-      name: '홍길동',
-      userId: 'abc1234',
-      password: 'abc1234!',
-      nickName: '궁으로간닷',
-      profile: '/images/mypage/honggildong.png',
-      tel: {
-        first: '010',
-        middle: '0000',
-        last: '0000',
-      },
-      birth: {
-        year: '1999',
-        month: '01',
-        date: '01',
-      },
-      reward: 0,
-      coupon: 0,
-      marketing: false,       // 선택항목 (이벤트/혜택 수신 여부)
-      marketingDate: null,    // 마지막 동의/거부 날짜
+        id: 1,
+        name: '홍길동',
+        userId: 'abc1234',
+        password: 'abc1234!',
+        nickName: '궁으로간닷',
+        profile: '/images/mypage/honggildong.png',
+        tel: {
+            first: '010',
+            middle: '0000',
+            last: '0000',
+        },
+        birth: {
+            year: '1999',
+            month: '01',
+            date: '01',
+        },
+        reward: 0,
+        coupon: 0,
+        marketing: false, // 선택항목 (이벤트/혜택 수신 여부)
+        marketingDate: null, // 마지막 동의/거부 날짜
     },
-  ];
-  
-  // 초기값 로드
-  const initialMembers = localStorage.getItem('members')
+];
+
+// 초기값 로드
+const initialMembers = localStorage.getItem('members')
     ? JSON.parse(localStorage.getItem('members'))
     : memberData;
-  
-  const initialAuthed = localStorage.getItem('authed')
+
+const initialAuthed = localStorage.getItem('authed')
     ? JSON.parse(localStorage.getItem('authed'))
     : false;
-  
-  const initialUser = localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
-    : null;
-  
-  let no = initialMembers.length + 1;
-  
-  export const useAuthStore = create((set, get) => ({
+
+const initialUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+let no = initialMembers.length + 1;
+
+export const useAuthStore = create((set, get) => ({
     members: initialMembers,
     authed: initialAuthed,
     user: initialUser,
-  
+
     // 로그인
     login: ({ userId, password }) => {
-      const { members } = get();
-      const item = members.find((member) => member.userId === userId);
-      if (item && item.password === password) {
-        set({ authed: true, user: item });
-        localStorage.setItem('authed', JSON.stringify(true));
-        localStorage.setItem('user', JSON.stringify(item));
-      } else {
+        const { members } = get();
+        const item = members.find((member) => member.userId === userId);
+        if (item && item.password === password) {
+            set({ authed: true, user: item });
+            localStorage.setItem('authed', JSON.stringify(true));
+            localStorage.setItem('user', JSON.stringify(item));
+        } else {
+            set({ authed: false, user: null });
+            localStorage.setItem('authed', JSON.stringify(false));
+            localStorage.setItem('user', JSON.stringify(null));
+        }
+    },
+
+    // 로그아웃
+    logout: () => {
         set({ authed: false, user: null });
         localStorage.setItem('authed', JSON.stringify(false));
         localStorage.setItem('user', JSON.stringify(null));
-      }
     },
-  
-    // 로그아웃
-    logout: () => {
-      set({ authed: false, user: null });
-      localStorage.setItem('authed', JSON.stringify(false));
-      localStorage.setItem('user', JSON.stringify(null));
-    },
-  
+
     // 회원가입 (기본값: 마케팅 미동의)
     signup: (user) => {
-      const { members } = get();
-      const newUser = {
-        ...user,
-        id: no++,
-        marketing: false,
-        marketingDate: null,
-      };
-      const updatedMembers = [...members, newUser];
-      set({ members: updatedMembers });
-      localStorage.setItem('members', JSON.stringify(updatedMembers));
+        const { members } = get();
+        const newUser = {
+            ...user,
+            id: no++,
+            marketing: false,
+            marketingDate: null,
+        };
+        const updatedMembers = [...members, newUser];
+        set({ members: updatedMembers });
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
     },
-  
+
     // 마케팅 동의/거부 업데이트
     updateMarketing: (status) => {
-      const { user, members } = get();
-      if (!user) return;
-  
-      const updatedUser = {
-        ...user,
-        marketing: status,
-        marketingDate: new Date().toISOString(), // ISO 형식 저장
-      };
-  
-      const updatedMembers = members.map((m) =>
-        m.id === user.id ? updatedUser : m
-      );
-  
-      set({ user: updatedUser, members: updatedMembers });
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-      localStorage.setItem('members', JSON.stringify(updatedMembers));
+        const { user, members } = get();
+        if (!user) return;
+
+        const updatedUser = {
+            ...user,
+            marketing: status,
+            marketingDate: new Date().toISOString(), // ISO 형식 저장
+        };
+
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
     },
-  }));
+
+    // 회원 탈퇴
+    withdraw: () => {
+        const { user, members } = get();
+        if (!user) return;
+
+        const updatedMembers = members.filter((m) => m.id !== user.id);
+
+        set({ members: updatedMembers, authed: false, user: null });
+
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+        localStorage.setItem('authed', JSON.stringify(false));
+        localStorage.setItem('user', JSON.stringify(null));
+    },
+}));
 
 export const useModalStore = create((set) => ({
     loginOpen: false,
@@ -114,12 +124,20 @@ export const useModalStore = create((set) => ({
     joinOpen: false,
     joinInfoOpen: false,
     joinComOpen: false,
+    withdrawConfirmOpen: false,
+    withdrawComOpen: false,
     rewardOpen: false,
     stampNoticeOpen: false,
     editInfoOpen: false,
 
     openEditInfo: () => set({ editInfoOpen: true }),
     closeEditInfo: () => set({ editInfoOpen: false }),
+
+    openWithdrawConfirm: () => set({ withdrawConfirmOpen: true }),
+    closeWithdrawConfirm: () => set({ withdrawConfirmOpen: false }),
+
+    openWithdrawCom: () => set({ withdrawComOpen: true }),
+    closeWithdrawCom: () => set({ withdrawComOpen: false }),
 
     openLoginCom: () => set({ loginComOpen: true }),
     closeLoginCom: () => set({ loginComOpen: false }),
@@ -150,6 +168,7 @@ export const useModalStore = create((set) => ({
     switchToJoinCom: () => set({ joinInfoOpen: false, joinComOpen: true }),
     switchToLogoutCom: () => set({ loginComOpen: false, logoutComOpen: true }),
     switchToLogin: () => set({ logoutComOpen: false, loginOpen: true }),
+    switchToWithdrawCom: () => set({ withdrawConfirmOpen: false, withdrawComOpen: true }),
 }));
 
 export const useTourClassStore = create((set, get) => ({

@@ -8,7 +8,8 @@
     .modal {
         @include modalLayout;
         position: relative;
-        &.logoutComplete {
+        &.logoutComplete,
+        &.withdrawComplete {
             @include confirm;
             background-image: url('/images/components/bg_flower.png');
             background-size: 80%;
@@ -115,16 +116,23 @@
                 }
             }
         }
-        &.joinComplete {
+        &.joinComplete,
+        &.withdrawConfirm {
             background-image: url('/images/components/bg_flower.png');
             @include complete;
             text-align: center;
             background-size: 75%;
             background-position: 200% 600%;
             h3 {
-                margin-bottom: vw(40);
+            }
+            em {
+                display: block;
+                color: $sub3;
+                margin-top: vw(30);
+                margin-bottom: vw(-20);
             }
             .btns {
+                margin-top: vw(40);
                 display: flex;
                 gap: vw(8);
                 justify-content: center;

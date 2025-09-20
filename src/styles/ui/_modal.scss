@@ -1,76 +1,81 @@
 @use '../base' as *;
 @use '../utils' as *;
 
-@mixin overlay{
+@mixin overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); // 화면 어둡게
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); // 화면 어둡게
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-@mixin modalLayout{
+@mixin modalLayout {
     background-size: contain;
     border-radius: vw(20);
     background: $white;
     box-sizing: border-box;
     background-repeat: no-repeat;
     z-index: 1001;
-    h3{
+    h3 {
         font-family: $font-sub;
     }
-    .btns{
+    .btns {
         text-align: center;
     }
 }
 
-@mixin infoInputs{
+@mixin infoInputs {
     width: vw(636);
     height: vw(806);
-    padding:vw(45) vw(50) vw(60) vw(50);
-    h3{
+    padding: vw(45) vw(50) vw(60) vw(50);
+    h3 {
         @include font-30px-M;
     }
 }
 
-@mixin login-agree{
+@mixin login-agree {
     width: vw(365);
     height: vw(445);
     padding: vw(42) vw(55);
 }
 
-@mixin complete{
+@mixin complete {
     width: vw(365);
     height: vw(250);
-    padding:vw(70) vw(60) vw(50) vw(60);
+    padding: vw(70) vw(40) vw(50) vw(40);
     text-align: center;
-    h3{
+    h3 {
         color: $main1;
         @include font-24px-SB;
     }
+    em {
+        @include font-16px;
+    }
 }
 
-@mixin confirm{
+@mixin confirm {
     width: vw(365);
     height: vw(220);
-    padding:vw(70) 0 vw(50) 0;
+    padding: vw(70) 0 vw(50) 0;
     text-align: center;
-    h3{
+    h3 {
         color: $main1;
         margin-bottom: vw(40);
         @include font-24px-SB;
     }
-    .btns{
+    .btns {
         display: flex;
         justify-content: center;
         gap: vw(8);
     }
 }
 
-@mixin stampPopup{
+@mixin stampPopup {
     background: $main1;
     background-position: center;
     background-size: 90% 90%;
@@ -78,29 +83,29 @@
     width: vw(544);
     height: vw(433);
     text-align: center;
-    img{
+    img {
         display: block;
         margin: auto;
         margin-top: vw(60);
     }
-    h3{
+    h3 {
         margin-top: vw(12);
         margin-bottom: vw(35);
         @include font-32px;
-        span{
+        span {
             @include font-32px-SB;
             font-family: $font-sub;
         }
     }
-    ul{
+    ul {
         margin-bottom: vw(46);
-        li{
+        li {
             color: $sub2;
             @include font-18px;
-            &:not(:last-child){
+            &:not(:last-child) {
                 margin-bottom: vw(10);
             }
-            span{
+            span {
                 color: $main2;
             }
         }

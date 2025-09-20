@@ -8,6 +8,7 @@ import "swiper/css";
 const Schedule = ({ thisitem }) => {
   const {
     id,
+    category,
     title,
     theme = [],
     description,
@@ -21,11 +22,16 @@ const Schedule = ({ thisitem }) => {
     detailsub2,
   } = thisitem;
 
-  const scheduleList = [
-    { img: "/images/tourclass/pics.png", title: "투어 이미지 1" },
-    { img: "/images/tourclass/pics.png", title: "투어 이미지 2" },
-    { img: "/images/tourclass/pics.png", title: "투어 이미지 3" },
-  ];
+  // 20개 이미지 경로 배열
+  const allImages = Array(20)
+    .fill(null)
+    .map((_, i) => `/images/tourclass/detail/pics${i + 1}.png`);
+
+  // 배열에서 중복 없이 n개 랜덤 뽑는 함수
+  const getRandomImages = (arr, n) => {
+    const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, n);
+  };
 
   const getDaysCount = (period) => {
     if (period === "하루") return 1;
@@ -35,22 +41,6 @@ const Schedule = ({ thisitem }) => {
   };
 
   const daysCount = getDaysCount(period);
-
-  // day 데이터 배열
-  const daysData = [
-    {
-      className: "day01",
-      imgSrc: "/images/tourclass/tourclassDetail_DAY01.png",
-    },
-    {
-      className: "day02",
-      imgSrc: "/images/tourclass/tourclassDetail_DAY02.png",
-    },
-    {
-      className: "day03",
-      imgSrc: "/images/tourclass/tourclassDetail_DAY03.png",
-    },
-  ];
 
   return (
     <div className="schedule">
@@ -64,36 +54,62 @@ const Schedule = ({ thisitem }) => {
       </div>
       <div className="pics">
         <Swiper slidesPerView="auto" grabCursor={true} className="days">
-          {daysData.slice(0, daysCount).map((day, dayIdx) => (
-            <SwiperSlide key={dayIdx}>
-              <article className={`day ${day.className}`}>
-                <strong>
-                  <img src={day.imgSrc} alt="" />
-                </strong>
-                <ul>
-                  {scheduleList.map(({ img, title }, idx) => (
-                    <Fragment key={idx}>
-                      <li>
-                        <img src={img} alt={title} />
-                        <h5>{title}</h5>
-                        <p></p>
-                      </li>
-                      {/* 마지막 day가 아니거나, 마지막 day이지만 마지막 이미지가 아닐 때만 span 표시 */}
-                      {(dayIdx !== daysCount - 1 ||
-                        idx !== scheduleList.length - 1) && (
-                        <span>
-                          <img
-                            src="/images/tourclass/tourclassDetail_dayFlower.png"
-                            alt="꽃 이미지"
-                          />
-                        </span>
-                      )}
-                    </Fragment>
-                  ))}
-                </ul>
-              </article>
-            </SwiperSlide>
-          ))}
+          {Array(daysCount)
+            .fill(null)
+            .map((_, dayIdx) => {
+              // 동적으로 className과 imgSrc 만들기
+              const dayClassName = `day0${dayIdx + 1}`;
+              const dayImgSrc = `/images/tourclass/tourclassDetail_DAY0${
+                dayIdx + 1
+              }.png`;
+
+              // 이미지 3개 랜덤 추출
+              const dayImages =
+                category === "tour"
+                  ? getRandomImages(allImages, 3).map((img, idx) => ({
+                      img,
+                      title: `투어 이미지 ${idx + 1}`,
+                    }))
+                  : Array(3)
+                      .fill(null)
+                      .map((_, idx) => ({
+                        img,
+                        title: `클래스 이미지 ${idx + 1}`,
+                      }));
+
+              return (
+                <SwiperSlide key={dayIdx}>
+                  <article className={`day ${dayClassName}`}>
+                    {/* tour일 때만 상단 이미지 보여주기 */}
+                    {category === "tour" && (
+                      <strong>
+                        <img src={dayImgSrc} alt="" />
+                      </strong>
+                    )}
+                    <ul>
+                      {dayImages.map(({ img, title }, idx) => (
+                        <Fragment key={idx}>
+                          <li>
+                            <img src={img} alt={title} />
+                            <h5>{title}</h5>
+                            <p></p>
+                          </li>
+                          {(dayIdx !== daysCount - 1 ||
+                            idx !== dayImages.length - 1) && (
+                            <span>
+                              <img
+                                src="/images/tourclass/tourclassDetail_dayFlower.png"
+                                alt="꽃 이미지"
+                              />
+                            </span>
+                          )}
+                        </Fragment>
+                      ))}
+                    </ul>
+                  </article>
+                </SwiperSlide>
+              );
+            })}
         </Swiper>
       </div>
       <p className="btns">

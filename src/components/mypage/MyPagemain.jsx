@@ -9,9 +9,8 @@ import WithdrawComplete from '../ui/modal/WithdrawComplete.jsx';
 import WithdrawConfirm from '../ui/modal/WithdrawConfirm.jsx';
 
 const MyPagemain = () => {
-    const { openWithdrawConfirm } = useModalStore();
+    const { openEditInfo, openWithdrawConfirm } = useModalStore();
     const [activeMenu, setActiveMenu] = useState('reservation');
-    const { openEditInfo } = useModalStore();
     const isWishlistOpen = activeMenu === 'wishlist';
     const user = useAuthStore((s) => s.user);
     return (

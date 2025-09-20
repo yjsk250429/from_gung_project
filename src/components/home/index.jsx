@@ -1,4 +1,4 @@
-export { default as Mainvisual } from './Mainvisual/Mainvisual';
+export { default as Mainvisual } from './mainvisual/Mainvisual';
 export { default as BestTour } from './section1/BestTour';
 export { default as PalaceVideo } from './section2/PalaceVideo';
 export { default as TraditionClass } from './section3/TraditionClass';

@@ -47,6 +47,16 @@ export const useAuthStore = create((set, get) => ({
     members: initialMembers,
     authed: initialAuthed,
     user: initialUser,
+    tempMarketing: { status: false, date: null },
+
+    setTempMarketing: (status) => {
+        set({
+            tempMarketing: {
+                status,
+                date: status ? new Date().toISOString() : null,
+            },
+        });
+    },
 
     // 로그인
     login: ({ userId, password }) => {
@@ -72,33 +82,15 @@ export const useAuthStore = create((set, get) => ({
 
     // 회원가입 (기본값: 마케팅 미동의)
     signup: (user) => {
-        const { members } = get();
+        const { members, tempMarketing } = get();
         const newUser = {
             ...user,
             id: no++,
-            marketing: false,
-            marketingDate: null,
+            marketing: tempMarketing.status,
+            marketingDate: tempMarketing.date,
         };
         const updatedMembers = [...members, newUser];
-        set({ members: updatedMembers });
-        localStorage.setItem('members', JSON.stringify(updatedMembers));
-    },
-
-    // 마케팅 동의/거부 업데이트
-    updateMarketing: (status) => {
-        const { user, members } = get();
-        if (!user) return;
-
-        const updatedUser = {
-            ...user,
-            marketing: status,
-            marketingDate: new Date().toISOString(), // ISO 형식 저장
-        };
-
-        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
-
-        set({ user: updatedUser, members: updatedMembers });
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+        set({ members: updatedMembers, tempMarketing: { status: false, date: null } }); // 초기화
         localStorage.setItem('members', JSON.stringify(updatedMembers));
     },
 
@@ -115,6 +107,27 @@ export const useAuthStore = create((set, get) => ({
         localStorage.setItem('authed', JSON.stringify(false));
         localStorage.setItem('user', JSON.stringify(null));
     },
+
+    //회원정보 수정
+    updateUser: (updates) => {
+        const { user, members } = get();
+        if (!user) return;
+
+        const updatedUser = {
+            ...user,
+            ...updates,
+            marketingDate:
+                updates.marketing !== undefined && updates.marketing !== user.marketing
+                    ? new Date().toISOString()
+                    : user.marketingDate,
+        };
+
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
 }));
 
 export const useModalStore = create((set) => ({
@@ -129,6 +142,14 @@ export const useModalStore = create((set) => ({
     rewardOpen: false,
     stampNoticeOpen: false,
     editInfoOpen: false,
+    editPasswordOpen: false,
+    editCompleteOpen: false,
+
+    openEditComplete: () => set({ editCompleteOpen: true }),
+    closeEditComplete: () => set({ editCompleteOpen: false }),
+
+    openEditPassword: () => set({ editPasswordOpen: true }),
+    closeEditPassword: () => set({ editPasswordOpen: false }),
 
     openEditInfo: () => set({ editInfoOpen: true }),
     closeEditInfo: () => set({ editInfoOpen: false }),
@@ -169,6 +190,8 @@ export const useModalStore = create((set) => ({
     switchToLogoutCom: () => set({ loginComOpen: false, logoutComOpen: true }),
     switchToLogin: () => set({ logoutComOpen: false, loginOpen: true }),
     switchToWithdrawCom: () => set({ withdrawConfirmOpen: false, withdrawComOpen: true }),
+    switchToEditPassword: () => set({ editPasswordOpen: false, editInfoOpen: true }),
+    switchToEditComplete: () => set({ editInfoOpen: false, editCompleteOpen: true }),
 }));
 
 export const useTourClassStore = create((set, get) => ({

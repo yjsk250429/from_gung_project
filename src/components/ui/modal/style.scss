@@ -9,7 +9,8 @@
         @include modalLayout;
         position: relative;
         &.logoutComplete,
-        &.withdrawComplete {
+        &.withdrawComplete,
+        &.editInfoComplete {
             @include confirm;
             background-image: url('/images/components/bg_flower.png');
             background-size: 80%;
@@ -52,13 +53,15 @@
             }
             dl {
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
                 gap: vw(24);
-                margin-left: vw(-180);
                 margin-bottom: vw(30);
-                dt,
-                dd {
-                    @include font-16px;
+                @include font-16px;
+                &:first-of-type {
+                    margin-left: vw(118);
+                }
+                &:last-of-type {
+                    margin-left: vw(130);
                 }
             }
             form {
@@ -72,18 +75,20 @@
                         text-align: left;
                         margin-left: vw(140);
                         input[type='checkbox'] {
-                            margin-right: vw(8);
+                            margin-right: vw(24);
                         }
                         span {
                             color: $sub3;
                         }
                         p {
                             @include font-14px;
-                            padding-left: vw(26);
+                            position: absolute;
+                            left: vw(230);
+                            font-weight: 300;
+                            color: #b1b1b1;
                         }
                     }
                     &:nth-child(4) {
-                        margin-bottom: vw(60);
                         select {
                             width: vw(70);
                             border: 1px solid #b1b1b1;
@@ -102,14 +107,45 @@
                             }
                         }
                     }
+                    &:nth-child(5) {
+                        margin-bottom: vw(50);
+                        select {
+                            width: vw(55);
+                            border: 1px solid #b1b1b1;
+                            border-radius: vw(4);
+                            height: vw(35);
+                            padding-left: vw(4);
+                            @include font-15px;
+                            margin-right: vw(4);
+                            margin-left: vw(12);
+                            &:first-child {
+                                width: vw(70);
+                                margin-left: vw(24);
+                            }
+                        }
+                    }
                     input[type='text'],
                     input[type='password'] {
                         @include inputStyle;
                         margin-left: vw(24);
                     }
+                    .error-message {
+                        @include font-14px;
+                        color: $sub3;
+                        position: absolute;
+                        left: vw(235);
+                        margin-top: vw(4);
+                    }
+                    .success-message {
+                        @include font-14px;
+                        color: $light-green;
+                        position: absolute;
+                        left: vw(235);
+                        margin-top: vw(4);
+                    }
                 }
                 .btns {
-                    margin-top: vw(50);
+                    margin-top: vw(75);
                     display: flex;
                     justify-content: center;
                     gap: vw(8);
@@ -117,19 +153,30 @@
             }
         }
         &.joinComplete,
-        &.withdrawConfirm {
+        &.withdrawConfirm,
+        &.editPassword {
             background-image: url('/images/components/bg_flower.png');
             @include complete;
             text-align: center;
             background-size: 75%;
             background-position: 200% 600%;
-            h3 {
-            }
             em {
                 display: block;
                 color: $sub3;
                 margin-top: vw(30);
                 margin-bottom: vw(-20);
+            }
+            input[type='password'] {
+                @include inputStyle;
+                margin-top: vw(10);
+                margin-bottom: vw(-10);
+            }
+            .error-message {
+                @include font-14px;
+                color: $sub3;
+                position: absolute;
+                left: vw(60);
+                margin-top: vw(4);
             }
             .btns {
                 margin-top: vw(40);
@@ -398,7 +445,7 @@
     width: vw(310);
     height: vw(270);
     position: fixed;
-    top: 7.5%;
+    top: vw(60);
     right: 8%;
     @include modalLayout;
     z-index: 1000;

@@ -62,10 +62,19 @@
                 border: vw(1) solid $main1;
                 border-radius: vw(100);
                 cursor: pointer;
+                transition: 0.2s;
                 img {
                     width: vw(16);
                     height: vw(16);
                     object-fit: cover;
+                    transition: 0.4s;
+                }
+                &:hover {
+                    background: #868ac248;
+                    // color: $white;
+                    // img {
+                    //     filter: invert(1);
+                    // }
                 }
             }
         }
@@ -105,14 +114,13 @@
                 background: none;
                 border: none;
                 cursor: pointer;
-
+                border-radius: vw(10);
+                transition: 0.4s;
                 &.active {
-                    width: vw(285);
                     height: vw(50);
-                    background: #1a1a7a;
+                    background: $main1;
                     text-indent: vw(5);
                     color: #fff;
-                    border-radius: vw(10);
                 }
             }
         }

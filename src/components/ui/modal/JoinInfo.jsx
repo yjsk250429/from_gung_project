@@ -23,8 +23,8 @@ const JoinInfo = () => {
     const [idChecked, setIdChecked] = useState(false);
     const [pwMatchMessage, setPwMatchMessage] = useState('');
     const [shakeTrigger, setShakeTrigger] = useState(0);
-    const [idCheckMessage, setIdCheckMessage] = useState(''); // ✅ 메시지 상태 추가
-    const [idCheckSuccess, setIdCheckSuccess] = useState(false); // ✅ 성공 여부 색상 구분용
+    const [idCheckMessage, setIdCheckMessage] = useState(''); //  메시지 상태 추가
+    const [idCheckSuccess, setIdCheckSuccess] = useState(false); // 성공 여부 색상 구분용
 
     const firstRef = useRef(null);
     const middleRef = useRef(null);
@@ -45,7 +45,7 @@ const JoinInfo = () => {
         resetForm();
     };
 
-    // ✅ 유효성 검사 함수들 (기존 그대로)
+    //유효성 검사 함수들 (기존 그대로)
     const validateName = (name) => {
         if (!name) return '필수 항목을 입력해주세요.';
         const regex = /^[a-zA-Z가-힣]+$/;
@@ -89,7 +89,7 @@ const JoinInfo = () => {
         return null;
     };
 
-    // ✅ 입력 핸들러 (검증 없음, 값 지울 때만 에러 제거)
+    // 입력 핸들러 (검증 없음, 값 지울 때만 에러 제거)
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (['first', 'middle', 'last'].includes(name)) {
@@ -103,7 +103,7 @@ const JoinInfo = () => {
             setForm((prev) => ({ ...prev, [name]: value }));
         }
 
-        // ✅ 값이 완전히 지워지면 해당 에러 제거
+        // 값이 완전히 지워지면 해당 에러 제거
         if (value === '') {
             setErrors((prev) => {
                 const newErrors = { ...prev };
@@ -139,7 +139,7 @@ const JoinInfo = () => {
             setErrors((prev) => ({ ...prev, userId: null }));
             setIdChecked(true);
             setIdCheckSuccess(true); // 성공 상태
-            setIdCheckMessage('사용 가능한 아이디입니다.'); // ✅ 메시지 설정
+            setIdCheckMessage('사용 가능한 아이디입니다.');
         }
     };
     const triggerContactShake = () => {
@@ -147,7 +147,6 @@ const JoinInfo = () => {
             if (!el) return;
             el.classList.remove('shake');
             // reflow 강제
-            // eslint-disable-next-line no-unused-expressions
             el.offsetWidth;
             el.classList.add('shake');
             // 애니메이션 끝나면 깔끔히 제거 (다음에 또 재생되도록)
@@ -213,8 +212,6 @@ const JoinInfo = () => {
             birth: form.birth,
             reward: 0,
             coupon: 0,
-            marketing: false,
-            marketingDate: null,
         });
 
         switchToJoinCom();

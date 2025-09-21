@@ -8,7 +8,7 @@ import { IoMapOutline } from "react-icons/io5";
 import { BiCoin } from "react-icons/bi";
 import { useState } from "react";
 import {
-  Reviews,
+  DetailReviews,
   Schedule,
   SelectDate,
 } from "../../components/tourclassDetail";
@@ -118,7 +118,7 @@ const TourClassDatail = () => {
             <Tab items={items} activeIndex={activeTab} onClick={setActiveTab} />
             {activeTab === 0 && <Schedule thisitem={thisitem} />}
             {activeTab === 1 && <SelectDate thisitem={thisitem} />}
-            {activeTab === 2 && <Reviews />}
+            {activeTab === 2 && <DetailReviews />}
           </div>
         </article>
       </div>

@@ -1,6 +1,266 @@
-@use '../../../styles/base' as *;
-@use '../../../styles/utils' as *;
+@use "../../../styles/base" as *;
+@use "../../../styles/utils" as *;
 
 .selectDate {
-    width: 100%;
+  width: 100%;
+  height: vw(600);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h3 {
+    @include font-22px-B;
+    margin-bottom: vw(30);
+  }
+
+  .selectTop {
+    margin-top: vw(60);
+    display: flex;
+    justify-content: space-between;
+    .date-picker {
+      width: vw(400);
+      h3 {
+        margin-bottom: vw(40);
+      }
+      .rdp-root {
+        width: vw(358);
+        margin: 0 auto;
+        .rdp-month {
+          width: vw(358);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .rdp-button_previous {
+          height: vw(32);
+          inset-inline-start: vw(30);
+          .rdp-chevron {
+            fill: $black;
+          }
+        }
+        .rdp-month_caption {
+          height: vw(60);
+          align-items: start;
+
+          .rdp-caption_label {
+            display: inline-block;
+            height: vw(30);
+            @include font-22px-B;
+          }
+        }
+        .rdp-button_next {
+          height: vw(32);
+          inset-inline-end: vw(30);
+          .rdp-chevron {
+            fill: $black;
+          }
+        }
+
+        .rdp-weekdays {
+          height: vw(50);
+          .rdp-weekday {
+            opacity: 1;
+            padding: 0;
+            @include font-18px-B;
+          }
+        }
+
+        .rdp-day {
+          @include font-16px-M;
+          &.rdp-disabled {
+            .rdp-day_button {
+              opacity: 0.3;
+            }
+          }
+          &.rdp-today {
+            .rdp-day_button {
+              color: $sub3;
+            }
+          }
+
+          &.rdp-range_start,
+          &.rdp-range_end {
+            .rdp-day_button {
+              background: $sub3;
+            }
+          }
+        }
+      }
+    }
+    .selectRight {
+      width: vw(400);
+      .people-selector {
+        .people {
+          display: flex;
+          justify-content: space-between;
+          span {
+            @include font-20px-B;
+          }
+          .peopleBtn {
+            width: vw(140);
+            height: vw(40);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: vw(2) solid $sub1;
+            border-radius: vw(10);
+            .minusBtn,
+            .plusBtn {
+              width: vw(40);
+              height: vw(40);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border: none;
+              @include font-18px-B;
+              color: #d0d0d0;
+
+              &:first-child {
+                border-right: vw(2) solid $sub1;
+              }
+              &:last-child {
+                border-left: vw(2) solid $sub1;
+              }
+            }
+          }
+        }
+      }
+
+      .coupon-apply {
+        margin-top: vw(60);
+
+        .coupon-dropdown {
+          position: relative;
+          width: 100%;
+
+          .coupon-button {
+            z-index: 2;
+            width: 100%;
+            padding: vw(12) vw(18);
+            background-color: $white;
+            border: vw(2) solid $sub1;
+            border-radius: vw(10);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+              background-color: #f8f9fa;
+            }
+
+            .coupon-content {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              width: 100%;
+
+              .placeholder {
+                @include font-16px-M;
+                color: #999;
+              }
+
+              .selected {
+                @include font-16px-B;
+                color: $black;
+              }
+
+              .discount-amount {
+                @include font-16px-B;
+                color: $sub3;
+              }
+            }
+
+            .chevron {
+              color: #999;
+              @include font-22px-B;
+              margin-left: vw(8);
+              display: flex;
+              align-items: center;
+            }
+          }
+
+          .coupon-menu {
+            position: absolute;
+            top: 80%;
+            left: 0;
+            right: 0;
+            border: vw(2) solid $sub1;
+            border-radius: 0 0 vw(10) vw(10);
+            z-index: 1;
+            padding: vw(18) vw(10) vw(10) vw(10);
+
+            .coupon-item {
+              width: 100%;
+              padding: vw(14) vw(8);
+              background: none;
+              border: none;
+              cursor: pointer;
+              transition: background-color 0.2s ease;
+
+              &:hover {
+                background-color: #f8f9fa;
+              }
+
+              &.selected {
+                background-color: $sub3;
+                .coupon-name {
+                  color: $white;
+                }
+                .coupon-discount {
+                  color: $white !important;
+                }
+              }
+
+              .coupon-item-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                text-align: left;
+
+                .coupon-name {
+                  @include font-14px-M;
+                }
+
+                .coupon-discount {
+                  @include font-14px-B;
+                  color: $sub3;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .selectBottom {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    p {
+      @include font-16px-M;
+      text-decoration: line-through;
+      margin-right: vw(10);
+    }
+    strong {
+      @include font-32px-B;
+      color: $sub3;
+      margin-right: vw(30);
+    }
+    button {
+      width: vw(160);
+      height: vw(48);
+      background: $main1;
+      border: none;
+      @include font-18px-SB;
+      font-family: $font-main;
+      color: $white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        background: $sub3;
+      }
+    }
+  }
 }

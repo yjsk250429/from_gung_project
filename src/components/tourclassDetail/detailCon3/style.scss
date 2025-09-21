@@ -1,2 +1,129 @@
-@use '../../../styles/base' as *;
-@use '../../../styles/utils' as *;
+@use "../../../styles/base" as *;
+@use "../../../styles/utils" as *;
+
+.detailReviews {
+  width: 100%;
+  height: vw(600);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .reviewsList {
+    width: 100%;
+    height: vw(360);
+    margin-top: vw(40);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    .reviewsRow {
+      width: max-content;
+      height: vw(70);
+      display: flex;
+      white-space: nowrap;
+      gap: vw(40);
+      will-change: transform;
+
+      .reviewItem {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+
+        background: $sub1;
+        border-radius: vw(100);
+        padding: vw(10) vw(30);
+        box-sizing: border-box;
+
+        &--new {
+          border: 2px solid $sub3;
+          font-weight: bold;
+
+          p {
+            color: $sub3;
+          }
+        }
+
+        span {
+          width: vw(50);
+          height: vw(50);
+          margin-right: vw(10);
+        }
+        p {
+          @include font-18px;
+        }
+      }
+    }
+  }
+  .reviewAdd {
+    width: 100%;
+    height: vw(48);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .starRating {
+      display: flex;
+      strong {
+        font-size: vw(28);
+        height: vw(28);
+        color: $sub3;
+        svg {
+          display: block;
+        }
+      }
+    }
+    .loginUser {
+      width: vw(580);
+      display: flex;
+      align-items: center;
+      .userInfo {
+        display: flex;
+        align-items: center;
+        .profileImg {
+          display: inline-block;
+          width: vw(48);
+          height: vw(48);
+          margin-right: vw(10);
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        .userNickname {
+          @include font-18px-B;
+          margin-right: vw(20);
+        }
+      }
+      .reviewInputArea {
+        display: flex;
+        flex: 1;
+        .reviewInput {
+          width: 100%;
+          height: vw(48);
+
+          border: none;
+          background-color: $sub2;
+          border-radius: vw(100);
+          padding: 0 vw(30);
+          outline: none;
+
+          @include font-18px;
+        }
+      }
+    }
+    button {
+      width: vw(160);
+      height: vw(48);
+      background: $main1;
+      border: none;
+      @include font-18px-SB;
+      font-family: $font-main;
+      color: $white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        background: $sub3;
+      }
+    }
+  }
+}

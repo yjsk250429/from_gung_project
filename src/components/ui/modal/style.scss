@@ -8,6 +8,8 @@
     .modal {
         @include modalLayout;
         position: relative;
+        &.coupon {
+        }
         &.logoutComplete,
         &.withdrawComplete,
         &.editInfoComplete {

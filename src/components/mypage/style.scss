@@ -71,10 +71,13 @@
                 }
                 &:hover {
                     background: #868ac248;
-                    // color: $white;
-                    // img {
-                    //     filter: invert(1);
-                    // }
+                }
+                &:disabled {
+                    opacity: 0.4;
+                    cursor: auto;
+                    &:hover {
+                        background: none;
+                    }
                 }
             }
         }

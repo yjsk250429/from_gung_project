@@ -25,7 +25,12 @@ const MyPagemain = () => {
                         <div className="profile_info">
                             <p className="nickname">{user?.nickName || '닉네임'}</p>
                             <p className="username">({user?.name || '이름'})</p>
-                            <button className="btn_edit" type="button" onClick={openEditPassword}>
+                            <button
+                                className="btn_edit"
+                                type="button"
+                                onClick={!user?.isKakao ? openEditPassword : undefined}
+                                disabled={user?.isKakao}
+                            >
                                 <span>회원정보 수정</span>
                                 <img src="/images/mypage/pen.png" alt="" />
                             </button>

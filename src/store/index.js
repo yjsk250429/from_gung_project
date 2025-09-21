@@ -59,8 +59,19 @@ export const useAuthStore = create((set, get) => ({
     },
 
     // 로그인
-    login: ({ userId, password }) => {
+    login: ({ userId, password, isExternal = false, profile, nickName }) => {
         const { members } = get();
+
+        if (isExternal) {
+            // 카카오 같은 외부 로그인 → 그냥 바로 인증 처리
+            const externalUser = { userId, nickName, profile };
+            set({ authed: true, user: externalUser });
+            localStorage.setItem('authed', JSON.stringify(true));
+            localStorage.setItem('user', JSON.stringify(externalUser));
+            return;
+        }
+
+        // 기존 로직
         const item = members.find((member) => member.userId === userId);
         if (item && item.password === password) {
             set({ authed: true, user: item });
@@ -78,6 +89,13 @@ export const useAuthStore = create((set, get) => ({
         set({ authed: false, user: null });
         localStorage.setItem('authed', JSON.stringify(false));
         localStorage.setItem('user', JSON.stringify(null));
+
+        // 카카오 로그인 유저라면 토큰도 삭제
+        if (window.Kakao && window.Kakao.Auth.getAccessToken()) {
+            window.Kakao.Auth.logout(() => {
+                console.log('카카오 로그아웃 완료');
+            });
+        }
     },
 
     // 회원가입 (기본값: 마케팅 미동의)
@@ -99,6 +117,7 @@ export const useAuthStore = create((set, get) => ({
         const { user, members } = get();
         if (!user) return;
 
+        // 회원 목록에서 삭제 (내부 DB/로컬 관리용)
         const updatedMembers = members.filter((m) => m.id !== user.id);
 
         set({ members: updatedMembers, authed: false, user: null });
@@ -106,6 +125,19 @@ export const useAuthStore = create((set, get) => ({
         localStorage.setItem('members', JSON.stringify(updatedMembers));
         localStorage.setItem('authed', JSON.stringify(false));
         localStorage.setItem('user', JSON.stringify(null));
+
+        //  카카오 로그인 계정이면 앱 연결 해제 (unlink)
+        if (window.Kakao && window.Kakao.Auth.getAccessToken()) {
+            window.Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function (res) {
+                    console.log('카카오 연결 해제 완료:', res);
+                },
+                fail: function (err) {
+                    console.error(' 카카오 연결 해제 실패:', err);
+                },
+            });
+        }
     },
 
     //회원정보 수정
@@ -127,6 +159,13 @@ export const useAuthStore = create((set, get) => ({
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+
+    // 카카오 로그인 전용
+    kakaoLogin: (kakaoUser) => {
+        set({ authed: true, user: kakaoUser });
+        localStorage.setItem('authed', JSON.stringify(true));
+        localStorage.setItem('user', JSON.stringify(kakaoUser));
     },
 }));
 

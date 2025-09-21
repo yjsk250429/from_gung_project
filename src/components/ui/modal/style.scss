@@ -372,17 +372,23 @@
                 gap: vw(8);
             }
             .bottom {
-                margin-top: vw(50);
+                margin-top: vw(40);
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 li {
                     @include font-16px-SB;
                     cursor: pointer;
                     &:first-child {
                         display: flex;
                         align-items: center;
-                        gap: vw(4);
                         color: #3c1e1e;
+                        background: #fee500;
+                        padding: vw(8) vw(16);
+                        border-radius: vw(4);
+                        img {
+                            margin-right: vw(8);
+                        }
                     }
                     &:last-child {
                         text-decoration: underline;
@@ -456,6 +462,12 @@
     background-position: 150% 0%;
     background-color: $sub1;
     @include ottMainDropShadow;
+    h3 {
+        text-align: center;
+        width: vw(220);
+        margin: auto;
+        margin-top: vw(80);
+    }
     .myreward,
     .attendance {
         strong {

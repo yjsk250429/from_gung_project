@@ -32,7 +32,7 @@ const EditInfo = () => {
     const user = useAuthStore((s) => s.user);
     const updateUser = useAuthStore((s) => s.updateUser);
 
-    const { userId, name, birth, nickName, tel, marketing, marketingDate } = user;
+    const { userId, name, birth, nickName, tel, marketing, marketingDate } = user || {};
 
     const initialForm = {
         nickName: nickName || '',
@@ -58,6 +58,7 @@ const EditInfo = () => {
             });
         }
     }, [user]);
+    if (!editInfoOpen || !user) return null;
 
     const resetForm = () => {
         setForm(initialForm);
@@ -142,8 +143,6 @@ const EditInfo = () => {
         resetForm();
         closeEditInfo();
     };
-
-    if (!editInfoOpen || !user) return null;
 
     return (
         <div className="modal-overlay">

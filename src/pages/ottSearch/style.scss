@@ -14,7 +14,32 @@
     width: vw(1600);
     height: vw(50);
     position: relative;
+ .back-btn {
+      position: absolute;
+      left: vw(0);
+      top: vw(50);
+      transform: translateY(-50%);
+      z-index: 2;
 
+      width: vw(4);
+      height: vw(44);
+      border-radius: vw(999);
+
+      display: grid;
+      place-items: center;
+
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease, transform .1s ease;
+
+      svg {
+        width: vw(28);
+        height: vw(28);
+        display: block;
+      }
+      }
+  
 
     .ott-search.wide {
       position: absolute;

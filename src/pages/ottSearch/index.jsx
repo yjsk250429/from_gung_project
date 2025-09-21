@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useMovieStore } from '../../store';
 import { isMovieEntity, isDramaEntity } from '../../store';
 import Button from '../../components/ui/button/Button';
-import { TbSearch } from 'react-icons/tb';
+import { TbSearch, TbChevronLeft } from 'react-icons/tb';
 // RoundTap은 안쓰면 제거해도 됩니다.
 
 const PAGE_CHUNK = 10;
@@ -74,6 +74,15 @@ export default function OttSearch() {
     <div className="ott-search-page">
       {/* 상단: 검색창만 오른쪽 */}
       <div className="search-head">
+      {/* 뒤로가기 */}
+       <button
+         type="button"
+         className="back-btn"
+         aria-label="뒤로가기"
+         onClick={() => navigate('/ottsub')}
+       >
+        <TbChevronLeft />
+       </button>
         <form className="ott-search wide" onSubmit={onSubmit} role="search" aria-label="OTT 검색">
           <input
             type="text"

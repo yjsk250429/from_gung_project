@@ -1,10 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MyRoutes } from './routes/MyRoutes';
 import IntroOverlay from './components/ui/intro/IntroOverlay';
 import './styles/index.scss';
 
 function App() {
     const [introDone, setIntroDone] = useState(false);
+    useEffect(() => {
+        const kakaoKey = import.meta.env.VITE_KAKAO_JS_KEY;
+        if (window.Kakao && !window.Kakao.isInitialized()) {
+            window.Kakao.init(kakaoKey);
+            console.log('Kakao SDK Init 완료');
+        }
+    }, []);
 
     return (
         <>

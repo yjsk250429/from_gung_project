@@ -4,57 +4,134 @@
 @use '../../styles/ui/tourList' as *;
 
 .ottclass {
+  position: relative;
+
+  .bg {
+    width: 100%;
+    height: vw(523);
+    position: absolute;
+    top: 200px;
+    background-image: url('/images/tourclass/bg.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .top {
     position: relative;
-    .bg {
-        width: 100%;
-        height: vw(523);
+
+    /* 탭 + 검색창 묶음 */
+    .top-head {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center; // 탭 가운데
+      gap: vw(20);
+      margin-bottom: vw(16);
+      min-height: vw(56); // 검색창 높이 확보
+      padding: 0 vw(90);  // 좌우 여백(검색창을 우측에 올리기 위한 공간)
+    }
+
+    /* 둥근 탭 기존 스타일 유지 */
+    .roundTap {
+      li {
+        &:first-child {
+          background: $sub3;
+        }
+      }
+    }
+
+    /* 검색창 */
+    .ott-search {
         position: absolute;
-        top: 200px;
-        background-image: url('/images/tourclass/bg.png');
-        background-position: 0 0;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    .top {
-        .recommend {
-            @include twoBoxes;
+        right: vw(90);
+        bottom: vw(-120);
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: vw(360);
+      height: vw(44);
+      background: #1f1f1f;
+      border: vw(1) solid rgba(255,255,255,0.15);
+      border-radius: vw(999);
+      padding-left: vw(16);
+      overflow: hidden;
+
+      input {
+        flex: 1;
+        height: 100%;
+        background: transparent;
+        border: 0;
+        outline: 0;
+        color: $white;
+        @include font-16px;
+        &::placeholder {
+          color: rgba(255,255,255,0.55);
         }
-        > span {
-            @include font-20px-B;
-            font-family: 'Arita buri';
-            color: $white;
-            display: block;
-            margin-bottom: vw(20);
-            margin-top: vw(-20);
-            margin-left: vw(89);
+      }
+
+      button {
+        width: vw(48);
+        height: 100%;
+        display: grid;
+        place-items: center;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        svg {
+          width: vw(18);
+          height: vw(18);
+          color: $white;
+          opacity: .85;
         }
-        .roundTap {
-            li {
-                &:first-child {
-                    background: $sub3;
-                }
-            }
+        &:hover svg {
+          opacity: 1;
         }
+      }
+
+      /* 포커스 링 */
+      &:focus-within {
+        border-color: rgba(255,255,255,0.35);
+        box-shadow: 0 0 vw(12) rgba(255,255,255,0.08) inset;
+      }
     }
-    .TourClassList {
-        margin-top: 50px;
-        @include tourList;
+
+    .recommend {
+      @include twoBoxes;
     }
+
+    > span {
+      @include font-20px-B;
+      font-family: 'Arita buri';
+      color: $white;
+      display: block;
+      margin-bottom: vw(20);
+      margin-top: vw(-20);
+      margin-left: vw(89);
+    }
+  }
+
+  .TourClassList {
+    margin-top: 50px;
+    @include tourList;
+  }
 }
 
 .ottlist-container {
-    text-align: center;
-    margin-top: vw(20);
+  text-align: center;
+  margin-top: vw(20);
 
-    .ottlist {
-        display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: vw(30);
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
-    button {
-        margin-top: vw(100);
-    }
+  .ottlist {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: vw(30);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  button {
+    margin-top: vw(100);
+  }
 }

@@ -5,11 +5,9 @@ import WishlistSection from './sections/WishlistSection.jsx';
 import ReviewSection from './sections/ReviewSection.jsx';
 import InquirySection from './sections/InquirySection.jsx';
 import { useAuthStore, useModalStore } from '../../store/index.js';
-import WithdrawComplete from '../ui/modal/WithdrawComplete.jsx';
-import WithdrawConfirm from '../ui/modal/WithdrawConfirm.jsx';
 
 const MyPagemain = () => {
-    const { openEditInfo, openWithdrawConfirm } = useModalStore();
+    const { openEditPassword, openWithdrawConfirm } = useModalStore();
     const [activeMenu, setActiveMenu] = useState('reservation');
     const isWishlistOpen = activeMenu === 'wishlist';
     const user = useAuthStore((s) => s.user);
@@ -27,7 +25,7 @@ const MyPagemain = () => {
                         <div className="profile_info">
                             <p className="nickname">{user?.nickName || '닉네임'}</p>
                             <p className="username">({user?.name || '이름'})</p>
-                            <button className="btn_edit" type="button" onClick={openEditInfo}>
+                            <button className="btn_edit" type="button" onClick={openEditPassword}>
                                 <span>회원정보 수정</span>
                                 <img src="/images/mypage/pen.png" alt="" />
                             </button>
@@ -113,8 +111,6 @@ const MyPagemain = () => {
                     {activeMenu === 'inquiry' && <InquirySection />}
                 </section>
             </div>
-            <WithdrawConfirm />
-            <WithdrawComplete />
         </div>
     );
 };

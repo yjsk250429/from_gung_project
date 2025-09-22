@@ -5,7 +5,7 @@
     position: relative;
 
     .inner {
-        width: vw(1220);
+        width: vw(1300);
         height: vw(1000);
         margin: auto;
         padding: vw(150) 0;
@@ -206,13 +206,14 @@
             }
         }
         .right {
-            width: vw(520);
+            width: vw(550);
             height: vw(850);
             border: 2px solid $light-gray;
             border-radius: vw(20);
             box-sizing: border-box;
             padding: vw(30);
             margin: 0;
+            margin-top: vw(30);
             .pay-info {
                 margin-top: vw(40);
                 width: vw(460);

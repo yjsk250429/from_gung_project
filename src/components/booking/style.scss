@@ -51,7 +51,7 @@
                 }
             }
             .basic-info {
-                margin-bottom: vw(80);
+                margin-bottom: vw(50);
                 h3 {
                     margin-top: vw(12);
                     padding-bottom: vw(26);
@@ -86,19 +86,115 @@
                     }
                 }
             }
-            .group {
-                position: sticky;
-                height: vw(700);
-                top: vw(150);
-                z-index: 10;
-                .tabs {
+
+            .charge-info {
+                width: vw(655);
+                height: vw(208);
+                span {
+                    @include font-18px;
+                    color: $gray;
+                    display: inline-block;
+                    margin-bottom: vw(5);
+                }
+                p {
+                    @include font-18px-B;
+                    color: $black;
+                    &:first-of-type {
+                        display: block;
+                        margin-bottom: vw(20);
+                    }
+                }
+                em {
+                    @include font-18px;
+                    font-weight: 500;
+                    color: $gray;
+                    display: inline-block;
+                    margin-left: vw(458);
+                }
+                .sum {
+                    width: vw(655);
+                    height: vw(44);
+                    border-top: 1px solid $gray;
+                    @include font-20px-B;
+                    display: flex;
+                    justify-content: space-between;
+                    padding-top: vw(15);
+                    margin-top: vw(40);
+                    p {
+                        @include font-20px-B;
+                        color: $main1;
+                    }
+                }
+            }
+
+            .booking-info {
+                margin-top: vw(90);
+                width: vw(520);
+                height: vw(267);
+                strong {
+                    @include font-24px-B;
+                    color: $black;
+                    display: flex;
+                    gap: vw(5);
+                    margin-bottom: vw(20);
+                    span {
+                        @include font-18px-B;
+                        color: $sub3;
+                    }
+                }
+                .txtbox {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    margin-bottom: vw(20);
+                    p {
+                        @include font-16px;
+                        width: vw(115);
+                        height: vw(23);
+                        display: flex;
+                    }
+                    input {
+                        width: vw(405);
+                        height: vw(35);
+                        border: 2px solid $sub3;
+                        border-radius: vw(4);
+                        outline: none;
+                        margin-bottom: vw(4);
+                    }
+                    i {
+                        @include font-12px;
+                        color: $sub3;
+                        margin-left: vw(115);
+                    }
+                }
+            }
+
+            .charge {
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                gap: vw(20);
+                margin-top: vw(60);
+                strong {
+                    @include font-24px-B;
+                    color: $black;
+                    display: flex;
+                    gap: vw(5);
+                    margin: 0;
+                    span {
+                        @include font-18px-B;
+                        color: $sub3;
+                    }
+                }
+                .selec {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: vw(20);
                     li {
-                        color: $sub2;
-                        border-color: $sub2;
-                        font-weight: 600;
-                        &.on {
-                            color: $sub3;
-                            border-color: $sub3;
+                        @include font-18px-SB;
+                        input {
+                            margin-right: vw(5);
                         }
                     }
                 }

@@ -1,282 +1,282 @@
-@use "./unit" as *;
+@use './unit' as *;
 //B: bold style. 안 붙어있는 건 normal
 
 @mixin font-200px-B {
-  font-size: vw(200);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(200);
+    font-size: vw(200);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(200);
 }
 
 @mixin font-160px-B {
-  font-size: vw(160);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(200);
+    font-size: vw(160);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(200);
 }
 
 @mixin font-130px-B {
-  font-size: vw(130);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(170);
+    font-size: vw(130);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(170);
 }
 
 @mixin font-105px-B {
-  font-size: vw(105);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
-  line-height: vw(140);
+    font-size: vw(105);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(140);
 }
 
 @mixin font-70px {
-  font-size: vw(70);
-  font-weight: 500;
+    font-size: vw(70);
+    font-weight: 500;
 }
 
 @mixin font-75px-B {
-  font-size: vw(75);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(95);
+    font-size: vw(75);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(95);
 }
 
 @mixin font-55px-B {
-  font-size: vw(55);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(68);
+    font-size: vw(55);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(68);
 }
 
 @mixin font-48px {
-  font-size: vw(48);
-  font-weight: 500;
+    font-size: vw(48);
+    font-weight: 500;
 }
 
 @mixin font-40px-SB {
-  font-size: vw(40);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
+    font-size: vw(40);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
 }
 
 @mixin font-35px-B {
-  font-size: vw(35);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(48);
+    font-size: vw(35);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(48);
 }
 
 @mixin font-35px-SB {
-  font-size: vw(35);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
-  line-height: vw(48);
+    font-size: vw(35);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(48);
 }
 
 @mixin font-32px-B {
-  font-size: vw(32);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(48);
+    font-size: vw(32);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(48);
 }
 @mixin font-32px-SB {
-  font-size: vw(32);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
-  line-height: vw(48);
+    font-size: vw(32);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(48);
 }
 @mixin font-32px {
-  font-size: vw(32);
-  letter-spacing: vw(-0.3);
-  line-height: vw(48);
+    font-size: vw(32);
+    letter-spacing: vw(-0.3);
+    line-height: vw(48);
 }
 
 @mixin font-32px-SB {
-  font-size: vw(32);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
-  line-height: vw(48);
+    font-size: vw(32);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(48);
 }
 
 @mixin font-30px-B {
-  font-size: vw(32);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
+    font-size: vw(32);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
 }
 @mixin font-30px-M {
-  font-size: vw(32);
-  font-weight: 500;
-  letter-spacing: vw(-0.3);
+    font-size: vw(32);
+    font-weight: 500;
+    letter-spacing: vw(-0.3);
 }
 
 @mixin font-30px-R {
-  font-size: vw(30);
-  font-weight: 400;
+    font-size: vw(30);
+    font-weight: 400;
 }
 
 @mixin font-25px-SB {
-  font-size: vw(25);
-  font-weight: 600;
+    font-size: vw(25);
+    font-weight: 600;
 }
 
 @mixin font-24px-B {
-  font-size: vw(24);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(36);
+    font-size: vw(24);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(36);
 }
 @mixin font-24px-SB {
-  font-size: vw(24);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
-  line-height: vw(36);
+    font-size: vw(24);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(36);
 }
 @mixin font-24px-R {
-  font-size: vw(24);
+    font-size: vw(24);
 }
 
 @mixin font-22px-B {
-  font-size: vw(22);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(30);
+    font-size: vw(22);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(30);
 }
 @mixin font-20px-B {
-  font-size: vw(20);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(30);
+    font-size: vw(20);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(30);
 }
 
 @mixin font-20px-M {
-  font-size: vw(20);
-  font-weight: 500;
-  letter-spacing: vw(-0.3);
-  line-height: vw(30);
+    font-size: vw(20);
+    font-weight: 500;
+    letter-spacing: vw(-0.3);
+    line-height: vw(30);
 }
 @mixin font-20px-R {
-  font-size: vw(20);
-  font-weight: 400;
+    font-size: vw(20);
+    font-weight: 400;
 }
 
 @mixin font-18px-B {
-  font-size: vw(18);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(27);
+    font-size: vw(18);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(27);
 }
 
 @mixin font-18px-SB {
-  font-size: vw(18);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
-  line-height: vw(27);
+    font-size: vw(18);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(27);
 }
 @mixin font-18px {
-  font-size: vw(18);
-  letter-spacing: vw(-0.3);
-  line-height: vw(27);
+    font-size: vw(18);
+    letter-spacing: vw(-0.3);
+    line-height: vw(27);
 }
 
 @mixin font-16px-B {
-  font-size: vw(16);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(24);
+    font-size: vw(16);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(24);
 }
 
 @mixin font-16px-SB {
-  font-size: vw(16);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
-  line-height: vw(24);
+    font-size: vw(16);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(24);
 }
 @mixin font-16px-M {
-  font-size: vw(16);
-  font-weight: 500;
-  letter-spacing: vw(-0.3);
-  line-height: 140%;
+    font-size: vw(16);
+    font-weight: 500;
+    letter-spacing: vw(-0.3);
+    line-height: 140%;
 }
 @mixin font-16px {
-  font-size: vw(16);
-  letter-spacing: vw(-0.3);
-  line-height: 140%;
+    font-size: vw(16);
+    letter-spacing: vw(-0.3);
+    line-height: 140%;
 }
 
 @mixin font-15px-B {
-  font-size: vw(15);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(21);
+    font-size: vw(15);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(21);
 }
 
 @mixin font-15px-SB {
-  font-size: vw(15);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
-  line-height: vw(21);
+    font-size: vw(15);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(21);
 }
 @mixin font-15px {
-  font-size: vw(15);
-  letter-spacing: vw(-0.3);
+    font-size: vw(15);
+    letter-spacing: vw(-0.3);
 }
 
 @mixin font-14px {
-  font-size: vw(14);
-  letter-spacing: vw(-0.3);
-  line-height: vw(21);
+    font-size: vw(14);
+    letter-spacing: vw(-0.3);
+    line-height: vw(21);
 }
 
 @mixin font-14px-M {
-  font-size: vw(14px);
-  font-weight: 500;
-  letter-spacing: vw(-0.3);
+    font-size: vw(14px);
+    font-weight: 500;
+    letter-spacing: vw(-0.3);
 }
 
 @mixin font-14px-B {
-  font-size: vw(14);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(21);
+    font-size: vw(14);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(21);
 }
 
 @mixin font-12px-B {
-  font-size: vw(12);
-  font-weight: 700;
-  letter-spacing: vw(-0.3);
-  line-height: vw(18);
+    font-size: vw(12);
+    font-weight: 700;
+    letter-spacing: vw(-0.3);
+    line-height: vw(18);
 }
 
 @mixin font-12px-SB {
-  font-size: vw(12);
-  font-weight: 600;
-  letter-spacing: vw(-0.3);
-  line-height: vw(18);
+    font-size: vw(12);
+    font-weight: 600;
+    letter-spacing: vw(-0.3);
+    line-height: vw(18);
 }
 
 @mixin font-20px {
-  font-size: vw(20);
-  letter-spacing: vw(-0.3);
-  line-height: vw(30);
+    font-size: vw(20);
+    letter-spacing: vw(-0.3);
+    line-height: vw(30);
 }
 @mixin font-20px-SB {
-  font-size: vw(20px);
-  font-weight: 600;
+    font-size: vw(20px);
+    font-weight: 600;
 }
 
 @mixin font-12px {
-  font-size: vw(12);
-  letter-spacing: vw(-0.3);
-  line-height: vw(18);
+    font-size: vw(12);
+    letter-spacing: vw(-0.3);
+    line-height: vw(18);
 }
 @mixin font-15px-SB {
-  font-size: vw(15px);
-  font-weight: 600;
+    font-size: vw(15px);
+    font-weight: 600;
 }
 @mixin font-15px-R {
-  font-size: vw(15px);
-  letter-spacing: vw(-0.5);
+    font-size: vw(15px);
+    letter-spacing: vw(-0.5);
 }
 @mixin font-17px {
-  font-size: vw(17px);
+    font-size: vw(17px);
 }

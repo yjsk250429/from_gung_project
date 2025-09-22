@@ -2,7 +2,7 @@
 import { tmdb, img } from './tmdb';
 
 const APPEND_TV = 'aggregate_credits,images,content_ratings,watch/providers,external_ids';
-const APPEND_MOVIE = 'credits,images,releases,watch/providers,external_ids';
+const APPEND_MOVIE = 'credits,images,release_dates,watch/providers,external_ids';
 
 const pickByLang = (arr, key = 'file_path', order = ['ko', null, 'en']) => {
     if (!Array.isArray(arr) || !arr.length) return null;
@@ -62,6 +62,21 @@ async function fetchCore({ type, tmdbId, season }) {
             episodes = [];
         }
     }
+    // certification 추출
+    let certification = null;
+    if (t === 'tv') {
+        const arr = base.content_ratings?.results || [];
+        const kr = arr.find((r) => r.iso_3166_1 === 'KR' && r.rating);
+        const us = arr.find((r) => r.iso_3166_1 === 'US' && r.rating);
+        certification = kr?.rating || us?.rating || null;
+    } else {
+        const arr = base.release_dates?.results || [];
+        const kr = arr.find((r) => r.iso_3166_1 === 'KR');
+        const us = arr.find((r) => r.iso_3166_1 === 'US');
+        const node = kr || us || arr[0];
+        const rd = node?.release_dates?.find((e) => e.certification);
+        certification = rd?.certification || null;
+    }
 
     return {
         id: base.id,
@@ -71,7 +86,7 @@ async function fetchCore({ type, tmdbId, season }) {
         overview: base.overview ?? '',
         genres: base.genres ?? [],
         rating: base.vote_average ?? null,
-        certification: null, // 필요시 releases/content_ratings에서 추가
+        certification, // ← 이제 실제 값이 들어감
         poster: posterPref ? img(posterPref, 'w500') : null,
         backdrop: backdropPref ? img(backdropPref, 'w1280') : null,
         titleLogo: logoPref ? img(logoPref, 'w500') : null,

@@ -75,7 +75,7 @@ const normalizeGenres = (g) => {
 
 // 디폴트 값을 '전체이용가'로 맞춤 (UI 요구사항)
 const normalizeCert = (cert) => {
-    const fallback = '전체이용가';
+    const fallback = '-';
     if (cert == null) return fallback;
 
     if (typeof cert === 'string' || typeof cert === 'number') {
@@ -330,7 +330,7 @@ const OttDetailVisual = ({
                         <p>{g0 || '-'}</p>
                         <p>{g1 || ''}</p>
                         <p>{safeSeasons ? `시즌 ${safeSeasons}개` : '시즌 정보 없음'}</p>
-                        <p>{hasSubtitle ? '자막' : '자막 없음'}</p>
+                        <p>자막</p>
                     </div>
 
                     {logoSrc ? (
@@ -358,7 +358,7 @@ const OttDetailVisual = ({
                 </div>
             </section>
 
-            <div className="bottom">
+            {/* <div className="bottom">
                 <div className="line" />
                 <div className="icons">
                     <p>
@@ -377,7 +377,7 @@ const OttDetailVisual = ({
                         </a>
                     </p>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

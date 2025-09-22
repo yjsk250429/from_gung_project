@@ -15,13 +15,51 @@ import { seeds } from '../../tmdb/seeds';
 import './style.scss';
 
 // ---- 시청연령 계산 헬퍼(훅 아님) ---------------------------------
+// ---- 시청연령 계산 헬퍼(훅 아님) — 교체 버전 -----------------------
 function computeCertString(data, mediaType) {
     const S = (v) => (v == null ? '' : String(v).trim());
+
+    // 연령 토큰 정규화: 연령처럼 보이는 값만 남기고, 평점처럼 보이면 버린다.
+    const normalizeCertToken = (v) => {
+        const s = S(v);
+        if (!s) return '';
+
+        const up = s.toUpperCase();
+
+        // 평점(소수점 포함 0~10대 형태)처럼 보이면 제외
+        if (/^\d+\.\d+$/.test(s)) return ''; // e.g. "7.4"
+        if (/^(10|[0-9])(\.\d+)?$/.test(s)) return ''; // "8", "9.0" 등도 배제
+
+        // 전체 이용가 매핑
+        if (
+            up === 'ALL' ||
+            up === '0' ||
+            up === '전체이용가' ||
+            up === 'G' ||
+            up === 'TV-G' ||
+            up === 'TV-Y'
+        )
+            return '-';
+
+        // 숫자 등급 (7, 12, 15, 18, 19)
+        if (/^(7|12|15|18|19)$/.test(s)) return s;
+
+        // 미국식 등급 최소 매핑 (필요시 확장)
+        if (/^PG-?13$/.test(up)) return '13';
+        if (up === 'R') return '17';
+        if (up === 'NC-17') return '17';
+        if (up === 'TV-14') return '14';
+        if (up === 'TV-MA') return '19';
+
+        // 그 외 문자열은 그대로(예: "PG") — 원하면 숫자로 더 매핑 가능
+        return s;
+    };
+
     if (!data) return '-';
 
-    // 이미 가공값이 있으면 우선
-    if (S(data.certification)) return S(data.certification);
-    if (S(data.cert)) return S(data.cert);
+    // 이미 가공된 값이 있으면 먼저 사용
+    const pre = normalizeCertToken(data.certification) || normalizeCertToken(data.cert);
+    if (pre) return pre;
 
     if (mediaType === 'tv') {
         // TMDB TV: content_ratings.results = [{ iso_3166_1, rating }]
@@ -29,15 +67,19 @@ function computeCertString(data, mediaType) {
             data?.content_ratings?.results ??
             (Array.isArray(data?.results) ? data.results : []) ??
             [];
-        if (Array.isArray(arr)) {
+        if (Array.isArray(arr) && arr.length) {
             const pick = (cc) =>
-                arr.find((n) => (n?.iso_3166_1 ?? n?.country ?? n?.iso) === cc && S(n?.rating));
-            return (
-                S(pick('KR')?.rating) ||
-                S(pick('US')?.rating) ||
-                S(arr.find((n) => S(n?.rating))?.rating) ||
-                '-'
+                arr.find(
+                    (n) =>
+                        (n?.iso_3166_1 ?? n?.country ?? n?.iso) === cc &&
+                        normalizeCertToken(n?.rating)
+                );
+            const kr = normalizeCertToken(pick('KR')?.rating);
+            const us = normalizeCertToken(pick('US')?.rating);
+            const any = normalizeCertToken(
+                (arr.find((n) => normalizeCertToken(n?.rating)) || {}).rating
             );
+            return kr || us || any || '-';
         }
     } else {
         // TMDB Movie: release_dates.results[].release_dates[].certification
@@ -49,14 +91,17 @@ function computeCertString(data, mediaType) {
             const pick = (cc) => nodes.find((n) => (n?.iso_3166_1 ?? n?.country ?? n?.iso) === cc);
             const node = pick('KR') || pick('US') || nodes[0];
             const rds = node?.release_dates ?? node?.dates ?? [];
-            if (Array.isArray(rds)) {
-                const hit = rds.find((e) => S(e?.certification));
-                if (hit) return S(hit.certification);
+            if (Array.isArray(rds) && rds.length) {
+                const hit = rds.find((e) => normalizeCertToken(e?.certification));
+                const val = normalizeCertToken(hit?.certification);
+                if (val) return val;
             }
         }
     }
     return '-';
 }
+// -------------------------------------------------------------------
+
 // -----------------------------------------------------------------
 
 export default function OttDetail() {

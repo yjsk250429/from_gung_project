@@ -143,93 +143,245 @@
 
 // 내가 쓴 리뷰
 .reviews {
-  width: 100%;
-  margin-top: vw(40);
-  overflow: hidden;
-
-  h2 {
-    @include font-22px-B;
-        margin: 0 0 vw(20);
-  }
-
-  .table {
     width: 100%;
-    border-collapse: collapse;
-    font-size: vw(16);
-    color: #333;
+    margin-top: vw(40);
+    overflow: hidden;
 
-    .thead {
-  display: grid;
-  /* 번호, 날짜, 내용, 제목, 카테고리 → 비율로 분배 */
-  grid-template-columns: 0.7fr 1.2fr 3fr 1.5fr 1.2fr;
-
-  background-color: #f5f5f5;
-  padding: vw(12) vw(20);
-  font-weight: 500;
-  border-bottom: vw(1) solid #ddd;
-
-  span {
-    text-align: center;
-    font-size: vw(16);
-  }
-}
-
-
-    .tbody {
-      padding: vw(40) vw(20);
-      text-align: center;
-      color: #666;
-
-      &.empty {
-        font-size: vw(14);
-      }
+    h2 {
+        @include font-22px-B;
+        margin: 0 0 vw(20);
     }
-  }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: vw(16);
+        color: #333;
+
+        .thead {
+            display: grid;
+            /* 번호, 날짜, 내용, 제목, 카테고리 → 비율로 분배 */
+            grid-template-columns: 0.7fr 1.2fr 3fr 1.5fr 1.2fr;
+
+            background-color: #f5f5f5;
+            padding: vw(12) vw(20);
+            font-weight: 500;
+            border-bottom: vw(1) solid #ddd;
+
+            span {
+                text-align: center;
+                font-size: vw(16);
+            }
+        }
+
+        .tbody {
+            padding: vw(40) vw(20);
+            text-align: center;
+            color: #666;
+
+            &.empty {
+                font-size: vw(14);
+            }
+        }
+    }
 }
 
 // 1대1 문의사항
 .inquiry {
-  width: 100%;
-  margin-top: vw(40);
-  overflow: hidden;
-
-  h2 {
-    @include font-22px-B;
-    margin: 0 0 vw(20);
-  }
-
-  .table {
     width: 100%;
-    border-collapse: collapse;
-    font-size: vw(16);
-    color: #333;
-
-    .thead {
-      display: grid;
-      /* 번호, 날짜, 내용, 답변상태 → 4칸 비율 */
-grid-template-columns: 0.7fr 1.2fr 4.5fr 1.2fr;
-
-
-      background-color: #f5f5f5;
-      padding: vw(12) vw(20);
-      font-weight: 500;
-      border-bottom: vw(1) solid #ddd;
-
-      span {
-        text-align: center;
-        font-size: vw(16);
-      }
-    }
-
+    margin-top: vw(40);
+    overflow: hidden;
     .tbody {
-      padding: vw(40) vw(20);
-      text-align: center;
-      color: #666;
+        .row.clickable {
+            cursor: pointer;
+            transition: background 0.2s;
 
-      &.empty {
-        font-size: vw(14);
-      }
+            &:hover {
+                background: #f9f9f9;
+            }
+        }
     }
-  }
-}
 
+    .detail {
+        border: vw(1) solid #ddd;
+        border-radius: vw(8);
+        background: #fafafa;
+        padding: vw(20);
+        margin-top: vw(20);
+
+        h3 {
+            margin-bottom: vw(16);
+            font-weight: 600;
+            font-size: vw(18);
+        }
+
+        p {
+            margin: vw(8) 0;
+            font-size: vw(14);
+            color: #333;
+
+            strong {
+                margin-right: vw(8);
+            }
+        }
+
+        .detail-buttons {
+            margin-top: vw(20);
+            text-align: right;
+
+            button {
+                padding: vw(8) vw(16);
+                background: #333;
+                color: #fff;
+                border: none;
+                border-radius: vw(4);
+                cursor: pointer;
+                font-size: vw(14);
+
+                &:hover {
+                    background: #555;
+                }
+            }
+        }
+    }
+
+    h2 {
+        @include font-22px-B;
+        margin: 0 0 vw(20);
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: vw(16);
+        color: #333;
+
+        .thead {
+            display: grid;
+            /* 번호, 날짜, 내용, 답변상태 → 4칸 비율 */
+            grid-template-columns: 0.7fr 1.2fr 4.5fr 1.2fr;
+
+            background-color: #f5f5f5;
+            padding: vw(12) vw(20);
+            font-weight: 500;
+            border-bottom: vw(1) solid #ddd;
+
+            span {
+                text-align: center;
+                font-size: vw(16);
+            }
+        }
+
+        .tbody {
+            text-align: center;
+            color: #666;
+
+            &.empty {
+                font-size: vw(14);
+                padding: vw(20);
+            }
+
+            .row {
+                display: grid;
+                grid-template-columns: 0.7fr 1.2fr 4.5fr 1.2fr;
+                padding: vw(12) vw(20);
+                border-bottom: vw(1) solid #eee;
+
+                span {
+                    text-align: center;
+                }
+            }
+        }
+
+        > button {
+            font-family: $font-main;
+            margin: vw(20) auto 0;
+            display: block;
+            padding: vw(10) vw(24);
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: vw(4);
+            cursor: pointer;
+            font-size: vw(14);
+            transition: background 0.2s;
+
+            &:hover {
+                background: #555;
+            }
+        }
+    }
+
+    /* 문의 작성 폼 */
+    .form {
+        padding: vw(20);
+        border: vw(1) solid #ddd;
+        border-radius: vw(8);
+        background: #fafafa;
+        font-size: vw(16);
+        color: #333;
+
+        .form-group {
+            margin-bottom: vw(20);
+
+            label {
+                display: block;
+                font-weight: 500;
+                margin-bottom: vw(8);
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                border: vw(1) solid #ccc;
+                border-radius: vw(4);
+                padding: vw(10);
+                font-size: vw(14);
+                outline: none;
+
+                &:focus {
+                    border-color: #333;
+                }
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: vw(100);
+            }
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: vw(12);
+
+            button {
+                font-family: $font-main;
+                padding: vw(10) vw(20);
+                border: none;
+                border-radius: vw(4);
+                font-size: vw(14);
+                cursor: pointer;
+                transition: background 0.2s;
+
+                &:first-of-type {
+                    background: #333;
+                    color: #fff;
+
+                    &:hover {
+                        background: #555;
+                    }
+                }
+
+                &:last-of-type {
+                    background: #eee;
+                    color: #333;
+
+                    &:hover {
+                        background: #ddd;
+                    }
+                }
+            }
+        }
+    }
+}

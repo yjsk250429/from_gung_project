@@ -13,6 +13,7 @@ import {
     TourClass,
     TourClassDetail,
     TourSearch,
+    Booking,
 } from '../pages';
 import ScrollToTop from '../components/ui/scrolltotop/ScrollToTop';
 
@@ -30,6 +31,7 @@ export const MyRoutes = () => {
                     <Route path="/tourclass" element={<TourClass />} />
                     <Route path="/tourclass/:tourclassID" element={<TourClassDetail />} />
                     <Route path="/tourresults" element={<TourSearch />} />
+                    <Route path="/booking" element={<Booking />} />
 
                     {/* OTT */}
                     {/* 
@@ -44,7 +46,6 @@ export const MyRoutes = () => {
                     <Route path="ott/:mediaType/:ottID" element={<OttDetail />} />
                     {/* <Route path="/vod/:medsiaType/:id" element={<OttDetail />} /> */}
                     {/* <Route path="/ott/ottdetail" element={<OttDetail />} /> */}
-                    
 
                     <Route path="/mypage" element={<MyPage />} />
 

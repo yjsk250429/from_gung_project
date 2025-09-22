@@ -12,6 +12,7 @@ export const seeds = [
         genre: 'fusion',
         backdrop: '/images/ott/206693_bg.png',
         titleLogo: '/images/ott/206693_logo.png',
+        genre_ids: [14, 18],
     },
     {
         title: '옷소매 붉은 끝동',

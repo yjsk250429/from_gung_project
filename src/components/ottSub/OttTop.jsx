@@ -3,28 +3,25 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TbSearch } from 'react-icons/tb';
 import RoundTap from '../ui/roundTap/RoundTap';
-import { useMovieStore } from '../../store'; // ⭐ 추가: 전역 store import
+import { useMovieStore } from '../../store'; // 추가: 전역 store import
 import './style.scss';
 
 const tvRecommend = [
-    { id: 132925, img: '/images/ott/otttop_1.png' },
-    { id: 206693, img: '/images/ott/otttop_2.png' },
+    { id: 132925, img: '/images/ott/tvtop_1.png', link: '/ott/tv/132925' },
+    { id: 206693, img: '/images/ott/tvtop_2.png', link: '/ott/tv/206693' },
 ];
 const movieRecommend = [
-    { id: 315162, img: '/images/ott/movie_2.png' },
-    { id: 634649, img: '/images/ott/movie_1.png' },
+    { id: 544089, img: '/images/ott/movietop_1.png', link: '/ott/movie/544089' },
+    { id: 572988, img: '/images/ott/movietop_2.png', link: '/ott/movie/572988' },
 ];
 
 export default function OttTop({ activeTop, onTopChange }) {
-    // 탭 상태
-    const [internal, setInternal] = useState('tv');
-    const selected = typeof activeTop === 'string' ? activeTop : internal;
-    const setSelected = onTopChange ?? setInternal;
-
-    // ⭐ 추가: Zustand 전역 상태 setter
+    const mediaCategory = useMovieStore((s) => s.mediaCategory);
     const setMediaCategory = useMovieStore((s) => s.setMediaCategory);
 
-    // 검색어 상태
+    const selected = activeTop ?? mediaCategory;
+    const setSelected = onTopChange ?? setMediaCategory;
+
     const [q, setQ] = useState('');
     const navigate = useNavigate();
 
@@ -40,15 +37,13 @@ export default function OttTop({ activeTop, onTopChange }) {
         e.preventDefault();
         const query = q.trim();
         if (!query) return;
-        // type(=selected)와 함께 검색 페이지로 이동
         navigate(`/ottresults?q=${encodeURIComponent(query)}&type=${selected}`);
     };
 
-    // ⭐ 추가: 탭 전환 핸들러
     const handleTabChange = (next) => {
-        setSelected(next); // 내부 상태 갱신
-        setMediaCategory(next); // 전역 상태 갱신
-        sessionStorage.setItem('ott:lastMediaType', next); // 마지막 선택 저장
+        setSelected(next);
+        setMediaCategory(next);
+        sessionStorage.setItem('ott:lastMediaType', next);
     };
 
     return (
@@ -76,10 +71,6 @@ export default function OttTop({ activeTop, onTopChange }) {
                         ) : (
                             <div className="img-fallback">No Image</div>
                         )}
-                        <div className="grad" />
-                        <div className="text">
-                            <strong>{item.title ?? ''}</strong>
-                        </div>
                     </li>
                 ))}
             </ul>

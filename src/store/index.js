@@ -246,14 +246,6 @@ export const useTourClassStore = create((set, get) => ({
     setRegionCategory: (regionCategory) => set({ regionCategory }),
 }));
 
-// export const usexxStore = create((set, get) => ({
-//     // state
-//     data: [],
-
-//     // actions
-//     onReset: () => set({ data: [] }),
-// }));
-
 // 드라마/영화 판별 헬퍼
 export const isMovieEntity = (it) =>
     (it?.media_type ?? (it?.title ? 'movie' : it?.name ? 'tv' : '')) === 'movie' ||

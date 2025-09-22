@@ -4,8 +4,11 @@ import "./style.scss";
 import { Fragment } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { useModalStore } from "../../../store";
 
 const Schedule = ({ thisitem }) => {
+  const {openCoupon} = useModalStore();
+
   const {
     id,
     category,
@@ -119,7 +122,7 @@ const Schedule = ({ thisitem }) => {
           </i>
           투어 찜하기
         </button>
-        <button>
+        <button onClick={openCoupon}>
           <i>
             <FiDownload />
           </i>

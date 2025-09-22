@@ -15,12 +15,10 @@ import {
     TourSearch,
     Booking,
 } from '../pages';
-import ScrollToTop from '../components/ui/scrolltotop/ScrollToTop';
 
 export const MyRoutes = () => {
     return (
         <BrowserRouter>
-            <ScrollToTop />
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />

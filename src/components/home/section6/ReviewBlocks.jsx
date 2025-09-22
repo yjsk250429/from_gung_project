@@ -81,8 +81,8 @@ const ReviewBlocks = () => {
             engine = Engine.create();
 
             // ▼▼▼ 속도/강도 완화 설정 ▼▼▼
-            engine.world.gravity.y = 20; // 기본 1 → 더 약한 중력
-            engine.timing.timeScale = 0.77; // 전체 시뮬 느리게
+            engine.world.gravity.y = 15; // 기본 1 → 더 약한 중력
+            engine.timing.timeScale = 0.5; // 전체 시뮬 느리게
             // ▲▲▲
 
             render = Render.create({
@@ -156,9 +156,9 @@ const ReviewBlocks = () => {
 
                 // 바디 생성 (튕김↓, 항력↑)
                 const common = {
-                    restitution: 0.38,
+                    restitution: 0.1,
                     friction: 1,
-                    frictionAir: 0.3,
+                    frictionAir: 0.1,
                 };
 
                 let body;

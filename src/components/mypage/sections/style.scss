@@ -273,12 +273,12 @@
         }
 
         .tbody {
-            padding: vw(40) vw(20);
             text-align: center;
             color: #666;
 
             &.empty {
                 font-size: vw(14);
+                padding: vw(20);
             }
 
             .row {
@@ -294,6 +294,7 @@
         }
 
         > button {
+            font-family: $font-main;
             margin: vw(20) auto 0;
             display: block;
             padding: vw(10) vw(24);
@@ -355,6 +356,7 @@
             gap: vw(12);
 
             button {
+                font-family: $font-main;
                 padding: vw(10) vw(20);
                 border: none;
                 border-radius: vw(4);

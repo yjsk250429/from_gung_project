@@ -1,10 +1,14 @@
+// components/mypage/InquirySection.jsx
 import { useState } from 'react';
+import { useInquiryStore } from '../../../store';
 
 const InquirySection = () => {
     const [mode, setMode] = useState('list'); // "list" | "form" | "detail"
-    const [inquiries, setInquiries] = useState([]);
     const [form, setForm] = useState({ title: '', content: '' });
     const [selectedInquiry, setSelectedInquiry] = useState(null);
+
+    // zustand store 가져오기
+    const { inquiries, addInquiry } = useInquiryStore();
 
     const handleSave = () => {
         if (!form.title.trim()) {
@@ -12,13 +16,10 @@ const InquirySection = () => {
             return;
         }
         const newItem = {
-            id: inquiries.length + 1,
             title: form.title,
             content: form.content,
-            date: new Date().toISOString().slice(0, 10),
-            status: '대기중',
         };
-        setInquiries([newItem, ...inquiries]);
+        addInquiry(newItem); // ✅ zustand store에 저장 (localStorage 유지됨)
         setForm({ title: '', content: '' });
         setMode('list');
     };

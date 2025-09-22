@@ -14,6 +14,7 @@ const UtilBar = () => {
     const formRef = useRef(null);
     const inputRef = useRef(null);
     const protectedPaths = ['/mypage'];
+
     const onLogout = () => {
         logout();
         openLogoutCom();
@@ -42,6 +43,8 @@ const UtilBar = () => {
         e.preventDefault();
         const keyword = q.trim();
         navigate(`/tourresults${keyword ? `?q=${encodeURIComponent(keyword)}` : ''}`);
+        setSearchOn(false);
+        setQ('');
         setSearchOn(false);
     };
     return (

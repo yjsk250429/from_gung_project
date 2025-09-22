@@ -10,10 +10,12 @@ import JoinComplete from '../components/ui/modal/JoinComplete';
 import LoginComplete from '../components/ui/modal/LoginComplete';
 import LogoutComplete from '../components/ui/modal/LogoutComplete';
 import NeedLogin from '../components/ui/modal/NeedLogin';
+import ScrollToTop from '../components/ui/scrolltotop/ScrollToTop';
 
 const Layout = () => {
     return (
         <div className="wrap">
+            <ScrollToTop />
             <Header />
             <main id="content" className="main">
                 <Outlet />

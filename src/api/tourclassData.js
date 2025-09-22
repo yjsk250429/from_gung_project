@@ -22,6 +22,7 @@ export const tourclassData = [
     detailsub1:
       "고요한 밤, 달빛 아래 고궁을 거닐며 조선의 숨결을 마주하는 시간",
     detailsub2: "궁궐의 은은한 조명과 함께 전통 예술공연까지 즐길 수 있습니다.",
+    rating:{ rate:4, count:105 } //rate : 1~5 , count:20~300
   },
   {
     id: 2,

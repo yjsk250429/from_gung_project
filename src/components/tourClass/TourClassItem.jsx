@@ -1,9 +1,15 @@
 import { FiHeart } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoTimeOutline } from 'react-icons/io5';
+import { useAuthStore, useModalStore } from '../../store';
+import { FaHeart } from "react-icons/fa";
 
-const TourClassItem = ({ id, title, theme, description, period, price, img, category }) => {
+const TourClassItem = ({ id, title, theme, description, period, price, img, category, time, region, place }) => {
     const navigate = useNavigate();
+    const { user, authed, toggleWishlist } = useAuthStore();
+    const { openNeedLogin} = useModalStore();
+    const isWished = authed && user?.wishlist?.some((w) => w.id === id);
+
     return (
         <li>
             <Link to={`/tourclass/${id}`}>
@@ -65,8 +71,20 @@ const TourClassItem = ({ id, title, theme, description, period, price, img, cate
             </Link>
             <div className="title">
                 <strong onClick={() => navigate(`/tourclass/${id}`)}>{title}</strong>
-                <i>
-                    <FiHeart />
+                <i
+          onClick={() => {
+            if (!authed) {
+              openNeedLogin();
+              return;
+            }
+            toggleWishlist({ id, title, category, theme, description, period, time, region, place, price, img});
+          }}
+        >
+                    {isWished ? (
+            <FaHeart style={{ color: 'red' }} />
+          ) : (
+            <FiHeart/>
+          )}
                 </i>
             </div>
         </li>

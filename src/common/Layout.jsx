@@ -9,6 +9,7 @@ import JoinInfo from '../components/ui/modal/JoinInfo';
 import JoinComplete from '../components/ui/modal/JoinComplete';
 import LoginComplete from '../components/ui/modal/LoginComplete';
 import LogoutComplete from '../components/ui/modal/LogoutComplete';
+import NeedLogin from '../components/ui/modal/NeedLogin';
 
 const Layout = () => {
     return (
@@ -25,6 +26,7 @@ const Layout = () => {
             <JoinComplete/>
             <LoginComplete/>
             <LogoutComplete/>
+            <NeedLogin/>
             <Footer />
         </div>
     );

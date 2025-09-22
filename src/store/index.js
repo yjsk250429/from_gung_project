@@ -27,6 +27,7 @@ const memberData = [
         coupon: 0,
         marketing: false, // 선택항목 (이벤트/혜택 수신 여부)
         marketingDate: null, // 마지막 동의/거부 날짜
+        wishlist:[],
     },
 ];
 
@@ -106,6 +107,7 @@ export const useAuthStore = create((set, get) => ({
             id: no++,
             marketing: tempMarketing.status,
             marketingDate: tempMarketing.date,
+            wishlist:[],
         };
         const updatedMembers = [...members, newUser];
         set({ members: updatedMembers, tempMarketing: { status: false, date: null } }); // 초기화
@@ -167,6 +169,23 @@ export const useAuthStore = create((set, get) => ({
         localStorage.setItem('authed', JSON.stringify(true));
         localStorage.setItem('user', JSON.stringify(kakaoUser));
     },
+
+    toggleWishlist: (item) => {
+        const { user, members } = get();
+        if (!user) return;
+    
+        const exists = user.wishlist?.some((w) => w.id === item.id);
+        const updatedWishlist = exists
+          ? user.wishlist.filter((w) => w.id !== item.id)
+          : [...(user.wishlist || []), item];
+    
+        const updatedUser = { ...user, wishlist: updatedWishlist };
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+    
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+      },
 }));
 
 export const useModalStore = create((set) => ({
@@ -184,6 +203,10 @@ export const useModalStore = create((set) => ({
     editPasswordOpen: false,
     editCompleteOpen: false,
     couponOpen:false,
+    needLoginOpen:false,
+
+    openNeedLogin: () => set({ needLoginOpen: true }),
+    closeNeedLogin: () => set({ needLoginOpen: false }),
 
     openCoupon: () => set({ couponOpen: true }),
     closeCoupon: () => set({ couponOpen: false }),

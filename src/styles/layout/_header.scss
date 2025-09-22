@@ -247,6 +247,9 @@ html.is-active {
             }
         }
     }
+    @media screen and (max-width: vw(393)) {
+        width: 90%;
+    }
 
     @include tablet {
         .inner {

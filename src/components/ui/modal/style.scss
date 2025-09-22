@@ -9,6 +9,84 @@
         @include modalLayout;
         position: relative;
         &.coupon {
+            position: absolute;
+            right: vw(160);
+            bottom: vw(150);
+            width: vw(520);
+            height: vw(360);
+            padding: vw(20);
+            box-sizing: border-box;
+            .close{
+                position: absolute;
+                right: vw(20);
+                top: vw(20);
+                cursor: pointer;
+            }
+            .box{
+                border: 1px solid $sub1;
+                display: flex;
+                margin-top: vw(34);
+                border-radius: vw(20);
+                justify-content: space-between;
+                align-items: center;
+                .left{
+                    padding: vw(20);
+                    box-sizing: border-box;
+                    em{
+                        color: $sub3;
+                        @include font-18px-B;
+
+                    }
+                    strong{
+                        margin-top: vw(4);
+                        margin-bottom: vw(10);
+                        display: block;
+                    }
+                    span{
+                        color: #999;
+                        @include font-14px;
+                        display: block;
+                    }
+                }
+                .right{
+                    cursor: pointer;
+                    border-radius: 50%;
+                    background: $sub3;
+                    width: vw(40);
+                    height: vw(40);
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-end;
+                    margin-right: vw(20);
+                    i{
+                        color: $white;
+                    }
+                }
+            }
+                ul{
+                    margin:vw(10) 0 vw(25) vw(10);
+                li{
+                    @include font-14px;
+                    padding-left: vw(10);
+                    position: relative;
+                    &::before{
+                        content: "";
+                        display: block;
+                        width: vw(3);
+                        height: vw(3);
+                        border-radius: 50%;
+                        background: #000;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        left: 0;
+                    }
+                }
+            }
+            .btns{
+                display: flex;
+                justify-content: center;
+            }
         }
         &.logoutComplete,
         &.withdrawComplete,

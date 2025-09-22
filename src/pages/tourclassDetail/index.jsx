@@ -12,6 +12,7 @@ import {
   Schedule,
   SelectDate,
 } from "../../components/tourclassDetail";
+import CouponDown from "../../components/ui/modal/CouponDown";
 
 const TourClassDatail = () => {
   const { tourclassID } = useParams();
@@ -122,6 +123,7 @@ const TourClassDatail = () => {
           </div>
         </article>
       </div>
+      <CouponDown/>
     </section>
   );
 };

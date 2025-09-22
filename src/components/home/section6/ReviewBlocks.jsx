@@ -14,27 +14,27 @@ const reviews = [
     '한복 체험이 정말 특별했어요!',
     '여행이 조금 타이트했지만 알찬 여행이었어요.',
     '다도 체험으로 한국 문화를 더 깊게 이해할 수 있었어요.',
-    '경치가 너무 멋졌어요!',
-    '가이드가 친절하고 설명이 알기 쉬웠어요.',
-    '전통 음식 투어 덕분에 맛집을 알게 됐어요.',
-    '사진 찍기 좋은 포인트가 많아 인생샷 건졌어요.',
-    '도자기 만들기가 색다른 경험이었어요.',
-    '한복 체험이 정말 특별했어요!',
-    '여행이 조금 타이트했지만 알찬 여행이었어요.',
-    '다도 체험으로 한국 문화를 더 깊게 이해할 수 있었어요.',
+    '고즈넉한 한옥에서 배우는 시간이 과거로 여행한 듯했어요.',
+    '전통 악기 체험이 정말 흥미로웠습니다..',
+    '궁궐 해설이 생생해서 몰입됐어요.',
+    '김치 만들기가 뜻밖에 즐거웠습니다.',
+    '공예 체험에서 마치 장인의 손길이 느껴졌어요.',
+    '도심 속에서 느끼는  전통문화 체험이 놀라웠습니다.',
+    '한복을 입고 특별한 하루를 보냈어요.',
+    '다도 수업이 마음을 차분하게 해줬습니다.',
 ];
 
 const stats = [
     { label: '600+', caption: 'Reservation' },
     { label: '500+', caption: 'review' },
     { label: '300+', caption: 'Rebook' },
-    { label: '600+', caption: 'Reservation' },
-    { label: '500+', caption: 'review' },
-    { label: '300+', caption: 'Rebook' },
-    { label: '600+', caption: 'Reservation' },
+    { label: '100+', caption: 'Reservation' },
+    { label: '400+', caption: 'review' },
+    { label: '700+', caption: 'Rebook' },
+    { label: '200+', caption: 'Reservation' },
 ];
 
-const ctas = ['+', '→', '→'];
+const ctas = ['+', '→', '←'];
 
 const ReviewBlocks = () => {
     const containerRef = useRef(null);
@@ -209,7 +209,7 @@ const ReviewBlocks = () => {
 
         st = ScrollTrigger.create({
             trigger: container,
-            start: 'top bottom',
+            start: 'top 70%',
             end: 'bottom top',
             invalidateOnRefresh: true,
             onEnter: () => init(),

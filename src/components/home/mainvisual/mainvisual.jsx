@@ -89,11 +89,9 @@ const Mainvisual = () => {
             });
 
             const floatLine = gsap.to('.banner_line img', {
-                y: 10,
-                rotation: 3,
-                duration: 15,
-                ease: 'sine.inOut',
-                yoyo: true,
+                rotation: '+=360',
+                duration: 30,
+                ease: 'linear',
                 repeat: -1,
                 paused: true,
             });
@@ -145,8 +143,8 @@ const Mainvisual = () => {
 
             tlBanner.fromTo(
                 '.banner_line img',
-                { scale: 0.1, rotation: 0 },
-                { scale: 1, rotation: 360, duration: 2.5, ease: 'power3.out', delay: 0.6 }
+                { scale: 0.001, rotation: 0 },
+                { scale: 1, duration: 2.5, ease: 'power3.out', delay: 1.1 }
             );
 
             tlBanner.fromTo(

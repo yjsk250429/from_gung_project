@@ -1,55 +1,55 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from '../common/Layout';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "../common/Layout";
 
 import {
-    Brand,
-    Home,
-    MyPage,
-    NotFiles,
-    OttDetail,
-    OttMain,
-    OttSearch,
-    OttSub,
-    TourClass,
-    TourClassDetail,
-    TourSearch,
-    Booking,
-} from '../pages';
+  Brand,
+  Home,
+  MyPage,
+  NotFiles,
+  OttDetail,
+  OttMain,
+  OttSearch,
+  OttSub,
+  TourClass,
+  TourClassDetail,
+  TourSearch,
+  Booking,
+} from "../pages";
 
 export const MyRoutes = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
 
-                    <Route path="/brand" element={<Brand />} />
+          <Route path="/brand" element={<Brand />} />
 
-                    {/* 투어 */}
-                    <Route path="/tourclass" element={<TourClass />} />
-                    <Route path="/tourclass/:tourclassID" element={<TourClassDetail />} />
-                    <Route path="/tourresults" element={<TourSearch />} />
-                    <Route path="/booking" element={<Booking />} />
+          {/* 투어 */}
+          <Route path="/tourclass" element={<TourClass />} />
+          <Route path="/tourclass/:tourclassID" element={<TourClassDetail />} />
+          <Route path="/tourresults" element={<TourSearch />} />
+          <Route path="/booking" element={<Booking />} />
 
-                    {/* OTT */}
-                    {/* 
+          {/* OTT */}
+          {/* 
                         추후 OTT에 다크모드 적용 예정
                         <Route path="/ott" element={<Layout theme="dark" />} >
                              <Route index element={<Ott />} />
                         </Route>
                         */}
-                    <Route path="/ottmain" element={<OttMain />} />
-                    <Route path="/ottsub" element={<OttSub />} />
-                    <Route path="/ottresults" element={<OttSearch />} />
-                    <Route path="ott/:mediaType/:ottID" element={<OttDetail />} />
-                    {/* <Route path="/vod/:medsiaType/:id" element={<OttDetail />} /> */}
-                    {/* <Route path="/ott/ottdetail" element={<OttDetail />} /> */}
+          <Route path="/ottmain" element={<OttMain />} />
+          <Route path="/ottsub" element={<OttSub />} />
+          <Route path="/ottresults" element={<OttSearch />} />
+          <Route path="ott/:mediaType/:id" element={<OttDetail />} />
+          {/* <Route path="/vod/:medsiaType/:id" element={<OttDetail />} /> */}
+          {/* <Route path="/ott/ottdetail" element={<OttDetail />} /> */}
 
-                    <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mypage" element={<MyPage />} />
 
-                    <Route path="*" element={<NotFiles />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    );
+          <Route path="*" element={<NotFiles />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 };

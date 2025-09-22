@@ -1,21 +1,30 @@
 // src/tmdb/loadAll.js
-import { fetchDetailSmart } from './fetchDetail';
-import { tmdbSearch, is404 } from './tmdb';
-import { seeds } from './seeds';
+import { fetchDetailSmart } from "./fetchDetail";
+import { tmdbSearch, is404 } from "./tmdb";
+import { seeds } from "./seeds";
 
 // ---- helpers -------------------------------------------------
 const normType = (t) => {
-  const v = String(t || '').toLowerCase();
-  return v === 'movie' || v === 'tv' ? v : undefined;
+  const v = String(t || "").toLowerCase();
+  return v === "movie" || v === "tv" ? v : undefined;
 };
 
 const pickQuery = (s) =>
-  s.title || s.name || s.koTitle || s.korTitle || s.originalTitle || s.query || '';
+  s.title ||
+  s.name ||
+  s.koTitle ||
+  s.korTitle ||
+  s.originalTitle ||
+  s.query ||
+  "";
 
 const pickYear = (s) =>
   s.year || s.first_air_date?.slice?.(0, 4) || s.release_date?.slice?.(0, 4);
 
-const norm = (x) => String(x || '').trim().toLowerCase();
+const norm = (x) =>
+  String(x || "")
+    .trim()
+    .toLowerCase();
 
 const pickBest = (hits, q) => {
   if (!Array.isArray(hits) || !hits.length) return null;
@@ -30,10 +39,12 @@ const pickBest = (hits, q) => {
 // 검색 캐시 (같은 제목 반복 호출 방지)
 const searchCache = new Map(); // key: `${type}:${query}:${year}` -> {id,type}
 async function searchBothTypesPrefer(typeHint, { query, year }) {
-  const order = typeHint ? [typeHint, typeHint === 'tv' ? 'movie' : 'tv'] : ['tv', 'movie'];
+  const order = typeHint
+    ? [typeHint, typeHint === "tv" ? "movie" : "tv"]
+    : ["tv", "movie"];
 
   for (const t of order) {
-    const key = `${t}:${query}:${year || ''}`;
+    const key = `${t}:${query}:${year || ""}`;
     if (searchCache.has(key)) {
       const v = searchCache.get(key);
       if (v) return v;
@@ -54,8 +65,8 @@ async function searchBothTypesPrefer(typeHint, { query, year }) {
 
 // 404/미발견은 조용히 무시하고, 진짜 에러만 로그
 function logNon404(label, err) {
-  const msg = String(err?.message || err || '');
-  if (is404(err) || msg.includes('404')) return; // silent
+  const msg = String(err?.message || err || "");
+  if (is404(err) || msg.includes("404")) return; // silent
   console.warn(`❌ ${label}`, msg);
 }
 
@@ -83,30 +94,31 @@ export async function loadAll() {
     const safeSeedId = Number.isFinite(seedId) ? seedId : undefined;
 
     try {
-      if (resolved?.id) {
+      if (resolved?.id && resolved.type === typeHint) {
+        // 검색 결과가 typeHint와 일치할 때만 신뢰
         item = await fetchDetailSmart({
           tmdbId: resolved.id,
           type: resolved.type,
           season: s.season,
         });
       } else if (safeSeedId && typeHint) {
-        // 타입 힌트가 확실할 때만 direct fetch (404 로그 최소화)
+        // typeHint가 있는 경우에만 tmdbId로 조회 시도
         item = await fetchDetailSmart({
           tmdbId: safeSeedId,
           type: typeHint,
           season: s.season,
         });
       } else {
-        // 검색도 없고 안전한 id도 없으면 스킵
+        // 검색도 실패했고 type도 없으면 skip
         return null;
       }
     } catch (e) {
       logNon404(`detail failed: ${query || s.title || s.id}`, e);
-      return null; // 404/미발견은 조용히 스킵
+      return null;
     }
 
     // ✅ 최종 타입 신뢰 + 로컬 에셋 우선 병합
-    const finalizedType = String(item.mediaType || '').toLowerCase();
+    const finalizedType = String(item.mediaType || "").toLowerCase();
     return {
       ...item,
       mediaType: finalizedType,
@@ -119,6 +131,6 @@ export async function loadAll() {
 
   const results = await Promise.allSettled(tasks);
   return results
-    .filter((r) => r.status === 'fulfilled' && r.value)
+    .filter((r) => r.status === "fulfilled" && r.value)
     .map((r) => r.value);
 }

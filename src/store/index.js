@@ -183,7 +183,7 @@ export const useModalStore = create((set) => ({
     editInfoOpen: false,
     editPasswordOpen: false,
     editCompleteOpen: false,
-    couponOpen:false,
+    couponOpen: false,
 
     openCoupon: () => set({ couponOpen: true }),
     closeCoupon: () => set({ couponOpen: false }),

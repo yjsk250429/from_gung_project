@@ -3,7 +3,7 @@ import CuratedSageuk from '../../components/tmdb/CuratedSageuk';
 import './style.scss';
 import Tab from '../../components/ui/tab/Tab';
 import { BiSortAlt2 } from 'react-icons/bi';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useMovieStore } from '../../store';
 
 const OttSub = () => {
@@ -21,6 +21,10 @@ const OttSub = () => {
 
     // index 기반 상태 관리
     const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+    useEffect(() => {
+        setSelectedTabIndex(0);
+    }, [mediaCategory]);
 
     return (
         <section className="ottsub">

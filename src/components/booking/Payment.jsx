@@ -82,39 +82,52 @@ const Payment = () => {
                         <p>2025.09.08(월)</p>
 
                         <span>인원·수량</span>
-                        <p>1인 (이용권 1장)</p>
+                        <p>
+                            1인 (이용권 1장) <em>54,000원</em>
+                        </p>
+                        <i className="sum">
+                            총 상품 금액 <p>54,000원</p>
+                        </i>
                     </div>
 
                     <div className="booking-info">
                         <strong>
                             예약자 정보<span>*</span>
                         </strong>
-                        <i>
-                            이름 <input type="textbox" />
-                            <p>이름을 입력해주세요.</p>
-                        </i>
-                        <i>
-                            전화번호 <input type="textbox" />
-                            <p>전화번호를 입력해주세요.</p>
-                        </i>
-                        <i>
-                            이메일 <input type="textbox" />
-                            <p>이메일을 입력해주세요.</p>
-                        </i>
+                        <div className="txtbox tb1">
+                            <p>이름</p>
+                            <input type="textbox" />
+                            <i>이름을 입력해주세요.</i>
+                        </div>
+                        <div className="txtbox tb2">
+                            <p>전화번호 </p>
+                            <input type="textbox" />
+                            <i>전화번호를 입력해주세요.</i>
+                        </div>
+                        <div className="txtbox tb3">
+                            <p>이메일 </p>
+                            <input type="textbox" />
+                            <i>이메일을 입력해주세요.</i>
+                        </div>
 
                         <div className="charge">
-                            <li>
-                                <input type="radio" />
-                                신용카드
-                            </li>
-                            <li>
-                                <input type="radio" />
-                                계좌이체
-                            </li>
-                            <li>
-                                <input type="radio" />
-                                무통장입금
-                            </li>
+                            <strong>
+                                결제수단<span>*</span>
+                            </strong>
+                            <div className="selec">
+                                <li>
+                                    <input type="radio" />
+                                    신용카드
+                                </li>
+                                <li>
+                                    <input type="radio" />
+                                    계좌이체
+                                </li>
+                                <li>
+                                    <input type="radio" />
+                                    무통장입금
+                                </li>
+                            </div>
                         </div>
                     </div>
                 </article>

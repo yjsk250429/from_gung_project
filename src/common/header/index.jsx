@@ -13,6 +13,7 @@ const Header = () => {
         path.startsWith('/mypage') ||
         path.startsWith('/tourclass') ||
         path.startsWith('/tourresults') ||
+        path.startsWith('/booking') ||
         path.startsWith('*');
 
     useEffect(() => {

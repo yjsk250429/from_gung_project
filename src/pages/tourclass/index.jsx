@@ -123,9 +123,21 @@ const TourClass = () => {
         let sorted = [...filtered];
 
         if (selected3 === 0) {
-            sorted.sort((a, b) => a.id - b.id);
+        // 최신순 (id 오름차순)
+        sorted.sort((a, b) => a.id - b.id);
         } else if (selected3 === 1) {
-            sorted.sort((a, b) => b.id - a.id);
+        // 오래된순 (id 내림차순)
+        sorted.sort((a, b) => b.id - a.id);
+        } else if (selected3 === 2) {
+        // 평점순 (평점이 같으면 리뷰 많은 순)
+        sorted.sort((a, b) => {
+            const rateDiff = (b.rating?.rate || 0) - (a.rating?.rate || 0);
+            if (rateDiff !== 0) return rateDiff;
+            return (b.rating?.count || 0) - (a.rating?.count || 0);
+        });
+        } else if (selected3 === 3) {
+        // 리뷰순 (리뷰 개수 많은 순)
+        sorted.sort((a, b) => (b.rating?.count || 0) - (a.rating?.count || 0));
         }
 
         return sorted;

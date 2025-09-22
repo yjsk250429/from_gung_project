@@ -13,6 +13,29 @@ import {
   SelectDate,
 } from "../../components/tourclassDetail";
 import CouponDown from "../../components/ui/modal/CouponDown";
+import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
+
+const renderStars = (rate) => {
+  const stars = [];
+  const fullStars = Math.floor(rate); // 꽉 찬 별 개수
+  const hasHalfStar = rate % 1 >= 0.5; // 반 별 여부
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+  // 꽉 찬 별
+  for (let i = 0; i < fullStars; i++) {
+    stars.push(<IoIosStar key={`full-${i}`} className="star full" />);
+  }
+  // 반 별
+  if (hasHalfStar) {
+    stars.push(<IoIosStarHalf key="half" className="star half" />);
+  }
+  // 빈 별
+  for (let i = 0; i < emptyStars; i++) {
+    stars.push(<IoIosStarOutline key={`empty-${i}`} className="star empty" />);
+  }
+
+  return stars;
+};
 
 const TourClassDatail = () => {
   const { tourclassID } = useParams();
@@ -79,7 +102,7 @@ const TourClassDatail = () => {
           <div className="basic-info">
             <h3>
               {title}
-              <span className="rate">평점 ★★★★★</span>
+              <span className="rate">평점  {renderStars(thisitem.rating?.rate || 0)}</span>
             </h3>
             <ul className="details">
               <li>

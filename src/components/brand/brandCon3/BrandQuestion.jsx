@@ -9,44 +9,47 @@ const BrandQuestion = () => {
     const questionRef = useRef(null);
 
     useEffect(() => {
-        if (questionRef.current) {
-            const title = questionRef.current.querySelector('h3');
-            const paragraphs = questionRef.current.querySelectorAll('.con3Sentence p');
+        const ctx = gsap.context(() => {
+            if (questionRef.current) {
+                const title = questionRef.current.querySelector('h3');
+                const paragraphs = questionRef.current.querySelectorAll('.con3Sentence p');
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: questionRef.current,
-                    start: 'top 80%',
-                    toggleActions: 'play none none reset',
-                    //   markers: true,
-                },
-            });
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: questionRef.current,
+                        start: 'top 70%',
+                        once: true,
+                        // markers: true,
+                    },
+                });
 
-            tl.fromTo(
-                title,
-                { y: -30, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 2,
-                    ease: 'power1.out',
-                    stagger: 0.5,
-                }
-            );
+                tl.fromTo(
+                    title,
+                    { y: -30, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 2,
+                        ease: 'power1.out',
+                    }
+                );
 
-            tl.fromTo(
-                paragraphs,
-                { y: 20, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: 'power1.out',
-                    stagger: 0.2,
-                },
-                0.8
-            );
-        }
+                tl.fromTo(
+                    paragraphs,
+                    { y: 20, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.6,
+                        ease: 'power1.out',
+                        stagger: 0.2,
+                    },
+                    0.8
+                );
+            }
+        }, questionRef);
+
+        return () => ctx.revert(); // cleanup
     }, []);
 
     return (

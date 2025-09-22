@@ -119,7 +119,7 @@ const TourClass = () => {
             filtered = filtered.filter((item) => item.period === selectedDay);
         }
 
-        //정렬
+       // 정렬
         let sorted = [...filtered];
 
         if (selected3 === 0) {
@@ -129,16 +129,21 @@ const TourClass = () => {
         // 오래된순 (id 내림차순)
         sorted.sort((a, b) => b.id - a.id);
         } else if (selected3 === 2) {
-        // 평점순 (평점이 같으면 리뷰 많은 순)
+        // 평점순 (평점 > 리뷰순)
         sorted.sort((a, b) => {
             const rateDiff = (b.rating?.rate || 0) - (a.rating?.rate || 0);
             if (rateDiff !== 0) return rateDiff;
             return (b.rating?.count || 0) - (a.rating?.count || 0);
         });
         } else if (selected3 === 3) {
-        // 리뷰순 (리뷰 개수 많은 순)
-        sorted.sort((a, b) => (b.rating?.count || 0) - (a.rating?.count || 0));
+        // 리뷰순 (리뷰수 > 평점순)
+        sorted.sort((a, b) => {
+            const countDiff = (b.rating?.count || 0) - (a.rating?.count || 0);
+            if (countDiff !== 0) return countDiff;
+            return (b.rating?.rate || 0) - (a.rating?.rate || 0);
+        });
         }
+
 
         return sorted;
     }, [tourClass, category, regionCategory, selected1, selected2, selected3]);

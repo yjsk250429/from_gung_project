@@ -90,7 +90,8 @@
         }
         &.logoutComplete,
         &.withdrawComplete,
-        &.editInfoComplete {
+        &.editInfoComplete,
+        &.needLogin {
             @include confirm;
             background-image: url('/images/components/bg_flower.png');
             background-size: 80%;

@@ -58,7 +58,7 @@ const TourClassItem = ({ id, title, theme, description, period, price, img, cate
                         <h6>{price.toLocaleString()} 원</h6>
                     </article>
                     <span className="hoverImg">
-                        <img src="/images/tourclass/tourclassList_hover.png" alt="" />
+                        <img src="/images/tourclass/tourclassList_hover.png" alt="deco" />
                     </span>
                     <span className="overlay"></span>
                 </div>

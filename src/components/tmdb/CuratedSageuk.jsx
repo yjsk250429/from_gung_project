@@ -57,16 +57,9 @@ export default function CuratedSageuk({ filterCategory }) {
 
             if (genreFilter) {
                 out = out.filter((it) => {
-                    // 내가 정의한 genre만 사용: string일 때만 인정
-                    const genreValue = it.genre;
+                    const genreValue = it._seed?.genre;
                     const isStringGenre = typeof genreValue === 'string';
-
                     const genreMatch = isStringGenre && genreValue.toLowerCase() === genreFilter;
-
-                    if (filterCategory === '정통사극') {
-                        const hasSageukTag = Array.isArray(it.tags) && it.tags.includes('sageuk');
-                        return genreMatch && hasSageukTag;
-                    }
 
                     return genreMatch;
                 });

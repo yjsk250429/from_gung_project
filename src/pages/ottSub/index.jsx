@@ -4,6 +4,7 @@ import './style.scss';
 import Tab from '../../components/ui/tab/Tab';
 import { BiSortAlt2 } from 'react-icons/bi';
 import { useMemo, useState } from 'react';
+import { useEffect } from 'react';
 import { useMovieStore } from '../../store';
 
 const OttSub = () => {
@@ -21,6 +22,10 @@ const OttSub = () => {
 
     // index 기반 상태 관리
     const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+    // ✅ 미디어 탭이 바뀔 때 하위 장르 탭을 '전체'로 리셋
+    useEffect(() => {
+        setSelectedTabIndex(0);
+    }, [mediaCategory]);
 
     return (
         <section className="ottsub">

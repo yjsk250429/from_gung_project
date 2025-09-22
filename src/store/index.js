@@ -183,7 +183,7 @@ export const useModalStore = create((set) => ({
     editInfoOpen: false,
     editPasswordOpen: false,
     editCompleteOpen: false,
-    couponOpen:false,
+    couponOpen: false,
 
     openCoupon: () => set({ couponOpen: true }),
     closeCoupon: () => set({ couponOpen: false }),
@@ -359,6 +359,31 @@ export const useMovieStore = create(
             name: 'ott:UI:v1',
             storage: createJSONStorage(() => sessionStorage), // 탭 상태만 세션에 저장
             partialize: (s) => ({ mediaCategory: s.mediaCategory }),
+        }
+    )
+);
+
+// 🔽 store/index.jsx 제일 아래에 추가
+
+export const useInquiryStore = create(
+    persist(
+        (set, get) => ({
+            inquiries: [],
+            addInquiry: (item) => {
+                const prev = get().inquiries;
+                const newItem = {
+                    id: prev.length + 1, // ✅ 순차 번호
+                    title: item.title,
+                    content: item.content,
+                    date: new Date().toISOString().slice(0, 10),
+                    status: '대기중',
+                };
+                set({ inquiries: [newItem, ...prev] });
+            },
+        }),
+        {
+            name: 'inquiries:v1',
+            storage: createJSONStorage(() => localStorage),
         }
     )
 );

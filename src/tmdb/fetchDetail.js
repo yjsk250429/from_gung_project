@@ -86,7 +86,7 @@ async function fetchCore({ type, tmdbId, season }) {
         overview: base.overview ?? '',
         genres: base.genres ?? [],
         rating: base.vote_average ?? null,
-        certification, // ← 이제 실제 값이 들어감
+        certification, // 필요시 releases/content_ratings에서 추가
         poster: posterPref ? img(posterPref, 'w500') : null,
         backdrop: backdropPref ? img(backdropPref, 'w1280') : null,
         titleLogo: logoPref ? img(logoPref, 'w500') : null,

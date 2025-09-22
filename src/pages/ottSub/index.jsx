@@ -4,6 +4,7 @@ import './style.scss';
 import Tab from '../../components/ui/tab/Tab';
 import { BiSortAlt2 } from 'react-icons/bi';
 import { useMemo, useState } from 'react';
+import { useEffect } from 'react';
 import { useMovieStore } from '../../store';
 
 const OttSub = () => {

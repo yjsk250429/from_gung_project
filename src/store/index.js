@@ -385,3 +385,28 @@ export const useMovieStore = create(
         }
     )
 );
+
+// 🔽 store/index.jsx 제일 아래에 추가
+
+export const useInquiryStore = create(
+    persist(
+        (set, get) => ({
+            inquiries: [],
+            addInquiry: (item) => {
+                const prev = get().inquiries;
+                const newItem = {
+                    id: prev.length + 1, // ✅ 순차 번호
+                    title: item.title,
+                    content: item.content,
+                    date: new Date().toISOString().slice(0, 10),
+                    status: '대기중',
+                };
+                set({ inquiries: [newItem, ...prev] });
+            },
+        }),
+        {
+            name: 'inquiries:v1',
+            storage: createJSONStorage(() => localStorage),
+        }
+    )
+);

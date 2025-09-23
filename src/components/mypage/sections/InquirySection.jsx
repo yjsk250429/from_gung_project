@@ -11,6 +11,7 @@ const InquirySection = () => {
     const inquiries = useAuthStore.getState().getMyInquiries();
     const addInquiry = useAuthStore((s) => s.addInquiry);
     const user = useAuthStore((s) => s.user);
+    const removeInquiry = useAuthStore((s) => s.removeInquiry);
 
     const handleSave = () => {
         if (!form.title.trim()) {
@@ -46,24 +47,40 @@ const InquirySection = () => {
                         <span>날짜</span>
                         <span>내용</span>
                         <span>답변상태</span>
+                        <span>-</span>
                     </div>
                     {inquiries.length === 0 ? (
                         <div className="tbody empty">1:1 문의 내역이 없습니다.</div>
                     ) : (
                         <div className="tbody">
                             {inquiries.map((q) => (
-                                <div
-                                    className="row clickable"
-                                    key={q.id}
-                                    onClick={() => {
-                                        setSelectedInquiry(q);
-                                        setMode('detail');
-                                    }}
-                                >
+                                <div className="row clickable" key={q.id}>
                                     <span>{q.id}</span>
                                     <span>{q.date}</span>
-                                    <span>{q.title}</span>
+                                    <span
+                                        className="detailBtn"
+                                        onClick={() => {
+                                            setSelectedInquiry(q);
+                                            setMode('detail');
+                                        }}
+                                    >
+                                        {q.title}
+                                    </span>
                                     <span>{q.status}</span>
+                                    <span>
+                                        <button
+                                            onClick={(e) => {
+                                                removeInquiry(q.id);
+                                                // 선택된 상세보기도 지워질 수 있게 mode, selectedInquiry 처리 (선택사항)
+                                                if (selectedInquiry?.id === q.id) {
+                                                    setSelectedInquiry(null);
+                                                    setMode('list');
+                                                }
+                                            }}
+                                        >
+                                            삭제
+                                        </button>
+                                    </span>
                                 </div>
                             ))}
                         </div>
@@ -115,7 +132,17 @@ const InquirySection = () => {
                     <p>
                         <strong>상태:</strong> {selectedInquiry.status}
                     </p>
+
                     <div className="detail-buttons">
+                        <button
+                            onClick={() => {
+                                removeInquiry(selectedInquiry.id);
+                                setSelectedInquiry(null);
+                                setMode('list');
+                            }}
+                        >
+                            삭제
+                        </button>
                         <button onClick={() => setMode('list')}>목록으로</button>
                     </div>
                 </div>

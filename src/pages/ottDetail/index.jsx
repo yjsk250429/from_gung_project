@@ -1,4 +1,3 @@
-// src/pages/ottDetail/index.jsx
 import { useEffect, useMemo, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
@@ -6,128 +5,196 @@ import OttDetailCast from '../../components/ottDetail/con1Cast/OttDetailCast';
 import OttDetailReview from '../../components/ottDetail/con2Review/OttDetailReview';
 import OttDetailContents from '../../components/ottDetail/con3Contents/OttDetailContents';
 import OttDetailVisual from '../../components/ottDetail/ottDetailVisual/OttDetailVisual';
+
 import reviewsDefault from '../../api/ottReview';
 import { fetchDetail } from '../../tmdb/fetchDetail';
-import { is404 } from '../../tmdb/tmdb';
-
-import { seeds } from '../../tmdb/seeds';
+import { is404, tmdb } from '../../tmdb/tmdb';
+import { seeds as seedList } from '../../tmdb/seeds';
 
 import './style.scss';
 
-// ---- 시청연령 계산 헬퍼(훅 아님) ---------------------------------
-// ---- 시청연령 계산 헬퍼(훅 아님) — 교체 버전 -----------------------
+/* ----------------- helpers (훅 아님) ----------------- */
+const TMDB_IMG_BASE = 'https://image.tmdb.org/t/p';
+
+/** 언어 우선순위로 이미지 경로 선택 */
+function pickByLang(arr, key = 'file_path', order = ['ko', null, 'en']) {
+    if (!Array.isArray(arr) || !arr.length) return null;
+    for (const lang of order) {
+        const hit = arr.find((p) => (p.iso_639_1 ?? null) === lang);
+        if (hit?.[key]) return hit[key];
+    }
+    return arr[0]?.[key] ?? null;
+}
+
+/** 문자열 경로를 앱에서 쓸 수 있게 보정 */
+const fixImg = (p, w = 500) => {
+    if (!p) return null;
+    const s = String(p).trim();
+    if (!s) return null;
+    if (/^https?:/i.test(s)) return s; // 절대 URL
+    if (s.startsWith('/images/')) return s; // 프로젝트 정적 자산
+    const path = s.startsWith('/') ? s : `/${s}`;
+    return `${TMDB_IMG_BASE}/w${w}${path}`; // TMDB 상대경로
+};
+
+/** 시청연령 계산 */
 function computeCertString(data, mediaType) {
     const S = (v) => (v == null ? '' : String(v).trim());
-
-    // 연령 토큰 정규화: 연령처럼 보이는 값만 남기고, 평점처럼 보이면 버린다.
-    const normalizeCertToken = (v) => {
+    const normalize = (v) => {
         const s = S(v);
         if (!s) return '';
-
         const up = s.toUpperCase();
-
-        // 평점(소수점 포함 0~10대 형태)처럼 보이면 제외
-        if (/^\d+\.\d+$/.test(s)) return ''; // e.g. "7.4"
-        if (/^(10|[0-9])(\.\d+)?$/.test(s)) return ''; // "8", "9.0" 등도 배제
-
-        // 전체 이용가 매핑
-        if (
-            up === 'ALL' ||
-            up === '0' ||
-            up === '전체이용가' ||
-            up === 'G' ||
-            up === 'TV-G' ||
-            up === 'TV-Y'
-        )
-            return '-';
-
-        // 숫자 등급 (7, 12, 15, 18, 19)
+        if (/^\d+\.\d+$/.test(s)) return '';
+        if (/^(10|[0-9])(\.\d+)?$/.test(s)) return '';
+        if (['ALL', '0', '전체이용가', 'G', 'TV-G', 'TV-Y'].includes(up)) return '-';
         if (/^(7|12|15|18|19)$/.test(s)) return s;
-
-        // 미국식 등급 최소 매핑 (필요시 확장)
         if (/^PG-?13$/.test(up)) return '13';
-        if (up === 'R') return '17';
-        if (up === 'NC-17') return '17';
+        if (up === 'R' || up === 'NC-17') return '17';
         if (up === 'TV-14') return '14';
         if (up === 'TV-MA') return '19';
-
-        // 그 외 문자열은 그대로(예: "PG") — 원하면 숫자로 더 매핑 가능
         return s;
     };
 
     if (!data) return '-';
-
-    // 이미 가공된 값이 있으면 먼저 사용
-    const pre = normalizeCertToken(data.certification) || normalizeCertToken(data.cert);
+    const pre = normalize(data.certification) || normalize(data.cert);
     if (pre) return pre;
 
     if (mediaType === 'tv') {
-        // TMDB TV: content_ratings.results = [{ iso_3166_1, rating }]
         const arr =
             data?.content_ratings?.results ??
             (Array.isArray(data?.results) ? data.results : []) ??
             [];
-        if (Array.isArray(arr) && arr.length) {
+        if (arr.length) {
             const pick = (cc) =>
                 arr.find(
-                    (n) =>
-                        (n?.iso_3166_1 ?? n?.country ?? n?.iso) === cc &&
-                        normalizeCertToken(n?.rating)
+                    (n) => (n?.iso_3166_1 ?? n?.country ?? n?.iso) === cc && normalize(n?.rating)
                 );
-            const kr = normalizeCertToken(pick('KR')?.rating);
-            const us = normalizeCertToken(pick('US')?.rating);
-            const any = normalizeCertToken(
-                (arr.find((n) => normalizeCertToken(n?.rating)) || {}).rating
+            return (
+                normalize(pick('KR')?.rating) ||
+                normalize(pick('US')?.rating) ||
+                normalize((arr.find((n) => normalize(n?.rating)) || {}).rating) ||
+                '-'
             );
-            return kr || us || any || '-';
         }
     } else {
-        // TMDB Movie: release_dates.results[].release_dates[].certification
         const nodes =
             data?.release_dates?.results ??
             (Array.isArray(data?.results) ? data.results : []) ??
             [];
-        if (Array.isArray(nodes) && nodes.length) {
+        if (nodes.length) {
             const pick = (cc) => nodes.find((n) => (n?.iso_3166_1 ?? n?.country ?? n?.iso) === cc);
             const node = pick('KR') || pick('US') || nodes[0];
             const rds = node?.release_dates ?? node?.dates ?? [];
-            if (Array.isArray(rds) && rds.length) {
-                const hit = rds.find((e) => normalizeCertToken(e?.certification));
-                const val = normalizeCertToken(hit?.certification);
+            if (rds.length) {
+                const hit = rds.find((e) => normalize(e?.certification));
+                const val = normalize(hit?.certification);
                 if (val) return val;
             }
         }
     }
     return '-';
 }
-// -------------------------------------------------------------------
-
-// -----------------------------------------------------------------
+/* ---------------------------------------------------- */
 
 export default function OttDetail() {
-    // /ott/:mediaType/:id 형태로 URL 파라미터 받음
+    // 라우트: /ott/:mediaType/:id
     const { mediaType, id: idParam } = useParams();
+    const [sp] = useSearchParams();
+
     const rawId = idParam;
     const id = Number(rawId);
-
-    const [sp] = useSearchParams();
-    const season = Number(sp.get('season')) || 1; // 영화면 무시됨
+    const season = Number(sp.get('season')) || 1; // 영화면 무시
 
     const [data, setData] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [ui, setUi] = useState({ loading: true, error: null });
 
+    // seeds 기반 관련콘텐츠(원천 후보 5개)
+    const seedCandidates = useMemo(() => {
+        // 1) 상세와 동일 타입만 추출(tv | movie)
+        const sameType = (seedList || []).filter((s) => (s.mediaType || s.type) === mediaType);
+
+        // 2) 현재 항목과 매칭되는 seed
+        const currentSeed = sameType.find((s) => Number(s.tmdbId) === id) || null;
+
+        // 3) 자신 제외
+        let candidates = sameType.filter((s) => Number(s.tmdbId) !== id);
+
+        // 4) 현재 seed의 genre가 있으면 같은 genre 먼저
+        if (currentSeed?.genre) {
+            const g = currentSeed.genre;
+            const head = candidates.filter((s) => s.genre === g);
+            const tail = candidates.filter((s) => s.genre !== g);
+            candidates = [...head, ...tail];
+        }
+
+        // 5) 상위 5개만
+        return candidates.slice(0, 5);
+    }, [mediaType, id]);
+
+    // seeds 후보를 "포스터 보장" 리스트로 확정
+    const [relatedList, setRelatedList] = useState([]);
+    useEffect(() => {
+        let alive = true;
+        (async () => {
+            try {
+                const out = [];
+                for (const s of seedCandidates) {
+                    // 1) seeds.poster 우선
+                    let posterUrl = fixImg(s.poster, 500);
+
+                    // 2) 없으면 TMDB에서 포스터만 받아오기(가벼움)
+                    if (!posterUrl) {
+                        try {
+                            const base = await tmdb(`${mediaType}/${s.tmdbId}`, {
+                                language: 'ko-KR',
+                                append_to_response: 'images',
+                                include_image_language: 'ko,null,en',
+                            });
+                            const picked =
+                                base?.poster_path || pickByLang(base?.images?.posters, 'file_path');
+                            if (picked) posterUrl = fixImg(picked, 500);
+                        } catch {
+                            // ignore per item
+                        }
+                    }
+
+                    // 3) 그래도 없으면 seeds.backdrop을 임시 사용
+                    if (!posterUrl) {
+                        posterUrl = fixImg(s.backdrop, 500);
+                    }
+
+                    out.push({
+                        id: s.tmdbId,
+                        tmdbId: s.tmdbId,
+                        title: s.title,
+                        poster: posterUrl, // ✅ 포스터 최우선
+                        backdrop: fixImg(s.backdrop, 780), // 참고용
+                        media_type: s.mediaType || s.type,
+                        genre: s.genre,
+                    });
+                }
+                if (alive) setRelatedList(out);
+            } catch (e) {
+                if (alive) setRelatedList([]);
+            }
+        })();
+        return () => {
+            alive = false;
+        };
+    }, [seedCandidates, mediaType]);
+
+    // ====== 상세 fetch (모든 훅은 조건부 반환보다 위) ======
     useEffect(() => {
         let alive = true;
 
         (async () => {
             try {
-                // 🔒 여기서 잘못된 id 처리
                 if (!rawId || !Number.isFinite(id)) {
                     setUi({
                         loading: false,
                         error: !rawId
-                            ? '잘못된 경로입니다. (id/ottID 없음)'
+                            ? '잘못된 경로입니다. (id 없음)'
                             : `잘못된 ID 형식입니다. (${String(rawId)})`,
                     });
                     return;
@@ -135,21 +202,16 @@ export default function OttDetail() {
 
                 setUi({ loading: true, error: null });
 
-                // type(mediaType)에 따라 구분 후 데이터 fetch
                 if (mediaType === 'tv') {
                     try {
-                        const tvItem = await fetchDetail({
-                            type: 'tv',
-                            tmdbId: id,
-                            season,
-                        });
+                        const tvItem = await fetchDetail({ type: 'tv', tmdbId: id, season });
                         if (!alive) return;
                         setData(tvItem || null);
                         setReviews(Array.isArray(reviewsDefault) ? reviewsDefault : []);
                         setUi({ loading: false, error: null });
                         return;
                     } catch (e1) {
-                        if (!is404(e1)) throw e1; // TV가 404가 아니면 그게 진짜 에러
+                        if (!is404(e1)) throw e1;
                     }
                 }
 
@@ -171,40 +233,7 @@ export default function OttDetail() {
         };
     }, [id, season, rawId, mediaType]);
 
-    // 관련/추천/유사 합치기(있으면)
-    const relatedList = useMemo(() => {
-        if (!data) return [];
-        const bucket = [];
-        const add = (arr) => Array.isArray(arr) && bucket.push(...arr);
-        add(data.related);
-        add(data.recommendations);
-        add(data.similar);
-        add(data.recommendations?.results);
-        add(data.similar?.results);
-
-        const seen = new Set();
-        const out = [];
-        for (const it of bucket) {
-            const rid = it?.id ?? it?.tmdbId ?? it?.tmdb_id;
-            if (rid == null) continue;
-            const key = String(rid);
-            if (seen.has(key)) continue;
-            seen.add(key);
-            out.push({
-                id: rid,
-                title: it?.title ?? it?.name ?? it?.original_title ?? it?.original_name ?? '',
-                poster_path:
-                    it?.poster_path ?? it?.poster ?? it?.image ?? it?.media?.poster_path ?? '',
-                backdrop_path: it?.backdrop_path ?? it?.backdrop ?? it?.media?.backdrop_path ?? '',
-                profile_path: it?.profile_path ?? it?.profile ?? '',
-                vote_average: it?.vote_average ?? it?.rating ?? it?.media?.vote_average,
-                media_type: (it?.media_type || it?.media?.media_type || '').toLowerCase() || null,
-            });
-        }
-        return out;
-    }, [data]);
-
-    // 장르 문자열(드라마 · 사극)
+    // ====== 파생값 (비주얼/에피소드 등) ======
     const genreText = useMemo(() => {
         const g = data?.genres;
         if (!g) return '';
@@ -218,7 +247,6 @@ export default function OttDetail() {
         return String(g);
     }, [data]);
 
-    // 에피소드 안전 변환
     const episodesSafe = useMemo(() => {
         const list = Array.isArray(data?.episodes) ? data.episodes : [];
         return list.map((ep, idx) => ({
@@ -226,81 +254,71 @@ export default function OttDetail() {
             name: ep?.name ?? '',
             runtime: ep?.runtime ?? ep?.run_time ?? null,
             date: ep?.date ?? ep?.air_date ?? '',
-            thumb:
-                ep?.thumb ??
-                (ep?.still_path ? `https://image.tmdb.org/t/p/w300${ep.still_path}` : ''),
+            thumb: ep?.thumb ?? (ep?.still_path ? `${TMDB_IMG_BASE}/w300${ep.still_path}` : ''),
         }));
     }, [data]);
 
-    // ✅ seed 매칭(현재 상세 id)
-    const seed = useMemo(() => {
-        if (!Number.isFinite(id)) return null;
-        return seeds.find((s) => Number(s.tmdbId ?? s.id) === id) || null;
+    // 비주얼 오버라이드: seeds에 동일 id가 있으면 우선 사용
+    const seedMatch = useMemo(() => {
+        return seedList.find((s) => Number(s.tmdbId) === id) || null;
     }, [id]);
 
-    // ✅ 시드 우선으로 대표 이미지 오버라이드
-    const visualOverrides = useMemo(() => {
-        return {
-            backdrop: seed?.backdrop || data?.backdrop || null,
-            titleLogo: seed?.titleLogo || data?.titleLogo || data?.poster || null,
-        };
-    }, [seed, data]);
+    const visualOverrides = useMemo(
+        () => ({
+            backdrop: fixImg(seedMatch?.backdrop, 1280) || data?.backdrop || null,
+            titleLogo: seedMatch?.titleLogo || data?.titleLogo || data?.poster || null,
+        }),
+        [seedMatch, data]
+    );
 
-    // ---- 여기까지가 모든 훅. 이 아래에서만 조기 return ----
-
-    if (ui.loading) return <div style={{ color: '#fff', padding: 24 }}>불러오는 중…</div>;
-    if (ui.error) return <div style={{ color: '#f66', padding: 24 }}>에러: {ui.error}</div>;
-    if (!data) return <div style={{ color: '#fff', padding: 24 }}>데이터 없음</div>;
-
-    // 안전 파생(훅 아님)
-    const rating = data.rating ?? data.vote_average ?? null;
+    const rating = data?.rating ?? data?.vote_average ?? null;
     const seasonCount =
-        data.seasonsCount ??
-        data.season_count ??
-        (Array.isArray(data.seasons) ? data.seasons.length : 1);
+        data?.seasonsCount ??
+        data?.season_count ??
+        (Array.isArray(data?.seasons) ? data.seasons.length : 1);
     const year =
-        data.year ??
-        (data.release_date ? String(data.release_date).slice(0, 4) : null) ??
-        (data.first_air_date ? String(data.first_air_date).slice(0, 4) : null);
+        data?.year ??
+        (data?.release_date ? String(data.release_date).slice(0, 4) : null) ??
+        (data?.first_air_date ? String(data.first_air_date).slice(0, 4) : null);
 
-    const castSafe = (data.cast || []).map((c) => ({
+    const castSafe = (data?.cast || []).map((c) => ({
         name: c.name ?? c.original_name ?? '',
         profile: c.profile ?? c.profile_path ?? '',
     }));
 
-    // ✅ 시청연령 문자열(훅 아님)
     const safeCert = computeCertString(data, mediaType);
+
+    // ====== 조건부 반환 시작 ======
+    if (ui.loading) return <div style={{ color: '#fff', padding: 24 }}>불러오는 중…</div>;
+    if (ui.error) return <div style={{ color: '#f66', padding: 24 }}>에러: {ui.error}</div>;
+    if (!data) return <div style={{ color: '#fff', padding: 24 }}>데이터 없음</div>;
 
     return (
         <div className={`ott-detail ${mediaType || data.mediaType || ''}`}>
             <OttDetailVisual
                 mediaType={mediaType}
-                // ✅ seed 우선 적용
                 backdrop={visualOverrides.backdrop}
                 titleLogo={visualOverrides.titleLogo}
-                // ✅ 이미지 소스(있으면 전달)
                 images={data.images || {}}
                 backdrops={data.backdrops || []}
                 logos={data.logos || []}
-                // ✅ 평점/연도/장르/시즌
                 rating={rating}
                 year={year}
                 overview={data.overview || ''}
                 genres={genreText}
                 seasonCount={mediaType === 'tv' ? seasonCount || 1 : undefined}
                 hasSubtitle={!!data.subtitlesAvailable}
-                // ✅ 시청연령(문자열)
                 cert={safeCert}
-                // ✅ 회차/출연
                 episodes={episodesSafe}
                 cast={castSafe}
-                // ✅ 소셜(홈페이지만 우선)
                 social={{ homepage: data?.homepage || '', instagram: '', facebook: '' }}
             />
 
             <OttDetailCast cast={castSafe.slice(0, 8)} />
             <OttDetailReview reviews={reviews} />
-            <OttDetailContents items={relatedList} max={8} seedKey={`${mediaType}:${id}`} />
+
+            {/* ✅ seeds만 사용 + 항상 5개, 포스터 우선(없으면 TMDB에서 보충) */}
+            <OttDetailContents items={relatedList} parentMediaType={mediaType} max={5} />
         </div>
     );
 }

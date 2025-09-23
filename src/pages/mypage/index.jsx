@@ -19,8 +19,12 @@ const MyPage = () => {
             <EditInfoComplete />
             <WithdrawConfirm />
             <WithdrawComplete />
-            {user.wishlist?.length > 0 && <WishModal className="deleteAll" />}
-            <SelectProfile />
+            {
+            user?.wishlist?.length > 0 &&
+            <WishModal className='deleteAll'/>
+            }
+            <SelectProfile/>
+
         </>
     );
 };

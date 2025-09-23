@@ -136,7 +136,7 @@ const TourClassDatail = () => {
                   <BiCoin />
                 </i>
                 1인 {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
-                <span>(리워드 {reward}p 지급)</span>
+                <span> (리워드 {reward}p 지급)</span>
               </li>
             </ul>
           </div>

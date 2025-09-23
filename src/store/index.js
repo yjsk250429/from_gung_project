@@ -12,7 +12,7 @@ const memberData = [
         userId: 'abc1234',
         password: 'abc1234!',
         nickName: '궁으로간닷',
-        profile: '/images/mypage/honggildong.png',
+        profile: '/images/profile/profile_13.png',
         tel: {
             first: '010',
             middle: '0000',
@@ -29,6 +29,7 @@ const memberData = [
         marketingDate: null, // 마지막 동의/거부 날짜
         wishlist: [],
         ottWishList: [],
+        bookings: [],
         attandance: 9,
         inquiries: [],
     },
@@ -165,6 +166,7 @@ export const useAuthStore = create((set, get) => ({
         const newUser = {
             ...user,
             id: no++,
+            profile: '/images/profile/profile_1.png',
             marketing: tempMarketing.status,
             marketingDate: tempMarketing.date,
             wishlist: [],
@@ -228,7 +230,100 @@ export const useAuthStore = create((set, get) => ({
         localStorage.setItem('user', JSON.stringify(kakaoUser));
     },
 
-    // wishlist 관련 메서드들 그대로...
+    toggleWishlist: (item) => {
+        const { user, members } = get();
+        if (!user) return;
+
+        const exists = user.wishlist?.some((w) => w.id === item.id);
+        const updatedWishlist = exists
+            ? user.wishlist.filter((w) => w.id !== item.id)
+            : [...(user.wishlist || []), item];
+
+        const updatedUser = { ...user, wishlist: updatedWishlist };
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+
+    clearWishlist: () => {
+        const { user, members } = get();
+        if (!user) return;
+
+        const updatedUser = { ...user, wishlist: [] };
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+
+    removeFromWishlist: (ids) => {
+        const { user, members } = get();
+        if (!user) return;
+
+        const updatedWishlist = user.wishlist.filter((w) => !ids.includes(w.id));
+        const updatedUser = { ...user, wishlist: updatedWishlist };
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+
+    addBooking: (bookingData) => {
+        const { user, members } = get();
+        if (!user) return;
+
+        const newBooking = {
+            ...bookingData,
+            id: Date.now(), // 예약 고유 ID
+            status: 'confirmed', // 예약 완료
+            createdAt: new Date().toISOString(),
+        };
+
+        const updatedUser = {
+            ...user,
+            bookings: [...(user.bookings || []), newBooking],
+        };
+
+        if (!user.id) {
+            // 외부 로그인(멤버스에 없음): 세션만 업데이트
+            set({ user: updatedUser });
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            return;
+        }
+
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+
+    cancelBooking: (bookingId) => {
+        const { user, members } = get();
+        if (!user) return;
+
+        const updatedBookings = (user.bookings || []).map((b) =>
+            b.id === bookingId
+                ? { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() }
+                : b
+        );
+
+        const updatedUser = { ...user, bookings: updatedBookings };
+
+        if (!user.id) {
+            set({ user: updatedUser });
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            return;
+        }
+
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
 }));
 
 export const useModalStore = create((set) => ({
@@ -248,7 +343,6 @@ export const useModalStore = create((set) => ({
     couponOpen: false,
     needLoginOpen: false,
     wishModalOpen: false,
-    selectProfileOpen: false,
 
     wishMessage: '',
     wishButtons: { text1: '', text2: '' },
@@ -268,8 +362,12 @@ export const useModalStore = create((set) => ({
             wishAction: null,
         }),
 
-    openSelectProfile: () => set({ selectProfileOpen: true }),
-    closeSelectProfile: () => set({ selectProfileOpen: false }),
+    selectProfileOpen: false,
+    selectedProfileImage: null,
+
+    openSelectProfile: (image = '') =>
+        set({ selectProfileOpen: true, selectedProfileImage: image }),
+    closeSelectProfile: () => set({ selectProfileOpen: false, selectedProfileImage: '' }),
 
     openNeedLogin: () => set({ needLoginOpen: true }),
     closeNeedLogin: () => set({ needLoginOpen: false }),

@@ -3,12 +3,12 @@ import { useAuthStore, useModalStore } from '../../store';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 
-
 const UtilBar = () => {
     const { openLogin, openJoin, openReward, closeReward, openLogoutCom } = useModalStore();
     const navigate = useNavigate();
     const location = useLocation();
     const authed = useAuthStore((s) => s.authed);
+    const user = useAuthStore((s) => s.user);
     const logout = useAuthStore((s) => s.logout);
     const [searchOn, setSearchOn] = useState(false);
     const [q, setQ] = useState('');
@@ -82,13 +82,13 @@ const UtilBar = () => {
             </ul>
             <ul className="reward" onMouseEnter={openReward} onMouseLeave={closeReward}>
                 <li>
-                    <img src="/images/coin_w.png" alt="coin" />0
+                    <img src="/images/coin_w.png" alt="coin" />
+                    {user.reward}
                 </li>
                 <li>
                     <img src="/images/calendar_w.png" alt="calendar" />0
                 </li>
             </ul>
-            
         </div>
     );
 };

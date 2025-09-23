@@ -169,14 +169,14 @@ const OttDetailReview = ({ reviews = [] }) => {
                                 <p>{r.content}</p>
                             </div>
 
-                            <div
+                            {/* <div
                                 className={`more ${open[r.id] ? 'open' : ''}`}
                                 role="button"
                                 onClick={() => toggleOpen(r.id)}
                             >
                                 {open[r.id] ? '접기' : '더보기'}
                                 <TiArrowSortedDown />
-                            </div>
+                            </div> */}
                         </div>
                     ))}
                 </div>

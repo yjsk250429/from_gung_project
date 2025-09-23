@@ -7,8 +7,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore, useModalStore } from '../../store';
 import { useState } from 'react';
-import { FaCheck } from "react-icons/fa6";
-
+import { FaCheck } from 'react-icons/fa6';
 
 const Payment = () => {
     const location = useLocation();
@@ -17,24 +16,47 @@ const Payment = () => {
     const { openWishModal } = useModalStore();
     const [payMethod, setPayMethod] = useState(null);
     const user = useAuthStore((s) => s.user);
-    const [orderName, setOrderName] = useState("");
-    const [orderTel, setOrderTel] = useState({ first: "010", middle: "", last: "" });
+    const [orderName, setOrderName] = useState('');
+    const [orderTel, setOrderTel] = useState({ first: '010', middle: '', last: '' });
     const [sameAsUser, setSameAsUser] = useState(false);
-  
-  
+    const [agreeAll, setAgreeAll] = useState(false);
+
     const bookingData = location.state; // SelectDate에서 전달된 payload
     if (!bookingData) {
-      return <section className="payment-page"><div className="inner"><p>예약 정보가 없습니다. 다시 시도해 주세요.</p></div></section>;
+        return (
+            <section className="payment-page">
+                <div className="inner">
+                    <p>예약 정보가 없습니다. 다시 시도해 주세요.</p>
+                </div>
+            </section>
+        );
     }
-  
-    const { item, selected, peopleCount, selectedCoupon, originalPrice, discountAmount, finalPrice } = bookingData;
-    const { theme, time, category, title = '상품명', period = '하루', region = '지역 정보', place = [], price = 0 } = item || {};
+
+    const {
+        item,
+        selected,
+        peopleCount,
+        selectedCoupon,
+        originalPrice,
+        discountAmount,
+        finalPrice,
+    } = bookingData;
+    const {
+        theme,
+        time,
+        category,
+        title = '상품명',
+        period = '하루',
+        region = '지역 정보',
+        place = [],
+        price = 0,
+    } = item || {};
 
     const fromDate = selected?.from ? new Date(selected.from) : null;
-    const toDate   = selected?.to ? new Date(selected.to) : null;
+    const toDate = selected?.to ? new Date(selected.to) : null;
 
     const fromStr = fromDate ? fromDate.toLocaleDateString() : '-';
-    const toStr   = toDate ? toDate.toLocaleDateString() : '-';
+    const toStr = toDate ? toDate.toLocaleDateString() : '-';
 
     const REWARD_UNIT = 2000;
     const originalReward = Math.ceil(originalPrice / REWARD_UNIT);
@@ -43,54 +65,54 @@ const Payment = () => {
     const handleSameAsUser = (e) => {
         const checked = e.target.checked;
         setSameAsUser(checked);
-    
+
         if (checked && user) {
-          setOrderName(user.name || "");
-          setOrderTel({
-            first: user.tel?.first || "010",
-            middle: user.tel?.middle || "",
-            last: user.tel?.last || ""
-          });
+            setOrderName(user.name || '');
+            setOrderTel({
+                first: user.tel?.first || '010',
+                middle: user.tel?.middle || '',
+                last: user.tel?.last || '',
+            });
         } else {
-          setOrderName("");
-          setOrderTel({ first: "010", middle: "", last: "" });
+            setOrderName('');
+            setOrderTel({ first: '010', middle: '', last: '' });
         }
-      };
-  
-      const handlePay = () => {
+    };
+
+    const handlePay = () => {
         if (!orderName || !orderTel.middle || !orderTel.last) {
-          alert("예약자 정보를 모두 입력해 주세요.");
-          return;
+            openWishModal('예약자 정보를 모두 입력해 주세요.', { text1: '확인' });
+            return;
         }
         if (!payMethod) {
-          alert("결제수단을 선택해 주세요.");
-          return;
+            openWishModal('결제수단을 선택해 주세요.', { text1: '확인' });
+            return;
         }
-      
+        if (!agreeAll) {
+            openWishModal('약관에 동의해 주세요.', { text1: '확인' });
+            return;
+        }
+
         const bookingPayload = {
-          ...bookingData,
-          orderInfo: {
-            name: orderName,
-            tel: orderTel,
-            email: "", // 이메일 입력값 있으면 여기 반영
-          },
-          payMethod,
+            ...bookingData,
+            orderInfo: {
+                name: orderName,
+                tel: orderTel,
+                email: '', // 이메일 입력값 있으면 여기 반영
+            },
+            payMethod,
         };
-      
+
         addBooking(bookingPayload);
         openWishModal(
-            "예약이 완료되었습니다.",
-            { text1: "확인", text2: "예약내역 확인" },
+            '예약이 완료되었습니다.',
+            { text1: '확인', text2: '예약내역 확인' },
             (btn) => {
-              if (btn === "확인") {
-                navigate("/"); // 홈으로
-              } else if (btn === "예약내역 확인") {
-                navigate("/mypage"); // 마이페이지 예약내역 탭으로 이동
-              }
+                if (btn === '확인') navigate('/');
+                else if (btn === '예약내역 확인') navigate('/mypage');
             }
-          );
-      };
-      
+        );
+    };
 
     return (
         <section className="payment-page">
@@ -163,13 +185,12 @@ const Payment = () => {
 
                     <div className="charge-info">
                         <span>이용 예정일</span>
-                        <p> {period === "하루"
-                            ? fromStr
-                            : `${fromStr} ~ ${toStr}`}</p>
+                        <p> {period === '하루' ? fromStr : `${fromStr} ~ ${toStr}`}</p>
 
                         <span>인원·수량</span>
                         <p>
-                         {peopleCount}인 (이용권 {peopleCount}장) <em>{originalPrice.toLocaleString()}원</em>
+                            {peopleCount}인 (이용권 {peopleCount}장){' '}
+                            <em>{originalPrice.toLocaleString()}원</em>
                         </p>
                         <i className="sum">
                             총 상품 금액 <p>{originalPrice.toLocaleString()}원</p>
@@ -183,22 +204,48 @@ const Payment = () => {
                         <div className="user">
                             <label>
                                 <span>이름 *</span>
-                                <input type="text" value={orderName} onChange={(e) => setOrderName(e.target.value)}/>
+                                <input
+                                    type="text"
+                                    value={orderName}
+                                    onChange={(e) => setOrderName(e.target.value)}
+                                />
                                 {/* <p>필수 입력</p> */}
                             </label>
                             <label>
                                 <span>연락처 *</span>
                                 <div>
-                                <select name="first" value={orderTel.first} onChange={(e) => setOrderTel({ ...orderTel, first: e.target.value })}>
-                                    <option value="010">010</option>
-                                    <option value="011">011</option>
-                                    <option value="012">012</option>
-                                    <option value="013">013</option>
-                                </select>
-                                -
-                                <input type="text" inputMode="numeric" maxLength={4} value={orderTel.middle} onChange={(e) => setOrderTel({ ...orderTel, middle: e.target.value })}/>
-                                -
-                                <input type="text" inputMode="numeric" maxLength={4}  value={orderTel.last} onChange={(e) => setOrderTel({ ...orderTel, last: e.target.value })}/>
+                                    <select
+                                        name="first"
+                                        value={orderTel.first}
+                                        onChange={(e) =>
+                                            setOrderTel({ ...orderTel, first: e.target.value })
+                                        }
+                                    >
+                                        <option value="010">010</option>
+                                        <option value="011">011</option>
+                                        <option value="012">012</option>
+                                        <option value="013">013</option>
+                                    </select>
+                                    -
+                                    <input
+                                        type="text"
+                                        inputMode="numeric"
+                                        maxLength={4}
+                                        value={orderTel.middle}
+                                        onChange={(e) =>
+                                            setOrderTel({ ...orderTel, middle: e.target.value })
+                                        }
+                                    />
+                                    -
+                                    <input
+                                        type="text"
+                                        inputMode="numeric"
+                                        maxLength={4}
+                                        value={orderTel.last}
+                                        onChange={(e) =>
+                                            setOrderTel({ ...orderTel, last: e.target.value })
+                                        }
+                                    />
                                 </div>
                             </label>
                             <label>
@@ -208,11 +255,14 @@ const Payment = () => {
 
                             <p className="currentUser">
                                 <label>
-                                    <input type="checkbox" checked={sameAsUser} onChange={handleSameAsUser}/>
+                                    <input
+                                        type="checkbox"
+                                        checked={sameAsUser}
+                                        onChange={handleSameAsUser}
+                                    />
                                     주문자 정보와 동일
                                 </label>
                             </p>
-
                         </div>
 
                         <div className="charge">
@@ -222,20 +272,38 @@ const Payment = () => {
                             <div className="selec">
                                 <li>
                                     <label>
-                                    <input type="radio" name="pay" value="card" checked={payMethod === "card"}  onChange={(e) => setPayMethod(e.target.value)} />
-                                    신용카드
+                                        <input
+                                            type="radio"
+                                            name="pay"
+                                            value="card"
+                                            checked={payMethod === 'card'}
+                                            onChange={(e) => setPayMethod(e.target.value)}
+                                        />
+                                        신용카드
                                     </label>
                                 </li>
                                 <li>
                                     <label>
-                                    <input type="radio" name="pay" value="bank" checked={payMethod === "bank"} onChange={(e) => setPayMethod(e.target.value)}/>
-                                    계좌이체
+                                        <input
+                                            type="radio"
+                                            name="pay"
+                                            value="bank"
+                                            checked={payMethod === 'bank'}
+                                            onChange={(e) => setPayMethod(e.target.value)}
+                                        />
+                                        계좌이체
                                     </label>
                                 </li>
                                 <li>
                                     <label>
-                                    <input type="radio" name="pay" value="cash"  checked={payMethod === "cash"} onChange={(e) => setPayMethod(e.target.value)}/>
-                                    무통장입금
+                                        <input
+                                            type="radio"
+                                            name="pay"
+                                            value="cash"
+                                            checked={payMethod === 'cash'}
+                                            onChange={(e) => setPayMethod(e.target.value)}
+                                        />
+                                        무통장입금
                                     </label>
                                 </li>
                             </div>
@@ -248,7 +316,9 @@ const Payment = () => {
                         <p>
                             판매금액 <em>{originalPrice.toLocaleString()}원</em>
                         </p>
-                        <p>할인금액 <em>-{discountAmount.toLocaleString()}원</em></p>
+                        <p>
+                            할인금액 <em>-{discountAmount.toLocaleString()}원</em>
+                        </p>
                         <p>
                             판매수량 X{peopleCount} <em>{originalPrice.toLocaleString()}원</em>
                         </p>
@@ -259,10 +329,10 @@ const Payment = () => {
                             사용 쿠폰 <p>{selectedCoupon ? '1' : '0'}장</p>
                         </span>
                         {selectedCoupon && (
-                        <div className="cpbox">
-                            <span>{selectedCoupon.name}</span>
-                            <p>{selectedCoupon.discount.toLocaleString()}원 할인</p>
-                        </div>
+                            <div className="cpbox">
+                                <span>{selectedCoupon.name}</span>
+                                <p>{selectedCoupon.discount.toLocaleString()}원 할인</p>
+                            </div>
                         )}
                     </div>
                     <div className="total">
@@ -273,14 +343,25 @@ const Payment = () => {
                     </div>
                     <div className="check">
                         <div className="all">
-                            <input type="checkbox" /> 전체동의
+                            <input
+                                type="checkbox"
+                                checked={agreeAll}
+                                onChange={(e) => setAgreeAll(e.target.checked)}
+                            />{' '}
+                            전체동의
                         </div>
                         <li>
-                        <i><FaCheck /></i> 취소규정 동의 (필수)
+                            <i>
+                                <FaCheck />
+                            </i>{' '}
+                            취소규정 동의 (필수)
                             <IoIosArrowForward />
                         </li>
                         <li>
-                        <i><FaCheck /></i> 취소 및 환불 정책 동의 (필수)
+                            <i>
+                                <FaCheck />
+                            </i>{' '}
+                            취소 및 환불 정책 동의 (필수)
                             <IoIosArrowForward />
                         </li>
                         <p>

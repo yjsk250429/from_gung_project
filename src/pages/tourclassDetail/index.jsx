@@ -40,11 +40,7 @@ const renderStars = (rate) => {
 
 const TourClassDatail = () => {
   const { tourclassID } = useParams();
-  const {closeWishModal} = useModalStore();
-  const goWish = () =>{
-    closeWishModal();
-    navigate('/mypage');
-};
+
   const tourClass = useTourClassStore((state) => state.tourClass);
   const thisitem = tourClass.find((t) => String(t.id) === tourclassID);
   const {
@@ -153,7 +149,7 @@ const TourClassDatail = () => {
         </article>
       </div>
       <CouponDown/>
-      <WishModal onClick={goWish} className='addWish'/>
+      <WishModal className='addWish'/>
     </section>
   );
 };

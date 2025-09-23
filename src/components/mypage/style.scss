@@ -1,5 +1,14 @@
 @use '../../styles/utils' as *;
 @use '../../styles/base' as *;
+@use '../../styles/ui/modal' as *;
+
+.modal-overlay{
+    @include overlay;
+    .selectProfile{
+        @include modalLayout;
+        position: relative;
+    }
+}
 
 .MyPagemain_main {
     .inner {

@@ -2,9 +2,9 @@ import { useModalStore } from "../../../store";
 import Button from "../button/Button";
 import './style.scss';
 
-const WishModal = ({onClick = () => {}, className="" }) => {
+const WishModal = ({ className="" }) => {
 
-    const {wishModalOpen, closeWishModal, wishMessage, wishButtons } = useModalStore();
+    const {wishModalOpen, closeWishModal, wishMessage, wishButtons, wishAction } = useModalStore();
     if( !wishModalOpen) return null;
 
     return (
@@ -16,7 +16,12 @@ const WishModal = ({onClick = () => {}, className="" }) => {
                     <Button text={wishButtons.text1} className="small gray" onClick={closeWishModal}/>
                 )}
                 {wishButtons.text2 && (
-                    <Button text={wishButtons.text2} className="small main1" onClick={onClick}/>
+                    <Button text={wishButtons.text2} className="small main1"
+                    onClick={() => {
+                        if (wishAction)
+                            wishAction(); 
+                        closeWishModal();
+                      }}/>
                 )}
                 </p>
             </div>

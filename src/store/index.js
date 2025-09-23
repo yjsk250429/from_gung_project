@@ -108,6 +108,7 @@ export const useAuthStore = create((set, get) => ({
         const newUser = {
             ...user,
             id: no++,
+            profile:'/images/profile/profile_1.png',
             marketing: tempMarketing.status,
             marketingDate: tempMarketing.date,
             wishlist:[],

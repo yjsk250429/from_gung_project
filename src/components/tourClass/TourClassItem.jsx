@@ -7,7 +7,7 @@ import { FaHeart } from "react-icons/fa";
 const TourClassItem = ({ id, title, theme, description, period, price, img, category, time, region, place }) => {
     const navigate = useNavigate();
     const { user, authed, toggleWishlist } = useAuthStore();
-    const { openNeedLogin} = useModalStore();
+    const { openNeedLogin, openWishModal} = useModalStore();
     const isWished = authed && user?.wishlist?.some((w) => w.id === id);
 
     return (
@@ -72,19 +72,21 @@ const TourClassItem = ({ id, title, theme, description, period, price, img, cate
             <div className="title">
                 <strong onClick={() => navigate(`/tourclass/${id}`)}>{title}</strong>
                 <i
-          onClick={() => {
-            if (!authed) {
-              openNeedLogin();
-              return;
-            }
-            toggleWishlist({ id, title, category, theme, description, period, time, region, place, price, img});
-          }}
-        >
-                    {isWished ? (
-            <FaHeart style={{ color: 'red' }} />
-          ) : (
-            <FiHeart/>
-          )}
+                onClick={() => {
+                    if (!authed) {
+                    openNeedLogin();
+                    return;
+                    }
+                    toggleWishlist({ id, title, category, theme, description, period, time, region, place, price, img });
+
+                    if (isWished) {
+                    openWishModal("찜 목록에서 삭제하였습니다", { text1: "닫기" });
+                    } else {
+                    openWishModal("찜 목록에 추가하였습니다", { text1: "닫기", text2: "찜 목록 보기" });
+                    }
+                }}
+                >
+                {isWished ? <FaHeart style={{ color: 'red' }} /> : <FiHeart />}
                 </i>
             </div>
         </li>

@@ -8,6 +8,7 @@
     .modal {
         @include modalLayout;
         position: relative;
+     
         &.coupon {
             position: absolute;
             right: vw(160);
@@ -91,11 +92,17 @@
         &.logoutComplete,
         &.withdrawComplete,
         &.editInfoComplete,
-        &.needLogin {
+        &.needLogin,
+        &.wishModal {
             @include confirm;
             background-image: url('/images/components/bg_flower.png');
             background-size: 80%;
             background-position: 210% 230%;
+        }
+        &.wishModal{
+            .button{
+                margin-top: 0;
+            }
         }
         &.loginComplete {
             @include complete;

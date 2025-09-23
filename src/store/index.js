@@ -204,6 +204,12 @@ export const useModalStore = create((set) => ({
     editCompleteOpen: false,
     couponOpen:false,
     needLoginOpen:false,
+    wishModalOpen:false,
+
+    wishMessage: '',   // ✅ 모달 메시지 상태 추가
+    wishButtons:{ text1: '', text2: '' },
+    openWishModal: (message, buttons={text1: '', text2: ''}) => set({ wishModalOpen: true, wishMessage: message, wishButtons:buttons }),
+    closeWishModal: () => set({ wishModalOpen: false, wishMessage: '', wishButtons:{text1: '', text2: ''} }),
 
     openNeedLogin: () => set({ needLoginOpen: true }),
     closeNeedLogin: () => set({ needLoginOpen: false }),

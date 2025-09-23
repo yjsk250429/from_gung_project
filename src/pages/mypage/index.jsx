@@ -19,7 +19,11 @@ const MyPage = () => {
             <EditInfoComplete />
             <WithdrawConfirm />
             <WithdrawComplete />
+<<<<<<< HEAD
             {user.wishlist.length > 0 && <WishModal className="deleteAll" />}
+=======
+            {user.wishlist?.length > 0 && <WishModal className="deleteAll" />}
+>>>>>>> 7cbd87f57e3ab6170e6f72580a130db0e15d7ff4
             <SelectProfile />
         </>
     );

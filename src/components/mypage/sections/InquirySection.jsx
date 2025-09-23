@@ -1,14 +1,16 @@
 // components/mypage/InquirySection.jsx
 import { useState } from 'react';
-import { useInquiryStore } from '../../../store';
+import { useAuthStore } from '../../../store';
 
 const InquirySection = () => {
     const [mode, setMode] = useState('list'); // "list" | "form" | "detail"
     const [form, setForm] = useState({ title: '', content: '' });
     const [selectedInquiry, setSelectedInquiry] = useState(null);
 
-    // zustand store 가져오기
-    const { inquiries, addInquiry } = useInquiryStore();
+    // zustand store (AuthStore) 사용
+    const inquiries = useAuthStore.getState().getMyInquiries();
+    const addInquiry = useAuthStore((s) => s.addInquiry);
+    const user = useAuthStore((s) => s.user);
 
     const handleSave = () => {
         if (!form.title.trim()) {
@@ -19,7 +21,7 @@ const InquirySection = () => {
             title: form.title,
             content: form.content,
         };
-        addInquiry(newItem); // ✅ zustand store에 저장 (localStorage 유지됨)
+        addInquiry(newItem); // ✅ 현재 로그인한 유저 계정에 저장됨
         setForm({ title: '', content: '' });
         setMode('list');
     };
@@ -28,6 +30,10 @@ const InquirySection = () => {
         setForm({ title: '', content: '' });
         setMode('list');
     };
+
+    if (!user) {
+        return <div className="inquiry">로그인 후 이용 가능합니다.</div>;
+    }
 
     return (
         <div className="inquiry">

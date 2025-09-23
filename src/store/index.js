@@ -29,6 +29,7 @@ const memberData = [
         marketingDate: null, // 마지막 동의/거부 날짜
         wishlist: [],
         ottWishList: [],
+        attandance: 9,
     },
 ];
 
@@ -110,6 +111,7 @@ export const useAuthStore = create((set, get) => ({
             marketingDate: tempMarketing.date,
             wishlist: [],
             ottWishList: [],
+            attandance: 0,
         };
         const updatedMembers = [...members, newUser];
         set({ members: updatedMembers, tempMarketing: { status: false, date: null } }); // 초기화

@@ -8,25 +8,24 @@ import { attachStablePoints } from '../../../utils/points';
 
 const TMDB_IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 
-/* ---- path helpers ---- */
+// ---- path helpers ------------------------------------------------
 function toFullUrl(path) {
     if (!path) return '';
     const s = String(path).trim();
     if (!s) return '';
-    // 절대 URL / data / blob → 그대로
+    // 절대 URL / data / blob
     if (/^(https?:|data:|blob:)/i.test(s)) return s;
-    // 로컬 정적 자산은 그대로 사용
+    // 로컬 정적 자산
     if (
         s.startsWith('/images/') ||
         s.startsWith('/img/') ||
         s.startsWith('/assets/') ||
         /\.(png|jpe?g|webp|gif|svg)$/i.test(s)
-    ) {
+    )
         return s;
-    }
-    // 그 외만 TMDB 상대 경로로 간주
-    const withSlash = s.startsWith('/') ? s : `/${s}`;
-    return `${TMDB_IMG_BASE}${withSlash}`;
+    // TMDB 상대경로
+    const p = s.startsWith('/') ? s : `/${s}`;
+    return `${TMDB_IMG_BASE}${p}`;
 }
 
 function pickPosterPath(it) {
@@ -39,124 +38,67 @@ function pickPosterPath(it) {
         it.profile_path ??
         it.profilePath ??
         it.poster ??
-        it.thumb ??
         it.image ??
-        it.profile ??
-        it.logo ??
+        it.thumb ??
         it.logo_path ??
         it.logoPath ??
         ''
     );
 }
 
-/* ---- seeded helpers (셔플 고정) ---- */
-function xmur3(str) {
-    let h = 1779033703 ^ str.length;
-    for (let i = 0; i < str.length; i++) {
-        h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
-        h = (h << 13) | (h >>> 19);
-    }
-    return function () {
-        h = Math.imul(h ^ (h >>> 16), 2246822507);
-        h = Math.imul(h ^ (h >>> 13), 3266489909);
-        return (h ^= h >>> 16) >>> 0;
-    };
-}
-function sfc32(a, b, c, d) {
-    return function () {
-        a >>>= 0;
-        b >>>= 0;
-        c >>>= 0;
-        d >>>= 0;
-        let t = (a + b) | 0;
-        a = b ^ (b >>> 9);
-        b = (c + (c << 3)) | 0;
-        c = (c << 21) | (c >>> 11);
-        d = (d + 1) | 0;
-        t = (t + d) | 0;
-        c = (c + t) | 0;
-        return (t >>> 0) / 4294967296;
-    };
-}
-function seededShufflePick(arr, n, seedKey = 'default') {
-    const base = (arr || [])
-        .slice()
-        .sort((a, b) => String(a?.id ?? '').localeCompare(String(b?.id ?? '')));
-    const seed = xmur3(String(seedKey));
-    const rand = sfc32(seed(), seed(), seed(), seed());
-    for (let i = base.length - 1; i > 0; i++) {
-        const j = Math.floor(rand() * (i + 1));
-        [base[i], base[j]] = [base[j], base[i]];
-    }
-    return base.slice(0, n);
-}
-
-/* ---- Component ---- */
-const OttDetailContents = ({ items = [], max = 5, seedKey = 'default' }) => {
-    // 디버깅을 위한 콘솔 로그 추가
-    console.log('🔍 OttDetailContents Debug:');
-    console.log('📦 Raw items:', items);
-    console.log('🔢 Items length:', items?.length);
-    console.log('📊 Items type:', typeof items, Array.isArray(items));
-
-    // 1) 리스트 계산(+포인트 부여는 여기서만)
+// ---- Component ---------------------------------------------------
+/**
+ * OttDetailContents
+ * - 부모에서 받은 items(관련/유사/추천 합본)를 Curated 카드 UI로 노출
+ * - URL 훅 사용 안 함(링크는 부모 mediaType을 기본값으로 사용)
+ */
+export default function OttDetailContents({
+    items = [],
+    parentMediaType = '', // 'tv' | 'movie' (부모 페이지 타입)
+    max = 10,
+    seedKey = 'ott-related',
+}) {
+    // 1) 정규화 + 포인트 배지 + 고정 셔플
     const list = useMemo(() => {
         const src = Array.isArray(items) ? items : [];
-        console.log('🔄 Processing src:', src);
 
         const normalized = src.map((it, idx) => {
-            console.log(`📝 Processing item ${idx}:`, it);
-
-            const title =
-                (it && (it.title || it.name || it.original_title || it.original_name)) || '';
+            const id = it?.id ?? it?.tmdbId ?? `${idx}`;
+            const title = it?.title ?? it?.name ?? it?.original_title ?? it?.original_name ?? '';
             const img = toFullUrl(pickPosterPath(it));
-
-            console.log(`  📄 Title: "${title}"`);
-            console.log(`  🖼️  Image: "${img}"`);
-
-            return {
-                id: (it && (it.id ?? it.tmdbId)) ?? `${title || 'item'}-${idx}`,
-                title,
-                img,
-                media_type: it?.media_type || it?.type || '', // 있으면 상세 링크에 ?t=로 사용
-            };
+            const mt = (it?.media_type || it?.type || parentMediaType || '').toLowerCase();
+            return { id: String(id), title, img, media_type: mt };
         });
 
-        console.log('✅ Normalized items:', normalized);
-
-        // 사양: 'ottPoints:v1' / 30~55 / 항목별 고정
         const withPts = attachStablePoints(normalized, {
             range: [30, 55],
             storageKey: 'ottPoints:v1',
-            keyFn: (it) => it.id,
+            keyFn: (x) => x.id,
         });
 
-        console.log('🎯 With points:', withPts);
+        const usable = withPts.filter((x) => !!x.img);
+        const pool = usable.length ? usable : withPts;
+        const count = Math.min(max, pool.length);
 
-        const withImg = withPts.filter((x) => !!x.img);
-        console.log('🖼️  Items with images:', withImg);
-
-        const pool = withImg.length ? withImg : withPts;
-        console.log('🏊 Pool to use:', pool);
-
-        const count = Math.min(max, pool.length || 0);
-        console.log('🔢 Final count:', count);
-
-        if (count === 0) {
-            console.log('❌ No items to display');
-            return [];
+        // 고정 셔플(간단 버전)
+        const sorted = pool.slice().sort((a, b) => String(a.id).localeCompare(String(b.id)));
+        const rng = (n) => {
+            let h = 0;
+            for (let i = 0; i < seedKey.length; i++) h = (h * 31 + seedKey.charCodeAt(i)) | 0;
+            return Math.abs((h ^ (n * 2654435761)) >>> 0);
+        };
+        for (let i = sorted.length - 1; i > 0; i--) {
+            const j = rng(i) % (i + 1);
+            [sorted[i], sorted[j]] = [sorted[j], sorted[i]];
         }
 
-        const result = seededShufflePick(pool, count, seedKey).map((v) => ({
+        return sorted.slice(0, count).map((v) => ({
             ...v,
             points:
                 typeof v.points === 'number' ? `${v.points}p` : `${parseInt(v.points, 10) || 0}p`,
-            tier: 'pink', // 배지 핑크 고정
+            tier: 'pink',
         }));
-
-        console.log('🎉 Final result:', result);
-        return result;
-    }, [items, max, seedKey]);
+    }, [items, parentMediaType, max, seedKey]);
 
     // 2) AOS
     useEffect(() => {
@@ -166,14 +108,12 @@ const OttDetailContents = ({ items = [], max = 5, seedKey = 'default' }) => {
         AOS.refreshHard();
     }, [list]);
 
-    console.log('🎬 Rendering with list:', list);
-
     return (
         <section className="ottDetail">
             <div className="con3-inner">
                 <div className="vod" data-aos="fade-up" data-aos-delay="150">
                     <strong>관련콘텐츠</strong>
-                    <i className="line"></i>
+                    <i className="line" />
                 </div>
 
                 <ul className="vodlist">
@@ -186,9 +126,7 @@ const OttDetailContents = ({ items = [], max = 5, seedKey = 'default' }) => {
                                   data-aos="fade-up"
                                   data-aos-delay={200 + i * 60}
                               >
-                                  <Link
-                                      to={`/ott/${v.id}${v.media_type ? `?t=${v.media_type}` : ''}`}
-                                  >
+                                  <Link to={`/ott/${v.media_type || parentMediaType}/${v.id}`}>
                                       {v.img ? (
                                           <img
                                               src={v.img}
@@ -220,6 +158,4 @@ const OttDetailContents = ({ items = [], max = 5, seedKey = 'default' }) => {
             </div>
         </section>
     );
-};
-
-export default OttDetailContents;
+}

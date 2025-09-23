@@ -87,14 +87,19 @@ export default function TraditionClass() {
             const firstImg = imageRefs.current[0];
             if (firstImg) {
                 gsap.set(firstImg, {
-                    scale: 0.5,
+                    scale: 0.01, // 거의 안 보일 정도
+                    clipPath: 'circle(0% at 50% 50%)',
                     transformOrigin: '50% 50%',
-                    willChange: 'transform',
+                    willChange: 'transform, clip-path',
                 });
 
-                const zoomTween = gsap.to(firstImg, {
+                gsap.to(firstImg, {
                     scale: 1,
-                    ease: 'none',
+                    clipPath: 'circle(100% at 50% 50%)', // 원이 점차 네모로 풀림
+
+                    opacity: 1, // 투명도 추가
+                    ease: 'power2.out',
+                    duration: 1.5, // 속도 약간 늘림 (기존보다 느려짐)
                     scrollTrigger: {
                         id: 's3-zoom',
                         trigger: section,
@@ -117,7 +122,7 @@ export default function TraditionClass() {
                         const snapped = Math.round(norm / SNAP_STEP) * SNAP_STEP;
                         return ZOOM_RATIO + snapped * (1 - ZOOM_RATIO);
                     },
-                    duration: { min: 0.1, max: 0.5 },
+                    duration: { min: 0.1, max: 1 },
                     ease: 'power1.inOut',
                 },
             });
@@ -241,7 +246,9 @@ export default function TraditionClass() {
                         <br />
                         마음을 가다듬는 시간.
                         <br />
-                        다도의 깊 정에서선들의 예와 멋을
+                        다도의 길 위에서
+                        <br />
+                        전통의 예와 멋을
                         <br />
                         함께 느껴보시길 바랍니다.
                     </p>

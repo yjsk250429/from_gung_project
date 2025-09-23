@@ -2,8 +2,11 @@ import './style.scss';
 import { useEffect, useRef, useMemo, useState } from 'react';
 import gsap from 'gsap';
 import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
+import { useAuthStore } from '../../../store';
 
-const DetailReviews = () => {
+const DetailReviews = ({ thisitem }) => {
+    const { title, category } = thisitem;
+
     const reviewsItemList = [
         {
             id: 1,
@@ -107,6 +110,14 @@ const DetailReviews = () => {
         },
     ];
 
+    const user = useAuthStore((state) => state.user);
+    const authed = useAuthStore((s) => s.authed);
+    const isLoggedIn = authed;
+    const addReview = useAuthStore((state) => state.addReview);
+
+    const userNickname = user?.nickName || '익명';
+    const userProfile = user?.profile || '/images/profile/default.png';
+
     // 새로운 리뷰 상태 추가
     const [newReviews, setNewReviews] = useState([]);
     const [reviewInput, setReviewInput] = useState('');
@@ -160,6 +171,18 @@ const DetailReviews = () => {
         }));
     };
 
+    // 리큐 카테고리 구분
+    const getCategoryKor = (cat) => {
+        switch (cat) {
+            case 'tour':
+                return '투어';
+            case 'class':
+                return '클래스';
+            default:
+                return cat; // 혹시 다른 값 있으면 그대로 반환
+        }
+    };
+
     // 리뷰 추가 함수
     const handleReviewSubmit = () => {
         if (!reviewInput.trim() || !ratings['global']) {
@@ -168,11 +191,16 @@ const DetailReviews = () => {
         }
 
         const newReview = {
-            id: Date.now(),
-            profile: '/images/profile/test.png',
+            profile: user?.profile || '/images/profile/default.png',
             reviewComment: reviewInput.trim(),
+            nickName: user?.nickName || '익명',
+            rating: ratings['global'],
+            title, // thisitem에서 받은 title 그대로 사용
+            category: getCategoryKor(category), // 여기서 영어를 한글로 변환해서 넣음
             isNew: true,
         };
+
+        addReview(newReview);
 
         // 새로운 리뷰를 맨 앞에 추가
         setNewReviews((prev) => [newReview, ...prev]);
@@ -218,14 +246,18 @@ const DetailReviews = () => {
                 ))}
             </div>
             <div className="reviewAdd">
-                <article className="starRating">
+                <article className="starRating" style={{ opacity: isLoggedIn ? 1 : 0.4 }}>
                     {[...Array(5)].map((_, starIndex) => {
                         const isFilled = (ratings['global'] || 0) > starIndex;
                         return (
                             <strong
                                 key={starIndex}
-                                onClick={() => handleStarClick('global', starIndex)}
-                                style={{ cursor: 'pointer' }}
+                                onClick={() => {
+                                    if (isLoggedIn) {
+                                        handleStarClick('global', starIndex);
+                                    }
+                                }}
+                                style={{ cursor: isLoggedIn ? 'pointer' : 'not-allowed' }}
                             >
                                 {isFilled ? <IoMdStar /> : <IoMdStarOutline />}
                             </strong>
@@ -234,21 +266,31 @@ const DetailReviews = () => {
                 </article>
 
                 <article className="loginUser">
-                    <div className="userInfo">
-                        <span className="profileImg">
-                            <img src="/images/profile/test.png" alt="user" />
-                        </span>
-                        <p className="userNickname">User닉네임</p>
-                    </div>
+                    {isLoggedIn ? (
+                        <div className="userInfo">
+                            <span className="profileImg">
+                                <img src={userProfile} alt={userNickname} />
+                            </span>
+                            <p className="userNickname">{userNickname}</p>
+                        </div>
+                    ) : (
+                        <div className="userInfo"></div>
+                    )}
+
                     <div className="reviewInputArea">
                         <input
                             className="reviewInput"
                             value={reviewInput}
                             onChange={(e) => setReviewInput(e.target.value)}
-                            placeholder="리뷰를 입력해주세요"
+                            placeholder={
+                                isLoggedIn
+                                    ? '리뷰를 입력해주세요'
+                                    : '로그인 후 이용 가능한 서비스 입니다'
+                            }
                             maxLength={30}
+                            disabled={!isLoggedIn}
                             onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
+                                if (e.key === 'Enter' && isLoggedIn) {
                                     handleReviewSubmit();
                                 }
                             }}
@@ -256,7 +298,16 @@ const DetailReviews = () => {
                     </div>
                 </article>
 
-                <button onClick={handleReviewSubmit}>리뷰 작성</button>
+                <button
+                    onClick={handleReviewSubmit}
+                    disabled={!isLoggedIn}
+                    style={{
+                        cursor: isLoggedIn ? 'pointer' : 'not-allowed',
+                        opacity: isLoggedIn ? 1 : 0.5,
+                    }}
+                >
+                    리뷰 작성
+                </button>
             </div>
         </div>
     );

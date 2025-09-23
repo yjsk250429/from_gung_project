@@ -1,6 +1,11 @@
 import React from 'react';
+import { useAuthStore } from '../../../store';
 
 const ReviewSection = () => {
+    const user = useAuthStore((state) => state.user);
+    const reviews = user?.reviews || [];
+    const deleteReview = useAuthStore((state) => state.deleteReview);
+
     return (
         <div className="reviews">
             <h2>내가 쓴 리뷰</h2>
@@ -11,8 +16,25 @@ const ReviewSection = () => {
                     <span>내용</span>
                     <span>제목</span>
                     <span>카테고리</span>
+                    <span>-</span>
                 </div>
-                <div className="tbody empty">작성한 리뷰 내역이 없습니다.</div>
+
+                {reviews.length > 0 ? (
+                    reviews.map((review, idx) => (
+                        <div key={review.id} className="tbody reviewList">
+                            <span>{idx + 1}</span>
+                            <span>{new Date(review.date).toLocaleDateString()}</span>
+                            <span>{review.reviewComment}</span>
+                            <span>{review.title || '-'}</span>
+                            <span>{review.category || '-'}</span>
+                            <span>
+                                <button onClick={() => deleteReview(review.id)}>삭제</button>
+                            </span>
+                        </div>
+                    ))
+                ) : (
+                    <div className="tbody reviewEmpty">작성한 리뷰 내역이 없습니다.</div>
+                )}
             </div>
         </div>
     );

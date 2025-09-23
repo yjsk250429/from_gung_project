@@ -27,9 +27,9 @@ const memberData = [
         coupon: 0,
         marketing: false, // 선택항목 (이벤트/혜택 수신 여부)
         marketingDate: null, // 마지막 동의/거부 날짜
-        wishlist:[],
-        ottWishList:[],
-        bookings:[],
+        wishlist: [],
+        ottWishList: [],
+        bookings: [],
         attandance: 9,
     },
 ];
@@ -108,10 +108,10 @@ export const useAuthStore = create((set, get) => ({
         const newUser = {
             ...user,
             id: no++,
-            profile:'/images/profile/profile_1.png',
+            profile: '/images/profile/profile_1.png',
             marketing: tempMarketing.status,
             marketingDate: tempMarketing.date,
-            wishlist:[],
+            wishlist: [],
             ottWishList: [],
             attandance: 0,
         };
@@ -191,8 +191,7 @@ export const useAuthStore = create((set, get) => ({
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
-      },
-      
+    },
 
     clearWishlist: () => {
         const { user, members } = get();
@@ -204,7 +203,7 @@ export const useAuthStore = create((set, get) => ({
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
-      },
+    },
 
     removeFromWishlist: (ids) => {
         const { user, members } = get();
@@ -215,61 +214,100 @@ export const useAuthStore = create((set, get) => ({
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
 
         set({ user: updatedUser, members: updatedMembers });
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        localStorage.setItem("members", JSON.stringify(updatedMembers));
-      },
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
 
-      addBooking: (bookingData) => {
+    addBooking: (bookingData) => {
         const { user, members } = get();
         if (!user) return;
-    
+
         const newBooking = {
-          ...bookingData,
-          id: Date.now(),                 // 예약 고유 ID
-          status: 'confirmed',            // 예약 완료
-          createdAt: new Date().toISOString(),
+            ...bookingData,
+            id: Date.now(), // 예약 고유 ID
+            status: 'confirmed', // 예약 완료
+            createdAt: new Date().toISOString(),
         };
-    
+
         const updatedUser = {
-          ...user,
-          bookings: [...(user.bookings || []), newBooking],
+            ...user,
+            bookings: [...(user.bookings || []), newBooking],
         };
-    
+
         if (!user.id) {
-          // 외부 로그인(멤버스에 없음): 세션만 업데이트
-          set({ user: updatedUser });
-          localStorage.setItem('user', JSON.stringify(updatedUser));
-          return;
+            // 외부 로그인(멤버스에 없음): 세션만 업데이트
+            set({ user: updatedUser });
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            return;
         }
-    
+
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
-      },
-      
-      cancelBooking: (bookingId) => {
+    },
+
+    cancelBooking: (bookingId) => {
         const { user, members } = get();
         if (!user) return;
-    
+
         const updatedBookings = (user.bookings || []).map((b) =>
-          b.id === bookingId ? { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() } : b
+            b.id === bookingId
+                ? { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() }
+                : b
         );
-    
+
         const updatedUser = { ...user, bookings: updatedBookings };
-    
+
         if (!user.id) {
-          set({ user: updatedUser });
-          localStorage.setItem('user', JSON.stringify(updatedUser));
-          return;
+            set({ user: updatedUser });
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            return;
         }
-    
+
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
-      },
- 
+    },
+
+    addReview: (review) => {
+        const { user, members } = get();
+        if (!user) return;
+
+        const newReview = {
+            id: Date.now(),
+            ...review,
+            date: new Date().toISOString(),
+        };
+
+        const updatedUser = {
+            ...user,
+            reviews: [...(user.reviews || []), newReview],
+        };
+
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+
+    deleteReview: (reviewId) => {
+        const { user, members } = get();
+        if (!user) return;
+
+        const updatedUser = {
+            ...user,
+            reviews: (user.reviews || []).filter((review) => review.id !== reviewId),
+        };
+
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
 }));
 
 export const useModalStore = create((set) => ({

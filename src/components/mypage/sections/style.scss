@@ -8,11 +8,11 @@
         @include font-22px-B;
         margin: 0 0 vw(20);
     }
-    .empty{
+    .empty {
         text-align: center;
         margin-top: vw(150);
     }
-    .top{
+    .top {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
@@ -26,12 +26,12 @@
         justify-content: flex-end;
         align-items: center;
         gap: vw(18);
-        li{
+        li {
             cursor: pointer;
-            &:first-child{
+            &:first-child {
                 position: relative;
-                &::after{
-                    content: "";
+                &::after {
+                    content: '';
                     display: block;
                     width: 1px;
                     height: vw(12);
@@ -49,50 +49,49 @@
     .wishlist_grid {
         @include tourList;
         grid-template-columns: repeat(3, 1fr); // ← 4 → 3 열로 변경
-        gap: vw(40); 
+        gap: vw(40);
         li {
-            .img-wrap{}
+            .img-wrap {
+            }
 
-                input[type="checkbox"] {
-                    appearance: none;   // 브라우저 기본 체크박스 없애기
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
+            input[type='checkbox'] {
+                appearance: none; // 브라우저 기본 체크박스 없애기
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                position: absolute;
+                z-index: 3;
+                top: vw(12);
+                left: vw(12);
+                width: vw(22);
+                height: vw(22);
+                border-radius: 50%;
+                border: vw(3) solid #fff;
+                background: rgba(255, 255, 255, 0.2);
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
+                // cursor: pointer;
+            }
+
+            input[type='checkbox']:checked {
+                border-color: $sub3;
+                &::after {
+                    content: '';
+                    display: block;
+                    background-image: url('/images/mypage/check.png');
+                    background-repeat: no-repeat;
+                    background-position: 0 0;
+                    width: vw(18);
+                    height: vw(18);
                     position: absolute;
-                    z-index: 3;
-                    top: vw(12);
-                    left: vw(12);
-                    width: vw(22);
-                    height: vw(22);
-                    border-radius: 50%;
-                    border: vw(3) solid #fff;
-                    background: rgba(255, 255, 255, 0.2);
-                    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
-                    // cursor: pointer;
-                  }
-                  
-                  input[type="checkbox"]:checked {
-                    border-color:$sub3;
-                    &::after{
-                        content: "";
-                        display: block;
-                        background-image: url('/images/mypage/check.png');
-                        background-repeat: no-repeat;
-                        background-position: 0 0;
-                        width: vw(18);
-                        height: vw(18);
-                        position: absolute;
-                        left: vw(-1);
-                    }
-           
-           
-        }
+                    left: vw(-1);
+                }
+            }
 
-        &.disabled {
-            opacity: 0.45;
-            filter: grayscale(1);
-            pointer-events: none;
+            &.disabled {
+                opacity: 0.45;
+                filter: grayscale(1);
+                pointer-events: none;
+            }
         }
-    }
     }
 }
 
@@ -116,10 +115,10 @@
         .thead {
             display: grid;
             /* 번호, 날짜, 내용, 제목, 카테고리 → 비율로 분배 */
-            grid-template-columns: 0.7fr 1.2fr 3fr 1.5fr 1.2fr;
+            grid-template-columns: 0.5fr 2fr 3.5fr 2.5fr 1fr 1fr;
 
             background-color: #f5f5f5;
-            padding: vw(12) vw(20);
+            padding: vw(12) vw(10);
             font-weight: 500;
             border-bottom: vw(1) solid #ddd;
 
@@ -130,12 +129,41 @@
         }
 
         .tbody {
-            padding: vw(40) vw(20);
-            text-align: center;
-            color: #666;
+            &.reviewList {
+                display: grid;
+                grid-template-columns: 0.5fr 2fr 3.5fr 2.5fr 1fr 1fr;
+                background-color: $white;
+                padding: vw(12) vw(10);
+                font-weight: 500;
+                border-bottom: vw(1) solid #ddd;
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    font-size: vw(16);
+                    button {
+                        font-family: $font-main;
+                        @include font-14px-M;
+                        width: vw(60);
+                        height: vw(30);
+                        border: vw(1) solid #666;
+                        &:hover {
+                            border: none;
+                            background: #666;
+                            color: $white;
+                        }
+                    }
+                }
+            }
 
-            &.empty {
-                font-size: vw(14);
+            &.reviewEmpty {
+                grid-template-columns: 1fr;
+                padding: vw(40) vw(20);
+                text-align: center;
+                color: #666;
+
+                font-size: vw(16);
             }
         }
     }

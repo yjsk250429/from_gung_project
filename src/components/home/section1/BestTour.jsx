@@ -90,7 +90,7 @@ const BestTour = () => {
                 {tourItems.map((item, index) => (
                     <div className="image-box" key={item.id}>
                         <Link
-                            to={`/tourclass/${item.id}`} // ✅ 라우트: /tourclass/:id
+                            to={`/tourclass/${item.link}`} // ✅ 라우트: /tourclass/:id
                             className="image-link"
                             aria-label={`${item.label} 상세보기`}
                             draggable={false}

@@ -1,6 +1,7 @@
 import { useAuthStore, useModalStore } from '../../../store';
 import './style.scss';
 import { BsQuestionCircleFill } from 'react-icons/bs';
+
 const RewardCheck = () => {
     const { rewardOpen, closeReward, openReward, openStampNotice } = useModalStore();
     const user = useAuthStore((s) => s.user);
@@ -8,10 +9,14 @@ const RewardCheck = () => {
 
     if (!rewardOpen) return null;
 
+    // ✅ 출석 횟수 (배열 길이 기반)
+    const attendanceCount = user?.attandance?.length || 0;
+
+    const isFull = attendanceCount >= 10;
+
     return (
         <div className="rewardModal" onMouseEnter={openReward} onMouseLeave={closeReward}>
             {authed ? (
-                // 로그인 상태일 때
                 <>
                     <div className="myreward">
                         <strong>
@@ -35,18 +40,22 @@ const RewardCheck = () => {
                                 </i>
                             </span>
                         </strong>
-                        <ul>
-                            <li className="on"></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
+
+                        <div className={`attendance-board ${isFull ? 'full' : ''}`}>
+                            <ul>
+                                {Array.from({ length: 10 }).map((_, i) => (
+                                    <li key={i} className={i < attendanceCount ? 'on' : ''}></li>
+                                ))}
+                            </ul>
+
+                            {isFull && (
+                                <div className="reward-overlay">
+                                    <button type="button" className="coupon-btn">
+                                        쿠폰받기
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </>
             ) : (

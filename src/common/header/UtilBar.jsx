@@ -86,7 +86,7 @@ const UtilBar = () => {
                     {user?.reward || 0}
                 </li>
                 <li>
-                    <img src="/images/calendar_w.png" alt="calendar" />0
+                    <img src="/images/calendar_w.png" alt="calendar" />{user?.attandance?.length || 0}
                 </li>
             </ul>
         </div>

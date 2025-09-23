@@ -4,6 +4,16 @@ import { getMovies, getMovieDetails, getMovieCredits, searchMovie } from '../api
 import { loadAll } from '../tmdb/loadAll';
 import { attachStablePoints } from '../utils/points';
 import { persist, createJSONStorage } from 'zustand/middleware';
+const seedDays = (n) => {
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const d = new Date();
+    d.setDate(d.getDate() - i - 1); // 오늘은 로그인으로 찍히게 하고, 과거 n일만 채움
+    out.push(d.toISOString().slice(0, 10));
+  }
+  return out;
+};
+
 
 const memberData = [
     {
@@ -30,7 +40,7 @@ const memberData = [
         wishlist: [],
         ottWishList: [],
         bookings: [],
-        attandance: 9,
+        attandance: seedDays(9),
         inquiries: [],
     },
 ];
@@ -135,7 +145,7 @@ export const useAuthStore = create((set, get) => ({
         const { members } = get();
 
         if (isExternal) {
-            const externalUser = { userId, nickName, profile, inquiries: [] };
+            const externalUser = { userId, nickName, profile, inquiries: [], attandance: [] };
             set({ authed: true, user: externalUser });
             localStorage.setItem('authed', JSON.stringify(true));
             localStorage.setItem('user', JSON.stringify(externalUser));
@@ -144,7 +154,29 @@ export const useAuthStore = create((set, get) => ({
 
         const item = members.find((member) => member.userId === userId);
         if (item && item.password === password) {
-            set({ authed: true, user: item });
+
+        // ✅ 출석 기록 추가 (하루에 한 번만, 최대 10개)
+        const today = new Date().toISOString().slice(0, 10);
+        let prev = [];
+    if (Array.isArray(item.attandance)) {
+      prev = item.attandance;
+    } else if (typeof item.attandance === 'number') {
+      const n = Math.max(0, Math.min(10, item.attandance)); // 0~10로 클램프
+      prev = Array.from({ length: n }, (_, i) => {
+        const d = new Date();
+        d.setDate(d.getDate() - i - 1);
+        return d.toISOString().slice(0, 10);
+      });
+    } else {
+      prev = [];
+    }
+ // ✅ 오늘 기록 1회만, 중복 제거 + 최대 10개 유지
+    const updatedAtt = [today, ...prev.filter((d) => d !== today)].slice(0, 10);
+
+    const updatedUser = { ...item, attandance: updatedAtt };
+    const updatedMembers = members.map((m) => (m.id === item.id ? updatedUser : m));
+
+            set({ authed: true, user: updatedUser , members: updatedMembers });
             localStorage.setItem('authed', JSON.stringify(true));
             localStorage.setItem('user', JSON.stringify(item));
         } else {
@@ -176,7 +208,7 @@ export const useAuthStore = create((set, get) => ({
             marketingDate: tempMarketing.date,
             wishlist: [],
             ottWishList: [],
-            attandance: 0,
+            attandance: [], 
             inquiries: [], // ✅ 새 회원은 빈 문의 배열로 시작
             coupon: [
                 {
@@ -278,7 +310,7 @@ export const useAuthStore = create((set, get) => ({
     },
 
     kakaoLogin: (kakaoUser) => {
-        set({ authed: true, user: { ...kakaoUser, inquiries: [] } });
+        set({ authed: true, user: { ...kakaoUser, inquiries: [], attandance: [] } });
         localStorage.setItem('authed', JSON.stringify(true));
         localStorage.setItem('user', JSON.stringify(kakaoUser));
     },

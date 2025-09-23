@@ -28,7 +28,8 @@ const memberData = [
         marketing: false, // 선택항목 (이벤트/혜택 수신 여부)
         marketingDate: null, // 마지막 동의/거부 날짜
         wishlist:[],
-        ottWishList:[]
+        ottWishList:[],
+        bookings:[],
     },
 ];
 
@@ -109,7 +110,8 @@ export const useAuthStore = create((set, get) => ({
             marketing: tempMarketing.status,
             marketingDate: tempMarketing.date,
             wishlist:[],
-            ottWishList:[]
+            ottWishList:[],
+            bookings:[],
         };
         const updatedMembers = [...members, newUser];
         set({ members: updatedMembers, tempMarketing: { status: false, date: null } }); // 초기화
@@ -190,6 +192,7 @@ export const useAuthStore = create((set, get) => ({
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
       },
+      
       clearWishlist: () => {
         const { user, members } = get();
         if (!user) return;
@@ -201,6 +204,7 @@ export const useAuthStore = create((set, get) => ({
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
       },
+
       removeFromWishlist: (ids) => {
         const { user, members } = get();
         if (!user) return;
@@ -212,6 +216,57 @@ export const useAuthStore = create((set, get) => ({
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem("user", JSON.stringify(updatedUser));
         localStorage.setItem("members", JSON.stringify(updatedMembers));
+      },
+
+      addBooking: (bookingData) => {
+        const { user, members } = get();
+        if (!user) return;
+    
+        const newBooking = {
+          ...bookingData,
+          id: Date.now(),                 // 예약 고유 ID
+          status: 'confirmed',            // 예약 완료
+          createdAt: new Date().toISOString(),
+        };
+    
+        const updatedUser = {
+          ...user,
+          bookings: [...(user.bookings || []), newBooking],
+        };
+    
+        if (!user.id) {
+          // 외부 로그인(멤버스에 없음): 세션만 업데이트
+          set({ user: updatedUser });
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+          return;
+        }
+    
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+      },
+      
+      cancelBooking: (bookingId) => {
+        const { user, members } = get();
+        if (!user) return;
+    
+        const updatedBookings = (user.bookings || []).map((b) =>
+          b.id === bookingId ? { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() } : b
+        );
+    
+        const updatedUser = { ...user, bookings: updatedBookings };
+    
+        if (!user.id) {
+          set({ user: updatedUser });
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+          return;
+        }
+    
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
       },
 }));
 

@@ -1,9 +1,9 @@
 @use '../../styles/base' as *;
 @use '../../styles/utils' as *;
+@use '../../styles/ui/input' as *;
 
 .payment-page {
     position: relative;
-
     .inner {
         width: vw(1300);
         height: vw(1000);
@@ -146,31 +146,35 @@
                         color: $sub3;
                     }
                 }
-                .txtbox {
-                    display: flex;
-                    flex-wrap: wrap;
-                    align-items: center;
-                    margin-bottom: vw(20);
-                    p {
-                        @include font-16px;
-                        width: vw(115);
-                        height: vw(23);
-                        display: flex;
+                .user{
+                    label{
+                        display: block;
+                        @include font-18px;
+                        input[type='text']{
+                            @include inputStyle;
+                        }
+                        &:nth-child(2){
+                            select {
+                                width: vw(55);
+                                border: 1px solid #b1b1b1;
+                                border-radius: vw(4);
+                                height: vw(35);
+                                padding-left: vw(4);
+                                @include font-15px;
+                                margin-right: vw(4);
+                                margin-left: vw(12);
+                        }
+                        input[type='text'] {
+                            width: vw(70);
+                            margin-left: vw(8);
+                            &:not(:last-child) {
+                                margin-right: vw(8);
+                            }
+                        }
                     }
-                    input {
-                        width: vw(405);
-                        height: vw(35);
-                        border: 2px solid $sub3;
-                        border-radius: vw(4);
-                        outline: none;
-                        margin-bottom: vw(4);
-                    }
-                    i {
-                        @include font-12px;
-                        color: $sub3;
-                        margin-left: vw(115);
                     }
                 }
+               
             }
 
             .charge {

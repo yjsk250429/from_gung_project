@@ -246,7 +246,9 @@ export default function TraditionClass() {
                         <br />
                         마음을 가다듬는 시간.
                         <br />
-                        다도의 깊 정에서선들의 예와 멋을
+                        다도의 길 위에서
+                        <br />
+                        전통의 예와 멋을
                         <br />
                         함께 느껴보시길 바랍니다.
                     </p>

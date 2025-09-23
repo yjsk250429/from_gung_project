@@ -8,7 +8,7 @@ const ReservationSection = () => {
         return (
             <div className="reservation">
                 <h2>나의 예약 내역</h2>
-                <p>예약 내역이 없습니다.</p>
+                <p className='empty'>예약 내역이 없습니다.</p>
             </div>
         );
     }

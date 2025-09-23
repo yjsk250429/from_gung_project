@@ -27,8 +27,8 @@ const memberData = [
         coupon: 0,
         marketing: false, // 선택항목 (이벤트/혜택 수신 여부)
         marketingDate: null, // 마지막 동의/거부 날짜
-        wishlist:[],
-        ottWishList:[]
+        wishlist: [],
+        ottWishList: [],
     },
 ];
 
@@ -108,8 +108,8 @@ export const useAuthStore = create((set, get) => ({
             id: no++,
             marketing: tempMarketing.status,
             marketingDate: tempMarketing.date,
-            wishlist:[],
-            ottWishList:[]
+            wishlist: [],
+            ottWishList: [],
         };
         const updatedMembers = [...members, newUser];
         set({ members: updatedMembers, tempMarketing: { status: false, date: null } }); // 초기화
@@ -144,8 +144,6 @@ export const useAuthStore = create((set, get) => ({
         }
     },
 
-
-
     //회원정보 수정
     updateUser: (updates) => {
         const { user, members } = get();
@@ -177,42 +175,42 @@ export const useAuthStore = create((set, get) => ({
     toggleWishlist: (item) => {
         const { user, members } = get();
         if (!user) return;
-    
+
         const exists = user.wishlist?.some((w) => w.id === item.id);
         const updatedWishlist = exists
-          ? user.wishlist.filter((w) => w.id !== item.id)
-          : [...(user.wishlist || []), item];
-    
+            ? user.wishlist.filter((w) => w.id !== item.id)
+            : [...(user.wishlist || []), item];
+
         const updatedUser = { ...user, wishlist: updatedWishlist };
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
-    
+
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
-      },
-      clearWishlist: () => {
+    },
+    clearWishlist: () => {
         const { user, members } = get();
         if (!user) return;
-    
+
         const updatedUser = { ...user, wishlist: [] };
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
-    
+
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
-      },
-      removeFromWishlist: (ids) => {
+    },
+    removeFromWishlist: (ids) => {
         const { user, members } = get();
         if (!user) return;
-    
+
         const updatedWishlist = user.wishlist.filter((w) => !ids.includes(w.id));
         const updatedUser = { ...user, wishlist: updatedWishlist };
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
-    
+
         set({ user: updatedUser, members: updatedMembers });
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        localStorage.setItem("members", JSON.stringify(updatedMembers));
-      },
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
 }));
 
 export const useModalStore = create((set) => ({
@@ -229,16 +227,28 @@ export const useModalStore = create((set) => ({
     editInfoOpen: false,
     editPasswordOpen: false,
     editCompleteOpen: false,
-    couponOpen:false,
-    needLoginOpen:false,
-    wishModalOpen:false,
-    selectProfileOpen:false,
+    couponOpen: false,
+    needLoginOpen: false,
+    wishModalOpen: false,
+    selectProfileOpen: false,
 
-    wishMessage: '',  
-    wishButtons:{ text1: '', text2: '' },
-    wishAction:null,
-    openWishModal: (message, buttons={text1: '', text2: ''}, action=null) => set({ wishModalOpen: true, wishMessage: message, wishButtons:buttons, wishAction:action }),
-    closeWishModal: () => set({ wishModalOpen: false, wishMessage: '', wishButtons:{text1: '', text2: ''}, wishAction:null }),
+    wishMessage: '',
+    wishButtons: { text1: '', text2: '' },
+    wishAction: null,
+    openWishModal: (message, buttons = { text1: '', text2: '' }, action = null) =>
+        set({
+            wishModalOpen: true,
+            wishMessage: message,
+            wishButtons: buttons,
+            wishAction: action,
+        }),
+    closeWishModal: () =>
+        set({
+            wishModalOpen: false,
+            wishMessage: '',
+            wishButtons: { text1: '', text2: '' },
+            wishAction: null,
+        }),
 
     openSelectProfile: () => set({ selectProfileOpen: true }),
     closeSelectProfile: () => set({ selectProfileOpen: false }),

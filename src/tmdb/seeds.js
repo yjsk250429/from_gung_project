@@ -400,6 +400,9 @@ export const seeds = [
         tmdbId: 66580,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2023/K01_T2013-0183-Horizontal_LogoN.webp',
+        titleLogo: 'https://www.wavve.com/player/vod?programid=K01_T2013-0183&autoplay=y',
     },
     {
         title: '연개소문',
@@ -410,6 +413,10 @@ export const seeds = [
         tmdbId: 3852,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABUEOq958FIIp5HCSlugv9GIRyYT8Ct0FiEyegay59oZ8C7_ndm5nMVUVP3p4AnJL6rKUL_y6OTVjw4kwegAOL3OgmkqSgj11QqqA.webp?r=c69',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABZYOD352KTp0TwTpv54v8n9tYCnWEugWRfz_DaQ1Preko5yDON2jNYASxl4nG9OXRtI0bCqyq2K4f3bUZFcxvom1o8ltmTGslg.webp?r=7b9',
     },
     {
         title: '광개토태왕',
@@ -420,6 +427,9 @@ export const seeds = [
         tmdbId: 39606,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: 'https://gimgcache.uplus.co.kr/still/ST_M01124UA06PPV00_105206.jpg',
+        titleLogo:
+            'https://i.namu.wiki/i/4QTmLDz7q1dTc1LJvExUyhtmPkkf49QZWIiLv1G-XE3dZlN-Rg_JG7k3m-4C5u8MaZR9aMFbR5wazh5VRAfHtQ.webp',
     },
     {
         title: '대왕세종',
@@ -430,6 +440,10 @@ export const seeds = [
         tmdbId: 14085,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2023/K02_T2007-0415-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2023/K02_T2007-0415-SingleColorContentLogo_Trimmed.png',
     },
     {
         title: '대장금',
@@ -440,6 +454,10 @@ export const seeds = [
         tmdbId: 333,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2022/M_T66244G-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2022/M_T66244G-SingleColorContentLogo-Trimmed.png',
     },
     {
         title: '주몽',
@@ -450,6 +468,8 @@ export const seeds = [
         tmdbId: 4734,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/WoFdEPChwTtUtW0b8W1vTw/1680x945.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/mPqyJV4V6vQD6M0WpKrdWg/760x286.png',
     },
     {
         title: '여인천하',
@@ -460,6 +480,10 @@ export const seeds = [
         tmdbId: 24165,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABWZSkvSa5x7fTv7Z1KW9YBOzsL8ODivJ0PlDBg7Klj7_othZ6QUq2brTYDKsxic__dKAH5pK37q-5ialHvcjXcTl2YNOYoCf11-z.webp?r=07e',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABRNWDrWParqJFUrR-oMt7Hhgk57LH6e53hqzGS_zCMvKjOTsNKZvgfwqsItFoIlEhuaPiA_wCUt1etVLsy2DH9yK9yphsjWirg.webp?r=1d2',
     },
     {
         title: '이산',
@@ -470,6 +494,8 @@ export const seeds = [
         tmdbId: 15135,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/tpiA7XLkL1qpyyHmlnyhMw/1680x945.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/3q5IYmFjlp1CMN5bAUhdow/760x286.png',
     },
     {
         title: '해치',
@@ -480,6 +506,10 @@ export const seeds = [
         tmdbId: 86094,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABTsVgAw2SBfYvdM0fr6rHcWJ0y28_ZhVl9AxzuTHl3HjOUJyZB3Ukyt29oVoA3BA-HvE5dBpqwjowL_PQqFTCkrGtypMiUBAWzyW.webp?r=e95',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABYVnF81gqBxdAlZD8U_U6uHJ5zUfOU--IkM8WDxvkEj4Pbmdm5tv5w-RKWva4LTP3JbgUFU8L7YmGFIFFFKLP7NQXnCFgI72inc.webp?r=632',
     },
     {
         title: '비밀의 문',
@@ -490,6 +520,8 @@ export const seeds = [
         tmdbId: 61488,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/dFMc8vq-4F3i8gBV6U5jjg/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/re-segOR2LrlZjclLOElAQ/760x286.png',
     },
     {
         title: '역적 : 백성을 훔친 도적',
@@ -500,6 +532,10 @@ export const seeds = [
         tmdbId: 68892,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://an2-img.amz.wtchn.net/image/v2/TxZfZHcJaaLVtjkyTM2rAw.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1USTRNSGczTWpCeE9EQWlYU3dpY0NJNklpOTJNaTl6ZEc5eVpTOXBiV0ZuWlM4Mk5qVXhNakUyTWpJeE1UUTBNVFVpZlEuNTFmSnpOcnBRN21DSmU1MVVOM3hsN0VXcTFfUi1OOFAtT1p3bHRUeEpodw==',
+        titleLogo:
+            'https://an2-img.amz.wtchn.net/image/v2/9TyN2ozVbs2krwpSZY5jZg.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMMmx0WVdkbEx6RTJORFF4T1RnM05qRTVOREU1TlRVd09UZ2lMQ0pvSWpveE1qQjkuMjFRVW9Yd1FVbnNjYkpPZEVFX1dfRVF5OHhOY1ZyNzVnbDF0UHFDdjRQVQ==',
     },
     {
         title: '왕과 나',
@@ -510,6 +546,10 @@ export const seeds = [
         tmdbId: 15961,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABWK7Mi-GGpRJqLXJgIRKGhNP2IC0CDUx6m60M9MczM8lKyGtN6E5LVOEcPFohWslBr16Pl6MwaukbTwqRFewQH4Gidn_kNw8vEzI.webp?r=7c4',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABb1sUEE7y5AbBbJloXilPaMjE2x3eEJH7Ww2p1jIMPNzF1hXuemgvm-IZX2QeGeMhhqppDkqiUkNFYNw-paS5J1ybHHbz9od8w.webp?r=034',
     },
     {
         title: '장희빈',
@@ -520,6 +560,8 @@ export const seeds = [
         tmdbId: 70397,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/Z_wHRuOZzLmwCtYnMtnLww/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/tbxDflGBwNSGh2hILxYvTw/760x286.png',
     },
     {
         title: '근초고왕',
@@ -530,6 +572,10 @@ export const seeds = [
         tmdbId: 35278,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2023/K01_AG2020-0005-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2023/K01_AG2020-0005-SingleColorContentLogo_Trimmed.png',
     },
     {
         title: '무신',
@@ -540,6 +586,10 @@ export const seeds = [
         tmdbId: 46573,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2023/M_T60154G-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://i.namu.wiki/i/P6uP7J69FkiS_KyAzccu2UNQal8JFWokuN35TCHSpMS-tULOF2mswGIID4WJvN7A-QjsQ_PngSSXqyoWAuGFww.webp',
     },
     {
         title: '마의',
@@ -550,6 +600,10 @@ export const seeds = [
         tmdbId: 45049,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2023/M_T60173G-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2023/M_T60173G-SingleColorContentLogo_Trimmed.png',
     },
     {
         title: '황진이',
@@ -560,6 +614,10 @@ export const seeds = [
         tmdbId: 565304,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABXl2IYGvOvlLz4rOPDOtD1o7Njw3hW8HOa5l_8ttfX_IGMjGfLSU4gJutv-6MBZiK6fUso3X5lflsIzyPS2OWBAmbm3wPB5eK00q.webp?r=cdd',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABVRTr35HqcxhEsZGvcdjcBENEeJ2qy1CxwOeHY8lxH2wyt-38FzL6hZmfHVWxSHJIAZcEM9xQWv4qDuEcnFrD4jqBHIk3n-2Ew.webp?r=8c5',
     },
     {
         title: '육룡이 나르샤',
@@ -570,6 +628,10 @@ export const seeds = [
         tmdbId: 63927,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2022/S01_V2000008547-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2022/S01_V2000008547-SingleColorContentLogo-Trimmed.png',
     },
     {
         title: '해를 품은 달',
@@ -580,6 +642,10 @@ export const seeds = [
         tmdbId: 45579,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2023/M_T60156G-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2023/M_T60156G-SingleColorContentLogo_Trimmed.png',
     },
     {
         title: '뿌리 깊은 나무',
@@ -590,6 +656,10 @@ export const seeds = [
         tmdbId: 41652,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2022/S01_V0000352936-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2022/S01_V0000352936-SingleColorContentLogo-Trimmed.png',
     },
     {
         title: '추노',
@@ -600,6 +670,10 @@ export const seeds = [
         tmdbId: 31424,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2023/K02_T2009-0897-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2023/K02_T2009-0897-SingleColorContentLogo_Trimmed.png',
     },
     {
         title: '일지매',
@@ -610,6 +684,10 @@ export const seeds = [
         tmdbId: 21013,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABcbpdb9v5nrItA4ISbzXarA-gCN1vso-6UbwZQ5QlXffHB2SDs_qU19aPYZFaObo0B8GZXlDWqpg5_lJ3d82SErqOg9KHwm8v6n-.webp?r=c39',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABbL-UiITWk1R0BCD6A_W1pWV1zGI1WHqyL3PzxF5VYk82QwpNKDj1VCSj-pSvkInVYASgdN2k33jWLqpfHZp8lUjlU4uwmsR6Rk.webp?r=47d',
     },
     {
         title: '슈룹',
@@ -632,6 +710,10 @@ export const seeds = [
         tmdbId: 61148,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABW7iTVLe8KAFj8HY5UpcLY7GIDw-YthRmFxlhbDq9VICeOrVCUUX0IxFpXlVPeEi5U0JSWtaI54WQ-BKc1fHFFsd18yt3nckOo0Z.webp?r=f4a',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABae6hw_CFLGLooSAU9QphA7f9NPa3mLZzyEzjCC6lhYPGpAvej1d7751wjNYyo-MwQQYlpRNO3Svmm9fUC_GwzLeZ9OoYK_gjQ.webp?r=ada',
     },
     {
         title: '달이 뜨는 강',
@@ -642,6 +724,8 @@ export const seeds = [
         tmdbId: 116605,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/Z9GestZZ4xld31B1lvznxg/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/IfZDbZHhaThAFPDCPIGwWA/760x286.png',
     },
     {
         title: '군주 - 가면의 주인',
@@ -652,6 +736,9 @@ export const seeds = [
         tmdbId: 69975,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://an2-img.amz.wtchn.net/image/v2/J40qIgQ4SXattKCFIgzQ5Q.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1USTRNSGczTWpCeE9EQWlYU3dpY0NJNklpOTJNaTl6ZEc5eVpTOXBiV0ZuWlM4eE5qRTFPRGN5TnpJM05qWXhNVFl4TmpRMUluMC4tNFJsZXlvdktfYVFTUUJCM19XZEMzRy1vVFlEVEh6LXNKdWRoS1luYnJN',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/QhsFYc5RPDppsEcikUlCKg/760x286.png',
     },
     {
         title: '7일의 왕비',
@@ -662,6 +749,8 @@ export const seeds = [
         tmdbId: 71748,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/lyJ0VZXVBDAnfhbobACRGg/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/9oh61oW9eMk6RQO-QApRrA/760x286.png',
     },
     {
         title: '나의 나라',
@@ -672,6 +761,10 @@ export const seeds = [
         tmdbId: 93490,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABdwSCdQWgihHJUg8MYF48UcDWcnQH2MnG5hrESXIos7LnPwrqJ9ymBIfj6mcFnXLj_440ayvRsjmXUHj2lvkdihk1CB4L22R7vWu.webp?r=b67',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABQDuZVyvh66ErBLiovRVaUGAkUPpnkNc_FQHo4aT87hMjs-2OjdkQ3zueSEFqDb7Ei_MflDlbVHUA3ueXctEah9d3JMTDCNrhg.webp?r=5a4',
     },
     {
         title: '세작, 매혹된 자들',
@@ -682,6 +775,10 @@ export const seeds = [
         tmdbId: 233205,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABcmjJVxpxlflsDhLe5YY3Cxr2STPAycWXfnzcpedBCYOE_O9Is9ydO0N2qGpZiR9X0T3R8RF4JmvCrgkh5mLsJkXDfL2Kw-yX2U3.webp?r=665',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABVkbdVyouUk74U3kql1bbqzJpe7ZgFNMyu_V9vh0lK3hb68jU7xNUcspYBsDg-gXQaKbRfx7TPmjJ4gvivc7cW91oYuuzkZo6A.webp?r=a26',
     },
     {
         title: '왕의 얼굴',
@@ -692,6 +789,8 @@ export const seeds = [
         tmdbId: 61830,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/R1dQPp8ria5CTb445a7KNA/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/F-yOYMYmLVyOGQfKpyuh2Q/760x286.png',
     },
     {
         title: '조선총잡이',
@@ -702,6 +801,8 @@ export const seeds = [
         tmdbId: 61184,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/WcPMehSe2lOP-ZKbg2V3_g/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/F48O18YqHAFPub8gRyTomw/760x286.png',
     },
     {
         title: '세자가 사라졌다',
@@ -712,6 +813,8 @@ export const seeds = [
         tmdbId: 235576,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/AQKGkapNePHVDREIkTXl9Q/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/ZcN6VdM3nvpiv71i7frIaQ/760x286.png',
     },
     {
         title: '장옥정, 사랑에 살다',
@@ -722,6 +825,10 @@ export const seeds = [
         tmdbId: 47322,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABROrbu2HTdoOuVDvoVMODeHBEjlilPjpknZ29MwaCr7a3n-YTdpxjGA4EDAiUUxPLRiL9xpiTEXVTN6oM097NMm6-Ytj82xZYVL9.webp?r=49b',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABabb0TeztzlhU2ODULVzgpf8kX-iCsOiuU1xREehnAdveLh332qmit_wHbyI50-QlN8qNhyDn9657Fqjfphy7o26XoQeqjwkxfI.webp?r=f45',
     },
     {
         title: '우씨왕후',
@@ -732,6 +839,10 @@ export const seeds = [
         tmdbId: 224732,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://mimgnews.pstatic.net/image/upload/component/2024/08/26/161258110_Ncontents_image.jpg?type=w800',
+        titleLogo:
+            'https://image.tving.com/ntgs/contents/CTC/caip/CAIP1800/ko/20240730/0651/P001759741.png/dims/resize/F_webp,800?from=pc',
     },
     {
         title: '공주의 남자',
@@ -742,6 +853,10 @@ export const seeds = [
         tmdbId: 40239,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://an2-img.amz.wtchn.net/image/v2/jxswiaL-3w6dm9Dxwx3AeA.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1USTRNSGczTWpCeE9EQWlYU3dpY0NJNklpOTJNaTl6ZEc5eVpTOXBiV0ZuWlM4eE5qRTFPRFkzTkRVNE1ESTJNalEyTVRFekluMC5xOUE0M1ZHT2h0S042a0wwU0ZWbjQwOEdnZTRyM0hNNm9GdFZoME1oaFVZ',
+        titleLogo:
+            'https://an2-img.amz.wtchn.net/image/v2/lKjXg15_dvOdBfQ2cTc4DQ.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMMmx0WVdkbEx6RTJNemt6T0RjMk9UZzRNRGMzTXpneE5qQWlMQ0pvSWpveE1qQjkuTU5VU2RRWmpLNUZ3NVJXbGpMTzE0eFY1am9nU0NTMHpDOHl5MC1xTTh5dw==',
     },
     {
         title: '보쌈-운명을 훔치다',
@@ -752,6 +867,9 @@ export const seeds = [
         tmdbId: 113623,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/AKflw_XES-j3Hpi1Kd4_Jg/1680x945.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2023/C9901_C99000000056-SingleColorContentLogo_Trimmed.png',
     },
     {
         title: '대왕의 꿈',
@@ -762,6 +880,8 @@ export const seeds = [
         tmdbId: 66719,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/jgzZVkPqr0-gVerCun-akA/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/NkPo9a2xATcd6ldvLvYXLQ/760x286.png',
     },
     {
         title: '불의 여신 정이',
@@ -772,6 +892,8 @@ export const seeds = [
         tmdbId: 51866,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/jZ8pFJOaem1CtN8ESwq55w/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/lpkZpPSPtTrPvSET63f3pg/760x286.png',
     },
     {
         title: '무사 백동수',
@@ -782,6 +904,10 @@ export const seeds = [
         tmdbId: 40016,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABST4asED277NL3Ax6d_XIlJ9zs7LazqMbN6S4U9yAKznKByHA8L53tP_ByU0O7D9rawrLGgHK82yP4LaqTJNLnT28wvIupDEFBpv.webp?r=8ac',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABZdoDUMIX_34kXFoFfMQMiTwIKDEW5S8AlRpDStQKxnjsu3_iPXi2mZZengPgK6zVgfPrh3r_WJJ4hgSoxQuuBiTcp5G3OFSRQ.webp?r=77fhttps://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABST4asED277NL3Ax6d_XIlJ9zs7LazqMbN6S4U9yAKznKByHA8L53tP_ByU0O7D9rawrLGgHK82yP4LaqTJNLnT28wvIupDEFBpv.webp?r=8ac',
     },
     {
         title: '원경',
@@ -916,6 +1042,10 @@ export const seeds = [
         tmdbId: 334486,
         mediaType: 'movie',
         genre: 'comedy',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/movieImg/MovieGroup/2023/GMV_SB01_SB0000000049-Horizontal_LogoN-re.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/movieImg/MovieGroup/2023/GMV_SB01_SB0000000049-SingleColorContentLogo_Trimmed-re.png',
     },
     {
         title: '궁합',
@@ -925,6 +1055,10 @@ export const seeds = [
         tmdbId: 500168,
         mediaType: 'movie',
         genre: 'comedy',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/meta/image/202310/1697156091026344693.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/meta/image/202310/1697156102679708447.png',
     },
     {
         title: '임금님의 사건수첩',
@@ -934,6 +1068,10 @@ export const seeds = [
         tmdbId: 451914,
         mediaType: 'movie',
         genre: 'comedy',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABeQkY-VK0QFLov-Nb09VH_o4Z4zrRAZKJfGG5P9hr7laCL13DDl0jXYJfUg9qpUchdfSm9a0aXyobYhyyMXl5iGcC6ZESrKOO8ps.webp?r=fa9',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABTLRUs7NP1KShKdYrpjkqHVhvt0YXwgm33rufub2VKkxWH65RANM9Gui-ZZd9rq_weILsRtm_wLxJ_2K4a9yYPcadsByyOKBng.webp?r=6a3',
     },
     {
         title: '군도',

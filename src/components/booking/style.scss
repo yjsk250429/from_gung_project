@@ -269,6 +269,7 @@
             }
             .coupon {
                 margin-top: vw(50);
+                height: vw(200);
                 strong {
                     @include font-22px-B;
                     display: inline-block;

@@ -47,6 +47,12 @@
                         @include font-14px;
                         display: block;
                     }
+                    .alreadyHas{
+                        @include font-18px-B;
+                        margin-top: vw(-14);
+                        margin-bottom: vw(8);
+                        color: $sub3;
+                    }
                 }
                 .right {
                     cursor: pointer;
@@ -61,7 +67,12 @@
                     i {
                         color: $white;
                     }
-                }
+                    &.disabled{
+                        background: #b1b1b1;
+                        cursor: auto;
+                        i{}
+                    }
+                    }
             }
             ul {
                 margin: vw(10) 0 vw(25) vw(10);

@@ -123,7 +123,7 @@ const MyPagemain = () => {
                         <div className="coupon">
                             <p className="coupon_title">보유 쿠폰</p>
                             <p className="coupon_value">
-                                <span>{user?.coupon ?? 0}</span> 장
+                                <span>{user?.coupon?.length ?? 0}</span> 장
                             </p>
                             <img className="reward_bg2" src="/images/mypage/reward2.png" alt="" />
                         </div>

@@ -12,6 +12,7 @@ import { useAuthStore, useModalStore } from '../../../store';
 const SelectDate = ({ thisitem }) => {
     const {openWishModal, openLogin } = useModalStore();
     const authed = useAuthStore((s)=>s.authed);
+    const user = useAuthStore((s) => s.user);
     const { id, category, period, price, quantity } = thisitem;
     const [selected, setSelected] = useState(null);
     const navigate = useNavigate();
@@ -54,23 +55,7 @@ const SelectDate = ({ thisitem }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCoupon, setSelectedCoupon] = useState(null);
 
-    const coupons = [
-        {
-            id: 1,
-            name: '리뷰 1,000개 돌파 기념 할인',
-            discount: '1,000원 할인',
-        },
-        {
-            id: 2,
-            name: '첫 구매 고객 특별 할인',
-            discount: '2,000원 할인',
-        },
-        {
-            id: 3,
-            name: '신규 회원 가입 쿠폰',
-            discount: '1,500원 할인',
-        },
-    ];
+    const coupons = (user?.coupon || []).filter(c => !c.used);
 
     const handleCouponSelect = (coupon) => {
         // 이미 선택된 쿠폰을 다시 클릭하면 취소
@@ -87,9 +72,8 @@ const SelectDate = ({ thisitem }) => {
 
     const getDiscountAmount = (coupon) => {
         if (!coupon) return 0;
-        const match = coupon.discount.match(/\d+/g);
-        return match ? parseInt(match.join('')) : 0;
-    };
+        return coupon.discount; // 숫자 그대로 반환
+      };
 
     const discountAmount = getDiscountAmount(selectedCoupon);
     const finalPrice = Math.max(0, originalPrice - discountAmount);
@@ -193,7 +177,7 @@ const SelectDate = ({ thisitem }) => {
                                     </span>
                                     {selectedCoupon && (
                                         <span className="discount-amount">
-                                            {selectedCoupon.discount}
+                                            {selectedCoupon.discount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 할인
                                         </span>
                                     )}
                                 </div>
@@ -205,6 +189,17 @@ const SelectDate = ({ thisitem }) => {
                             {/* 드롭다운 메뉴 */}
                             {isOpen && (
                                 <div className="coupon-menu">
+                                    <button
+                                        onClick={() => {
+                                            setSelectedCoupon(null);
+                                            setIsOpen(false);
+                                        }}
+                                        className={`coupon-item ${!selectedCoupon ? "selected" : ""}`}
+                                        >
+                                        <div className="coupon-item-content">
+                                            <span className="coupon-name">- - - - - 쿠폰을 선택하세요 - - - - -</span>
+                                        </div>
+                                        </button>
                                     {coupons.map((coupon) => (
                                         <button
                                             key={coupon.id}
@@ -218,7 +213,7 @@ const SelectDate = ({ thisitem }) => {
                                             <div className="coupon-item-content">
                                                 <span className="coupon-name">{coupon.name}</span>
                                                 <span className="coupon-discount">
-                                                    {coupon.discount}
+                                                    {coupon.discount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 할인
                                                 </span>
                                             </div>
                                         </button>

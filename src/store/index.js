@@ -24,7 +24,7 @@ const memberData = [
             date: '01',
         },
         reward: 0,
-        coupon: 0,
+        coupon: [],
         marketing: false, // 선택항목 (이벤트/혜택 수신 여부)
         marketingDate: null, // 마지막 동의/거부 날짜
         wishlist: [],
@@ -173,11 +173,59 @@ export const useAuthStore = create((set, get) => ({
             ottWishList: [],
             attandance: 0,
             inquiries: [], // ✅ 새 회원은 빈 문의 배열로 시작
+            coupon: [
+                {
+                    id: 'signup',
+                    name: '신규 회원 가입 쿠폰',
+                    discount: 1500,
+                    used: false,
+                },
+                {
+                    id: 'firstbuy',
+                    name: '첫 구매 고객 특별 할인',
+                    discount: 2000,
+                    used: false,
+                },
+            ],
         };
         const updatedMembers = [...members, newUser];
         set({ members: updatedMembers, tempMarketing: { status: false, date: null } });
         localStorage.setItem('members', JSON.stringify(updatedMembers));
     },
+
+    // 쿠폰 사용
+    useCoupon: (couponId) => {
+        const { user, members } = get();
+        if (!user) return;
+      
+        const updatedCoupons = (user.coupon || []).map(c =>
+          c.id === couponId ? { ...c, used: true } : c
+        );
+      
+        const updatedUser = { ...user, coupon: updatedCoupons };
+        const updatedMembers = members.map(m => m.id === user.id ? updatedUser : m);
+      
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        localStorage.setItem("members", JSON.stringify(updatedMembers));
+      },
+
+      // 쿠폰 발급
+      addCoupon: (newCoupon) => {
+        const { user, members } = get();
+        if (!user) return;
+      
+        const updatedUser = {
+          ...user,
+          coupon: [...(user.coupon || []), { ...newCoupon, used: false }]
+        };
+      
+        const updatedMembers = members.map(m => m.id === user.id ? updatedUser : m);
+      
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        localStorage.setItem("members", JSON.stringify(updatedMembers));
+      },
 
     withdraw: () => {
         const { user, members } = get();
@@ -275,32 +323,51 @@ export const useAuthStore = create((set, get) => ({
     addBooking: (bookingData) => {
         const { user, members } = get();
         if (!user) return;
-
+      
+        // 예약번호 생성
+        const now = new Date();
+        const yy = String(now.getFullYear()).slice(-2);
+        const mm = String(now.getMonth() + 1).padStart(2, "0");
+        const dd = String(now.getDate()).padStart(2, "0");
+        const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+        const bookingNumber = `${yy}${mm}${dd}-${random}`;
+      
         const newBooking = {
-            ...bookingData,
-            id: Date.now(), // 예약 고유 ID
-            status: 'confirmed', // 예약 완료
-            createdAt: new Date().toISOString(),
+          id: Date.now(),
+          bookingNumber,
+          ...bookingData,
+          status: "confirmed",
+          createdAt: new Date().toISOString(),
         };
-
-        const updatedUser = {
-            ...user,
-            bookings: [...(user.bookings || []), newBooking],
-        };
-
-        if (!user.id) {
-            // 외부 로그인(멤버스에 없음): 세션만 업데이트
-            set({ user: updatedUser });
-            localStorage.setItem('user', JSON.stringify(updatedUser));
-            return;
+      
+        // ✅ reward 적립
+        const REWARD_UNIT = 2000;
+        const rewardEarned = Math.ceil(bookingData.finalPrice / REWARD_UNIT);
+      
+        // ✅ 사용한 쿠폰은 used:true 처리
+        let updatedCoupons = user.coupon || [];
+        if (bookingData.selectedCoupon) {
+          updatedCoupons = updatedCoupons.map(c =>
+            c.id === bookingData.selectedCoupon.id ? { ...c, used: true } : c
+          );
         }
-
-        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+      
+        const updatedUser = {
+          ...user,
+          reward: (user.reward || 0) + rewardEarned,
+          coupon: updatedCoupons,
+          bookings: [...(user.bookings || []), newBooking],
+        };
+      
+        const updatedMembers = user.id
+          ? members.map((m) => (m.id === user.id ? updatedUser : m))
+          : members;
+      
         set({ user: updatedUser, members: updatedMembers });
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        localStorage.setItem('members', JSON.stringify(updatedMembers));
-    },
-
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        localStorage.setItem("members", JSON.stringify(updatedMembers));
+      },
+      
     cancelBooking: (bookingId) => {
         const { user, members } = get();
         if (!user) return;

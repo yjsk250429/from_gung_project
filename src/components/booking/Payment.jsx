@@ -5,15 +5,22 @@ import { IoMapOutline } from 'react-icons/io5';
 import { BiCoin } from 'react-icons/bi';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../store';
+import { useAuthStore, useModalStore } from '../../store';
 import { useState } from 'react';
 import { FaCheck } from "react-icons/fa6";
+
 
 const Payment = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const addBooking = useAuthStore((s) => s.addBooking);
+    const { openWishModal } = useModalStore();
     const [payMethod, setPayMethod] = useState(null);
+    const user = useAuthStore((s) => s.user);
+    const [orderName, setOrderName] = useState("");
+    const [orderTel, setOrderTel] = useState({ first: "010", middle: "", last: "" });
+    const [sameAsUser, setSameAsUser] = useState(false);
+  
   
     const bookingData = location.state; // SelectDate에서 전달된 payload
     if (!bookingData) {
@@ -32,13 +39,58 @@ const Payment = () => {
     const REWARD_UNIT = 2000;
     const originalReward = Math.ceil(originalPrice / REWARD_UNIT);
     const finalReward = Math.ceil(finalPrice / REWARD_UNIT);
+
+    const handleSameAsUser = (e) => {
+        const checked = e.target.checked;
+        setSameAsUser(checked);
+    
+        if (checked && user) {
+          setOrderName(user.name || "");
+          setOrderTel({
+            first: user.tel?.first || "010",
+            middle: user.tel?.middle || "",
+            last: user.tel?.last || ""
+          });
+        } else {
+          setOrderName("");
+          setOrderTel({ first: "010", middle: "", last: "" });
+        }
+      };
   
-    const handlePay = () => {
-      // 여기서 실제 PG 결제 로직을 붙일 수 있음 (포폴용이면 바로 addBooking)
-      addBooking(bookingData);
-      alert('결제가 완료되었습니다.');
-      navigate('/');
-    };
+      const handlePay = () => {
+        if (!orderName || !orderTel.middle || !orderTel.last) {
+          alert("예약자 정보를 모두 입력해 주세요.");
+          return;
+        }
+        if (!payMethod) {
+          alert("결제수단을 선택해 주세요.");
+          return;
+        }
+      
+        const bookingPayload = {
+          ...bookingData,
+          orderInfo: {
+            name: orderName,
+            tel: orderTel,
+            email: "", // 이메일 입력값 있으면 여기 반영
+          },
+          payMethod,
+        };
+      
+        addBooking(bookingPayload);
+        openWishModal(
+            "예약이 완료되었습니다.",
+            { text1: "확인", text2: "예약내역 확인" },
+            (btn) => {
+              if (btn === "확인") {
+                navigate("/"); // 홈으로
+              } else if (btn === "예약내역 확인") {
+                navigate("/mypage"); // 마이페이지 예약내역 탭으로 이동
+              }
+            }
+          );
+      };
+      
 
     return (
         <section className="payment-page">
@@ -117,7 +169,7 @@ const Payment = () => {
 
                         <span>인원·수량</span>
                         <p>
-                         {peopleCount}인 (이용권 1장) <em>{originalPrice.toLocaleString()}원</em>
+                         {peopleCount}인 (이용권 {peopleCount}장) <em>{originalPrice.toLocaleString()}원</em>
                         </p>
                         <i className="sum">
                             총 상품 금액 <p>{originalPrice.toLocaleString()}원</p>
@@ -131,22 +183,22 @@ const Payment = () => {
                         <div className="user">
                             <label>
                                 <span>이름 *</span>
-                                <input type="text" />
+                                <input type="text" value={orderName} onChange={(e) => setOrderName(e.target.value)}/>
                                 {/* <p>필수 입력</p> */}
                             </label>
                             <label>
                                 <span>연락처 *</span>
                                 <div>
-                                <select name="first">
+                                <select name="first" value={orderTel.first} onChange={(e) => setOrderTel({ ...orderTel, first: e.target.value })}>
                                     <option value="010">010</option>
                                     <option value="011">011</option>
                                     <option value="012">012</option>
                                     <option value="013">013</option>
                                 </select>
                                 -
-                                <input type="text" inputMode="numeric" maxLength={4}/>
+                                <input type="text" inputMode="numeric" maxLength={4} value={orderTel.middle} onChange={(e) => setOrderTel({ ...orderTel, middle: e.target.value })}/>
                                 -
-                                <input type="text" inputMode="numeric" maxLength={4}/>
+                                <input type="text" inputMode="numeric" maxLength={4}  value={orderTel.last} onChange={(e) => setOrderTel({ ...orderTel, last: e.target.value })}/>
                                 </div>
                             </label>
                             <label>
@@ -156,7 +208,7 @@ const Payment = () => {
 
                             <p className="currentUser">
                                 <label>
-                                    <input type="checkbox" />
+                                    <input type="checkbox" checked={sameAsUser} onChange={handleSameAsUser}/>
                                     주문자 정보와 동일
                                 </label>
                             </p>
@@ -209,7 +261,7 @@ const Payment = () => {
                         {selectedCoupon && (
                         <div className="cpbox">
                             <span>{selectedCoupon.name}</span>
-                            <p>{selectedCoupon.discount}</p>
+                            <p>{selectedCoupon.discount.toLocaleString()}원 할인</p>
                         </div>
                         )}
                     </div>
@@ -235,7 +287,7 @@ const Payment = () => {
                             개인정보 3자 제공 동의 안내 <IoIosArrowForward />
                         </p>
                     </div>
-                    <button>{finalPrice.toLocaleString()}원 결제하기</button>
+                    <button onClick={handlePay}>{finalPrice.toLocaleString()}원 결제하기</button>
                 </section>
             </div>
         </section>

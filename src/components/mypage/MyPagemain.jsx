@@ -12,14 +12,24 @@ const MyPagemain = () => {
     const [wishlistSubMenu, setWishlistSubMenu] = useState('tour');
     const isWishlistOpen = activeMenu === 'wishlist';
     const user = useAuthStore((s) => s.user);
+
+    const handleProfileClick = () => {
+        openSelectProfile(user?.profile || '/images/profile/profile_1.png');
+    };
+
     return (
         <div className="MyPagemain_main">
             <div className="inner">
                 <aside className="mypage_sidebar">
                     <div className="profile">
-                        <div className="profile_img" onClick={openSelectProfile}>
+                        <div className="profile_img" onClick={handleProfileClick}>
+                            <p className="cameraHover">
+                                <img src="/images/mypage/editProfile_hover.png" alt="cameraIcon" />
+                            </p>
+                            <span className="overlayHover"></span>
+
                             <img
-                                src={user?.profile || '/images/common/profile_placeholder.png'}
+                                src={user?.profile || '/images/profile/profile_1.png'}
                                 alt="프로필 이미지"
                             />
                         </div>

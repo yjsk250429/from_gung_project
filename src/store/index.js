@@ -12,7 +12,7 @@ const memberData = [
         userId: 'abc1234',
         password: 'abc1234!',
         nickName: '궁으로간닷',
-        profile: '/images/mypage/honggildong.png',
+        profile: '/images/profile/profile_13.png',
         tel: {
             first: '010',
             middle: '0000',
@@ -230,7 +230,7 @@ export const useModalStore = create((set) => ({
     couponOpen: false,
     needLoginOpen: false,
     wishModalOpen: false,
-    selectProfileOpen: false,
+    // selectProfileOpen: false,
 
     wishMessage: '',
     wishButtons: { text1: '', text2: '' },
@@ -250,8 +250,12 @@ export const useModalStore = create((set) => ({
             wishAction: null,
         }),
 
-    openSelectProfile: () => set({ selectProfileOpen: true }),
-    closeSelectProfile: () => set({ selectProfileOpen: false }),
+    selectProfileOpen: false,
+    selectedProfileImage: null,
+
+    openSelectProfile: (image = '') =>
+        set({ selectProfileOpen: true, selectedProfileImage: image }),
+    closeSelectProfile: () => set({ selectProfileOpen: false, selectedProfileImage: '' }),
 
     openNeedLogin: () => set({ needLoginOpen: true }),
     closeNeedLogin: () => set({ needLoginOpen: false }),

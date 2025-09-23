@@ -20,7 +20,7 @@ const MyPage = () => {
             <WithdrawConfirm />
             <WithdrawComplete />
             {
-            user.wishlist.length > 0 &&
+            user?.wishlist?.length > 0 &&
             <WishModal className='deleteAll'/>
             }
             <SelectProfile/>

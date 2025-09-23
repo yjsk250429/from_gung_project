@@ -4,14 +4,43 @@ import { LuClock3, LuMapPin } from 'react-icons/lu';
 import { IoMapOutline } from 'react-icons/io5';
 import { BiCoin } from 'react-icons/bi';
 import { IoIosArrowForward } from 'react-icons/io';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../store';
+import { useState } from 'react';
 
 const Payment = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const addBooking = useAuthStore((s) => s.addBooking);
+    const [payMethod, setPayMethod] = useState(null);
+  
+    const bookingData = location.state; // SelectDate에서 전달된 payload
+    if (!bookingData) {
+      return <section className="payment-page"><div className="inner"><p>예약 정보가 없습니다. 다시 시도해 주세요.</p></div></section>;
+    }
+  
+    const { item, selected, peopleCount, selectedCoupon, originalPrice, discountAmount, finalPrice } = bookingData;
+    const { theme, time, category, title = '상품명', period = '하루', region = '지역 정보', place = [], price = 0 } = item || {};
+
+    const fromDate = selected?.from ? new Date(selected.from) : null;
+    const toDate   = selected?.to ? new Date(selected.to) : null;
+
+    const fromStr = fromDate ? fromDate.toLocaleDateString() : '-';
+    const toStr   = toDate ? toDate.toLocaleDateString() : '-';
+  
+    const handlePay = () => {
+      // 여기서 실제 PG 결제 로직을 붙일 수 있음 (포폴용이면 바로 addBooking)
+      addBooking(bookingData);
+      alert('결제가 완료되었습니다.');
+      navigate('/');
+    };
+
     return (
         <section className="payment-page">
             <div className="inner">
                 <article className="left">
                     <ul className="theme">
-                        {/* {theme.map((tm, i) => (
+                        {theme.map((tm, i) => (
                             <li
                                 key={i}
                                 className={
@@ -36,79 +65,85 @@ const Payment = () => {
                             >
                                 {tm}
                             </li>
-                        ))} */}
+                        ))}
                     </ul>
                     <div className="basic-info">
-                        <h3>경복궁 달빛기행</h3>
+                        <h3>{title}</h3>
                         <ul className="details">
                             <li>
                                 <i>
                                     <MdOutlineCalendarMonth />
                                 </i>
-                                상시예약
+                                {time}
                             </li>
                             <li>
                                 <i>
                                     <LuClock3 />
                                 </i>
-                                1박2일
+                                {period}
                             </li>
                             <li>
                                 <i>
                                     <IoMapOutline />
                                 </i>
-                                서울시 종로구
+                                {region}
                             </li>
                             <li>
                                 <i>
                                     <LuMapPin />
                                 </i>
-                                {/* {category === 'tour' ? `${place.length}개 명소` : `${place[0]}`} */}
-                                6개명소
+                                {category === 'tour' ? `${place.length}개 명소` : `${place[0]}`}
                             </li>
                             <li>
                                 <i>
                                     <BiCoin />
                                 </i>
-                                1인
-                                {/* {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} */}
-                                10,000원
-                                <span>(리워드 10p 지급)</span>
+                                1인 {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+                                <span> (리워드 10p 지급)</span>
                             </li>
                         </ul>
                     </div>
 
                     <div className="charge-info">
                         <span>이용 예정일</span>
-                        <p>2025.09.08(월)</p>
+                        <p>{fromStr}</p>
 
                         <span>인원·수량</span>
                         <p>
-                            1인 (이용권 1장) <em>54,000원</em>
+                         {peopleCount}인 (이용권 1장) <em>{originalPrice.toLocaleString()}원</em>
                         </p>
                         <i className="sum">
-                            총 상품 금액 <p>54,000원</p>
+                            총 상품 금액 <p>{originalPrice.toLocaleString()}원</p>
                         </i>
                     </div>
 
-                    <div className="booking-info">
+                    <form className="booking-info">
                         <strong>
                             예약자 정보<span>*</span>
                         </strong>
-                        <div className="txtbox tb1">
-                            <p>이름</p>
-                            <input type="textbox" />
-                            <i>이름을 입력해주세요.</i>
-                        </div>
-                        <div className="txtbox tb2">
-                            <p>전화번호 </p>
-                            <input type="textbox" />
-                            <i>전화번호를 입력해주세요.</i>
-                        </div>
-                        <div className="txtbox tb3">
-                            <p>이메일 </p>
-                            <input type="textbox" />
-                            <i>이메일을 입력해주세요.</i>
+                        <div className="user">
+                            <label>이름*
+                                <input type="text" />
+                                {/* <p>이름을 입력해주세요.</p> */}
+                            </label>
+                            <label>
+                                    연락처*
+                                <select name="first">
+                                    <option value="010">010</option>
+                                    <option value="011">011</option>
+                                    <option value="012">012</option>
+                                    <option value="013">013</option>
+                                </select>
+                                -
+                                <input type="text" inputMode="numeric" maxLength={4}/>
+                                -
+                                <input type="text" inputMode="numeric" maxLength={4}/>
+                            </label>
+                        <label>
+                            이메일
+                            <input type="text" />
+                            {/* <p>이메일을 입력해주세요.</p> */}
+                        </label>
                         </div>
 
                         <div className="charge">
@@ -117,20 +152,26 @@ const Payment = () => {
                             </strong>
                             <div className="selec">
                                 <li>
-                                    <input type="radio" name="pay" value="card" checked />
+                                    <label>
+                                    <input type="radio" name="pay" value="card" checked={payMethod === "card"}  onChange={(e) => setPayMethod(e.target.value)} />
                                     신용카드
+                                    </label>
                                 </li>
                                 <li>
-                                    <input type="radio" name="pay" value="bank" checked />
+                                    <label>
+                                    <input type="radio" name="pay" value="bank" checked={payMethod === "bank"} onChange={(e) => setPayMethod(e.target.value)}/>
                                     계좌이체
+                                    </label>
                                 </li>
                                 <li>
-                                    <input type="radio" name="pay" value="cash" checked />
+                                    <label>
+                                    <input type="radio" name="pay" value="cash"  checked={payMethod === "cash"} onChange={(e) => setPayMethod(e.target.value)}/>
                                     무통장입금
+                                    </label>
                                 </li>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </article>
                 <section className="right">
                     <div className="pay-info">

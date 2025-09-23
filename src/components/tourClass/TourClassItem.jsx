@@ -82,7 +82,7 @@ const TourClassItem = ({ id, title, theme, description, period, price, img, cate
                     if (isWished) {
                     openWishModal("찜 목록에서 삭제하였습니다", { text1: "닫기" });
                     } else {
-                    openWishModal("찜 목록에 추가하였습니다", { text1: "닫기", text2: "찜 목록 보기" });
+                    openWishModal("찜 목록에 추가하였습니다", { text1: "닫기", text2: "찜 목록 보기" }, () => navigate('/mypage'));
                     }
                 }}
                 >

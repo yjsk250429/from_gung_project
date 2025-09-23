@@ -9,8 +9,8 @@ import WithdrawConfirm from '../../components/ui/modal/WithdrawConfirm';
 import { useAuthStore } from '../../store';
 
 const MyPage = () => {
-        const { user } = useAuthStore();  
-    
+    const { user } = useAuthStore();
+
     return (
         <>
             <MyPagemain />
@@ -24,6 +24,7 @@ const MyPage = () => {
             <WishModal className='deleteAll'/>
             }
             <SelectProfile/>
+
         </>
     );
 };

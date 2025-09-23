@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthStore, useModalStore } from '../../../store';
 import './style.scss';
+import { Link } from 'react-router-dom';
 
 const WishlistSection = ({ activeSubMenu }) => {
     const { user, clearWishlist, removeFromWishlist  } = useAuthStore();
@@ -50,14 +51,15 @@ const WishlistSection = ({ activeSubMenu }) => {
                 <ul className="wishlist_grid">
                     {items.map((it) => (
                         <li key={it.id} className={it.disabled ? 'disabled' : ''}>
+                                    <input type="checkbox" id='selector' checked={selectedIds.includes(it.id)}
+                                    onChange={(e) => handleSelect(it.id, e.target.checked)}/>
+                                    <label htmlFor="selector"></label>
+                                <Link to={`/tourclass/${it.id}`}>
                                 <div className="img-wrap">
                                     <img src={it.img} alt={it.title} />
-                                    {/* <i className="selector" aria-hidden /> */}
-                                    <input type="checkbox" id='selector' checked={selectedIds.includes(it.id)}
-                  onChange={(e) => handleSelect(it.id, e.target.checked)}/>
-                                    <label htmlFor="selector"></label>
                                 </div>
                                 <p className="title">{it.title}</p>
+                                </Link>
                         </li>
                     ))}
                 </ul>

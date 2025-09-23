@@ -874,8 +874,8 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     }
     @media screen and (max-width: 393px) {
         width: 393px;
-        // height: 852px;
-        border: 1px solid #000;
+        padding-bottom: 100px;
+
         .s3_main-title {
             margin-top: 155px;
             h1 {
@@ -885,15 +885,20 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             }
         }
         .s3_top-image {
+            margin-top: 70px;
             img {
+                transform: scale(2);
+                margin-left: 150px;
             }
         }
         .s3_bottom-image {
             img {
+                transform: scale(2);
+                margin-left: -250px;
+                margin-bottom: 50px;
             }
         }
         .s3_center-image {
-
         }
         .s3_center-image .main-image {
             height: 390px;
@@ -959,10 +964,15 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
                 }
                 .s3_card--bottom-right {
                 }
-                .s3_bottom-message {
-                    p {
-                    }
-                }
+            }
+        }
+        .s3_bottom-message {
+            width: 275px;
+            p {
+                font-size: 20px;
+                line-height: 1.2;
+                text-align: right;
+                margin-bottom: 30px;
             }
         }
     }

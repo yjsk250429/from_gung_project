@@ -157,6 +157,10 @@ export const seeds = [
         tmdbId: 66496,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2023/K02_T2016-0151-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2023/K02_T2016-0151-SingleColorContentLogo_Trimmed.png',
     },
     {
         title: '궁',
@@ -167,6 +171,9 @@ export const seeds = [
         tmdbId: 5279,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/8azpI0t_S-hs_PZ3zLwuWw/1680x945sr.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/meta/image/202409/1725366929550193837.png',
     },
 
     {
@@ -190,6 +197,10 @@ export const seeds = [
         tmdbId: 108261,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABeTwzdlIv_3ED-fIp1bX3hZv1qz614Rj2XjE5vPztNEYZobjf2y2E06DPQrVm3D8iE_G78pn4GrRp53RyTZJPtnzEcvwZ0XeaoIG.webp?r=9a3',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABedeIb6b43il0NU7MZuYTUx1tSRVpyEJbAviau_ayheKXGOgG9E9ZQR0o9NyYGuipWXtlPxsVmvheGPr7xUABQH6qMX5jgS1Dw.webp?r=495',
     },
     {
         title: '달의 연인 - 보보경심 려',
@@ -201,6 +212,10 @@ export const seeds = [
         tmdbId: 66433,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABVyS3aovwEcauCzSt440xHNz-sHf837gTJefd9kTjAecStZZgN1pjiHt3fwK_s0sRvzZD8juDsBB5T8t1VdBEFLyISC-8kJ0-YMJ.webp?r=217',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABZKRhL7xHrgdhHTU1zquepkMHJ4pAC6G7emBcmDQjuGvWRExO5YKQUPc3BXdIKrWSg4iXxWpCISjlQGVnnT5cvqNVU8GZuGuZg.webp?r=016',
     },
     {
         title: '퐁당퐁당 LOVE',
@@ -211,6 +226,9 @@ export const seeds = [
         tmdbId: 65355,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/ay2quyev6vlmEEX7Qbfdbw/1680x945sr.webp',
+        titleLogo:
+            'https://an2-img.amz.wtchn.net/image/v2/zr3weFnbPZ60OLLp4Es9Qg.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMMmx0WVdkbEx6RTJNemswTmpRNE16Y3lOamczTkRBM09EWWlMQ0pvSWpveE1qQjkuc1NTUEdqM3lnbjNZZ3d0WjFUTXZ4V2JaYmVTSG9ielVBSlUyM084cVl2RQ==',
     },
     {
         title: '옥탑방 왕세자',
@@ -221,6 +239,10 @@ export const seeds = [
         tmdbId: 43152,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABcH6wS-azp5Ga5K4IviAtaWl-3RkQzh0xgdonKDC-9kOygmX3pvtNpWKabbGBlTjd0UGYTWbWuZl8ABBZHgiYFVQywlqqtZjcDCq.webp?r=47b',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABXWF4CFATvqbrN52llwUeB4FG870qVqtSlNY24xl6LFS0sWYc3vAwc2hbFGL2bZ_RT3pMyW_ug10kG-6cmG0FRu2xMKxnAxThg.webp?r=5db',
     },
 
     {
@@ -232,6 +254,10 @@ export const seeds = [
         tmdbId: 230924,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABZqrXboAqRRcCfNldrc5swwIj4wOahTPqEpkK_Qd6hCVDxYfbofNjye1w_-_CInQONl7lEjxHxhSOogF61Jxjegxa8zBqWatecBp.webp?r=aa5',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABU649TqVF_8ty9D-pi_Npd0pmisYmveLc5WxREM1q_b9uUzhF9nj9wbqjXm_lOfzrsc3611xkXhDjS-EhNlyeqVbBlhBkES8sw.webp?r=7b5',
     },
     {
         title: '귀궁',
@@ -242,6 +268,10 @@ export const seeds = [
         tmdbId: 259486,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/meta/image/202504/1744941555399831650.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/meta/image/202504/1744941572476533098.png',
     },
     {
         title: '청춘월담',
@@ -252,6 +282,10 @@ export const seeds = [
         tmdbId: 154889,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABR3CMIFZoGwCrDD4CFmrPps67Czyv18H2i2F7tlLWr0L4GJaok6fVMIefANWjHqoTJmVPNinZ9BUFNgmToexvSAoZDCF7ckmaCmZ.webp?r=6ab',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABa6qQTyzRgTaZaKWeZNCRQiHuZ09utQnFu_kXe7fjCEEEwp87vbUXs3fTYXKfAp4oeP2NpJY4_QLa7Ijp_gA5hERdQnxA6JBlQ.webp?r=4fb',
     },
     {
         title: '열녀박씨 계약결혼뎐',
@@ -262,6 +296,10 @@ export const seeds = [
         tmdbId: 220076,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop:
+            'https://img.coupangstreaming.com/titles/428d9891-811b-430c-bfd3-8d248ceb4481/hero-largescreen/4461d07a-bef0-45b0-81e1-db0503de2e70.jpg?imwidth=1280&imscalingMode=aspectFit&quot',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/meta/image/202311/1700806949866978669.png',
     },
     {
         title: '인현왕후의 남자',
@@ -272,6 +310,8 @@ export const seeds = [
         tmdbId: 44964,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/BfLfXu3jbsgXYlzOt3yVfA/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/KhXAFPXjg_9EPaGLF-RoeQ/760x286.png',
     },
 
     {
@@ -283,6 +323,8 @@ export const seeds = [
         tmdbId: 64811,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/DR-IPyp2avVFbdmn5VyxKw/1680x945sr.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/olGpk_qt17niWr8v5Y29bg/760x286.png',
     },
     {
         title: '태종 이방원',
@@ -305,6 +347,10 @@ export const seeds = [
         tmdbId: 14534,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/BMS/TVSeason/2023/K01_T2004-0084-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/BMS/TVSeason/2023/K01_T2004-0084-SingleColorContentLogo_Trimmed.png',
     },
     {
         title: '태조 왕건',
@@ -315,6 +361,10 @@ export const seeds = [
         tmdbId: 17039,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop:
+            'https://an2-img.amz.wtchn.net/image/v2/bafIf1lSoViuMSCymNPE6g.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk1UQTFNekUwTlRNek1qYzRNamMzTVRBaWZRLk80SDF4ekw1WTFFVHJNX0NOX0IzTGdFUWZpenZaaFRVN2Z6aUdtVVJJTE0=',
+        titleLogo:
+            'https://i.namu.wiki/i/dl5dP5YkaF0NkICeIf65P1UVeyH5-biI71HnEV6-lvgr8BwM4LncTQltyxyfL9u_BkOUvVYGhdm8fHwpw6NxVg.webp',
     },
     {
         title: '동이',
@@ -325,6 +375,9 @@ export const seeds = [
         tmdbId: 38852,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/efml5ayFoHTkmLaTmTdpHg/1680x945.webp',
+        titleLogo:
+            'https://an2-img.amz.wtchn.net/image/v2/dNBUAcuK1xgMMu0_GxEBOg.png?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKd0lqb2lMM1l5TDNOMGIzSmxMMmx0WVdkbEx6RTJNemsyTkRFd056UTFOVGM1TlRjM05ESWlMQ0pvSWpveE1qQjkuck13UThna0otUkxhMzhIS3d6UVJFRG4tc2pVMUlMdjltWG1xSjhHQnYwWQ==',
     },
     {
         title: '선덕여왕',
@@ -335,6 +388,8 @@ export const seeds = [
         tmdbId: 21771,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/r7DW7sf14gp9y33WLNu-xA/1680x945.webp',
+        titleLogo: 'https://is1-ssl.mzstatic.com/image/thumb/bVyRzIsISzXkF2rXIBhAJQ/760x286.png',
     },
     {
         title: '정도전',

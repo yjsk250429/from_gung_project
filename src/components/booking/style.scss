@@ -149,11 +149,29 @@
                 .user{
                     label{
                         display: block;
+                        width: vw(360);
+                        height: vw(60);
                         @include font-18px;
+                        position: relative;
                         input[type='text']{
                             @include inputStyle;
                         }
+                        &:nth-child(1),
+                        &:nth-child(2),
+                        &:nth-child(3){
+                            display: flex;
+                            justify-content: space-between;
+                            span{
+                                display: block;
+                            }
+                        }
                         &:nth-child(2){
+                            span{
+                                margin-right: vw(20);
+                            }
+                            div{
+                                margin-right: vw(18);
+                            }
                             select {
                                 width: vw(55);
                                 border: 1px solid #b1b1b1;
@@ -173,8 +191,20 @@
                         }
                     }
                     }
+                    .currentUser{
+                        label{
+                            width: auto;
+                            height: auto;
+                            display: block;
+                            @include font-16px;
+                            input[type="checkbox"]{
+                                margin-left: vw(105);
+                                margin-right: vw(8);
+                        }
+
+                        }
+                    }
                 }
-               
             }
 
             .charge {
@@ -358,6 +388,9 @@
                 border: none;
                 border-radius: vw(10);
                 margin-top: vw(50);
+                &:hover{
+                    background: #141644;
+                }
             }
         }
     }

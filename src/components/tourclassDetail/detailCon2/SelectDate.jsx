@@ -7,8 +7,11 @@ import { ko } from 'react-day-picker/locale';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore, useModalStore } from '../../../store';
 
 const SelectDate = ({ thisitem }) => {
+    const {openWishModal, openLogin } = useModalStore();
+    const authed = useAuthStore((s)=>s.authed);
     const { id, category, period, price, quantity } = thisitem;
     const [selected, setSelected] = useState(null);
     const navigate = useNavigate();
@@ -92,26 +95,40 @@ const SelectDate = ({ thisitem }) => {
     const finalPrice = Math.max(0, originalPrice - discountAmount);
 
     const handleReserve = () => {
-        if (!selected) {
-          alert('이용하실 날짜를 선택해 주세요.');
-          return;
+        if (!authed) {
+            openWishModal(
+                "로그인 후 이용해 주세요",
+                { text1: "취소", text2: "로그인" },
+                openLogin // 로그인 버튼 누르면 로그인 모달 오픈
+            );
+            return;
         }
+
+        if (!selected) {
+            openWishModal(
+                "이용 날짜를 선택해 주세요",
+                { text1: "확인" },
+            )
+            return;
+        }
+
         const daysToAdd = getPeriodDays(period);
-        const from = selected;
+        const from = selected.from || selected; // DatePicker에서 객체/단일 Date 모두 처리
         const to = daysToAdd > 0 ? addDays(from, daysToAdd) : from;
-    
+
         const bookingPayload = {
-          item: thisitem,
-          selected: {from, to},
-          peopleCount,
-          selectedCoupon,
-          originalPrice,
-          discountAmount,
-          finalPrice,
+            item: thisitem,
+            selected: { from, to },
+            peopleCount,
+            selectedCoupon,
+            originalPrice,
+            discountAmount,
+            finalPrice,
         };
-        // 결제 페이지로 상태 전달
+
         navigate('/booking', { state: bookingPayload });
-      };
+    };
+
 
     return (
         <div className="selectDate">

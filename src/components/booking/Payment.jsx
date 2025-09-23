@@ -7,6 +7,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store';
 import { useState } from 'react';
+import { FaCheck } from "react-icons/fa6";
 
 const Payment = () => {
     const location = useLocation();
@@ -27,6 +28,10 @@ const Payment = () => {
 
     const fromStr = fromDate ? fromDate.toLocaleDateString() : '-';
     const toStr   = toDate ? toDate.toLocaleDateString() : '-';
+
+    const REWARD_UNIT = 2000;
+    const originalReward = Math.ceil(originalPrice / REWARD_UNIT);
+    const finalReward = Math.ceil(finalPrice / REWARD_UNIT);
   
     const handlePay = () => {
       // 여기서 실제 PG 결제 로직을 붙일 수 있음 (포폴용이면 바로 addBooking)
@@ -99,14 +104,16 @@ const Payment = () => {
                                     <BiCoin />
                                 </i>
                                 1인 {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
-                                <span> (리워드 10p 지급)</span>
+                                <span> (리워드 {originalReward}p 지급)</span>
                             </li>
                         </ul>
                     </div>
 
                     <div className="charge-info">
                         <span>이용 예정일</span>
-                        <p>{fromStr}</p>
+                        <p> {period === "하루"
+                            ? fromStr
+                            : `${fromStr} ~ ${toStr}`}</p>
 
                         <span>인원·수량</span>
                         <p>
@@ -122,12 +129,14 @@ const Payment = () => {
                             예약자 정보<span>*</span>
                         </strong>
                         <div className="user">
-                            <label>이름*
+                            <label>
+                                <span>이름 *</span>
                                 <input type="text" />
-                                {/* <p>이름을 입력해주세요.</p> */}
+                                {/* <p>필수 입력</p> */}
                             </label>
                             <label>
-                                    연락처*
+                                <span>연락처 *</span>
+                                <div>
                                 <select name="first">
                                     <option value="010">010</option>
                                     <option value="011">011</option>
@@ -138,12 +147,20 @@ const Payment = () => {
                                 <input type="text" inputMode="numeric" maxLength={4}/>
                                 -
                                 <input type="text" inputMode="numeric" maxLength={4}/>
+                                </div>
                             </label>
-                        <label>
-                            이메일
-                            <input type="text" />
-                            {/* <p>이메일을 입력해주세요.</p> */}
-                        </label>
+                            <label>
+                                <span>이메일</span>
+                                <input type="text" />
+                            </label>
+
+                            <p className="currentUser">
+                                <label>
+                                    <input type="checkbox" />
+                                    주문자 정보와 동일
+                                </label>
+                            </p>
+
                         </div>
 
                         <div className="charge">
@@ -177,45 +194,48 @@ const Payment = () => {
                     <div className="pay-info">
                         <strong>결제 정보</strong>
                         <p>
-                            판매금액 <em>54,000원</em>
+                            판매금액 <em>{originalPrice.toLocaleString()}원</em>
                         </p>
+                        <p>할인금액 <em>-{discountAmount.toLocaleString()}원</em></p>
                         <p>
-                            판매수량 X1 <em>54,000원</em>
+                            판매수량 X{peopleCount} <em>{originalPrice.toLocaleString()}원</em>
                         </p>
                     </div>
                     <div className="coupon">
                         <strong>할인쿠폰</strong>
                         <span>
-                            사용가능 쿠폰 <p>1장</p>
+                            사용 쿠폰 <p>{selectedCoupon ? '1' : '0'}장</p>
                         </span>
+                        {selectedCoupon && (
                         <div className="cpbox">
-                            <span>리뷰 1,000개 돌파 기념 할인</span>
-                            <p>1,000원 할인</p>
+                            <span>{selectedCoupon.name}</span>
+                            <p>{selectedCoupon.discount}</p>
                         </div>
+                        )}
                     </div>
                     <div className="total">
                         <strong>
-                            최종 결제금액 <p>53,000원</p>
+                            최종 결제금액 <p>{finalPrice.toLocaleString()}원</p>
                         </strong>
-                        <em>(리워드 10p 적립)</em>
+                        <em>(리워드 {finalReward}p 적립)</em>
                     </div>
                     <div className="check">
                         <div className="all">
                             <input type="checkbox" /> 전체동의
                         </div>
                         <li>
-                            <input type="checkbox" /> 취소규정 동의 (필수)
+                        <i><FaCheck /></i> 취소규정 동의 (필수)
                             <IoIosArrowForward />
                         </li>
                         <li>
-                            <input type="checkbox" /> 취소 및 환불 정책 동의 (필수)
+                        <i><FaCheck /></i> 취소 및 환불 정책 동의 (필수)
                             <IoIosArrowForward />
                         </li>
                         <p>
                             개인정보 3자 제공 동의 안내 <IoIosArrowForward />
                         </p>
                     </div>
-                    <button>53,000원 결제하기</button>
+                    <button>{finalPrice.toLocaleString()}원 결제하기</button>
                 </section>
             </div>
         </section>

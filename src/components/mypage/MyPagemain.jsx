@@ -9,6 +9,7 @@ import { useAuthStore, useModalStore } from '../../store/index.js';
 const MyPagemain = () => {
     const { openEditPassword, openWithdrawConfirm } = useModalStore();
     const [activeMenu, setActiveMenu] = useState('reservation');
+    const [wishlistSubMenu, setWishlistSubMenu] = useState('tour');
     const isWishlistOpen = activeMenu === 'wishlist';
     const user = useAuthStore((s) => s.user);
     return (
@@ -60,10 +61,18 @@ const MyPagemain = () => {
                         {/* 찜 목록 클릭 시에만 나타나는 서브 메뉴 */}
                         {isWishlistOpen && (
                             <div id="wishlist-submenu" className="submenu">
-                                <button type="button" className="sub">
+                                <button
+                                    type="button"
+                                    className={wishlistSubMenu === 'tour' ? 'active' : ''}
+                                    onClick={() => setWishlistSubMenu('tour')}
+                                >
                                     투어 / 클래스
                                 </button>
-                                <button type="button" className="sub">
+                                <button
+                                    type="button"
+                                    className={wishlistSubMenu === 'ott' ? 'active' : ''}
+                                    onClick={() => setWishlistSubMenu('ott')}
+                                >
                                     OTT
                                 </button>
                             </div>
@@ -111,7 +120,9 @@ const MyPagemain = () => {
                     </div>
 
                     {activeMenu === 'reservation' && <ReservationSection />}
-                    {activeMenu === 'wishlist' && <WishlistSection />}
+                    {activeMenu === 'wishlist' && (
+                        <WishlistSection activeSubMenu={wishlistSubMenu} />
+                    )}
                     {activeMenu === 'review' && <ReviewSection />}
                     {activeMenu === 'inquiry' && <InquirySection />}
                 </section>

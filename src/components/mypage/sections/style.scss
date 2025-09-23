@@ -2,142 +2,105 @@
 @use '../../../styles/utils' as *;
 @use '../../../styles/ui/tourList' as *;
 
-// 찜목록
 .wishlist {
+    position: relative;
     h2 {
         @include font-22px-B;
         margin: 0 0 vw(20);
     }
-
+    .empty{
+        text-align: center;
+        margin-top: vw(150);
+    }
+    .top{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: vw(20);
+    }
     /* 우측 상단 "전체 선택 / 선택 삭제" 영역 */
     .wishlist_toolbar {
+        @include font-14px-M;
+        color: #666;
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        gap: vw(12);
-        margin-bottom: vw(20);
-        @include font-14px;
-        color: #666;
+        gap: vw(18);
+        li{
+            cursor: pointer;
+            &:first-child{
+                position: relative;
+                &::after{
+                    content: "";
+                    display: block;
+                    width: 1px;
+                    height: vw(12);
+                    position: absolute;
+                    background: #666;
+                    right: vw(-11);
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
     }
 
     /* === 카드 그리드: 기본 믹스인 + 3열로 재정의 === */
     .wishlist_grid {
         @include tourList;
         grid-template-columns: repeat(3, 1fr); // ← 4 → 3 열로 변경
-        gap: vw(40); // 필요시 간격 조정
-
-        /* 믹스인 안의 고정 width를 덮어 그리드에 맡김 */
+        gap: vw(40); 
         li {
-            width: auto;
-            margin-bottom: 0;
+            .img-wrap{
+
+                input[type="checkbox"] {
+                    appearance: none;   // 브라우저 기본 체크박스 없애기
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    position: absolute;
+                    z-index: 3;
+                    top: vw(12);
+                    left: vw(12);
+                    width: vw(22);
+                    height: vw(22);
+                    border-radius: 50%;
+                    border: vw(3) solid #fff;
+                    background: rgba(255, 255, 255, 0.2);
+                    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
+                    // cursor: pointer;
+                  }
+                  
+                  input[type="checkbox"]:checked {
+                    border-color:$sub3;
+                    &::after{
+                        content: "";
+                        display: block;
+                        background-image: url('/images/mypage/check.png');
+                        background-repeat: no-repeat;
+                        background-position: 0 0;
+                        width: vw(18);
+                        height: vw(18);
+                        position: absolute;
+                        left: vw(-1);
+                    }
+                  }
+           
         }
-
-        /* 카드 */
-        .card {
-            display: flex;
-            flex-direction: column;
-        }
-        .img-wrap,
-        .imgwrap {
-            cursor: pointer;
-            width: 100%;
-            height: vw(460); // 원본 유지 (비율 박스 쓰려면 바꿔도 OK)
-            border-radius: vw(10);
-            overflow: hidden;
-            margin-bottom: vw(12);
-            position: relative;
-            background: #333;
-
-            img {
-                display: none;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                transform: scale(1);
-                transition: transform 0.25s ease;
-            }
-
-            /* 선택 동그라미 */
-            .selector {
-                position: absolute;
-                z-index: 3;
-                top: vw(12);
-                left: vw(12);
-                width: vw(22);
-                height: vw(22);
-                border-radius: 50%;
-                border: vw(2) solid #fff;
-                background: rgba(255, 255, 255, 0.2);
-                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
-            }
-
-            /* 오버레이/호버(믹스인 패턴 간소화 버전) */
-            .overlay {
-                position: absolute;
-                inset: 0;
-                z-index: 2;
-                background: rgba(0, 0, 0, 0.5);
-                opacity: 0;
-                transition: opacity 0.2s ease;
-            }
-            .hoverImg {
-                position: absolute;
-                inset: 0;
-                z-index: 1;
-                opacity: 0;
-                transition: opacity 0.2s ease;
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain;
-                    scale: 0.95;
-                }
-            }
-
-            &:hover {
-                img {
-                    transform: scale(1.03);
-                }
-                .overlay {
-                    opacity: 1;
-                }
-                .hoverImg {
-                    opacity: 0.35;
-                }
-            }
-        }
-
-        /* 제목 줄 */
-        .title {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            strong {
-                @include font-18px-B;
-                display: block;
-            }
-            i {
-                font-size: vw(24);
-                cursor: pointer;
-            }
-        }
-
+        
         /* 선택/비활성 상태 */
-        li.selected {
-            .img-wrap .selector,
-            .imgwrap .selector {
-                background: $main1;
-                border-color: $main1;
-                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06) inset;
-            }
-        }
-        li.disabled {
+        // &.selected {
+        //     .img-wrap .selector,{
+        //         background: $main1;
+        //         border-color: $main1;
+        //         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06) inset;
+        //     }
+        // }
+        &.disabled {
             opacity: 0.45;
             filter: grayscale(1);
             pointer-events: none;
         }
+    }
     }
 }
 

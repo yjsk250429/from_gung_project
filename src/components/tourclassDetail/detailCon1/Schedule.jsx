@@ -5,10 +5,12 @@ import { Fragment } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useAuthStore, useModalStore } from "../../../store";
+import { useNavigate } from "react-router-dom";
 
 const Schedule = ({ thisitem }) => {
   const { user, authed, toggleWishlist } = useAuthStore();
   const { openNeedLogin, openWishModal, openCoupon} = useModalStore();
+  const navigate = useNavigate();
   
   const {
     id,
@@ -128,11 +130,11 @@ const Schedule = ({ thisitem }) => {
                     if (isWished) {
                     openWishModal("찜 목록에서 삭제하였습니다", { text1: "닫기" });
                     } else {
-                    openWishModal("찜 목록에 추가하였습니다", { text1: "닫기", text2: "찜 목록 보기" });
+                    openWishModal("찜 목록에 추가하였습니다", { text1: "닫기", text2: "찜 목록 보기" }, () => navigate('/mypage'));
                     }
                 }}>
           <i>
-          {isWished ? <FaHeart style={{ color: 'red' }} /> : <FiHeart />}          </i>
+          {isWished ? <FaHeart style={{ color: 'red' }} /> : <FiHeart />}</i>
           투어 찜하기
         </button>
         <button onClick={openCoupon}>

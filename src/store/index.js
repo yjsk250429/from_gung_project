@@ -186,6 +186,29 @@ export const useAuthStore = create((set, get) => ({
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
       },
+      clearWishlist: () => {
+        const { user, members } = get();
+        if (!user) return;
+    
+        const updatedUser = { ...user, wishlist: [] };
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+    
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+      },
+      removeFromWishlist: (ids) => {
+        const { user, members } = get();
+        if (!user) return;
+    
+        const updatedWishlist = user.wishlist.filter((w) => !ids.includes(w.id));
+        const updatedUser = { ...user, wishlist: updatedWishlist };
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+    
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        localStorage.setItem("members", JSON.stringify(updatedMembers));
+      },
 }));
 
 export const useModalStore = create((set) => ({
@@ -208,8 +231,9 @@ export const useModalStore = create((set) => ({
 
     wishMessage: '',   // ✅ 모달 메시지 상태 추가
     wishButtons:{ text1: '', text2: '' },
-    openWishModal: (message, buttons={text1: '', text2: ''}) => set({ wishModalOpen: true, wishMessage: message, wishButtons:buttons }),
-    closeWishModal: () => set({ wishModalOpen: false, wishMessage: '', wishButtons:{text1: '', text2: ''} }),
+    wishAction:null,
+    openWishModal: (message, buttons={text1: '', text2: ''}, action=null) => set({ wishModalOpen: true, wishMessage: message, wishButtons:buttons, wishAction:action }),
+    closeWishModal: () => set({ wishModalOpen: false, wishMessage: '', wishButtons:{text1: '', text2: ''}, wishAction:null }),
 
     openNeedLogin: () => set({ needLoginOpen: true }),
     closeNeedLogin: () => set({ needLoginOpen: false }),

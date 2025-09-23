@@ -19,7 +19,6 @@ const TourClass = () => {
     const category = useTourClassStore((s) => s.category);
     const setRegionCategory = useTourClassStore((s) => s.setRegionCategory);
     const regionCategory = useTourClassStore((s) => s.regionCategory);
-    const {closeWishModal} = useModalStore();
 
     const tabItems = useMemo(() => {
         if (category === 'tour') {
@@ -46,11 +45,6 @@ const TourClass = () => {
 
     const filterRef = useRef(null);
     const sortRef = useRef(null);
-
-    const goWish = () =>{
-        closeWishModal();
-        navigate('/mypage');
-    };
 
     useEffect(() => {
         setRegionCategory('전체');
@@ -272,7 +266,7 @@ const TourClass = () => {
                     </p>
                 )}
             </div>
-            <WishModal onClick={goWish} className='addWish'/>
+            <WishModal className='addWish'/>
         </section>
     );
 };

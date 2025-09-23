@@ -227,29 +227,35 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             }
         }
         .main_banner {
-            width: 351px;
-            height: 330px;
+            // width: 351px;
+            // height: 330px;
             position: absolute;
-            top: 163px;
-            left: 80px;
+            top: 70%;
+            left: 50%;
+            transform: scale(2) translateX(-5%);
             .banner_line {
                 img {
-                    width: 330px;
-                    height: 330px;
+                    // width: 330px;
+                    // height: 330px;
                 }
             }
             .banner_image {
                 img {
-                    width: 300px;
-                    height: 330px;
+                    // width: 300px;
+                    // height: 330px;
                 }
             }
             .banner_cloud {
-                width: 351px;
-                height: 300px;
                 img {
-                    width: 68px;
-                    height: 24px;
+                    &:nth-child(1){
+                        transform: scale(2);
+                        left: 20px;
+                    }
+                    &:nth-child(2){
+
+                        left: 180px;
+                        top: 130px;
+                    }
                 }
             }
         }
@@ -263,21 +269,30 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             width: 296px;
 
             h2 {
-                position: absolute;
-                top: 573px;
-                left: 45px;
-                display: flex;
                 font-size: 32px;
                 font-weight: 500;
+                &:first-of-type{
+                    top: 573px;
+                    left: 45px;       
+                }
+                &:last-of-type{
+                    top: 620px;
+                    left: 180px;    
+                }
             }
             p {
                 font-size: 9px;
-                position: absolute;
-                bottom: 161px;
-                left: 52px;
+                bottom: 212px;
+                right: 220px;
             }
             img {
+                top: 600px;
+                right: 50px;
+                transform: scale(2);
             }
+        }
+        .default{
+            display: none;
         }
     }
 }
@@ -424,8 +439,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             font-size: 50px;
             line-height: 1;
             p {
-                white-space: pre-line;
-                content: 'A Journey\A Back in Time';
+                width: 310px;
             }
         }
     }

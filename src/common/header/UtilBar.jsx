@@ -83,7 +83,7 @@ const UtilBar = () => {
             <ul className="reward" onMouseEnter={openReward} onMouseLeave={closeReward}>
                 <li>
                     <img src="/images/coin_w.png" alt="coin" />
-                    {user.reward}
+                    {user?.reward || 0}
                 </li>
                 <li>
                     <img src="/images/calendar_w.png" alt="calendar" />0

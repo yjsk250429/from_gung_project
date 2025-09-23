@@ -86,19 +86,19 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
         .banner_line {
             img {
                 position: absolute;
+                &:nth-child(1) {
+                    width: vw(692);
+                    object-fit: cover;
+                    top: vw(120);
+                    left: vw(241);
+                }
             }
-            img:nth-child(1) {
-                width: vw(692);
-                object-fit: cover;
-                top: vw(120);
-                left: vw(235);
-            }
-            img:nth-child(2) {
-                width: vw(634);
-                object-fit: cover;
-                top: vw(118);
-                left: vw(280);
-            }
+            // img:nth-child(2) {
+            //     width: vw(634);
+            //     object-fit: cover;
+            //     top: vw(118);
+            //     left: vw(280);
+            // }
         }
         .banner_image {
             img {
@@ -107,14 +107,14 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             img:nth-child(1) {
                 width: vw(617);
                 object-fit: cover;
-                top: vw(135);
+                top: vw(143);
                 left: vw(273);
                 z-index: 2;
             }
             img:nth-child(2) {
                 width: vw(640);
                 object-fit: cover;
-                top: vw(125);
+                top: vw(137);
                 left: vw(275);
                 z-index: 2;
             }

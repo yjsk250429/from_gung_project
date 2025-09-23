@@ -4,7 +4,7 @@
     background-color: $main1;
     width: 100%;
     position: relative;
-    height: 300px;
+    height: vw(300);
     &.dark {
         background-color: #000;
     }
@@ -13,18 +13,18 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 300px;
+        height: vw(300);
         background-image: url('/images/footer_bg.png');
         background-position: 0 0;
         background-repeat: no-repeat;
         background-size: cover;
     }
     .inner {
-        padding: 65px 0 22px 0;
-        height: 300px;
+        padding: vw(65) 0 vw(22) 0;
+        height: vw(300);
     }
     .top {
-        padding-bottom: 20px;
+        padding-bottom: vw(20);
         border-bottom: 1px solid $white;
         display: flex;
         justify-content: space-between;
@@ -32,13 +32,13 @@
         h2 {
             a {
                 img {
-                    width: 170px;
+                    width: vw(170);
                 }
             }
         }
         .policy {
             display: flex;
-            gap: 44px;
+            gap: vw(44);
             align-items: center;
             // justify-content: end;
             li {
@@ -51,25 +51,25 @@
                         content: '';
                         display: block;
                         width: 1px;
-                        height: 16px;
+                        height: vw(16);
                         background: $white;
                         position: absolute;
                         top: 50%;
                         transform: translateY(-50%);
-                        right: -23px;
+                        right: vw(-23);
                     }
                 }
             }
         }
     }
     .bottom {
-        padding-top: 20px;
+        padding-top: vw(20);
         .info {
             display: flex;
-            gap: 22px;
+            gap: vw(22);
             justify-content: end;
             color: $white;
-            margin-bottom: 60px;
+            margin-bottom: vw(60);
             li {
                 @include font-16px;
                 position: relative;
@@ -79,12 +79,12 @@
                         content: '';
                         display: block;
                         width: 1px;
-                        height: 16px;
+                        height: vw(16);
                         background: $white;
                         position: absolute;
                         top: 50%;
                         transform: translateY(-50%);
-                        right: -12px;
+                        right: vw(-12);
                     }
                 }
             }

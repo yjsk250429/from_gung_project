@@ -1,14 +1,15 @@
-import { FiDownload } from "react-icons/fi";
+import { FiDownload, FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import "./style.scss";
 import { Fragment } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { useModalStore } from "../../../store";
+import { useAuthStore, useModalStore } from "../../../store";
 
 const Schedule = ({ thisitem }) => {
-  const {openCoupon} = useModalStore();
-
+  const { user, authed, toggleWishlist } = useAuthStore();
+  const { openNeedLogin, openWishModal, openCoupon} = useModalStore();
+  
   const {
     id,
     category,
@@ -24,7 +25,8 @@ const Schedule = ({ thisitem }) => {
     detailsub1,
     detailsub2,
   } = thisitem;
-
+  const isWished = authed && user?.wishlist?.some((w) => w.id === id);
+  
   // 20개 이미지 경로 배열
   const allImages = Array(20)
     .fill(null)
@@ -116,10 +118,21 @@ const Schedule = ({ thisitem }) => {
         </Swiper>
       </div>
       <p className="btns">
-        <button>
+        <button onClick={() => {
+                    if (!authed) {
+                    openNeedLogin();
+                    return;
+                    }
+                    toggleWishlist({ id, title, category, theme, description, period, time, region, place, price, img });
+
+                    if (isWished) {
+                    openWishModal("찜 목록에서 삭제하였습니다", { text1: "닫기" });
+                    } else {
+                    openWishModal("찜 목록에 추가하였습니다", { text1: "닫기", text2: "찜 목록 보기" });
+                    }
+                }}>
           <i>
-            <FaHeart />
-          </i>
+          {isWished ? <FaHeart style={{ color: 'red' }} /> : <FiHeart />}          </i>
           투어 찜하기
         </button>
         <button onClick={openCoupon}>

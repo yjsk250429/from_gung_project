@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useTourClassStore } from "../../store";
+import { useModalStore, useTourClassStore } from "../../store";
 import "./style.scss";
 import Tab from "../../components/ui/tab/Tab";
 import { MdOutlineCalendarMonth } from "react-icons/md";
@@ -14,6 +14,7 @@ import {
 } from "../../components/tourclassDetail";
 import CouponDown from "../../components/ui/modal/CouponDown";
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
+import WishModal from "../../components/ui/modal/WishModal";
 
 const renderStars = (rate) => {
   const stars = [];
@@ -39,6 +40,11 @@ const renderStars = (rate) => {
 
 const TourClassDatail = () => {
   const { tourclassID } = useParams();
+  const {closeWishModal} = useModalStore();
+  const goWish = () =>{
+    closeWishModal();
+    navigate('/mypage');
+};
   const tourClass = useTourClassStore((state) => state.tourClass);
   const thisitem = tourClass.find((t) => String(t.id) === tourclassID);
   const {
@@ -147,6 +153,7 @@ const TourClassDatail = () => {
         </article>
       </div>
       <CouponDown/>
+      <WishModal onClick={goWish} className='addWish'/>
     </section>
   );
 };

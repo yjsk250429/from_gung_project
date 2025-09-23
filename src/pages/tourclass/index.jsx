@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useTourClassStore } from '../../components/tourClass/../../store';
+import { useModalStore, useTourClassStore } from '../../components/tourClass/../../store';
 import TourClassList from '../../components/tourClass/TourClassList';
 import TourClassTop from '../../components/tourClass/TourClassTop';
 import Button from '../../components/ui/button/Button';
@@ -9,6 +9,8 @@ import { IoIosList } from 'react-icons/io';
 import { BiSortAlt2 } from 'react-icons/bi';
 import { FaCheck } from 'react-icons/fa6';
 import { MdErrorOutline } from 'react-icons/md';
+import WishModal from '../../components/ui/modal/WishModal';
+import { useNavigate } from 'react-router-dom';
 
 const INITIAL_COUNT = 8;
 const STEP = 8;
@@ -17,6 +19,7 @@ const TourClass = () => {
     const category = useTourClassStore((s) => s.category);
     const setRegionCategory = useTourClassStore((s) => s.setRegionCategory);
     const regionCategory = useTourClassStore((s) => s.regionCategory);
+    const {closeWishModal} = useModalStore();
 
     const tabItems = useMemo(() => {
         if (category === 'tour') {
@@ -33,6 +36,7 @@ const TourClass = () => {
     const sortTaps = ['최신순', '오래된순', '평점순', '리뷰순'];
     const tourClass = useTourClassStore((s) => s.tourClass);
     const activeIndex = tabItems.findIndex((item) => item === regionCategory);
+    const navigate = useNavigate();
 
     const [filterOpen, setFilterOpen] = useState(false);
     const [sortOpen, setSortOpen] = useState(false);
@@ -42,6 +46,11 @@ const TourClass = () => {
 
     const filterRef = useRef(null);
     const sortRef = useRef(null);
+
+    const goWish = () =>{
+        closeWishModal();
+        navigate('/mypage');
+    };
 
     useEffect(() => {
         setRegionCategory('전체');
@@ -263,6 +272,7 @@ const TourClass = () => {
                     </p>
                 )}
             </div>
+            <WishModal onClick={goWish} className='addWish'/>
         </section>
     );
 };

@@ -218,6 +218,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
     @media screen and (max-width: 393px) {
         width: 100%;
         height: 852px;
+        position: relative;
 
         .main_star {
         }
@@ -228,7 +229,9 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
         .main_banner {
             width: 351px;
             height: 330px;
-
+            position: absolute;
+            top: 163px;
+            left: 80px;
             .banner_line {
                 img {
                     width: 330px;
@@ -236,20 +239,22 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
                 }
             }
             .banner_image {
-                width: 300px;
-                height: 300px;
                 img {
                     width: 300px;
                     height: 330px;
                 }
             }
             .banner_cloud {
+                width: 351px;
+                height: 300px;
                 img {
+                    width: 68px;
+                    height: 24px;
                 }
             }
         }
         .main_bottom {
-            width: 393px;
+            position: absolute;
             bottom: 0;
             img {
             }
@@ -259,7 +264,7 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
 
             h2 {
                 position: absolute;
-                top: 627px; /* 원하는 픽셀값으로 조정 */
+                top: 573px;
                 left: 45px;
                 display: flex;
                 font-size: 32px;

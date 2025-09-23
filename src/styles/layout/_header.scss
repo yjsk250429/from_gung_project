@@ -13,6 +13,9 @@ html.is-active {
     transform: translateX(-50%);
     z-index: 100;
     transition: 0.4s;
+    .menu-icon {
+        display: none;
+    }
     &.show {
         transform: translate(-50%, 0); // 원래 위치
         opacity: 1;
@@ -247,9 +250,6 @@ html.is-active {
             }
         }
     }
-    @media screen and (max-width: vw(393)) {
-        width: 90%;
-    }
 
     @include tablet {
         .inner {
@@ -321,6 +321,79 @@ html.is-active {
                         img {
                             filter: invert(1);
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 393px) {
+    #header {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        background-color: none;
+        .inner {
+            height: 50px;
+            position: relative;
+            width: 95%;
+            .menu-icon {
+                position: absolute;
+                display: block;
+                color: $black;
+                font-size: 20px;
+                line-height: 1;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0;
+                cursor: pointer;
+            }
+            h1 {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                a {
+                    img {
+                        width: 79px;
+                    }
+                }
+            }
+        }
+        .nav {
+            display: none;
+            ul {
+                li {
+                }
+            }
+        }
+        .util {
+            form,
+            .mymenu {
+                display: none;
+            }
+            ul.reward {
+                width: 53px;
+                height: 25px;
+                border-radius: 25px;
+                padding: 5px 13px;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                li {
+                    width: 53px;
+                    height: 25px;
+                    line-height: 1;
+                    font-size: 12px;
+                    img {
+                        width: 15px;
+                        height: 15px;
+                        margin-right: 5px;
+                    }
+                    &:last-of-type {
+                        display: none;
                     }
                 }
             }

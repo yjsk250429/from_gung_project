@@ -6,12 +6,12 @@ import 'react-day-picker/style.css';
 import { ko } from 'react-day-picker/locale';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SelectDate = ({ thisitem }) => {
     const { id, category, period, price, quantity } = thisitem;
     const [selected, setSelected] = useState(null);
-    const naviagte = useNavigate();
+    const navigate = useNavigate();
 
     const addDays = (date, days) => {
         const result = new Date(date);
@@ -90,6 +90,28 @@ const SelectDate = ({ thisitem }) => {
 
     const discountAmount = getDiscountAmount(selectedCoupon);
     const finalPrice = Math.max(0, originalPrice - discountAmount);
+
+    const handleReserve = () => {
+        if (!selected) {
+          alert('이용하실 날짜를 선택해 주세요.');
+          return;
+        }
+        const daysToAdd = getPeriodDays(period);
+        const from = selected;
+        const to = daysToAdd > 0 ? addDays(from, daysToAdd) : from;
+    
+        const bookingPayload = {
+          item: thisitem,
+          selected: {from, to},
+          peopleCount,
+          selectedCoupon,
+          originalPrice,
+          discountAmount,
+          finalPrice,
+        };
+        // 결제 페이지로 상태 전달
+        navigate('/booking', { state: bookingPayload });
+      };
 
     return (
         <div className="selectDate">
@@ -193,7 +215,7 @@ const SelectDate = ({ thisitem }) => {
             <div className="selectBottom">
                 <p>정가 {originalPrice.toLocaleString()}원</p>
                 <strong>{finalPrice.toLocaleString()} 원</strong>
-                <button type="button" onClick={() => naviagte('/booking')}>
+                <button type="button" onClick={handleReserve}>
                     예약하기
                 </button>
             </div>

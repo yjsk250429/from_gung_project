@@ -146,6 +146,7 @@ const normalizeCert = (cert) => {
 };
 
 const OttDetailVisual = ({
+  mediaType,
   backdrop,
   titleLogo,
   images = {},
@@ -251,7 +252,7 @@ const OttDetailVisual = ({
         className="bg"
         style={bgSrc ? { backgroundImage: `url(${bgSrc})` } : undefined}
       />
-
+      {mediaType === "tv" && (
       <div className="left">
         {/* 회차 */}
         <div className="episode">
@@ -302,7 +303,7 @@ const OttDetailVisual = ({
               ))}
           </Swiper>
         </div>
-      </div>
+      </div>)}
 
       {/* 중앙: 타이틀/정보 */}
       <section className="title-area">

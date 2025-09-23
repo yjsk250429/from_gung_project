@@ -7,7 +7,7 @@
     position: relative;
     width: 100%;
     height: vw(1000);
-
+    display: flex;
     .grad {
         width: 100%;
         height: vw(320);
@@ -171,14 +171,11 @@
     .title-area {
         width: vw(600);
         height: vw(700);
-        position: absolute;
-        top: vw(150);
-        left: vw(444);
-
         display: flex;
         align-items: center;
         justify-content: center;
-
+        margin-top: vw(150);
+        margin-left: vw(140);
         .title {
             width: vw(598);
             height: auto;

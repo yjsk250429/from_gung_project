@@ -292,6 +292,7 @@ export default function OttDetail() {
   return (
     <div className={`ott-detail ${mediaType || data.mediaType || ""}`}>
       <OttDetailVisual
+        mediaType={mediaType}
         // ✅ seed 우선 적용
         backdrop={visualOverrides.backdrop}
         titleLogo={visualOverrides.titleLogo}

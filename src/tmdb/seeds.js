@@ -1081,6 +1081,10 @@ export const seeds = [
         tmdbId: 281780,
         mediaType: 'movie',
         genre: 'action',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABfDe8T3netsIl4qJArKjYxO6BoW86KAB-SU-Lif5xL0aBtXbPlOAfnV_g_pfDZpIFqmUqFyo7pjvyob5_Dv_IlEAITdcZp_-fbzb.webp?r=e95',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABT6Qmra2I1r_bfeyMfURPfle7k3V7cZXvcMeDRIw29D1H613Xbzx3jx8vpGPAPAVTht-Rdok1-BsKu83Ehjm5aR1fKmyusncLVQ.webp?r=b38',
     },
     {
         title: '최종병기 활',
@@ -1090,6 +1094,10 @@ export const seeds = [
         tmdbId: 79224,
         mediaType: 'movie',
         genre: 'action',
+        backdrop:
+            'https://img.coupangstreaming.com/titles/1ed73d6e-0e66-463e-a028-a2f33e20bf2a/hero-largescreen/8ae27503-2a0a-4277-bcc8-333c6b023e98.jpeg?imwidth=1280&imscalingMode=aspectFit&quot;',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABZa5ZmOGv4Dmgo2e2S8OCkkMrvQG1egjYnuZgsCx-yIHqbk1BMLWkW64j9LEv6bBTL3PzPtjdDNn6Wzb-PVcRl8oEdxWdf7mMg.webp?r=6f3',
     },
     {
         title: '황진이',
@@ -1099,6 +1107,10 @@ export const seeds = [
         tmdbId: 56247,
         mediaType: 'movie',
         genre: 'drama',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/meta/image/202402/1707961418776639722.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/meta/image/202402/1707961434084145772.png',
     },
     {
         title: '바람과 함께 사라지다',
@@ -1108,6 +1120,10 @@ export const seeds = [
         tmdbId: 132711,
         mediaType: 'movie',
         genre: 'comedy',
+        backdrop:
+            'https://img.coupangstreaming.com/titles/f9e36999-2f4a-4adb-92d6-a4cb7fa1c9cf/hero-largescreen/7e674037-9c86-41cf-8198-df36709ab6bd.jpg?imwidth=1280&imscalingMode=aspectFit&quot;',
+        titleLogo:
+            'https://img.coupangstreaming.com/titles/f9e36999-2f4a-4adb-92d6-a4cb7fa1c9cf/title-treatment/f45a3d66-b7eb-49df-b31b-38a05d941a5e.png?imwidth=350&imscalingMode=aspectFit',
     },
     {
         title: '나는 왕이로소이다',
@@ -1117,6 +1133,10 @@ export const seeds = [
         tmdbId: 138713,
         mediaType: 'movie',
         genre: 'comedy',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/movieImg/MovieGroup/2023/GMV_CI01_LE0000011163-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/movieImg/MovieGroup/2023/GMV_CI01_LE0000011163-SingleColorContentLogo_Trimmed.png',
     },
     {
         title: '남한산성',
@@ -1126,6 +1146,10 @@ export const seeds = [
         tmdbId: 437081,
         mediaType: 'movie',
         genre: 'drama',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/meta/image/202311/1700712526910847771.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/meta/image/202311/1700712536498760560.png',
     },
     {
         title: '나랏말싸미',
@@ -1135,6 +1159,10 @@ export const seeds = [
         tmdbId: 572988,
         mediaType: 'movie',
         genre: 'drama',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/meta/image/202408/1723527281063436645.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/meta/image/202408/1723527308278804593.png',
     },
     {
         title: '전우치',
@@ -1144,6 +1172,10 @@ export const seeds = [
         tmdbId: 40171,
         mediaType: 'movie',
         genre: 'comedy',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/movieImg/MovieGroup/2023/GMV_EN01_EN000000019-Horizontal_LogoN_RTC.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/movieImg/MovieGroup/2023/GMV_EN01_EN000000019-SingleColorContentLogo_Trimmed_RTC.png',
     },
     {
         title: '불꽃처럼 나비처럼',
@@ -1153,6 +1185,10 @@ export const seeds = [
         tmdbId: 41441,
         mediaType: 'movie',
         genre: 'action',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/meta/image/202403/1710912963657288653.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/meta/image/202403/1710912982582350331.png',
     },
     {
         title: '신기전',
@@ -1162,6 +1198,10 @@ export const seeds = [
         tmdbId: 50341,
         mediaType: 'movie',
         genre: 'action',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABSWdTFiuZ-eO0Ewrmbf9Oj7xwqCWvlh3lxfcK1j64lJymC3rYxPhvIhWM1yoJ487TLAvX4qRARawhupGjArN9Ik81QyFQcxnmCM0.webp?r=495',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABegSHtJZmvwUWHAh7l3rkhzi6xsRm3mojd_F0po2MseJVTvvt6uDn7GAaaVa3hftsimdHB3zkKqQNjlJgpWqhl3-3JyMB2PgFw.webp?r=4cc',
     },
     {
         title: '올빼미',
@@ -1171,6 +1211,9 @@ export const seeds = [
         tmdbId: 806128,
         mediaType: 'movie',
         genre: 'drama',
+        backdrop: 'https://is1-ssl.mzstatic.com/image/thumb/zjCuHA4RsNbOEHse4Y1bhQ/1680x945sr.webp',
+        titleLogo:
+            'https://is1-ssl.mzstatic.com/image/thumb/Video113/v4/81/a2/4f/81a24fbb-deaa-7e17-879f-8df0bc58f3cf/xku16574264507900937380.png/760x286.png',
     },
     {
         title: '자산어보',
@@ -1180,6 +1223,10 @@ export const seeds = [
         tmdbId: 581390,
         mediaType: 'movie',
         genre: 'drama',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/meta/image/202310/1697005893471041014.webp',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/meta/image/202310/1697005904637600550.png',
     },
     {
         title: '천문: 하늘에 묻는다',
@@ -1189,6 +1236,10 @@ export const seeds = [
         tmdbId: 569267,
         mediaType: 'movie',
         genre: 'drama',
+        backdrop:
+            'https://image.wavve.com/v1/thumbnails/1240_698_20_80/movieImg/MovieGroup/2023/GMV_CI01_LE0000011242-Horizontal_LogoN.webp',
+        titleLogo:
+            'https://image.tving.com/ntgs/contents/CTC/caim/CAIM1800/ko/20241021/0235/M000281834.png/dims/resize/F_webp,800?from=pc',
     },
     {
         title: '해적: 바다로 간 산적',
@@ -1198,6 +1249,10 @@ export const seeds = [
         tmdbId: 285213,
         mediaType: 'movie',
         genre: 'action',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABeU9GV_OeXDgc_vgdliN1SwCoiMSS8ARwjYeG0CeHiZrJrDlKIg8-8Ld03ySb_5xn9-cribuidOBt2QiW1uqpglzaxnOBuMqEv1W.webp?r=6c5',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/movieImg/MovieGroup/2023/GMV_CI01_LE0000011115-SingleColorContentLogo_Trimmed-re.png',
     },
     {
         title: '역린',
@@ -1207,6 +1262,10 @@ export const seeds = [
         tmdbId: 269340,
         mediaType: 'movie',
         genre: 'drama',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABSATr_t5UD5klH3tT3rUuqAksekJzNymtT9rSeWiJd8tqhDHFHFCUZWDhqpriXzi9gL9Xs5y3a-Jmt023fMFbupfV8towbvIKrdJ.webp?r=d1c',
+        titleLogo:
+            'https://image.wavve.com/v1/thumbnails/0_0_20_80/movieImg/MovieGroup/2023/GMV_CI01_LE0000011118-SingleColorContentLogo_Trimmed_RTC.png',
     },
     {
         title: '상의원',
@@ -1216,6 +1275,10 @@ export const seeds = [
         tmdbId: 314327,
         mediaType: 'movie',
         genre: 'drama',
+        backdrop:
+            'https://an2-img.amz.wtchn.net/image/v2/WyL_CALb9LUYOhTFlg32KA.webp?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5qUXdlRE0yTUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk5UYzNPREExTWpjME16a3lNVFE1TkRraWZRLmxXd2RBd19EaUhmT3prbkhOMVJmdlo0ZGI2X1hZblZRbG9zdEtVNWp5dWM=',
+        titleLogo:
+            'https://image.tving.com/ntgs/contents/CTC/caim/CAIM1800/ko/20241226/0150/M000346034.png/dims/resize/F_webp,800?from=pc',
     },
     {
         title: '전,란',
@@ -1236,6 +1299,10 @@ export const seeds = [
         tmdbId: 410882,
         mediaType: 'movie',
         genre: 'drama',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABYVr4ABwThuO-T2paMTHQKyMd_nWIf-JxC-w2RoJqKs2mjxhwc7flBMZ1mHhtBwenpnoXl52cEEK40EUMB-UAkWdnuhfhB7PxQEc.webp?r=c43',
+        titleLogo:
+            'https://is1-ssl.mzstatic.com/image/thumb/Video125/v4/7b/b8/88/7bb8881a-a2b1-6f91-7c0c-634c5466bacb/wbs5575155400266720875.png/760x286.png',
     },
     {
         title: '안시성',
@@ -1245,5 +1312,9 @@ export const seeds = [
         tmdbId: 535389,
         mediaType: 'movie',
         genre: 'action',
+        backdrop:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABULkJGUSZ2J224T1CPh85rIQSUfE_utwOQ88-LUeAf1sex05iYu67rO93ILeA35oL2N3AbzEFnjAlPMZ23qUngYq0vs1dkAnPI9H.webp?r=edc',
+        titleLogo:
+            'https://occ-0-4342-993.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABQJ-Dm0TnA6K1pkDRaQK2MxQVLnUd9tcipmiig5t6OtOCsBq95vwnY4MJXMg6v-_OAR9VeIrEW8ufE0RvbWutztSm97s_OusZXM.webp?r=aa4',
     },
 ];

@@ -868,6 +868,10 @@ $y-values: -20px, 30px, -10px, 20px, -15px, 25px, -5px, 15px;
             @include font-35px-SB;
         }
     }
+    @media screen and (max-width: 393px) {
+        width: 100%;
+        height: 825px;
+    }
 }
 /* section4 영역 */
 .section4-main {

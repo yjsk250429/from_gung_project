@@ -10,8 +10,8 @@ export const seeds = [
         tmdbId: 206693,
         mediaType: 'tv',
         genre: 'fusion',
-        backdrop: '/images/ott/206693_bg.png',
-        titleLogo: '/images/ott/206693_logo.png',
+        backdrop: '/images/ott/detail/206693_bg.png',
+        titleLogo: '/images/ott/detail/206693_logo.png',
         genre_ids: [14, 18],
     },
     {
@@ -23,8 +23,8 @@ export const seeds = [
         tmdbId: 132925,
         mediaType: 'tv',
         genre: 'fusion',
-        backdrop: '/images/ott/132925_bg.png',
-        titleLogo: '/images/ott/132925_logo.png',
+        backdrop: '/images/ott/detail/132925_bg.png',
+        titleLogo: '/images/ott/detail/132925_logo.png',
     },
     {
         title: '연모',
@@ -35,8 +35,8 @@ export const seeds = [
         tmdbId: 129478,
         mediaType: 'tv',
         genre: 'fusion',
-        backdrop: '/images/ott/129478_bg.png',
-        titleLogo: '/images/ott/129478_logo.png',
+        backdrop: '/images/ott/detail/129478_bg.png',
+        titleLogo: '/images/ott/detail/129478_logo.png',
     },
     {
         title: '백일의 낭군님',
@@ -47,8 +47,8 @@ export const seeds = [
         tmdbId: 81821,
         mediaType: 'tv',
         genre: 'fusion',
-        backdrop: '/images/ott/81821_bg.png',
-        titleLogo: '/images/ott/81821_logo.png',
+        backdrop: '/images/ott/detail/81821_bg.png',
+        titleLogo: '/images/ott/detail/81821_logo.png',
     },
     {
         title: '구르미 그린 달빛',
@@ -59,8 +59,8 @@ export const seeds = [
         tmdbId: 66256,
         mediaType: 'tv',
         genre: 'fusion',
-        backdrop: '/images/ott/ottdetail.png',
-        titleLogo: '/images/ott/title_logo.png',
+        backdrop: '/images/ott/detail/66256_bg.png',
+        titleLogo: '/images/ott/detail/66256_logo.png',
     },
 
     {
@@ -72,8 +72,8 @@ export const seeds = [
         tmdbId: 90721,
         mediaType: 'tv',
         genre: 'fusion',
-        backdrop: '/images/ott/90721_bg.png',
-        titleLogo: '/images/ott/90721_logo.png',
+        backdrop: '/images/ott/detail/90721_bg.png',
+        titleLogo: '/images/ott/detail/90721_logo.png',
     },
     {
         title: '옥씨부인전',
@@ -84,8 +84,8 @@ export const seeds = [
         tmdbId: 226649,
         mediaType: 'tv',
         genre: 'fusion',
-        backdrop: '/images/ott/226649_bg.png',
-        titleLogo: '/images/ott/226649_logo.png',
+        backdrop: '/images/ott/detail/226649_bg.png',
+        titleLogo: '/images/ott/detail/226649_logo.png',
     },
     {
         title: '혼례대첩',
@@ -96,8 +96,8 @@ export const seeds = [
         tmdbId: 230024,
         mediaType: 'tv',
         genre: 'fusion',
-        backdrop: '/images/ott/230024_bg.png',
-        titleLogo: '/images/ott/230024_logo.png',
+        backdrop: '/images/ott/detail/230024_bg.png',
+        titleLogo: '/images/ott/detail/230024_logo.png',
     },
     {
         title: '킹덤',
@@ -108,8 +108,8 @@ export const seeds = [
         tmdbId: 70593,
         mediaType: 'tv',
         genre: 'fantasy',
-        backdrop: '/images/ott/70593_bg.png',
-        titleLogo: '/images/ott/70593_logo.png',
+        backdrop: '/images/ott/detail/70593_bg.png',
+        titleLogo: '/images/ott/detail/70593_logo.png',
     },
     {
         title: '조선로코 - 녹두전',
@@ -120,8 +120,8 @@ export const seeds = [
         tmdbId: 93541,
         mediaType: 'tv',
         genre: 'fusion',
-        backdrop: '/images/ott/93541_bg.png',
-        titleLogo: '/images/ott/93541_logo.png',
+        backdrop: '/images/ott/detail/93541_bg.png',
+        titleLogo: '/images/ott/detail/93541_logo.png',
     },
     {
         title: '폭군의 셰프',
@@ -132,6 +132,8 @@ export const seeds = [
         tmdbId: 280945,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop: '/images/ott/detail/280945_bg.png',
+        titleLogo: '/images/ott/detail/280945_logo.png',
     },
 
     {
@@ -143,6 +145,8 @@ export const seeds = [
         tmdbId: 218290,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: '/images/ott/detail/218290_bg.png',
+        titleLogo: '/images/ott/detail/218290_logo.png',
     },
     {
         title: '화랑',
@@ -174,6 +178,8 @@ export const seeds = [
         tmdbId: 135157,
         mediaType: 'tv',
         genre: 'fantasy',
+        backdrop: '/images/ott/detail/135157_bg.png',
+        titleLogo: '/images/ott/detail/135157_logo.png',
     },
     {
         title: '철인왕후',
@@ -287,6 +293,8 @@ export const seeds = [
         tmdbId: 135751,
         mediaType: 'tv',
         genre: 'orthodox',
+        backdrop: '/images/ott/detail/135751_bg.png',
+        titleLogo: '/images/ott/detail/135751_logo.png',
     },
     {
         title: '불멸의 이순신',
@@ -557,6 +565,8 @@ export const seeds = [
         tmdbId: 156406,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: '/images/ott/detail/156406_bg.png',
+        titleLogo: '/images/ott/detail/156406_logo.png',
     },
     {
         title: '기황후',
@@ -727,6 +737,8 @@ export const seeds = [
         tmdbId: 226103,
         mediaType: 'tv',
         genre: 'fusion',
+        backdrop: '/images/ott/detail/226103_bg.png',
+        titleLogo: '/images/ott/detail/226103_logo.png',
     },
 
     // Movie
@@ -738,8 +750,8 @@ export const seeds = [
         tmdbId: 315439,
         mediaType: 'movie',
         genre: 'drama',
-        // backdrop: '/images/ott/315439_bg.png',
-        // titleLogo: '/images/ott/315439_logo.png',
+        backdrop: '/images/ott/detail/315439_bg.png',
+        titleLogo: '/images/ott/detail/315439_logo.png',
     },
     {
         title: '명량',
@@ -749,8 +761,8 @@ export const seeds = [
         tmdbId: 282631,
         mediaType: 'movie',
         genre: 'action',
-        // backdrop: '/images/ott/282631_bg.png',
-        // titleLogo: '/images/ott/282631_logo.png',
+        backdrop: '/images/ott/detail/282631_bg.png',
+        titleLogo: '/images/ott/detail/282631_logo.png',
     },
     {
         title: '한산:용의 출현',
@@ -760,8 +772,8 @@ export const seeds = [
         tmdbId: 588108,
         mediaType: 'movie',
         genre: 'action',
-        // backdrop: '/images/ott/230024_bg.png',
-        // titleLogo: '/images/ott/230024_logo.png',
+        backdrop: '/images/ott/detail/588108_bg.png',
+        titleLogo: '/images/ott/detail/588108_logo.png',
     },
     {
         title: '노량:죽음의 바다',
@@ -771,8 +783,8 @@ export const seeds = [
         tmdbId: 660360,
         mediaType: 'movie',
         genre: 'action',
-        // backdrop: "/images/ott/660360_bg.png",
-        // titleLogo: "/images/ott/660360_logo.png",
+        backdrop: '/images/ott/detail/660360_bg.png',
+        titleLogo: '/images/ott/detail/660360_logo.png',
     },
     {
         title: '관상',
@@ -782,8 +794,8 @@ export const seeds = [
         tmdbId: 220176,
         mediaType: 'movie',
         genre: 'drama',
-        // backdrop: "/images/ott/220176_bg.png",
-        // titleLogo: "/images/ott/220176_logo.png",
+        backdrop: '/images/ott/detail/220176_bg.png',
+        titleLogo: '/images/ott/detail/220176_logo.png',
     },
     {
         title: '왕의 남자',
@@ -793,8 +805,8 @@ export const seeds = [
         tmdbId: 45035,
         mediaType: 'movie',
         genre: 'drama',
-        // backdrop: "/images/ott/45035_bg.png",
-        // titleLogo: "/images/ott/45035_logo.png",
+        backdrop: '/images/ott/detail/45035_bg.png',
+        titleLogo: '/images/ott/detail/45035_logo.png',
     },
     {
         title: '광해:왕이 된 남자',
@@ -804,8 +816,8 @@ export const seeds = [
         tmdbId: 133200,
         mediaType: 'movie',
         genre: 'drama',
-        // backdrop: "/images/ott/133200_bg.png",
-        // titleLogo: "/images/ott/133200_logo.png",
+        backdrop: '/images/ott/detail/133200_bg.png',
+        titleLogo: '/images/ott/detail/133200_logo.png',
     },
 
     {
@@ -816,8 +828,8 @@ export const seeds = [
         tmdbId: 385137,
         mediaType: 'movie',
         genre: 'comedy',
-        // backdrop: "/images/ott/385137_bg.png",
-        // titleLogo: "/images/ott/3851374_logo.png",
+        backdrop: '/images/ott/detail/385137_bg.png',
+        titleLogo: '/images/ott/detail/385137_logo.png',
     },
     {
         title: '조선마술사',
@@ -827,8 +839,8 @@ export const seeds = [
         tmdbId: 366654,
         mediaType: 'movie',
         genre: 'drama',
-        // backdrop: "/images/ott/366654_bg.png",
-        // titleLogo: "/images/ott/366654_logo.png",
+        backdrop: '/images/ott/detail/366654_bg.png',
+        titleLogo: '/images/ott/detail/366654_logo.png',
     },
     {
         title: '명당',
@@ -838,8 +850,8 @@ export const seeds = [
         tmdbId: 544089,
         mediaType: 'movie',
         genre: 'drama',
-        // backdrop: "/images/ott/544089_bg.png",
-        // titleLogo: "/images/ott/544089_logo.png",
+        backdrop: '/images/ott/detail/544089_bg.png',
+        titleLogo: '/images/ott/detail/544089_logo.png',
     },
     {
         title: '조선명탐정:흡혈괴마의 비밀',
@@ -1020,6 +1032,8 @@ export const seeds = [
         tmdbId: 1075676,
         mediaType: 'movie',
         genre: 'action',
+        backdrop: '/images/ott/detail/1075676_bg.png',
+        titleLogo: '/images/ott/detail/1075676_logo.png',
     },
     {
         title: '고산자, 대동여지도',

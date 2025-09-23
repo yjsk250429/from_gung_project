@@ -28,6 +28,7 @@ const memberData = [
         marketing: false, // 선택항목 (이벤트/혜택 수신 여부)
         marketingDate: null, // 마지막 동의/거부 날짜
         wishlist:[],
+        ottWishList:[]
     },
 ];
 
@@ -108,6 +109,7 @@ export const useAuthStore = create((set, get) => ({
             marketing: tempMarketing.status,
             marketingDate: tempMarketing.date,
             wishlist:[],
+            ottWishList:[]
         };
         const updatedMembers = [...members, newUser];
         set({ members: updatedMembers, tempMarketing: { status: false, date: null } }); // 초기화
@@ -141,6 +143,8 @@ export const useAuthStore = create((set, get) => ({
             });
         }
     },
+
+
 
     //회원정보 수정
     updateUser: (updates) => {
@@ -228,12 +232,16 @@ export const useModalStore = create((set) => ({
     couponOpen:false,
     needLoginOpen:false,
     wishModalOpen:false,
+    selectProfileOpen:false,
 
-    wishMessage: '',   // ✅ 모달 메시지 상태 추가
+    wishMessage: '',  
     wishButtons:{ text1: '', text2: '' },
     wishAction:null,
     openWishModal: (message, buttons={text1: '', text2: ''}, action=null) => set({ wishModalOpen: true, wishMessage: message, wishButtons:buttons, wishAction:action }),
     closeWishModal: () => set({ wishModalOpen: false, wishMessage: '', wishButtons:{text1: '', text2: ''}, wishAction:null }),
+
+    openSelectProfile: () => set({ selectProfileOpen: true }),
+    closeSelectProfile: () => set({ selectProfileOpen: false }),
 
     openNeedLogin: () => set({ needLoginOpen: true }),
     closeNeedLogin: () => set({ needLoginOpen: false }),

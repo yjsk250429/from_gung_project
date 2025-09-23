@@ -7,7 +7,7 @@ import InquirySection from './sections/InquirySection.jsx';
 import { useAuthStore, useModalStore } from '../../store/index.js';
 
 const MyPagemain = () => {
-    const { openEditPassword, openWithdrawConfirm } = useModalStore();
+    const { openEditPassword, openWithdrawConfirm, openSelectProfile } = useModalStore();
     const [activeMenu, setActiveMenu] = useState('reservation');
     const [wishlistSubMenu, setWishlistSubMenu] = useState('tour');
     const isWishlistOpen = activeMenu === 'wishlist';
@@ -17,7 +17,7 @@ const MyPagemain = () => {
             <div className="inner">
                 <aside className="mypage_sidebar">
                     <div className="profile">
-                        <div className="profile_img">
+                        <div className="profile_img" onClick={openSelectProfile}>
                             <img
                                 src={user?.profile || '/images/common/profile_placeholder.png'}
                                 alt="프로필 이미지"

@@ -1,4 +1,5 @@
 import MyPagemain from '../../components/mypage/MyPagemain';
+import SelectProfile from '../../components/mypage/SelectProfile';
 import EditInfo from '../../components/ui/modal/EditInfo';
 import EditInfoComplete from '../../components/ui/modal/EditInfoComplete';
 import EditPassword from '../../components/ui/modal/EditPassword';
@@ -22,6 +23,7 @@ const MyPage = () => {
             user.wishlist.length > 0 &&
             <WishModal className='deleteAll'/>
             }
+            <SelectProfile/>
         </>
     );
 };

@@ -3,6 +3,7 @@ import { useAuthStore, useModalStore } from '../../store';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 
+
 const UtilBar = () => {
     const { openLogin, openJoin, openReward, closeReward, openLogoutCom } = useModalStore();
     const navigate = useNavigate();
@@ -87,6 +88,7 @@ const UtilBar = () => {
                     <img src="/images/calendar_w.png" alt="calendar" />0
                 </li>
             </ul>
+            
         </div>
     );
 };

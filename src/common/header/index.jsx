@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import NavBar from './NavBar';
 import UtilBar from './UtilBar';
 import { useEffect, useState } from 'react';
+import { IoMdMenu } from 'react-icons/io';
 
 const Header = () => {
     const [visible, setVisible] = useState(true);
@@ -67,6 +68,9 @@ const Header = () => {
             }`}
         >
             <div className="inner">
+                <i className="menu-icon">
+                    <IoMdMenu />
+                </i>
                 <h1>
                     <Link to="/">
                         <img src="/images/logo.png" alt="fromgung" />

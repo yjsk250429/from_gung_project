@@ -16,22 +16,42 @@ button {
         &.main1 {
             background-image: url('/images/components/button-small-main1.png');
             color: $main1;
+            &:hover {
+                color: $sub3;
+                background-image: url('/images/components/button-small-sub3.png');
+            }
         }
         &.gray {
             background-image: url('/images/components/button-small-gray.png');
             color: gray;
+            &:hover {
+                color: $main1;
+                background-image: url('/images/components/button-small-main1.png');
+            }
         }
         &.sub2 {
             background-image: url('/images/components/button-small-sub2.png');
             color: $sub2;
+            &:hover {
+                color: $sub3;
+                background-image: url('/images/components/button-small-sub3.png');
+            }
         }
         &.sub3 {
             background-image: url('/images/components/button-small-sub3.png');
             color: $sub3;
+            &:hover {
+                color: $main1;
+                background-image: url('/images/components/button-small-main1.png');
+            }
         }
         &.white {
             background-image: url('/images/components/button-small-white.png');
             color: $white;
+            &:hover {
+                color: $sub3;
+                background-image: url('/images/components/button-small-sub3.png');
+            }
         }
     }
     &.default {
@@ -42,22 +62,42 @@ button {
         &.main1 {
             background-image: url('/images/components/button-default-main1.png');
             color: $main1;
+            &:hover {
+                color: $sub3;
+                background-image: url('/images/components/button-default-sub3.png');
+            }
         }
         &.gray {
             background-image: url('/images/components/button-default-gray.png');
             color: gray;
+            &:hover {
+                color: $main1;
+                background-image: url('/images/components/button-default-main1.png');
+            }
         }
         &.sub2 {
             background-image: url('/images/components/button-default-sub2.png');
             color: $sub2;
+            &:hover {
+                color: $sub3;
+                background-image: url('/images/components/button-default-sub3.png');
+            }
         }
         &.sub3 {
             background-image: url('/images/components/button-default-sub3.png');
             color: $sub3;
+            &:hover {
+                color: $main1;
+                background-image: url('/images/components/button-default-main1.png');
+            }
         }
         &.white {
             background-image: url('/images/components/button-default-white.png');
             color: $white;
+            &:hover {
+                color: $sub3;
+                background-image: url('/images/components/button-default-sub3.png');
+            }
         }
     }
     &.big {
@@ -68,22 +108,42 @@ button {
         &.main1 {
             background-image: url('/images/components/button-big-main1.png');
             color: $main1;
+            &:hover {
+                color: $sub3;
+                background-image: url('/images/components/button-big-sub3.png');
+            }
         }
         &.gray {
             background-image: url('/images/components/button-big-gray.png');
             color: gray;
+            &:hover {
+                color: $main1;
+                background-image: url('/images/components/button-big-main1.png');
+            }
         }
         &.sub2 {
             background-image: url('/images/components/button-big-sub2.png');
             color: $sub2;
+            &:hover {
+                color: $sub3;
+                background-image: url('/images/components/button-big-sub3.png');
+            }
         }
         &.sub3 {
             background-image: url('/images/components/button-big-sub3.png');
             color: $sub3;
+            &:hover {
+                color: $main1;
+                background-image: url('/images/components/button-big-main1.png');
+            }
         }
         &.white {
             background-image: url('/images/components/button-big-white.png');
             color: $white;
+            &:hover {
+                color: $sub3;
+                background-image: url('/images/components/button-big-sub3.png');
+            }
         }
     }
 }

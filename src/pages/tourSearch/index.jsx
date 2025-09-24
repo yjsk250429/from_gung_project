@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { tourclassData } from '../../api/tourclassData';
-import TourClassList from '../../components/tourclass/TourClassList';
+import TourClassList from '../../components/tourClass/TourClassList';
 import './style.scss';
 
 function useQuery() {

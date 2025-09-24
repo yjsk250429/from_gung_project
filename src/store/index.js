@@ -5,15 +5,14 @@ import { loadAll } from '../tmdb/loadAll';
 import { attachStablePoints } from '../utils/points';
 import { persist, createJSONStorage } from 'zustand/middleware';
 const seedDays = (n) => {
-  const out = [];
-  for (let i = 0; i < n; i++) {
-    const d = new Date();
-    d.setDate(d.getDate() - i - 1); // 오늘은 로그인으로 찍히게 하고, 과거 n일만 채움
-    out.push(d.toISOString().slice(0, 10));
-  }
-  return out;
+    const out = [];
+    for (let i = 0; i < n; i++) {
+        const d = new Date();
+        d.setDate(d.getDate() - i - 1); // 오늘은 로그인으로 찍히게 하고, 과거 n일만 채움
+        out.push(d.toISOString().slice(0, 10));
+    }
+    return out;
 };
-
 
 const memberData = [
     {
@@ -154,29 +153,28 @@ export const useAuthStore = create((set, get) => ({
 
         const item = members.find((member) => member.userId === userId);
         if (item && item.password === password) {
+            // ✅ 출석 기록 추가 (하루에 한 번만, 최대 10개)
+            const today = new Date().toISOString().slice(0, 10);
+            let prev = [];
+            if (Array.isArray(item.attandance)) {
+                prev = item.attandance;
+            } else if (typeof item.attandance === 'number') {
+                const n = Math.max(0, Math.min(10, item.attandance)); // 0~10로 클램프
+                prev = Array.from({ length: n }, (_, i) => {
+                    const d = new Date();
+                    d.setDate(d.getDate() - i - 1);
+                    return d.toISOString().slice(0, 10);
+                });
+            } else {
+                prev = [];
+            }
+            // ✅ 오늘 기록 1회만, 중복 제거 + 최대 10개 유지
+            const updatedAtt = [today, ...prev.filter((d) => d !== today)].slice(0, 10);
 
-        // ✅ 출석 기록 추가 (하루에 한 번만, 최대 10개)
-        const today = new Date().toISOString().slice(0, 10);
-        let prev = [];
-    if (Array.isArray(item.attandance)) {
-      prev = item.attandance;
-    } else if (typeof item.attandance === 'number') {
-      const n = Math.max(0, Math.min(10, item.attandance)); // 0~10로 클램프
-      prev = Array.from({ length: n }, (_, i) => {
-        const d = new Date();
-        d.setDate(d.getDate() - i - 1);
-        return d.toISOString().slice(0, 10);
-      });
-    } else {
-      prev = [];
-    }
- // ✅ 오늘 기록 1회만, 중복 제거 + 최대 10개 유지
-    const updatedAtt = [today, ...prev.filter((d) => d !== today)].slice(0, 10);
+            const updatedUser = { ...item, attandance: updatedAtt };
+            const updatedMembers = members.map((m) => (m.id === item.id ? updatedUser : m));
 
-    const updatedUser = { ...item, attandance: updatedAtt };
-    const updatedMembers = members.map((m) => (m.id === item.id ? updatedUser : m));
-
-            set({ authed: true, user: updatedUser , members: updatedMembers });
+            set({ authed: true, user: updatedUser, members: updatedMembers });
             localStorage.setItem('authed', JSON.stringify(true));
             localStorage.setItem('user', JSON.stringify(item));
         } else {
@@ -208,7 +206,7 @@ export const useAuthStore = create((set, get) => ({
             marketingDate: tempMarketing.date,
             wishlist: [],
             ottWishList: [],
-            attandance: [], 
+            attandance: [],
             inquiries: [], // ✅ 새 회원은 빈 문의 배열로 시작
             coupon: [
                 {
@@ -234,35 +232,35 @@ export const useAuthStore = create((set, get) => ({
     useCoupon: (couponId) => {
         const { user, members } = get();
         if (!user) return;
-      
-        const updatedCoupons = (user.coupon || []).map(c =>
-          c.id === couponId ? { ...c, used: true } : c
-        );
-      
-        const updatedUser = { ...user, coupon: updatedCoupons };
-        const updatedMembers = members.map(m => m.id === user.id ? updatedUser : m);
-      
-        set({ user: updatedUser, members: updatedMembers });
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        localStorage.setItem("members", JSON.stringify(updatedMembers));
-      },
 
-      // 쿠폰 발급
-      addCoupon: (newCoupon) => {
+        const updatedCoupons = (user.coupon || []).map((c) =>
+            c.id === couponId ? { ...c, used: true } : c
+        );
+
+        const updatedUser = { ...user, coupon: updatedCoupons };
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+
+    // 쿠폰 발급
+    addCoupon: (newCoupon) => {
         const { user, members } = get();
         if (!user) return;
-      
+
         const updatedUser = {
-          ...user,
-          coupon: [...(user.coupon || []), { ...newCoupon, used: false }]
+            ...user,
+            coupon: [...(user.coupon || []), { ...newCoupon, used: false }],
         };
-      
-        const updatedMembers = members.map(m => m.id === user.id ? updatedUser : m);
-      
+
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
         set({ user: updatedUser, members: updatedMembers });
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        localStorage.setItem("members", JSON.stringify(updatedMembers));
-      },
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
 
     withdraw: () => {
         const { user, members } = get();
@@ -360,51 +358,51 @@ export const useAuthStore = create((set, get) => ({
     addBooking: (bookingData) => {
         const { user, members } = get();
         if (!user) return;
-      
+
         // 예약번호 생성
         const now = new Date();
         const yy = String(now.getFullYear()).slice(-2);
-        const mm = String(now.getMonth() + 1).padStart(2, "0");
-        const dd = String(now.getDate()).padStart(2, "0");
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
         const random = Math.random().toString(36).substring(2, 6).toUpperCase();
         const bookingNumber = `${yy}${mm}${dd}-${random}`;
-      
+
         const newBooking = {
-          id: Date.now(),
-          bookingNumber,
-          ...bookingData,
-          status: "confirmed",
-          createdAt: new Date().toISOString(),
+            id: Date.now(),
+            bookingNumber,
+            ...bookingData,
+            status: 'confirmed',
+            createdAt: new Date().toISOString(),
         };
-      
+
         // ✅ reward 적립
         const REWARD_UNIT = 2000;
         const rewardEarned = Math.ceil(bookingData.finalPrice / REWARD_UNIT);
-      
+
         // ✅ 사용한 쿠폰은 used:true 처리
         let updatedCoupons = user.coupon || [];
         if (bookingData.selectedCoupon) {
-          updatedCoupons = updatedCoupons.map(c =>
-            c.id === bookingData.selectedCoupon.id ? { ...c, used: true } : c
-          );
+            updatedCoupons = updatedCoupons.map((c) =>
+                c.id === bookingData.selectedCoupon.id ? { ...c, used: true } : c
+            );
         }
-      
+
         const updatedUser = {
-          ...user,
-          reward: (user.reward || 0) + rewardEarned,
-          coupon: updatedCoupons,
-          bookings: [...(user.bookings || []), newBooking],
+            ...user,
+            reward: (user.reward || 0) + rewardEarned,
+            coupon: updatedCoupons,
+            bookings: [...(user.bookings || []), newBooking],
         };
-      
+
         const updatedMembers = user.id
-          ? members.map((m) => (m.id === user.id ? updatedUser : m))
-          : members;
-      
+            ? members.map((m) => (m.id === user.id ? updatedUser : m))
+            : members;
+
         set({ user: updatedUser, members: updatedMembers });
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        localStorage.setItem("members", JSON.stringify(updatedMembers));
-      },
-      
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+
     cancelBooking: (bookingId) => {
         const { user, members } = get();
         if (!user) return;

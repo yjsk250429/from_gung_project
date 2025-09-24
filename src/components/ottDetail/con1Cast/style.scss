@@ -35,6 +35,7 @@
                 justify-content: center;
                 align-items: center;
                 img {
+                    cursor: pointer;
                     width: vw(150);
                     height: vw(150);
                     object-fit: cover;
@@ -49,6 +50,79 @@
                 &:hover {
                     transform: translateY(vw(-10));
                     transition: 0.3s ease-in-out;
+                }
+            }
+        }
+    }
+    .cast-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); // 어두운 배경
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+
+        .modal-content {
+            background: #000;
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 1000px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1), 0 0 40px rgba(255, 255, 255, 0.1),
+                0 0 60px rgba(255, 255, 255, 0.1);
+
+            h2 {
+                font-size: 24px;
+                margin-bottom: 24px;
+                color: #fff;
+            }
+
+            .close-btn {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                font-size: 28px;
+                cursor: pointer;
+                color: #fff;
+                border: none;
+            }
+
+            .works-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 20px;
+
+                .work-card {
+                    position: relative;
+                    border-radius: 6px;
+                    overflow: hidden;
+                    background: #111;
+
+                    img {
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                    }
+
+                    .points-badge {
+                        position: absolute;
+                        top: 8px;
+                        right: 8px;
+                        background: #e60023;
+                        color: #fff;
+                        font-size: 12px;
+                        font-weight: bold;
+                        padding: 4px 6px;
+                        border-radius: 4px;
+                    }
                 }
             }
         }

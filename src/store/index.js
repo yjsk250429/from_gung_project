@@ -178,7 +178,8 @@ export const useAuthStore = create((set, get) => ({
 
             set({ authed: true, user: updatedUser , members: updatedMembers });
             localStorage.setItem('authed', JSON.stringify(true));
-            localStorage.setItem('user', JSON.stringify(item));
+            // localStorage.setItem('user', JSON.stringify(item));
+            localStorage.setItem('user', JSON.stringify(updatedUser));
         } else {
             set({ authed: false, user: null });
             localStorage.setItem('authed', JSON.stringify(false));

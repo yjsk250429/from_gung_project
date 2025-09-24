@@ -7,9 +7,11 @@ const WishModal = ({ className = "" }) => {
   if (!wishModalOpen) return null;
 
   const handleClick = (btnText) => {
+    // text2 버튼일 때만 action 실행
     if (btnText === wishButtons.text2 && wishAction) {
       wishAction(btnText);
     }
+    // 항상 모달은 닫아주기
     closeWishModal();
   };
 

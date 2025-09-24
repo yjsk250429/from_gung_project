@@ -16,7 +16,8 @@ const CouponDown = () => {
         discount: 1000,
     };
 
-    const alreadyHas = user?.coupon?.some((c) => c.id === couponInfo.id);
+    const coupons = Array.isArray(user?.coupon) ? user.coupon : [];
+    const alreadyHas = coupons.some((c) => c.id === couponInfo.id);
 
     const handleGetCoupon = () => {
         if (alreadyHas) return;

@@ -176,7 +176,8 @@ export const useAuthStore = create((set, get) => ({
 
             set({ authed: true, user: updatedUser, members: updatedMembers });
             localStorage.setItem('authed', JSON.stringify(true));
-            localStorage.setItem('user', JSON.stringify(item));
+            // localStorage.setItem('user', JSON.stringify(item));
+            localStorage.setItem('user', JSON.stringify(updatedUser));
         } else {
             set({ authed: false, user: null });
             localStorage.setItem('authed', JSON.stringify(false));
@@ -320,7 +321,7 @@ export const useAuthStore = create((set, get) => ({
         const exists = user.wishlist?.some((w) => w.id === item.id);
         const updatedWishlist = exists
             ? user.wishlist.filter((w) => w.id !== item.id)
-            : [...(user.wishlist || []), item];
+            : [...(Array.isArray(user.wishlist) ? [...user.wishlist] : []), item];
 
         const updatedUser = { ...user, wishlist: updatedWishlist };
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
@@ -407,7 +408,7 @@ export const useAuthStore = create((set, get) => ({
         const { user, members } = get();
         if (!user) return;
 
-        const updatedBookings = (user.bookings || []).map((b) =>
+        const updatedBookings = (Array.isArray(user.bookings) ? [...user.bookings] : []).map((b) =>
             b.id === bookingId
                 ? { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() }
                 : b
@@ -439,7 +440,7 @@ export const useAuthStore = create((set, get) => ({
 
         const updatedUser = {
             ...user,
-            reviews: [...(user.reviews || []), newReview],
+            reviews: [...(Array.isArray(user.reviews) ? user.reviews : []), newReview],
         };
 
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
@@ -455,7 +456,9 @@ export const useAuthStore = create((set, get) => ({
 
         const updatedUser = {
             ...user,
-            reviews: (user.reviews || []).filter((review) => review.id !== reviewId),
+            reviews: (Array.isArray(user.reviews) ? user.reviews : []).filter(
+                (review) => review.id !== reviewId
+            ),
         };
 
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
@@ -487,12 +490,14 @@ export const useModalStore = create((set) => ({
     wishMessage: '',
     wishButtons: { text1: '', text2: '' },
     wishAction: null,
-    openWishModal: (message, buttons = { text1: '', text2: '' }, action = null) =>
+    wishOptions: {},
+    openWishModal: (message, buttons = { text1: '', text2: '' }, action = null, options = {}) =>
         set({
             wishModalOpen: true,
             wishMessage: message,
             wishButtons: buttons,
             wishAction: action,
+            wishOptions: options,
         }),
     closeWishModal: () =>
         set({
@@ -500,6 +505,7 @@ export const useModalStore = create((set) => ({
             wishMessage: '',
             wishButtons: { text1: '', text2: '' },
             wishAction: null,
+            wishOptions: {},
         }),
 
     selectProfileOpen: false,

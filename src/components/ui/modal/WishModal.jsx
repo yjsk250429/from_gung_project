@@ -3,12 +3,18 @@ import Button from "../button/Button";
 import './style.scss';
 
 const WishModal = ({ className = "" }) => {
-  const { wishModalOpen, closeWishModal, wishMessage, wishButtons, wishAction } = useModalStore();
+  const { wishModalOpen, closeWishModal, wishMessage, wishButtons, wishAction, wishOptions  } = useModalStore();
   if (!wishModalOpen) return null;
 
   const handleClick = (btnText) => {
-    if (btnText === wishButtons.text2 && wishAction) {
-      wishAction(btnText);
+    // Payment에서만 special 옵션 적용
+    if (wishOptions?.special && wishAction) {
+      wishAction(btnText); // text1/text2 모두 실행
+    } else {
+      // 기본 동작: text2만 실행
+      if (btnText === wishButtons.text2 && wishAction) {
+        wishAction(btnText);
+      }
     }
     closeWishModal();
   };

@@ -13,7 +13,7 @@ const Payment = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const addBooking = useAuthStore((s) => s.addBooking);
-    const { openWishModal } = useModalStore();
+    const { openWishModal, closeWishModal } = useModalStore();
     const [payMethod, setPayMethod] = useState(null);
     const user = useAuthStore((s) => s.user);
     const [orderName, setOrderName] = useState('');
@@ -81,38 +81,47 @@ const Payment = () => {
 
     const handlePay = () => {
         if (!orderName || !orderTel.middle || !orderTel.last) {
-            openWishModal('예약자 정보를 모두 입력해 주세요.', { text1: '확인' });
-            return;
+          openWishModal("예약자 정보를 모두 입력해 주세요.", { text1: "확인" });
+          return;
         }
         if (!payMethod) {
-            openWishModal('결제수단을 선택해 주세요.', { text1: '확인' });
-            return;
+          openWishModal("결제수단을 선택해 주세요.", { text1: "확인" });
+          return;
         }
         if (!agreeAll) {
-            openWishModal('약관에 동의해 주세요.', { text1: '확인' });
-            return;
+          openWishModal("약관에 동의해 주세요.", { text1: "확인" });
+          return;
         }
-
+      
         const bookingPayload = {
-            ...bookingData,
-            orderInfo: {
-                name: orderName,
-                tel: orderTel,
-                email: '', // 이메일 입력값 있으면 여기 반영
-            },
-            payMethod,
+          ...bookingData,
+          orderInfo: {
+            name: orderName,
+            tel: orderTel,
+            email: "",
+          },
+          payMethod,
         };
-
+      
         addBooking(bookingPayload);
+      
+        // 예약 완료 모달 띄우기 (Payment에서만 special 옵션 적용)
         openWishModal(
-            '예약이 완료되었습니다.',
-            { text1: '확인', text2: '예약내역 확인' },
-            (btn) => {
-                if (btn === '확인') navigate('/');
-                else if (btn === '예약내역 확인') navigate('/mypage');
+          "예약이 완료되었습니다.",
+          { text1: "확인", text2: "예약내역 확인" },
+          (btn) => {
+            if (btn === "확인") {
+              navigate("/"); // 홈 이동
             }
+            if (btn === "예약내역 확인") {
+              navigate("/mypage"); // 마이페이지 이동
+            }
+          },
+          { special: true } // Payment 전용 옵션
         );
     };
+      
+    
 
     return (
         <section className="payment-page">

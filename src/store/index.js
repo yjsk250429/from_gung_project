@@ -490,12 +490,14 @@ export const useModalStore = create((set) => ({
     wishMessage: '',
     wishButtons: { text1: '', text2: '' },
     wishAction: null,
-    openWishModal: (message, buttons = { text1: '', text2: '' }, action = null) =>
+    wishOptions:{},
+    openWishModal: (message, buttons = { text1: '', text2: '' }, action = null, options={}) =>
         set({
             wishModalOpen: true,
             wishMessage: message,
             wishButtons: buttons,
             wishAction: action,
+            wishOptions: options,
         }),
     closeWishModal: () =>
         set({
@@ -503,6 +505,7 @@ export const useModalStore = create((set) => ({
             wishMessage: '',
             wishButtons: { text1: '', text2: '' },
             wishAction: null,
+            wishOptions: {},
         }),
 
     selectProfileOpen: false,

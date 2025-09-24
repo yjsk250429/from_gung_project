@@ -105,32 +105,21 @@ const Payment = () => {
       
         addBooking(bookingPayload);
       
-        // ✅ 예약 완료 모달 띄우기
+        // 예약 완료 모달 띄우기 (Payment에서만 special 옵션 적용)
         openWishModal(
           "예약이 완료되었습니다.",
           { text1: "확인", text2: "예약내역 확인" },
           (btn) => {
-            if (btn === "예약내역 확인") {
-              navigate("/mypage"); // text2 → 마이페이지
-            }
-          }
-        );
-      
-        // ✅ text1("확인")만 홈으로 보내기
-        const originalClose = closeWishModal;
-        useModalStore.setState({
-          closeWishModal: () => {
-            const { wishMessage, wishButtons } = useModalStore.getState();
-            if (
-              wishMessage.includes("예약이 완료되었습니다.") &&
-              wishButtons.text1 === "확인"
-            ) {
+            if (btn === "확인") {
               navigate("/"); // 홈 이동
             }
-            originalClose();
+            if (btn === "예약내역 확인") {
+              navigate("/mypage"); // 마이페이지 이동
+            }
           },
-        });
-      };
+          { special: true } // Payment 전용 옵션
+        );
+    };
       
     
 

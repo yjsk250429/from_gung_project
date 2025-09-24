@@ -11,11 +11,12 @@ const ReservationSection = () => {
           { text1: "취소", text2: "확인" },
           (btnText) => {
             if (btnText === "확인") {
-              // ✅ 실제 예약 취소 실행
               cancelBooking(id);
       
-              // ✅ 예약 취소 완료 모달 띄우기
-              openWishModal("예약이 취소되었습니다", { text1: "확인" });
+              // 약간의 지연 후 다음 모달 띄우기
+              setTimeout(() => {
+                openWishModal("예약이 취소되었습니다", { text1: "확인" });
+              }, 0);
             }
           }
         );

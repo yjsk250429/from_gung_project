@@ -3,15 +3,19 @@ import Button from "../button/Button";
 import './style.scss';
 
 const WishModal = ({ className = "" }) => {
-  const { wishModalOpen, closeWishModal, wishMessage, wishButtons, wishAction } = useModalStore();
+  const { wishModalOpen, closeWishModal, wishMessage, wishButtons, wishAction, wishOptions  } = useModalStore();
   if (!wishModalOpen) return null;
 
   const handleClick = (btnText) => {
-    // text2 버튼일 때만 action 실행
-    if (btnText === wishButtons.text2 && wishAction) {
-      wishAction(btnText);
+    // Payment에서만 special 옵션 적용
+    if (wishOptions?.special && wishAction) {
+      wishAction(btnText); // text1/text2 모두 실행
+    } else {
+      // 기본 동작: text2만 실행
+      if (btnText === wishButtons.text2 && wishAction) {
+        wishAction(btnText);
+      }
     }
-    // 항상 모달은 닫아주기
     closeWishModal();
   };
 

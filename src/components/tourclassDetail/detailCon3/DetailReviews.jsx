@@ -2,10 +2,11 @@ import './style.scss';
 import { useEffect, useRef, useMemo, useState } from 'react';
 import gsap from 'gsap';
 import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
-import { useAuthStore } from '../../../store';
+import { useAuthStore, useModalStore } from '../../../store';
 
 const DetailReviews = ({ thisitem }) => {
     const { title, category } = thisitem;
+    const {openWishModal} = useModalStore();
 
     const reviewsItemList = [
         {
@@ -186,7 +187,11 @@ const DetailReviews = ({ thisitem }) => {
     // 리뷰 추가 함수
     const handleReviewSubmit = () => {
         if (!reviewInput.trim() || !ratings['global']) {
-            alert('별점과 리뷰를 모두 입력해주세요!');
+            // alert('별점과 리뷰를 모두 입력해주세요!');
+            openWishModal(
+                "별점과 리뷰를 모두 입력해주세요!",
+                { text1: "확인" },
+            )
             return;
         }
 

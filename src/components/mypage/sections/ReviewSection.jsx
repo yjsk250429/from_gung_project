@@ -1,10 +1,23 @@
-import React from 'react';
-import { useAuthStore } from '../../../store';
+
+import { useAuthStore, useModalStore } from '../../../store';
 
 const ReviewSection = () => {
     const user = useAuthStore((state) => state.user);
     const reviews = user?.reviews || [];
     const deleteReview = useAuthStore((state) => state.deleteReview);
+    const {openWishModal} = useModalStore();
+
+    const onDel = (id) => {
+        openWishModal(
+          '리뷰를 삭제하시겠습니까?',
+          { text1: "취소", text2: "확인" },
+          (btnText) => {
+            if (btnText === "확인") {
+              deleteReview(id);
+            }
+          }
+        );
+      };
 
     return (
         <div className="reviews">
@@ -28,7 +41,7 @@ const ReviewSection = () => {
                             <span>{review.title || '-'}</span>
                             <span>{review.category || '-'}</span>
                             <span>
-                                <button onClick={() => deleteReview(review.id)}>삭제</button>
+                                <button onClick={() => onDel(review.id)}>삭제</button>
                             </span>
                         </div>
                     ))

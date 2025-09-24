@@ -15,6 +15,7 @@ html.is-active {
     transition: 0.4s;
     .menu-icon {
         display: none;
+        color: $white;
     }
     &.show {
         transform: translate(-50%, 0); // 원래 위치
@@ -270,6 +271,9 @@ html.is-active {
         }
     }
     &.light {
+        .menu-icon{
+            color: #000;
+        }
         h1 {
             a {
                 img {
@@ -340,7 +344,6 @@ html.is-active {
             .menu-icon {
                 position: absolute;
                 display: block;
-                color: $black;
                 font-size: 20px;
                 line-height: 1;
                 top: 50%;

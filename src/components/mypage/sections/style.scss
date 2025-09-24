@@ -36,6 +36,7 @@
                 margin-right: vw(20);
                 border-radius: vw(10);
                 overflow: hidden;
+                cursor: pointer;
                 img{
                     width: 100%;
                     height: 100%;
@@ -43,6 +44,7 @@
             }
 
             .info {
+                cursor: pointer;
                 flex: 1;
                 .title {
                     font-size: vw(18);
@@ -66,6 +68,12 @@
                 border: 1px solid $main1;
                 background: none;
                 cursor: pointer;
+                &:disabled{
+                    background: #b1b1b1;
+                    color: $white;
+                    cursor: auto;
+                    border-color:#999;
+                }
             }
         }
     }

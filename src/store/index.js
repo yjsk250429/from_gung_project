@@ -157,7 +157,15 @@ export const useAuthStore = create((set, get) => ({
 
         // ✅ 출석 기록 추가 (하루에 한 번만, 최대 10개)
         const today = new Date().toISOString().slice(0, 10);
-        let prev = [];
+        let prev = Array.isArray(item.attandance)
+  ? [...item.attandance]
+  : typeof item.attandance === 'number'
+    ? Array.from({ length: Math.max(0, Math.min(10, item.attandance)) }, (_, i) => {
+        const d = new Date();
+        d.setDate(d.getDate() - i - 1);
+        return d.toISOString().slice(0, 10);
+      })
+    : [];
     if (Array.isArray(item.attandance)) {
       prev = item.attandance;
     } else if (typeof item.attandance === 'number') {
@@ -323,7 +331,7 @@ export const useAuthStore = create((set, get) => ({
         const exists = user.wishlist?.some((w) => w.id === item.id);
         const updatedWishlist = exists
             ? user.wishlist.filter((w) => w.id !== item.id)
-            : [...(user.wishlist || []), item];
+            : [...(Array.isArray(user.wishlist) ? [...user.wishlist] : []), item];
 
         const updatedUser = { ...user, wishlist: updatedWishlist };
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
@@ -394,7 +402,7 @@ export const useAuthStore = create((set, get) => ({
           ...user,
           reward: (user.reward || 0) + rewardEarned,
           coupon: updatedCoupons,
-          bookings: [...(user.bookings || []), newBooking],
+          bookings: [...(Array.isArray(user.bookings) ? [...user.bookings] : []), newBooking],
         };
       
         const updatedMembers = user.id
@@ -410,7 +418,7 @@ export const useAuthStore = create((set, get) => ({
         const { user, members } = get();
         if (!user) return;
 
-        const updatedBookings = (user.bookings || []).map((b) =>
+        const updatedBookings = (Array.isArray(user.bookings) ? [...user.bookings] : []).map((b) =>
             b.id === bookingId
                 ? { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() }
                 : b
@@ -442,7 +450,7 @@ export const useAuthStore = create((set, get) => ({
 
         const updatedUser = {
             ...user,
-            reviews: [...(user.reviews || []), newReview],
+            reviews: [...(Array.isArray(user.reviews) ? user.reviews : []), newReview],
         };
 
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
@@ -458,7 +466,7 @@ export const useAuthStore = create((set, get) => ({
 
         const updatedUser = {
             ...user,
-            reviews: (user.reviews || []).filter((review) => review.id !== reviewId),
+            reviews: (Array.isArray(user.reviews) ? user.reviews : []).filter((review) => review.id !== reviewId),
         };
 
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));

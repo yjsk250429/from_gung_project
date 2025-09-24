@@ -5,6 +5,7 @@ import WishlistSection from './sections/WishlistSection.jsx';
 import ReviewSection from './sections/ReviewSection.jsx';
 import InquirySection from './sections/InquirySection.jsx';
 import { useAuthStore, useModalStore } from '../../store/index.js';
+import WishModal from '../ui/modal/WishModal.jsx';
 
 const MyPagemain = () => {
     const { openEditPassword, openWithdrawConfirm, openSelectProfile } = useModalStore();
@@ -137,6 +138,7 @@ const MyPagemain = () => {
                     {activeMenu === 'inquiry' && <InquirySection />}
                 </section>
             </div>
+            <WishModal className="cancelReserve"/>
         </div>
     );
 };

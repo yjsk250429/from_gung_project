@@ -6,13 +6,13 @@ const WishModal = ({ className = "" }) => {
   const { wishModalOpen, closeWishModal, wishMessage, wishButtons, wishAction } = useModalStore();
   if (!wishModalOpen) return null;
 
-  // 버튼 클릭 핸들러: 버튼 텍스트를 인자로 넘겨줌
   const handleClick = (btnText) => {
-    if (wishAction) {
-      wishAction(btnText); // Payment.jsx 같은 곳에서는 분기 처리 가능
+    if (btnText === wishButtons.text2 && wishAction) {
+      wishAction(btnText);
     }
     closeWishModal();
   };
+
 
   return (
     <div className="modal-overlay">

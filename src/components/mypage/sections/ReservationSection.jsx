@@ -1,7 +1,25 @@
-import { useAuthStore } from '../../../store';
+import { useAuthStore, useModalStore } from '../../../store';
 
 const ReservationSection = () => {
     const user = useAuthStore((s) => s.user);
+    const cancelBooking = useAuthStore((s) => s.cancelBooking);
+    const { openWishModal } = useModalStore();
+
+    const handleCancel = (id) => {
+        openWishModal(
+          "예약을 취소하시겠습니까?",
+          { text1: "취소", text2: "확인" },
+          (btnText) => {
+            if (btnText === "확인") {
+              // ✅ 실제 예약 취소 실행
+              cancelBooking(id);
+      
+              // ✅ 예약 취소 완료 모달 띄우기
+              openWishModal("예약이 취소되었습니다", { text1: "확인" });
+            }
+          }
+        );
+      };
 
     // 로그인 안 되어 있거나 예약이 없을 경우
     if (!user || !user.bookings || user.bookings.length === 0) {
@@ -37,13 +55,16 @@ const ReservationSection = () => {
                                         : ''}
                                 </p>
                                 <p className="num">예약번호: {bookingNumber}</p>
-                                <p className="status">상태: {status === 'confirmed' ? '예약완료' : '취소됨'}</p>
+                                <p className="status">상태: {status === 'confirmed' ? '예약완료' : '예약취소'}</p>
                             </div>
-                            {status === 'confirmed' && (
-                                <button className="btn_cancel" type="button">
-                                    예약 취소
-                                </button>
-                            )}
+                            {status === 'confirmed' ? (
+                                <button className="btn_cancel" type="button" onClick={() => handleCancel(id)}>예약 취소</button>
+                            )
+                            : (
+                                <button className="btn_cancel" type="button" disabled>
+                                    예약 취소됨
+                                </button>)
+                            }
                         </div>
                     );
                 })}

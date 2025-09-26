@@ -14,12 +14,15 @@ import { useNavigate } from 'react-router-dom';
 
 const INITIAL_COUNT = 8;
 const STEP = 8;
+// 일정 태그 X 버튼으로 해제
 
 const TourClass = () => {
     const category = useTourClassStore((s) => s.category);
     const setRegionCategory = useTourClassStore((s) => s.setRegionCategory);
     const regionCategory = useTourClassStore((s) => s.regionCategory);
-
+    const removeDay = () => {
+        setSeleted2(0); // '전체'로 초기화
+    };
     const tabItems = useMemo(() => {
         if (category === 'tour') {
             return ['전체', '서울', '인천/경기', '기타'];
@@ -205,18 +208,24 @@ const TourClass = () => {
                 {/* ✅ sort: 왼쪽 필터태그 + 오른쪽 드롭다운 */}
                 <ul className="sort">
                     <li className="selected-filters">
-                        {selectedThemes.length > 0 && (
+                        {(selectedThemes.length > 0 || selected2 !== 0) && (
                             <div className="filters-wrap">
+                                {/* 전체 해제 버튼 */}
                                 <button
                                     type="button"
                                     className="filter-tag reset"
-                                    onClick={() => setSelectedThemes([])}
+                                    onClick={() => {
+                                        setSelectedThemes([]);
+                                        setSeleted2(0);
+                                    }}
                                 >
                                     전체 해제
                                 </button>
+
+                                {/* 테마 태그들 */}
                                 {selectedThemes.map((i) => (
                                     <button
-                                        key={i}
+                                        key={`theme-${i}`}
                                         type="button"
                                         className="filter-tag"
                                         onClick={() => removeTheme(i)}
@@ -225,6 +234,19 @@ const TourClass = () => {
                                         <span className="close">×</span>
                                     </button>
                                 ))}
+
+                                {/* 일정 태그 */}
+                                {selected2 !== 0 && (
+                                    <button
+                                        key="day"
+                                        type="button"
+                                        className="filter-tag"
+                                        onClick={removeDay}
+                                    >
+                                        <span className="label">{dayTaps[selected2]}</span>
+                                        <span className="close">×</span>
+                                    </button>
+                                )}
                             </div>
                         )}
                     </li>

@@ -86,7 +86,9 @@
                 display: block;
                 position: relative;
                 margin-right: vw(30);
-
+                &:last-child {
+                    margin-right: vw(10);
+                }
                 i {
                     position: absolute;
                     left: 0;
@@ -94,10 +96,11 @@
                     transform: translateY(-43%);
                 }
                 p {
+                    display: inline-block; /* 글자 크기에 딱 맞춤 */
+                    line-height: 1;
                     margin-left: vw(10);
                 }
                 &:last-child {
-                    margin-right: 0;
                 }
             }
 
@@ -262,18 +265,43 @@
             > span {
                 display: inline-block;
                 align-items: center;
-                width: 43px;
-                font-size: 12px;
+                width: vw(42);
+                font-size: vw(12);
                 line-height: 1;
                 i {
                     position: absolute;
-                    left: -10px;
+                    left: vw(-10);
                     top: 50%;
                     transform: translateY(-45%);
                 }
             }
             &:last-child {
                 .sortBox {
+                    li {
+                        display: flex;
+                        align-items: center;
+                        gap: vw(8);
+
+                        i {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: vw(12);
+                            color: $sub3;
+                            margin: 0;
+                            position: static;
+                        }
+
+                        > span {
+                            cursor: pointer;
+                            line-height: 1.4;
+                        }
+
+                        &.sortSelected {
+                            color: $sub3;
+                            font-weight: 600;
+                        }
+                    }
                 }
                 &.on {
                 }

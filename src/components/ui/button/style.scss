@@ -53,6 +53,9 @@ button {
                 background-image: url('/images/components/button-small-sub3.png');
             }
         }
+        @media screen and (max-width: 393px) {
+            transform: scale(0.8);
+        }
     }
     &.default {
         width: vw(150);
@@ -98,6 +101,12 @@ button {
                 color: $sub3;
                 background-image: url('/images/components/button-default-sub3.png');
             }
+        }
+        @media screen and (max-width: 393px) {
+            width: 120px;
+            height: 32px;
+            font-size: 12px;
+            font-weight: 700;
         }
     }
     &.big {
@@ -145,5 +154,8 @@ button {
                 background-image: url('/images/components/button-big-sub3.png');
             }
         }
+    }
+    @media screen and (max-width: 393px) {
+        transform: scale(0.8);
     }
 }

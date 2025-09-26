@@ -2,6 +2,17 @@
 @use '../../styles/base' as *;
 
 .tourclass {
+    position: relative;
+    .bg {
+        width: 100%;
+        height: vw(523);
+        position: absolute;
+        top: 200px;
+        background-image: url('/images/tourclass/bg.png');
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
     .inner {
         padding: 200px 0;
     }
@@ -156,78 +167,83 @@
         }
     }
     @media screen and (max-width: 393px) {
-        width: 100%;
-        height: 852px;
-        .tourclass {
-            .inner {
-            }
-            .tabs {
-                width: 100%;
-                li {
-                    &.on {
-                    }
+        // width: 100%;
+        .bg {
+            height: 160px;
+            position: absolute;
+            top: 640px;
+        }
+        .inner {
+            padding: 50px 0;
+        }
+
+        .tabs {
+            width: 100%;
+            li {
+                &.on {
                 }
             }
         }
-        .sort {
-            > li {
-                > span {
-                    display: inline-block;
-                    align-items: center;
-                    width: 43px;
-                    font-size: 12px;
-                    line-height: 1;
+    }
+    .sort {
+        > li {
+            > span {
+                display: inline-block;
+                align-items: center;
+                width: 43px;
+                font-size: 12px;
+                line-height: 1;
+                i {
+                    position: absolute;
+                    left: -10px;
+                    top: 50%;
+                    transform: translateY(-45%);
+                }
+            }
+            &:last-child {
+                .sortBox {
+                }
+                &.on {
+                }
+                li {
                     i {
-                        position: absolute;
-                        left: -10px;
-                        top: 50%;
-                        transform: translateY(-45%);
+                    }
+                    > span {
+                    }
+                    &:last-child {
+                    }
+                    &.sortSelected {
                     }
                 }
-                &:last-child {
-                    .sortBox {
-                    }
-                    &.on {
-                    }
-                    li {
-                        i {
-                        }
-                        > span {
-                        }
-                        &:last-child {
-                        }
-                        &.sortSelected {
-                        }
-                    }
+            }
+            .filterBox {
+                &.on {
                 }
-                .filterBox {
-                    &.on {
+                > li {
+                    &:first-child {
                     }
-                    > li {
-                        &:first-child {
-                        }
-                        &:last-child {
-                        }
-                        span {
-                        }
-                        .themeTaps,
-                        .dayTaps {
-                            > li {
-                                &:first-child {
-                                }
-                                &.on {
-                                }
+                    &:last-child {
+                    }
+                    span {
+                    }
+                    .themeTaps,
+                    .dayTaps {
+                        > li {
+                            &:first-child {
+                            }
+                            &.on {
                             }
                         }
                     }
                 }
             }
         }
-        .empty-message {
-            i {
-            }
-            p {
-            }
+    }
+    .empty-message {
+        i {
         }
+    }
+    .more {
+        margin-top: 30px;
     }
 }

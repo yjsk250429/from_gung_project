@@ -1,113 +1,141 @@
 import './style.scss';
 import { useEffect, useRef, useMemo, useState } from 'react';
 import gsap from 'gsap';
-import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
+import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io';
 import { useAuthStore, useModalStore } from '../../../store';
+import { IoClose } from 'react-icons/io5';
 
 const DetailReviews = ({ thisitem }) => {
     const { title, category } = thisitem;
     const {openWishModal} = useModalStore();
-
     const reviewsItemList = [
         {
             id: 1,
             profile: '/images/profile/profile_1.png',
             reviewComment: '너무 재밌었어요',
+            rate:3,
         },
         {
             id: 2,
             profile: '/images/profile/profile_2.png',
             reviewComment: '야경이 정말 아름답고 낭만적이에요',
+            rate:4.5,
+
         },
         {
             id: 3,
             profile: '/images/profile/profile_3.png',
             reviewComment: '가족 여행지로 딱이에요',
+            rate:3,
+
         },
         {
             id: 4,
             profile: '/images/profile/profile_4.png',
             reviewComment: '전통문화 체험이 인상 깊었어요',
+            rate:4,
+
         },
         {
             id: 5,
             profile: '/images/profile/profile_5.png',
             reviewComment: '인생샷 건졌습니다',
+            rate:5,
+
         },
         {
             id: 6,
             profile: '/images/profile/profile_6.png',
             reviewComment: '한복 체험이 특히 좋았어요',
+            rate:4.5,
+
         },
         {
             id: 7,
             profile: '/images/profile/profile_7.png',
             reviewComment: '가이드분 설명이 귀에 쏙쏙',
+            rate:4.5,
+
         },
         {
             id: 8,
             profile: '/images/profile/profile_8.png',
             reviewComment: '아이들과 함께해도 전혀 지루하지 않았습니다',
+            rate:4.5,
+
         },
         {
             id: 9,
             profile: '/images/profile/profile_9.png',
             reviewComment: '생각보다 규모가 엄청 크더라고요',
+            rate:4.5,
+
         },
         {
             id: 10,
             profile: '/images/profile/profile_10.png',
             reviewComment: '먹을거리도 많고 볼거리도 풍성해요',
+            rate:4.5,
         },
         {
             id: 11,
             profile: '/images/profile/profile_11.png',
             reviewComment: '날씨 좋을 때 가면 정말 최고예요',
+            rate:3,
         },
         {
             id: 12,
             profile: '/images/profile/profile_12.png',
             reviewComment: '주차 공간도 넉넉해서 편했어요',
+            rate:5,
         },
         {
             id: 13,
             profile: '/images/profile/profile_13.png',
             reviewComment: '입장료가 전혀 아깝지 않았어요',
+            rate:4.5,
         },
         {
             id: 14,
             profile: '/images/profile/profile_14.png',
             reviewComment: '데이트 장소로 강추합니다!',
+            rate:4,
         },
         {
             id: 15,
             profile: '/images/profile/profile_15.png',
             reviewComment: '찍는 족족 인생샷이에요',
+            rate:4.5,
         },
         {
             id: 16,
             profile: '/images/profile/profile_16.png',
             reviewComment: '아이들에게 생생한 역사 교육이 되었습니다',
+            rate:4,
         },
         {
             id: 17,
             profile: '/images/profile/profile_17.png',
             reviewComment: '시간 가는 줄 모르고 구경했어요',
+            rate:4,
         },
         {
             id: 18,
             profile: '/images/profile/profile_18.png',
             reviewComment: '기념품 종류가 다양해서 고르기 힘들 정도',
+            rate:4,
         },
         {
             id: 19,
             profile: '/images/profile/profile_1.png',
             reviewComment: '또 가고 싶어요',
+            rate:5,
         },
         {
             id: 20,
             profile: '/images/profile/profile_2.png',
             reviewComment: '정말 만족스러운 여행이었습니다. 추천해요!',
+            rate:4,
         },
     ];
 
@@ -115,6 +143,8 @@ const DetailReviews = ({ thisitem }) => {
     const authed = useAuthStore((s) => s.authed);
     const isLoggedIn = authed;
     const addReview = useAuthStore((state) => state.addReview);
+    const deleteReview = useAuthStore((state) => state.deleteReview);
+    const reviewsFromStore = user?.reviews || [];
 
     const userNickname = user?.nickName || '익명';
     const userProfile = user?.profile || '/images/profile/default.png';
@@ -122,6 +152,19 @@ const DetailReviews = ({ thisitem }) => {
     // 새로운 리뷰 상태 추가
     const [newReviews, setNewReviews] = useState([]);
     const [reviewInput, setReviewInput] = useState('');
+
+    const handleDelete = (id) => {
+        openWishModal(
+          "리뷰를 삭제하시겠습니까?",
+          { text1: "취소", text2: "확인" },
+          (btnText) => {
+            if (btnText === "확인") {
+              deleteReview(id); // store에서도 삭제
+              setNewReviews((prev) => prev.filter((r) => r.id !== id)); // UI 보조용 state도 정리
+            }
+          }
+        );
+      };
 
     // useMemo로 랜덤 리스트 고정 - 새로운 리뷰와 함께 처리
     const randomReviews = useMemo(() => {
@@ -131,15 +174,17 @@ const DetailReviews = ({ thisitem }) => {
 
     // 4개씩 나누기 - 첫 번째 행에 새로운 리뷰 추가
     const rows = useMemo(() => {
-        const baseRows = Array.from({ length: 4 }, (_, i) => randomReviews.slice(i * 4, i * 4 + 4));
-
-        // 첫 번째 행에 새로운 리뷰들을 맨 앞에 추가
-        if (newReviews.length > 0) {
-            baseRows[0] = [...newReviews, ...baseRows[0]];
+        const baseRows = Array.from({ length: 4 }, (_, i) =>
+          randomReviews.slice(i * 4, i * 4 + 4)
+        );
+      
+        if (reviewsFromStore.length > 0) {
+          baseRows[0] = [...reviewsFromStore, ...baseRows[0]];
         }
-
+      
         return baseRows;
-    }, [randomReviews, newReviews]);
+      }, [randomReviews, reviewsFromStore]);
+      
 
     const rowRefs = useRef([]);
 
@@ -187,42 +232,27 @@ const DetailReviews = ({ thisitem }) => {
     // 리뷰 추가 함수
     const handleReviewSubmit = () => {
         if (!reviewInput.trim() || !ratings['global']) {
-            // alert('별점과 리뷰를 모두 입력해주세요!');
-            openWishModal(
-                "별점과 리뷰를 모두 입력해주세요!",
-                { text1: "확인" },
-            )
-            return;
+          openWishModal("별점과 리뷰를 모두 입력해주세요!", { text1: "확인" });
+          return;
         }
-
+      
         const newReview = {
-            profile: user?.profile || '/images/profile/default.png',
-            reviewComment: reviewInput.trim(),
-            nickName: user?.nickName || '익명',
-            rating: ratings['global'],
-            title, // thisitem에서 받은 title 그대로 사용
-            category: getCategoryKor(category), // 여기서 영어를 한글로 변환해서 넣음
-            isNew: true,
+          id: Date.now(), // 반드시 고유 ID 넣기
+          profile: user?.profile || '/images/profile/default.png',
+          reviewComment: reviewInput.trim(),
+          nickName: user?.nickName || '익명',
+          rating: ratings['global'],
+          title,
+          category: getCategoryKor(category),
+          isNew: true,
         };
-
-        addReview(newReview);
-
-        // 새로운 리뷰를 맨 앞에 추가
-        setNewReviews((prev) => [newReview, ...prev]);
-
+      
+        addReview(newReview); // Zustand에만 추가
+      
         // 입력 초기화
         setReviewInput('');
         setRatings({});
-
-        // 3초 후 하이라이트 제거
-        setTimeout(() => {
-            setNewReviews((prev) =>
-                prev.map((review) =>
-                    review.id === newReview.id ? { ...review, isNew: false } : review
-                )
-            );
-        }, 3000);
-    };
+      };
 
     return (
         <div className="detailReviews">
@@ -235,18 +265,43 @@ const DetailReviews = ({ thisitem }) => {
                     >
                         {/* 루프를 위해 아이템 2배 복제 */}
                         {[...rowItems, ...rowItems].map(
-                            ({ id, profile, reviewComment, isNew }, i) => (
-                                <div
-                                    key={`${id}-${i}`}
-                                    className={`reviewItem ${isNew ? 'reviewItem--new' : ''}`}
-                                >
-                                    <span>
-                                        <img src={profile} alt={`리뷰어 ${id}`} />
-                                    </span>
-                                    <p>{reviewComment}</p>
-                                </div>
-                            )
-                        )}
+  ({ id, profile, reviewComment, rate, rating, isNew, nickName }, i) => {
+    const score = rate ?? rating; 
+    const isMyReview = isLoggedIn && userNickname === nickName;
+    return (
+      <div
+        key={`${id}-${i}`}
+        className={`reviewItem ${isNew ? 'reviewItem--new' : ''}`}
+      >
+        <span>
+          <img src={profile} alt={`리뷰어 ${id}`} />
+        </span>
+        {isMyReview && (
+          <i
+          onClick={() => handleDelete(id)}
+          >
+            <IoClose />
+          </i>
+        )}
+        <div className="txts">
+          <p className="stars">
+            {[...Array(5)].map((_, starIndex) => {
+              if (score >= starIndex + 1) {
+                return <IoMdStar key={starIndex} />;
+              } else if (score >= starIndex + 0.5) {
+                return <IoMdStarHalf key={starIndex} />; 
+                // 반 별을 따로 쓰려면 IoMdStarHalf 아이콘 사용 가능
+              } else {
+                return <IoMdStarOutline key={starIndex} />;
+              }
+            })}
+          </p>
+          <p className="comment">{reviewComment}</p>
+        </div>
+      </div>
+    );
+  }
+)}
                     </article>
                 ))}
             </div>

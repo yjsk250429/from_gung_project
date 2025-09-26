@@ -213,12 +213,22 @@
                 padding: vw(12) vw(10);
                 font-weight: 500;
                 border-bottom: vw(1) solid #ddd;
+                &:hover{
+                    background: #f9f9f9;
+                }
                 span {
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     text-align: center;
                     font-size: vw(16);
+                    &:nth-child(3){
+                        display: inline-block;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                    }
                     button {
                         font-family: $font-main;
                         @include font-14px-M;

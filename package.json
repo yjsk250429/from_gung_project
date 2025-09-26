@@ -17,6 +17,7 @@
         "date-fns": "^4.1.0",
         "daypicker": "^1.0.1",
         "framer-motion": "^12.23.12",
+        "git-filter-repo": "^0.0.30",
         "gsap": "^3.13.0",
         "icons": "^1.0.0",
         "matter-js": "^0.20.0",

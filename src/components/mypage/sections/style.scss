@@ -288,7 +288,10 @@
         .detail-buttons {
             margin-top: vw(20);
             text-align: right;
-
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: vw(8);
             button {
                 font-family: $font-main;
                 @include font-14px;

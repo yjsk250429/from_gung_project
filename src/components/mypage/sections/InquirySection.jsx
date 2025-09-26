@@ -134,6 +134,7 @@ const InquirySection = () => {
                     </p>
 
                     <div className="detail-buttons">
+                        <button>수정</button>
                         <button
                             onClick={() => {
                                 removeInquiry(selectedInquiry.id);

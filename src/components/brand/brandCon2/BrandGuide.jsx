@@ -46,16 +46,38 @@ const BrandGuide = () => {
             const boxes = gsap.utils.toArray(q('.guideStepWrap .stepBox'));
             if (!boxes.length) return;
 
+            let lastIndex = -1;
+
             // 초기 상태 세팅 (첫 번째 강조, 나머지 살짝 축소/투명)
-            const setActive = (i) => {
+            const setActive = (i, direction = 1) => {
                 boxes.forEach((b, idx) => b.classList.toggle('activeBox', idx === i));
                 gsap.to(boxes, { opacity: 0.35, scale: 0.96, duration: 0.25, overwrite: 'auto' });
                 gsap.to(boxes[i], { opacity: 1, scale: 1, duration: 0.35, overwrite: 'auto' });
-            };
-            gsap.set(boxes, { opacity: 0.35, scale: 0.96 });
-            setActive(0);
+              
+                const img = boxes[i].querySelector('img');
+                if (img) {
+                  const isFirstToSecond = (lastIndex === 0 && i === 1 && direction === 1);
+                  const isFifthToFourth = (lastIndex === 4 && i === 3 && direction === -1);
+              
+                  if (isFirstToSecond || isFifthToFourth) {
+                    // ✅ 특정 구간만 애니메이션으로 반전
+                    gsap.to(img, {
+                      scaleX: direction === -1 ? -1 : 1,
+                      duration: 0.3,
+                      ease: 'power2.out',
+                    });
+                  } else {
+                    // ✅ 나머지는 즉시 반전 (돌아가는 모션 없음)
+                    gsap.set(img, {
+                      scaleX: direction === -1 ? -1 : 1,
+                    });
+                  }
+                }
+              };
 
-            let lastIndex = -1;
+
+            gsap.set(boxes, { opacity: 0.35, scale: 0.96 });
+            setActive(0, 1);
 
             ScrollTrigger.create({
                 trigger: el,
@@ -71,7 +93,7 @@ const BrandGuide = () => {
                         Math.floor(self.progress * boxes.length)
                     );
                     if (idx !== lastIndex) {
-                        setActive(idx);
+                        setActive(idx, self.direction);
                         lastIndex = idx;
                     }
                 },

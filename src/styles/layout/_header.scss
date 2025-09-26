@@ -15,7 +15,10 @@ html.is-active {
     transition: 0.4s;
     .menu-icon {
         display: none;
+<<<<<<< HEAD
         color: $white;
+=======
+>>>>>>> 3274e59d02500b3e448fbfd40391341880cb4c31
     }
     &.show {
         transform: translate(-50%, 0); // 원래 위치
@@ -271,9 +274,12 @@ html.is-active {
         }
     }
     &.light {
+<<<<<<< HEAD
         .menu-icon{
             color: #000;
         }
+=======
+>>>>>>> 3274e59d02500b3e448fbfd40391341880cb4c31
         h1 {
             a {
                 img {
@@ -344,6 +350,10 @@ html.is-active {
             .menu-icon {
                 position: absolute;
                 display: block;
+<<<<<<< HEAD
+=======
+                color: $black;
+>>>>>>> 3274e59d02500b3e448fbfd40391341880cb4c31
                 font-size: 20px;
                 line-height: 1;
                 top: 50%;

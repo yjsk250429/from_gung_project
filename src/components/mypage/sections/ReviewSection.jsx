@@ -1,4 +1,3 @@
-
 import { useAuthStore, useModalStore } from '../../../store';
 
 const ReviewSection = () => {
@@ -18,6 +17,7 @@ const ReviewSection = () => {
           }
         );
       };
+
 
     return (
         <div className="reviews">

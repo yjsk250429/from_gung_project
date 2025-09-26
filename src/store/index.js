@@ -407,21 +407,32 @@ export const useAuthStore = create((set, get) => ({
     cancelBooking: (bookingId) => {
         const { user, members } = get();
         if (!user) return;
-
-        const updatedBookings = (Array.isArray(user.bookings) ? [...user.bookings] : []).map((b) =>
-            b.id === bookingId
-                ? { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() }
-                : b
-        );
-
-        const updatedUser = { ...user, bookings: updatedBookings };
-
+    
+        let rewardToRefund = 0;
+    
+        const updatedBookings = (Array.isArray(user.bookings) ? [...user.bookings] : []).map((b) => {
+            if (b.id === bookingId && b.status === 'confirmed') {
+                // ✅ 취소되는 예약에서 환불할 리워드 계산
+                const REWARD_UNIT = 2000;
+                rewardToRefund = Math.ceil((b.finalPrice || 0) / REWARD_UNIT);
+                return { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() };
+            }
+            return b;
+        });
+    
+        // 리워드 차감 (최소 0 이상 유지)
+        const updatedUser = {
+            ...user,
+            bookings: updatedBookings,
+            reward: Math.max(0, (user.reward || 0) - rewardToRefund),
+        };
+    
         if (!user.id) {
             set({ user: updatedUser });
             localStorage.setItem('user', JSON.stringify(updatedUser));
             return;
         }
-
+    
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));

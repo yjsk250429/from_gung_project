@@ -2,17 +2,17 @@
 @use '../utils' as *;
 
 @mixin tourList {
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: vw(50);
+    grid-template-columns: repeat(4, vw(352));
+    justify-content: space-between;
     li {
         position: relative;
         width: vw(352);
         margin-bottom: vw(60);
         .img-wrap {
             cursor: pointer;
-            width: vw(352);
+            width: 100%;
             height: vw(460);
             border-radius: vw(10);
             overflow: hidden;
@@ -201,7 +201,7 @@
         grid-template-columns: repeat(2, 1fr);
         // glyph-orientation-horizontal: 16.5;
         // margin-left: px;
-        
+
         // gap: 12px;
         // width: 95%;
 

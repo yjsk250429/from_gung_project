@@ -67,7 +67,6 @@
                             width: vw(20);
                             text-align: center;
                             margin-right: vw(20);
-
                             font-size: vw(12);
                         }
                         > span {
@@ -154,6 +153,81 @@
         text-align: center;
         .button {
             margin-top: vw(50);
+        }
+    }
+    @media screen and (max-width: 393px) {
+        width: 100%;
+        height: 852px;
+        .tourclass {
+            .inner {
+            }
+            .tabs {
+                width: 100%;
+                li {
+                    &.on {
+                    }
+                }
+            }
+        }
+        .sort {
+            > li {
+                > span {
+                    display: inline-block;
+                    align-items: center;
+                    width: 43px;
+                    font-size: 12px;
+                    line-height: 1;
+                    i {
+                        position: absolute;
+                        left: -10px;
+                        top: 50%;
+                        transform: translateY(-45%);
+                    }
+                }
+                &:last-child {
+                    .sortBox {
+                    }
+                    &.on {
+                    }
+                    li {
+                        i {
+                        }
+                        > span {
+                        }
+                        &:last-child {
+                        }
+                        &.sortSelected {
+                        }
+                    }
+                }
+                .filterBox {
+                    &.on {
+                    }
+                    > li {
+                        &:first-child {
+                        }
+                        &:last-child {
+                        }
+                        span {
+                        }
+                        .themeTaps,
+                        .dayTaps {
+                            > li {
+                                &:first-child {
+                                }
+                                &.on {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .empty-message {
+            i {
+            }
+            p {
+            }
         }
     }
 }

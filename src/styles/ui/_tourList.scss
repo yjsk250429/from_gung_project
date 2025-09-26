@@ -196,4 +196,91 @@
             }
         }
     }
+    @media screen and (max-width: 393px) {
+        width: 353px;
+        height: auto;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        grid-template-columns: repeat(2, 1fr);
+        glyph-orientation-horizontal: 16.5;
+
+        li {
+            .img-wrap {
+                width: 171px;
+                height: 254px;
+                margin-bottom: 10px;
+
+                img {
+                    transform: scale(1);
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                }
+                .tourclassInfo {
+                    width: 171px;
+                    border: 1px solid #fff;
+                    position: absolute;
+                    left: 0;
+                    box-sizing: border-box;
+                    padding: 20px;
+                    .tourclassThemes {
+                        .tourclassTheme {
+                            width: 30px;
+                            height: 15px;
+                            border-radius: 10px;
+                            font-size: 10px;
+                            text-align: center;
+                            line-height: 10px;
+                        }
+                    }
+
+                    h4 {
+                        font-size: 14px;
+                        margin-top: 5px;
+                    }
+                    .period {
+                        font-size: 7px;
+                        dt {
+                        }
+                        dd {
+                        }
+                    }
+                    h5 {
+                    }
+                    h6 {
+                    }
+                }
+                .hoverImg {
+                    img {
+                    }
+                }
+                .overlay {
+                }
+                .tourclassInfo,
+                .hoverImg,
+                .overlay {
+                }
+                &:hover {
+                    .tourclassInfo .hoverImg {
+                    }
+                    .overlay {
+                    }
+                }
+            }
+            .title {
+                width: 169px;
+                justify-content: space-between;
+                align-items: center;
+                strong {
+                    font-size: 12px;
+                    font-weight: 400;
+                }
+                i {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
 }

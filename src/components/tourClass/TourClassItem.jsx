@@ -2,12 +2,24 @@ import { FiHeart } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoTimeOutline } from 'react-icons/io5';
 import { useAuthStore, useModalStore } from '../../store';
-import { FaHeart } from "react-icons/fa";
+import { FaHeart } from 'react-icons/fa';
 
-const TourClassItem = ({ id, title, theme, description, period, price, img, category, time, region, place }) => {
+const TourClassItem = ({
+    id,
+    title,
+    theme,
+    description,
+    period,
+    price,
+    img,
+    category,
+    time,
+    region,
+    place,
+}) => {
     const navigate = useNavigate();
     const { user, authed, toggleWishlist } = useAuthStore();
-    const { openNeedLogin, openWishModal} = useModalStore();
+    const { openNeedLogin, openWishModal } = useModalStore();
     const isWished = authed && user?.wishlist?.some((w) => w.id === id);
 
     return (
@@ -72,21 +84,37 @@ const TourClassItem = ({ id, title, theme, description, period, price, img, cate
             <div className="title">
                 <strong onClick={() => navigate(`/tourclass/${id}`)}>{title}</strong>
                 <i
-                onClick={() => {
-                    if (!authed) {
-                    openNeedLogin();
-                    return;
-                    }
-                    toggleWishlist({ id, title, category, theme, description, period, time, region, place, price, img });
+                    onClick={() => {
+                        if (!authed) {
+                            openNeedLogin();
+                            return;
+                        }
+                        toggleWishlist({
+                            id,
+                            title,
+                            category,
+                            theme,
+                            description,
+                            period,
+                            time,
+                            region,
+                            place,
+                            price,
+                            img,
+                        });
 
-                    if (isWished) {
-                    openWishModal("찜 목록에서 삭제하였습니다", { text1: "닫기" });
-                    } else {
-                    openWishModal("찜 목록에 추가하였습니다", { text1: "닫기", text2: "찜 목록 보기" }, () => navigate('/mypage'));
-                    }
-                }}
+                        if (isWished) {
+                            openWishModal('찜 목록에서 삭제하였습니다', { text1: '닫기' });
+                        } else {
+                            openWishModal(
+                                '찜 목록에 추가하였습니다',
+                                { text1: '닫기', text2: '찜 목록 보기' },
+                                () => navigate('/mypage')
+                            );
+                        }
+                    }}
                 >
-                {isWished ? <FaHeart style={{ color: 'red' }} /> : <FiHeart />}
+                    {isWished ? <FaHeart style={{ color: 'red' }} /> : <FiHeart />}
                 </i>
             </div>
         </li>

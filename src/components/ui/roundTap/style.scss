@@ -36,7 +36,7 @@
             align-items: center;
             justify-content: center;
             border-radius: vw(50);
-            
+
             span {
                 @include font-24px-B;
                 color: $white;
@@ -44,6 +44,22 @@
                 left: 50%;
                 transform: translateX(-50%);
                 line-height: vw(48);
+            }
+        }
+    }
+    @media screen and (max-width: 393px) {
+        width: 353px;
+        height: 35px;
+        border-radius: 35px;
+        margin-bottom: 50px;
+        li {
+            &:first-child {
+                border-radius: 35px;
+            }
+            &:not(:first-child) {
+                span {
+                    font-size: 15px;
+                }
             }
         }
     }

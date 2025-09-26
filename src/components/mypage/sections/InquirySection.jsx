@@ -6,29 +6,41 @@ const InquirySection = () => {
     const [mode, setMode] = useState('list'); // "list" | "form" | "detail"
     const [form, setForm] = useState({ title: '', content: '' });
     const [selectedInquiry, setSelectedInquiry] = useState(null);
+    const [editId, setEditId] = useState(null);
 
     // zustand store (AuthStore) 사용
     const inquiries = useAuthStore.getState().getMyInquiries();
     const addInquiry = useAuthStore((s) => s.addInquiry);
+    const updateInquiry = useAuthStore((s) => s.updateInquiry);
     const user = useAuthStore((s) => s.user);
     const removeInquiry = useAuthStore((s) => s.removeInquiry);
 
     const handleSave = () => {
         if (!form.title.trim()) {
-            alert('제목을 입력하세요');
+            alert('제목을 입력하세요'); // 모달로 수정하기
             return;
         }
-        const newItem = {
-            title: form.title,
-            content: form.content,
-        };
-        addInquiry(newItem); // ✅ 현재 로그인한 유저 계정에 저장됨
+        if (editId) {
+            // ✅ 수정
+            updateInquiry(editId, {
+                title: form.title,
+                content: form.content,
+            });
+            setEditId(null);
+        } else {
+            // ✅ 신규 추가
+            addInquiry({
+                title: form.title,
+                content: form.content,
+            });
+        }
         setForm({ title: '', content: '' });
         setMode('list');
     };
 
     const handleCancel = () => {
         setForm({ title: '', content: '' });
+        setEditId(null);
         setMode('list');
     };
 
@@ -56,7 +68,7 @@ const InquirySection = () => {
                             {inquiries.map((q) => (
                                 <div className="row clickable" key={q.id}>
                                     <span>{q.id}</span>
-                                    <span>{q.date}</span>
+                                    <span>{q.date.split(" ")[0]}</span>
                                     <span
                                         className="detailBtn"
                                         onClick={() => {
@@ -121,8 +133,13 @@ const InquirySection = () => {
                         <strong>번호:</strong> {selectedInquiry.id}
                     </p>
                     <p>
-                        <strong>날짜:</strong> {selectedInquiry.date}
+                        <strong>작성일:</strong> {selectedInquiry.date}
                     </p>
+                    {selectedInquiry.updatedAt && (
+                        <p>
+                            <strong>수정일:</strong> {selectedInquiry.updatedAt}
+                        </p>
+                    )}
                     <p>
                         <strong>제목:</strong> {selectedInquiry.title}
                     </p>
@@ -134,7 +151,15 @@ const InquirySection = () => {
                     </p>
 
                     <div className="detail-buttons">
-                        <button>수정</button>
+                        <button 
+                        onClick={() => {
+                            setForm({
+                                title: selectedInquiry.title,
+                                content: selectedInquiry.content,
+                            });
+                            setEditId(selectedInquiry.id); // 수정 대상 지정
+                            setMode('form'); // form 모드 전환
+                        }}>수정</button>
                         <button
                             onClick={() => {
                                 removeInquiry(selectedInquiry.id);

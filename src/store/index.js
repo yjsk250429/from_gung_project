@@ -76,29 +76,48 @@ export const useAuthStore = create((set, get) => ({
     addInquiry: (item) => {
         const { user, members } = get();
         if (!user) return;
-
-        // 해당 유저 객체 찾기
+    
         const target = members.find((m) => m.id === user.id);
         if (!target) return;
-
+    
         const prev = target.inquiries || [];
+    
+        // ✅ 작성일은 ISO + 시간
+        const now = new Date();
+        const formatDateTime = (date) => {
+            const pad = (n) => String(n).padStart(2, '0');
+            return (
+                date.getFullYear() +
+                '-' +
+                pad(date.getMonth() + 1) +
+                '-' +
+                pad(date.getDate()) +
+                ' ' +
+                pad(date.getHours()) +
+                ':' +
+                pad(date.getMinutes()) +
+                ':' +
+                pad(date.getSeconds())
+            );
+        };
+    
         const newItem = {
             id: prev.length + 1,
             title: item.title,
             content: item.content,
-            date: new Date().toISOString().slice(0, 10),
+            date: formatDateTime(now),   // 최초 작성일
+            updatedAt: null,             // 수정일은 없음
             status: '대기중',
         };
-
+    
         const updatedUser = { ...target, inquiries: [newItem, ...prev] };
         const updatedMembers = members.map((m) => (m.id === target.id ? updatedUser : m));
-
-        // 상태 및 로컬스토리지 반영
+    
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
     },
-
+    
     // ✅ 내 문의 목록 가져오기
     getMyInquiries: () => {
         const { user } = get();
@@ -134,6 +153,45 @@ export const useAuthStore = create((set, get) => ({
         const updatedUser = { ...user, inquiries: [] };
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
 
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+    },
+
+    updateInquiry: (id, updates) => {
+        const { user, members } = get();
+        if (!user) return;
+    
+        const formatDateTime = (date) => {
+            const pad = (n) => String(n).padStart(2, '0');
+            return (
+                date.getFullYear() +
+                '-' +
+                pad(date.getMonth() + 1) +
+                '-' +
+                pad(date.getDate()) +
+                ' ' +
+                pad(date.getHours()) +
+                ':' +
+                pad(date.getMinutes()) +
+                ':' +
+                pad(date.getSeconds())
+            );
+        };
+    
+        const updatedInquiries = (user.inquiries || []).map((q) =>
+            q.id === id
+                ? {
+                      ...q,
+                      ...updates,
+                      updatedAt: formatDateTime(new Date()), // ✅ 수정일 기록
+                  }
+                : q
+        );
+    
+        const updatedUser = { ...user, inquiries: updatedInquiries };
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+    
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));

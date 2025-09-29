@@ -36,6 +36,7 @@
         .left {
             position: sticky;
             top: vw(150);
+            z-index: 900;
             .img-wrap {
                 width: vw(598);
                 height: vw(700);

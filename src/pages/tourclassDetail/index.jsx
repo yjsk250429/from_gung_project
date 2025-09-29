@@ -11,6 +11,7 @@ import { DetailReviews, Schedule, SelectDate } from '../../components/tourclassD
 import CouponDown from '../../components/ui/modal/CouponDown';
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from 'react-icons/io';
 import WishModal from '../../components/ui/modal/WishModal';
+import TourReviewDetail from '../../components/ui/modal/TourReviewDetail';
 
 const renderStars = (rate) => {
     const stars = [];
@@ -137,7 +138,8 @@ const TourClassDatail = () => {
                 </article>
             </div>
             <CouponDown />
-            <WishModal className="addWish" />
+            <WishModal className='underReview'/>
+            <TourReviewDetail/>
         </section>
     );
 };

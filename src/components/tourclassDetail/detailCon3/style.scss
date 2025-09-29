@@ -3,18 +3,21 @@
 
 .detailReviews {
     width: 100%;
+    // width: vw(924);
     height: vw(600);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     .reviewsList {
         width: 100%;
+        // width: vw(1150);
         height: vw(360);
+        margin-left: vw(-800);
         margin-top: vw(40);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        overflow: hidden;
+        // overflow: hidden;
         .reviewsRow {
             width: max-content;
             height: vw(70);
@@ -23,7 +26,6 @@
             gap: vw(40);
             will-change: transform;
             // position: relative;
-
             .reviewItem {
                 display: flex;
                 align-items: center;
@@ -33,8 +35,13 @@
                 padding: vw(10) vw(20);
                 box-sizing: border-box;
                 position: relative;
+                cursor: pointer;
+                &:hover{
+                    opacity: 0.7;
+                    box-shadow: inset 0 0 0 2px $sub3;
+                }
                 &--new {
-                    border: 2px solid $sub3;
+                    box-shadow: inset 0 0 0 2px $sub3; 
                     font-weight: bold;
 
                     p {
@@ -122,17 +129,27 @@
             .reviewInputArea {
                 display: flex;
                 flex: 1;
+                position: relative;
                 .reviewInput {
                     width: 100%;
                     height: vw(48);
-
                     border: none;
-                    background-color: $sub2;
+                    border: 1px solid $sub3;
+                    // background-color: rgba($color: $sub2, $alpha: 0.2);
                     border-radius: vw(100);
                     padding: 0 vw(30);
                     outline: none;
-
                     @include font-18px;
+                }
+                .charCount{
+                    position: absolute;
+                    @include font-16px-SB;
+                    right: 0;
+                    bottom: vw(-30);
+                    color: $sub3;
+                    span{
+                        color: #999;
+                    }
                 }
             }
         }
@@ -147,6 +164,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: vw(50);
             &:hover {
                 background: $sub3;
             }

@@ -254,6 +254,127 @@
             }
         }
     }
+    .detail {
+        border: vw(1) solid #ddd;
+        border-radius: vw(8);
+        background: #fafafa;
+        padding: vw(20);
+        margin-top: vw(20);
+
+        h3 {
+            margin-bottom: vw(16);
+            font-weight: 600;
+            font-size: vw(18);
+        }
+
+        p {
+            margin: vw(8) 0;
+            font-size: vw(14);
+            color: #333;
+
+            strong {
+                margin-right: vw(8);
+            }
+        }
+
+        .detail-buttons {
+            margin-top: vw(20);
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: vw(8);
+            button {
+                font-family: $font-main;
+                @include font-14px;
+                padding: vw(8) vw(16);
+                background: #333;
+                color: #fff;
+                border: none;
+                border-radius: vw(4);
+                cursor: pointer;
+                font-size: vw(14);
+
+                &:hover {
+                    background: #555;
+                }
+                &:last-child {
+                    margin-left: vw(10);
+                }
+            }
+        }
+    }
+    .form {
+        padding: vw(20);
+        border: vw(1) solid #ddd;
+        border-radius: vw(8);
+        background: #fafafa;
+        font-size: vw(16);
+        color: #333;
+
+        .form-group {
+            margin-bottom: vw(20);
+
+            label {
+                display: block;
+                font-weight: 500;
+                margin-bottom: vw(8);
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                border: vw(1) solid #ccc;
+                border-radius: vw(4);
+                padding: vw(10);
+                font-size: vw(14);
+                outline: none;
+
+                &:focus {
+                    border-color: #333;
+                }
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: vw(100);
+            }
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: vw(12);
+
+            button {
+                font-family: $font-main;
+                padding: vw(10) vw(20);
+                border: none;
+                border-radius: vw(4);
+                font-size: vw(14);
+                cursor: pointer;
+                transition: background 0.2s;
+
+                &:first-of-type {
+                    background: #333;
+                    color: #fff;
+
+                    &:hover {
+                        background: #555;
+                    }
+                }
+
+                &:last-of-type {
+                    background: #eee;
+                    color: #333;
+
+                    &:hover {
+                        background: #ddd;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // 1대1 문의사항

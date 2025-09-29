@@ -7,7 +7,7 @@ import { IoClose } from 'react-icons/io5';
 
 const DetailReviews = ({ thisitem }) => {
     const { title, category } = thisitem;
-    const {openWishModal} = useModalStore();
+    const {openWishModal, openTourReview} = useModalStore();
     const reviewsItemList = [
         {
             id: 1,
@@ -246,7 +246,6 @@ const DetailReviews = ({ thisitem }) => {
           category: getCategoryKor(category),
           isNew: true,
         };
-      
         addReview(newReview); // Zustand에만 추가
       
         // 입력 초기화
@@ -264,44 +263,54 @@ const DetailReviews = ({ thisitem }) => {
                         ref={(el) => (rowRefs.current[rowIndex] = el)}
                     >
                         {/* 루프를 위해 아이템 2배 복제 */}
-                        {[...rowItems, ...rowItems].map(
-  ({ id, profile, reviewComment, rate, rating, isNew, nickName }, i) => {
-    const score = rate ?? rating; 
-    const isMyReview = isLoggedIn && userNickname === nickName;
-    return (
-      <div
-        key={`${id}-${i}`}
-        className={`reviewItem ${isNew ? 'reviewItem--new' : ''}`}
-      >
-        <span>
-          <img src={profile} alt={`리뷰어 ${id}`} />
-        </span>
-        {isMyReview && (
-          <i
-          onClick={() => handleDelete(id)}
-          >
-            <IoClose />
-          </i>
-        )}
-        <div className="txts">
-          <p className="stars">
-            {[...Array(5)].map((_, starIndex) => {
-              if (score >= starIndex + 1) {
-                return <IoMdStar key={starIndex} />;
-              } else if (score >= starIndex + 0.5) {
-                return <IoMdStarHalf key={starIndex} />; 
-                // 반 별을 따로 쓰려면 IoMdStarHalf 아이콘 사용 가능
-              } else {
-                return <IoMdStarOutline key={starIndex} />;
-              }
-            })}
-          </p>
-          <p className="comment">{reviewComment}</p>
-        </div>
-      </div>
-    );
-  }
-)}
+                        {[...rowItems, ...rowItems, ...rowItems].map(
+                    ({ id, profile, reviewComment, rate, rating, isNew, nickName }, i) => {
+                    const score = rate ?? rating; 
+                    const isMyReview = isLoggedIn && userNickname === nickName;
+                    return (
+                    <div
+                        key={`${id}-${i}`}
+                        className={`reviewItem ${isNew ? 'reviewItem--new' : ''}`}
+                        onClick={() => {
+                            openTourReview({
+                              id,
+                              profile,
+                              nickName,
+                              reviewComment,
+                              rate: score,
+                              date: new Date().toISOString().split("T")[0],
+                            });
+                          }}
+                    >
+                        <span>
+                        <img src={profile} alt={`리뷰어 ${id}`} />
+                        </span>
+                        {isMyReview && (
+                        <i
+                        onClick={(e) =>{e.stopPropagation();handleDelete(id);}}
+                        >
+                            <IoClose />
+                        </i>
+                        )}
+                <div className="txts">
+                <p className="stars">
+                    {[...Array(5)].map((_, starIndex) => {
+                    if (score >= starIndex + 1) {
+                        return <IoMdStar key={starIndex} />;
+                    } else if (score >= starIndex + 0.5) {
+                        return <IoMdStarHalf key={starIndex} />; 
+                        // 반 별을 따로 쓰려면 IoMdStarHalf 아이콘 사용 가능
+                    } else {
+                        return <IoMdStarOutline key={starIndex} />;
+                    }
+                    })}
+                </p>
+                <p className="comment">{reviewComment}</p>
+                            </div>
+                    </div>
+                    );
+                }
+                )}
                     </article>
                 ))}
             </div>
@@ -347,7 +356,7 @@ const DetailReviews = ({ thisitem }) => {
                                     ? '리뷰를 입력해주세요'
                                     : '로그인 후 이용 가능한 서비스 입니다'
                             }
-                            maxLength={30}
+                            maxLength={150}
                             disabled={!isLoggedIn}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter' && isLoggedIn) {
@@ -355,6 +364,7 @@ const DetailReviews = ({ thisitem }) => {
                                 }
                             }}
                         />
+                        <p className="charCount"><span>{reviewInput.length}</span> / 150</p>
                     </div>
                 </article>
 

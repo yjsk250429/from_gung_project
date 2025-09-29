@@ -536,6 +536,32 @@ export const useAuthStore = create((set, get) => ({
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
     },
+    updateReview: (id, updates) => {
+        const { user, members } = get();
+        if (!user) return;
+      
+        const formatDateTime = (date) => { /* ... 동일 ... */ };
+      
+        const updatedReviews = (Array.isArray(user.reviews) ? user.reviews : []).map((r) =>
+          r.id === id ? { ...r, ...updates, updatedAt: formatDateTime(new Date()) } : r
+        );
+      
+        const updatedUser = { ...user, reviews: updatedReviews };
+      
+        // ✅ user.id가 없을 때도 반영되도록 처리
+        if (!user.id) {
+          set({ user: updatedUser });
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+          return;
+        }
+      
+        const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+        set({ user: updatedUser, members: updatedMembers });
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('members', JSON.stringify(updatedMembers));
+      },
+      
+    
 }));
 
 export const useModalStore = create((set) => ({
@@ -583,6 +609,15 @@ export const useModalStore = create((set) => ({
     openSelectProfile: (image = '') =>
         set({ selectProfileOpen: true, selectedProfileImage: image }),
     closeSelectProfile: () => set({ selectProfileOpen: false, selectedProfileImage: '' }),
+
+    tourReviewOpen: false,
+    ottReviewOpen: false,
+    selectedReview: null,
+
+    openTourReview: (review) => set({ tourReviewOpen: true, selectedReview: review }),
+    closeTourReview: () => set({ tourReviewOpen: false }),
+    openOttReview: () => set({ ottReviewOpen: true }),
+    closeOttReview: () => set({ ottReviewOpen: false }),
 
     openNeedLogin: () => set({ needLoginOpen: true }),
     closeNeedLogin: () => set({ needLoginOpen: false }),

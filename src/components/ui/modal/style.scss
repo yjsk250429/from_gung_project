@@ -8,7 +8,120 @@
     .modal {
         @include modalLayout;
         position: relative;
+        &.tourReviewDetail{
+            width: vw(500);   
+            height: vw(400);
+            padding:vw(50);
+            box-sizing: border-box;
+            position: relative;
+            &::after{
+                content: "";
+                width: vw(464);
+                height: vw(366);
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-image: url('/images/components/review_detail_frame.png');
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
+                opacity: 0.1;
+                z-index: -1;
+            }
+            .top{
+                display: flex;
+                align-items: center;
+                gap: vw(20);
+                margin-bottom: vw(20);
+                .profile-wrap{
+                    width: vw(80);
+                    height: vw(80);
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .name-wrap{
+                    strong{
+                       display: block;
+                       margin-bottom: vw(8);
+                       @include font-18px;
+                    }
+                    .date{
+                        color: #666;
+                        display: block;
+                        @include font-14px;
+                    }
+                    .stars{
+                        @include font-16px;
+                        color: #666;
+                        span{
+                           margin-left: vw(-1);
+                            color: $sub3;
+                        }
+                    }
+                }
+            }
+            .bottom{
+                .edit{
+                    display: flex;
+                    justify-content: flex-end;
+                    gap: vw(14);
+                    margin-bottom: vw(10);
+                    li{
+                        @include font-15px;
+                        color: #666;
+                        position: relative;
+                        cursor: pointer;
+                        &:first-child{
+                            &::after{
+                                content: "";
+                                display: block;
+                                width: 1px;
+                                height: vw(14);
+                                background: #666;
+                                position: absolute;
+                                right: vw(-8);
+                                top: 50%;
+                                transform: translateY(-50%);
+                            }
+                        }
+                    }
+                }
+                .textarea-wrap{
+                    position: relative;
+                    .content-edit{
+                        width: 100%;
+                    height: vw(140);
+                    border: vw(1) solid #ccc;
+                    border-radius: vw(4);
+                    padding: vw(8);
+                    @include font-14px;
+                    outline: none;
+                    &:focus {
+                        border-color: #333;
+                    }
+                }
+                .char-count{
+                    position: absolute;
+                    @include font-14px;
+                    right: vw(8);
+                    bottom: vw(12);
+                    color: #999;
+                }
+            }
+                .content{
+                    
+                    @include font-18px;
+                    height: vw(150);
+                }
+            }
+            .btns{
 
+            }
+
+        }
         &.coupon {
             position: absolute;
             right: vw(160);
@@ -108,8 +221,6 @@
             background-image: url('/images/components/bg_flower.png');
             background-size: 80%;
             background-position: 210% 230%;
-        }
-        &.wishModal {
             .button {
                 margin-top: 0;
             }

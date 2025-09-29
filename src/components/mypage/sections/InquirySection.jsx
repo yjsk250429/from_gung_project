@@ -17,7 +17,7 @@ const InquirySection = () => {
 
     const handleSave = () => {
         if (!form.title.trim()) {
-            alert('제목을 입력하세요'); // 모달로 수정하기
+            openWishModal("제목을 입력하세요", { text1: "확인" });
             return;
         }
         if (editId) {

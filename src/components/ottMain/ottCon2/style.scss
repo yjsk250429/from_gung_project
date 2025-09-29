@@ -27,4 +27,36 @@
             }
         }
     }
+    @media screen and (max-width: 393px) {
+        width: 100%;
+        .inner {
+            width: 353px;
+            height: 208px;
+            .myDearest_04,
+            .myDearest_05 {
+                display: none;
+            }
+            .myDearest_01 img {
+                width: 114px;
+                height: 208px;
+                content: url('/images/ott/myDearest_mobile_01.png');
+                display: block;
+            }
+            .myDearest_02 img {
+                width: 114px;
+                height: 208px;
+                content: url('/images/ott/myDearest_mobile_02.png');
+            }
+            .myDearest_03 img {
+                width: 114px;
+                height: 208px;
+                content: url('/images/ott/myDearest_mobile_03.png');
+            }
+        }
+
+        .con2Poster {
+            &:hover img {
+            }
+        }
+    }
 }

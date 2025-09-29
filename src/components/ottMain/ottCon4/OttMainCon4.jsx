@@ -85,12 +85,14 @@ const OttMainCon4 = () => {
             <div className="slider-container">
                 <Slider {...settings}>
                     {con4SlidesInfo.map((slide, idx) => (
-                        <div key={idx}>
-                            <img
-                                className="posterImg"
-                                src={slide.posterImg}
-                                alt={`slide ${idx + 1}`}
-                            />
+                        <div key={idx} className="box">
+                            <div className="imgwrap">
+                                <img
+                                    className="posterImg"
+                                    src={slide.posterImg}
+                                    alt={`slide ${idx + 1}`}
+                                />
+                            </div>
                             <span>10p</span>
                             <article className="ottInfo">
                                 <img className="titleLogo" src={slide.titleLogo} alt="title-logo" />

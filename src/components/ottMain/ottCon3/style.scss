@@ -1,155 +1,271 @@
-@use "../../../styles/utils" as *;
-@use "../../../styles/base" as *;
+@use '../../../styles/utils' as *;
+@use '../../../styles/base' as *;
 
 @keyframes loopRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .ottMainCon3 {
-  width: 100%;
-  background-color: $black;
-  overflow: hidden;
+    width: 100%;
+    background-color: $black;
+    overflow: hidden;
 
-  .inner {
-    display: flex;
-    justify-content: space-between;
-    .ottPosters_Left {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .inner {
+        display: flex;
+        justify-content: space-between;
+        .ottPosters_Left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .poster {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: vw(15);
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+
+            .jagae {
+                width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1;
+                opacity: 0;
+            }
+            .posterText {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                width: max-content;
+                color: $white;
+                z-index: 1;
+                opacity: 0;
+                h3 {
+                    @include font-35px-SB;
+                    margin-bottom: vw(30);
+                }
+                h4 {
+                    @include font-20px-M;
+                    margin-bottom: vw(30);
+                }
+                img {
+                    max-width: vw(20);
+                    height: auto;
+                    margin-bottom: vw(30);
+                }
+                p {
+                    @include font-20px-R;
+                }
+            }
+            .overlay {
+                display: block;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+
+            .jagae,
+            .posterText,
+            .overlay {
+                transition: opacity 0.3s ease-in-out;
+            }
+
+            &.pic04 {
+                width: vw(750);
+                height: vw(420);
+                background-image: url('/images/ott/main_05.png');
+            }
+            &.pic05 {
+                width: vw(750);
+                height: vw(1060);
+                background-image: url('/images/ott/main_06.png');
+            }
+
+            &:hover {
+                .jagae {
+                    opacity: 1;
+                }
+                .posterText {
+                    opacity: 1;
+                }
+                .overlay {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .jagaeImg {
+            width: vw(750);
+            height: vw(640);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-image: url('/images/ott/mainJagae_Dot.png');
+            background-position: center;
+            background-repeat: no-repeat;
+
+            img {
+                animation: loopRotate 16s infinite linear;
+                max-width: vw(350);
+            }
+        }
     }
 
-    .poster {
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-radius: vw(15);
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-
-      .jagae {
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        opacity: 0;
-      }
-      .posterText {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
+    .textLoop_Top {
+        padding-top: vw(200);
+        display: flex;
+        flex-wrap: nowrap;
         width: max-content;
-        color: $white;
-        z-index: 1;
-        opacity: 0;
-        h3 {
-          @include font-35px-SB;
-          margin-bottom: vw(30);
-        }
-        h4 {
-          @include font-20px-M;
-          margin-bottom: vw(30);
-        }
-        img {
-          max-width: vw(20);
-          height: auto;
-          margin-bottom: vw(30);
-        }
+        will-change: transform;
         p {
-          @include font-20px-R;
+            padding-right: vw(150);
+            font-family: $font-sub;
+            @include font-160px-B;
+            color: $main2;
         }
-      }
-      .overlay {
-        display: block;
+    }
+
+    .textLoop_Bottom {
+        padding-bottom: vw(200);
+        display: flex;
+        flex-wrap: nowrap;
+        width: max-content;
+        will-change: transform;
+        p {
+            padding-right: vw(150);
+            font-family: $font-sub;
+            @include font-160px-B;
+            color: $white;
+        }
+    }
+    @media screen and (max-width: 393px) {
         width: 100%;
-        height: 100%;
-        opacity: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
+        .inner {
+            width: 353px;
+            height: 485px;
+            margin: auto;
+            .ottPosters_Left {
+                width: 353px;
+                height: 205px !important;
+            }
+            .poster {
+                .jagae {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 1;
+                    opacity: 0;
+                }
+                .posterText {
+                    h3 {
+                        font-size: 15px;
+                        margin-bottom: 12px;
+                    }
+                    h4 {
+                        font-size: 12px;
+                        font-weight: 300;
+                        margin-bottom: 12px;
+                        word-break: keep-all;
+                        line-height: 1.2;
 
-      .jagae,
-      .posterText,
-      .overlay {
-        transition: opacity 0.3s ease-in-out;
-      }
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                    img {
+                        max-width: 10px;
+                        height: auto;
+                    }
+                    p {
+                        width: 180px;
+                        word-break: keep-all;
+                        font-size: 10px;
+                        font-weight: 300;
+                        margin: auto;
 
-      &.pic04 {
-        width: vw(750);
-        height: vw(420);
-        background-image: url("/images/ott/main_05.png");
-      }
-      &.pic05 {
-        width: vw(750);
-        height: vw(1060);
-        background-image: url("/images/ott/main_06.png");
-      }
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3; // 보여줄 줄 수
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        br {
+                            display: none;
+                        }
+                    }
+                }
+                .overlay {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    background-color: rgba(0, 0, 0, 0.5);
+                }
 
-      &:hover {
-        .jagae {
-          opacity: 1;
+                .jagae,
+                .posterText,
+                .overlay {
+                }
+                &.pic04 {
+                    width: 353px;
+                    height: 205px !important;
+                }
+                &.pic05 {
+                    width: 171px !important;
+                    height: 230px !important;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                }
+                &.hover {
+                    .jagae {
+                    }
+                    .posterText {
+                    }
+                    .overlay {
+                    }
+                }
+            }
+            .jagaeImg {
+                width: 120px !important;
+                height: 24px !important;
+                background-size: cover;
+                position: absolute;
+                top: 80%;
+                left: 25px;
+                transform: translateY(-80%);
+                img {
+                }
+            }
         }
-        .posterText {
-          opacity: 1;
+        .textLoop_Top {
+            p {
+                margin-top: 50px;
+                margin-bottom: 20px;
+                font-size: 40px;
+            }
         }
-        .overlay {
-          opacity: 1;
+        .textLoop_Bottom {
+            p {
+                margin-bottom: 50px;
+                font-size: 40px;
+            }
         }
-      }
     }
-
-    .jagaeImg {
-      width: vw(750);
-      height: vw(640);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      background-image: url("/images/ott/mainJagae_Dot.png");
-      background-position: center;
-      background-repeat: no-repeat;
-
-      img {
-        animation: loopRotate 16s infinite linear;
-        max-width: vw(350);
-      }
-    }
-  }
-
-  .textLoop_Top {
-    padding-top: vw(200);
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
-    will-change: transform;
-    p {
-      padding-right: vw(150);
-      font-family: $font-sub;
-      @include font-160px-B;
-      color: $main2;
-    }
-  }
-
-  .textLoop_Bottom {
-    padding-bottom: vw(200);
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
-    will-change: transform;
-    p {
-      padding-right: vw(150);
-      font-family: $font-sub;
-      @include font-160px-B;
-      color: $white;
-    }
-  }
 }

@@ -4,28 +4,26 @@
 @use '../../styles/ui/tourList' as *;
 
 .top {
-  .slider {
-    width: vw(1490);
-    overflow: hidden; // 뷰포트
+    .slider {
+        width: vw(1490);
+        overflow: hidden; // 뷰포트
 
-    .recommend {
-      @include twoBoxes;   // 카드 레이아웃 그대로
-      will-change: transform;
-      display: flex;       // JS에서 translateX로 이동
-      
+        .recommend {
+            @include twoBoxes; // 카드 레이아웃 그대로
+            will-change: transform;
+            display: flex; // JS에서 translateX로 이동
+        }
     }
-  }
 
-  @media screen and (max-width: 393px) {
-    margin-bottom: 50px;
-  }
+    @media screen and (max-width: 393px) {
+        margin-bottom: 50px;
+    }
 }
 
 .TourClassList {
-  margin: auto;
-  @include tourList;
-  @media screen and (max-width: 393px) {
-    width: 355px;
-    margin-top: 50px;
-  }
+    @include tourList;
+    @media screen and (max-width: 393px) {
+        width: 355px;
+        margin: 0 auto;
+    }
 }

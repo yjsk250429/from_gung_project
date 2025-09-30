@@ -36,4 +36,39 @@
             margin-top: vw(250);
         }
     }
+    @media screen and (max-width: 393px) {
+        width: 100%;
+        position: relative;
+        .inner {
+            margin-top: -150px;
+            .ottclass {
+                // margin-bottom: 50px;
+            }
+
+            .tabs {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                &.on {
+                }
+            }
+        }
+        .sort {
+            margin-top: 120px;
+            margin-bottom: -20px;
+            li {
+                display: inline-block;
+                align-items: center;
+                width: 42px;
+                font-size: 12px;
+                line-height: 1;
+                i {
+                }
+            }
+        }
+        p {
+            .button {
+            }
+        }
+    }
 }

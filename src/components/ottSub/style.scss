@@ -133,4 +133,58 @@
     button {
         margin-top: vw(100);
     }
+    @media screen and (max-width: 393px) {
+        width: 100%;
+        .top {
+            .top-head {
+            }
+            .roundTap {
+                // position: absolute;
+                li {
+                    &:first-child {
+                    }
+                }
+            }
+            span {
+                font-size: 18px;
+            }
+
+            .recommend {
+                li {
+                }
+            }
+            .ott-search {
+                width: 353px;
+                input {
+                    font-size: 12px;
+                }
+                button {
+                }
+            }
+        }
+    }
+
+    .ottlist {
+        margin-top: 50px;
+        grid-template-columns: repeat(2, 1fr);
+        width: 355px;
+        margin: auto;
+        margin-top: 50px;
+        li {
+            width: 171px;
+            height: 224px;
+            margin-bottom: 10px;
+            img {
+            }
+            span {
+                width: 30px;
+                height: 40px;
+                border-radius: 0 0 5px 5px;
+                font-size: 12px;
+                padding: 15px 5px;
+            }
+        }
+        button {
+        }
+    }
 }

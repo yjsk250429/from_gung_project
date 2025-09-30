@@ -202,14 +202,15 @@
         // glyph-orientation-horizontal: 16.5;
         // margin-left: px;
 
-        // gap: 12px;
+        gap: 12px;
         // width: 95%;
 
         li {
             .img-wrap {
                 width: 171px;
                 height: 224px;
-                margin-bottom: 10px;
+                margin-bottom: 5px;
+
                 img {
                     transform: scale(1);
                     width: 100%;
@@ -293,6 +294,8 @@
                 strong {
                     font-size: 12px;
                     font-weight: 400;
+                    white-space: nowrap; // 줄바꿈 안 함
+                    text-overflow: ellipsis;
                 }
                 i {
                     font-size: 12px;

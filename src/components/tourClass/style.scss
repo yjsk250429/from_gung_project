@@ -7,6 +7,7 @@
     .slider {
         width: vw(1490);
         overflow: hidden; // 뷰포트
+        margin: 0 auto;
 
         .recommend {
             @include twoBoxes; // 카드 레이아웃 그대로

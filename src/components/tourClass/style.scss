@@ -4,18 +4,27 @@
 @use '../../styles/ui/tourList' as *;
 
 .top {
-    .recommend {
-        @include twoBoxes;
+    .slider {
+        width: vw(1490);
+        overflow: hidden; // 뷰포트
+        margin: 0 auto;
+
+        .recommend {
+            @include twoBoxes; // 카드 레이아웃 그대로
+            will-change: transform;
+            display: flex; // JS에서 translateX로 이동
+        }
     }
+
     @media screen and (max-width: 393px) {
         margin-bottom: 50px;
     }
 }
+
 .TourClassList {
-    margin: auto;
     @include tourList;
     @media screen and (max-width: 393px) {
         width: 355px;
-        margin-top: 50px;
+        margin: 0 auto;
     }
 }

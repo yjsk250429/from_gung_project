@@ -8,10 +8,11 @@
     gap: vw(35);
     margin-bottom: vw(150);
     li {
+        flex-shrink: 0;
         border-radius: vw(10);
         width: vw(693);
         height: vw(320);
-        position: relative;
+        position: relative; 
         overflow: hidden;
         cursor: pointer;
         &:hover {

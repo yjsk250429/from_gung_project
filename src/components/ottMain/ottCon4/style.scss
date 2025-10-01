@@ -93,13 +93,14 @@
         .slider-container {
             height: 440px;
             .slick-slide {
-                width: 250px;
-                height: 440px;
                 .box {
+                    width: 250px;
+                    height: 440px;
                     .imgwrap {
                         width: 250px;
                         height: 250px;
                         position: relative;
+                        border-radius: 5px;
                         .posterImg {
                             width: 100%;
                             height: 100%;
@@ -112,11 +113,11 @@
                     span {
                         width: 40px;
                         height: 50px;
-                        border-radius: 0 0 5px 5px;
                         font-size: 18px;
                         margin-left: 15px;
                     }
                     .ottInfo {
+                        width: 250px;
                         height: 190px;
                         padding: 25px;
                         .titleLogo {

@@ -148,6 +148,9 @@
                     justify-content: right;
                     align-items: center;
                     cursor: pointer;
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
         }

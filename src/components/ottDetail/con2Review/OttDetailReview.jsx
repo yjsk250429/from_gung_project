@@ -2,13 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import './style.scss';
 import { MdStar, MdStarBorder, MdStarHalf } from 'react-icons/md';
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
-import { TiArrowSortedDown } from 'react-icons/ti';
 import Button from '../../ui/button/Button';
 
 const INITIAL_COUNT = 6; // 처음 6개
 const LOAD_MORE_STEP = 3; // 클릭마다 3개 추가
 
-// 🫧 하트 파티클 컴포넌트 (자동으로 나타났다 사라짐)
 // 🫧 하트 파티클 컴포넌트 (자동으로 나타났다 사라짐)
 const HeartBurst = ({ count = 10, duration = 720 }) => {
     const [alive, setAlive] = useState(true);
@@ -100,8 +98,6 @@ const OttDetailReview = ({ reviews = [] }) => {
         });
     };
 
-    const toggleOpen = (id) => setOpen((prev) => ({ ...prev, [id]: !prev[id] }));
-
     // StrictMode에서도 +1/-1 정확히
     const toggleLike = (id) => {
         const wasLiked = !!liked[id];
@@ -169,14 +165,9 @@ const OttDetailReview = ({ reviews = [] }) => {
                                 <p>{r.content}</p>
                             </div>
 
-                            {/* <div
-                                className={`more ${open[r.id] ? 'open' : ''}`}
-                                role="button"
-                                onClick={() => toggleOpen(r.id)}
-                            >
-                                {open[r.id] ? '접기' : '더보기'}
-                                <TiArrowSortedDown />
-                            </div> */}
+                            <div className="more" role="button">
+                                더보기
+                            </div>
                         </div>
                     ))}
                 </div>

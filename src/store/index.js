@@ -76,12 +76,12 @@ export const useAuthStore = create((set, get) => ({
     addInquiry: (item) => {
         const { user, members } = get();
         if (!user) return;
-    
+
         const target = members.find((m) => m.id === user.id);
         if (!target) return;
-    
+
         const prev = target.inquiries || [];
-    
+
         // ✅ 작성일은 ISO + 시간
         const now = new Date();
         const formatDateTime = (date) => {
@@ -100,24 +100,24 @@ export const useAuthStore = create((set, get) => ({
                 pad(date.getSeconds())
             );
         };
-    
+
         const newItem = {
             id: prev.length + 1,
             title: item.title,
             content: item.content,
-            date: formatDateTime(now),   // 최초 작성일
-            updatedAt: null,             // 수정일은 없음
+            date: formatDateTime(now), // 최초 작성일
+            updatedAt: null, // 수정일은 없음
             status: '대기중',
         };
-    
+
         const updatedUser = { ...target, inquiries: [newItem, ...prev] };
         const updatedMembers = members.map((m) => (m.id === target.id ? updatedUser : m));
-    
+
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
     },
-    
+
     // ✅ 내 문의 목록 가져오기
     getMyInquiries: () => {
         const { user } = get();
@@ -161,7 +161,7 @@ export const useAuthStore = create((set, get) => ({
     updateInquiry: (id, updates) => {
         const { user, members } = get();
         if (!user) return;
-    
+
         const formatDateTime = (date) => {
             const pad = (n) => String(n).padStart(2, '0');
             return (
@@ -178,7 +178,7 @@ export const useAuthStore = create((set, get) => ({
                 pad(date.getSeconds())
             );
         };
-    
+
         const updatedInquiries = (user.inquiries || []).map((q) =>
             q.id === id
                 ? {
@@ -188,10 +188,10 @@ export const useAuthStore = create((set, get) => ({
                   }
                 : q
         );
-    
+
         const updatedUser = { ...user, inquiries: updatedInquiries };
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
-    
+
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
@@ -465,32 +465,34 @@ export const useAuthStore = create((set, get) => ({
     cancelBooking: (bookingId) => {
         const { user, members } = get();
         if (!user) return;
-    
+
         let rewardToRefund = 0;
-    
-        const updatedBookings = (Array.isArray(user.bookings) ? [...user.bookings] : []).map((b) => {
-            if (b.id === bookingId && b.status === 'confirmed') {
-                // ✅ 취소되는 예약에서 환불할 리워드 계산
-                const REWARD_UNIT = 2000;
-                rewardToRefund = Math.ceil((b.finalPrice || 0) / REWARD_UNIT);
-                return { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() };
+
+        const updatedBookings = (Array.isArray(user.bookings) ? [...user.bookings] : []).map(
+            (b) => {
+                if (b.id === bookingId && b.status === 'confirmed') {
+                    // ✅ 취소되는 예약에서 환불할 리워드 계산
+                    const REWARD_UNIT = 2000;
+                    rewardToRefund = Math.ceil((b.finalPrice || 0) / REWARD_UNIT);
+                    return { ...b, status: 'cancelled', cancelledAt: new Date().toISOString() };
+                }
+                return b;
             }
-            return b;
-        });
-    
+        );
+
         // 리워드 차감 (최소 0 이상 유지)
         const updatedUser = {
             ...user,
             bookings: updatedBookings,
             reward: Math.max(0, (user.reward || 0) - rewardToRefund),
         };
-    
+
         if (!user.id) {
             set({ user: updatedUser });
             localStorage.setItem('user', JSON.stringify(updatedUser));
             return;
         }
-    
+
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -539,29 +541,42 @@ export const useAuthStore = create((set, get) => ({
     updateReview: (id, updates) => {
         const { user, members } = get();
         if (!user) return;
-      
-        const formatDateTime = (date) => { /* ... 동일 ... */ };
-      
+
+        const formatDateTime = (date) => {
+            const pad = (n) => String(n).padStart(2, '0');
+            return (
+                date.getFullYear() +
+                '-' +
+                pad(date.getMonth() + 1) +
+                '-' +
+                pad(date.getDate()) +
+                ' ' +
+                pad(date.getHours()) +
+                ':' +
+                pad(date.getMinutes()) +
+                ':' +
+                pad(date.getSeconds())
+            );
+        };
+
         const updatedReviews = (Array.isArray(user.reviews) ? user.reviews : []).map((r) =>
-          r.id === id ? { ...r, ...updates, updatedAt: formatDateTime(new Date()) } : r
+            r.id === id
+                ? {
+                      ...r,
+                      ...updates,
+                      date: r.date, // ✅ 기존 작성일 그대로 유지
+                      updatedAt: formatDateTime(new Date()), // ✅ 수정일 기록
+                  }
+                : r
         );
-      
+
         const updatedUser = { ...user, reviews: updatedReviews };
-      
-        // ✅ user.id가 없을 때도 반영되도록 처리
-        if (!user.id) {
-          set({ user: updatedUser });
-          localStorage.setItem('user', JSON.stringify(updatedUser));
-          return;
-        }
-      
         const updatedMembers = members.map((m) => (m.id === user.id ? updatedUser : m));
+
         set({ user: updatedUser, members: updatedMembers });
         localStorage.setItem('user', JSON.stringify(updatedUser));
         localStorage.setItem('members', JSON.stringify(updatedMembers));
-      },
-      
-    
+    },
 }));
 
 export const useModalStore = create((set) => ({

@@ -8,14 +8,22 @@
     .modal {
         @include modalLayout;
         position: relative;
-        &.tourReviewDetail{
-            width: vw(500);   
-            height: vw(400);
-            padding:vw(50);
+        &.ottReviewDetail {
+            width: vw(500);
+            height: vw(450);
+            padding: vw(50);
             box-sizing: border-box;
             position: relative;
-            &::after{
-                content: "";
+            background: #000;
+        }
+        &.tourReviewDetail {
+            width: vw(500);
+            height: vw(400);
+            padding: vw(50);
+            box-sizing: border-box;
+            position: relative;
+            &::after {
+                content: '';
                 width: vw(464);
                 height: vw(366);
                 display: block;
@@ -29,54 +37,54 @@
                 opacity: 0.1;
                 z-index: -1;
             }
-            .top{
+            .top {
                 display: flex;
                 align-items: center;
                 gap: vw(20);
                 margin-bottom: vw(20);
-                .profile-wrap{
+                .profile-wrap {
                     width: vw(80);
                     height: vw(80);
-                    img{
+                    img {
                         width: 100%;
                         height: 100%;
                     }
                 }
-                .name-wrap{
-                    strong{
-                       display: block;
-                       margin-bottom: vw(8);
-                       @include font-18px;
+                .name-wrap {
+                    strong {
+                        display: block;
+                        margin-bottom: vw(8);
+                        @include font-18px;
                     }
-                    .date{
+                    .date {
                         color: #666;
                         display: block;
                         @include font-14px;
                     }
-                    .stars{
+                    .stars {
                         @include font-16px;
                         color: #666;
-                        span{
-                           margin-left: vw(-1);
+                        span {
+                            margin-left: vw(-1);
                             color: $sub3;
                         }
                     }
                 }
             }
-            .bottom{
-                .edit{
+            .bottom {
+                .edit {
                     display: flex;
                     justify-content: flex-end;
                     gap: vw(14);
                     margin-bottom: vw(10);
-                    li{
+                    li {
                         @include font-15px;
                         color: #666;
                         position: relative;
                         cursor: pointer;
-                        &:first-child{
-                            &::after{
-                                content: "";
+                        &:first-child {
+                            &::after {
+                                content: '';
                                 display: block;
                                 width: 1px;
                                 height: vw(14);
@@ -89,38 +97,35 @@
                         }
                     }
                 }
-                .textarea-wrap{
+                .textarea-wrap {
                     position: relative;
-                    .content-edit{
+                    .content-edit {
                         width: 100%;
-                    height: vw(140);
-                    border: vw(1) solid #ccc;
-                    border-radius: vw(4);
-                    padding: vw(8);
-                    @include font-14px;
-                    outline: none;
-                    &:focus {
-                        border-color: #333;
+                        height: vw(140);
+                        border: vw(1) solid #ccc;
+                        border-radius: vw(4);
+                        padding: vw(8);
+                        @include font-14px;
+                        outline: none;
+                        &:focus {
+                            border-color: #333;
+                        }
+                    }
+                    .char-count {
+                        position: absolute;
+                        @include font-14px;
+                        right: vw(8);
+                        bottom: vw(12);
+                        color: #999;
                     }
                 }
-                .char-count{
-                    position: absolute;
-                    @include font-14px;
-                    right: vw(8);
-                    bottom: vw(12);
-                    color: #999;
-                }
-            }
-                .content{
-                    
+                .content {
                     @include font-18px;
                     height: vw(150);
                 }
             }
-            .btns{
-
+            .btns {
             }
-
         }
         &.coupon {
             position: absolute;
@@ -160,7 +165,7 @@
                         @include font-14px;
                         display: block;
                     }
-                    .alreadyHas{
+                    .alreadyHas {
                         @include font-18px-B;
                         margin-top: vw(-14);
                         margin-bottom: vw(8);
@@ -180,12 +185,13 @@
                     i {
                         color: $white;
                     }
-                    &.disabled{
+                    &.disabled {
                         background: #b1b1b1;
                         cursor: auto;
-                        i{}
+                        i {
+                        }
                     }
-                    }
+                }
             }
             ul {
                 margin: vw(10) 0 vw(25) vw(10);
@@ -861,76 +867,75 @@
             }
         }
     }
-.attendance {
-    position: relative;
-
-    strong {
-        span {
-            cursor: pointer;
-        }
-    }
-
-    .attendance-board {
+    .attendance {
         position: relative;
 
-        ul {
-            background: $white;
-            border-radius: vw(8);
-            width: 100%;
-            height: vw(116);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: vw(12);
-            padding: vw(26) vw(20);
-
-            li {
-                background-image: url('/images/components/stamp_default.png');
-                background-position: 0 0;
-                background-repeat: no-repeat;
-                background-size: cover;
-                width: vw(35.21);
-                height: vw(24);
-
-                &.on {
-                    background-image: url('/images/components/stamp_on.png');
-                }
+        strong {
+            span {
+                cursor: pointer;
             }
         }
 
-        &.full {
-            .reward-overlay {
-                position: absolute;
-                inset: 0;
-                background: rgba(0, 0, 0, 0.6); // ✅ 검은색 투명 배경
-                display: flex;
-                align-items: center;
-                justify-content: center;
+        .attendance-board {
+            position: relative;
+
+            ul {
+                background: $white;
                 border-radius: vw(8);
+                width: 100%;
+                height: vw(116);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: vw(12);
+                padding: vw(26) vw(20);
+
+                li {
+                    background-image: url('/images/components/stamp_default.png');
+                    background-position: 0 0;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    width: vw(35.21);
+                    height: vw(24);
+
+                    &.on {
+                        background-image: url('/images/components/stamp_on.png');
+                    }
+                }
             }
 
-            .coupon-btn {
-                padding: vw(12) vw(24);
-                background: $main1;
-                border: none;
-                border-radius: vw(6);
-                font-weight: bold;
-                font-size: vw(16);
-                font-family: $font-main;
-                cursor: pointer;
-                color: #fff;
-                box-shadow: 0 vw(2) vw(6) rgba(0, 0, 0, 0.25);
-                transition: transform 0.2s ease, background 0.2s ease;
+            &.full {
+                .reward-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0, 0, 0, 0.6); // ✅ 검은색 투명 배경
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: vw(8);
+                }
 
-                &:hover {
-                    transform: scale(1.05);
+                .coupon-btn {
+                    padding: vw(12) vw(24);
+                    background: $main1;
+                    border: none;
+                    border-radius: vw(6);
+                    font-weight: bold;
+                    font-size: vw(16);
+                    font-family: $font-main;
+                    cursor: pointer;
+                    color: #fff;
+                    box-shadow: 0 vw(2) vw(6) rgba(0, 0, 0, 0.25);
+                    transition: transform 0.2s ease, background 0.2s ease;
+
+                    &:hover {
+                        transform: scale(1.05);
+                    }
                 }
             }
         }
     }
-}
-
 }
 @keyframes shake {
     0% {

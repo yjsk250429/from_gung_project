@@ -20,15 +20,15 @@ const Layout = () => {
             <main id="content" className="main">
                 <Outlet />
             </main>
-            <Login/>
-            <JoinAgree/>
-            <RewardCheck/>
-            <StampNotice/>
-            <JoinInfo/>
-            <JoinComplete/>
-            <LoginComplete/>
-            <LogoutComplete/>
-            <NeedLogin/>
+            <Login />
+            <JoinAgree />
+            <RewardCheck />
+            <StampNotice />
+            <JoinInfo />
+            <JoinComplete />
+            <LoginComplete />
+            <LogoutComplete />
+            <NeedLogin />
             <Footer />
         </div>
     );

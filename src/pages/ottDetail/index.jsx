@@ -12,6 +12,7 @@ import { is404, tmdb } from '../../tmdb/tmdb';
 import { seeds as seedList } from '../../tmdb/seeds';
 
 import './style.scss';
+import OttReviewDetail from '../../components/ui/modal/OttReviewDetail';
 
 /* ----------------- helpers (훅 아님) ----------------- */
 const TMDB_IMG_BASE = 'https://image.tmdb.org/t/p';
@@ -319,6 +320,7 @@ export default function OttDetail() {
 
             {/* ✅ seeds만 사용 + 항상 5개, 포스터 우선(없으면 TMDB에서 보충) */}
             <OttDetailContents items={relatedList} parentMediaType={mediaType} max={5} />
+            <OttReviewDetail />
         </div>
     );
 }

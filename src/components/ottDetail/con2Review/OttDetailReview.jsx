@@ -3,6 +3,7 @@ import './style.scss';
 import { MdStar, MdStarBorder, MdStarHalf } from 'react-icons/md';
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
 import Button from '../../ui/button/Button';
+import { useModalStore } from '../../../store';
 
 const INITIAL_COUNT = 6; // 처음 6개
 const LOAD_MORE_STEP = 3; // 클릭마다 3개 추가
@@ -66,6 +67,7 @@ const HeartBurst = ({ count = 10, duration = 720 }) => {
 };
 
 const OttDetailReview = ({ reviews = [] }) => {
+    const { openOttReview } = useModalStore();
     const [list, setList] = useState([]);
     const [open, setOpen] = useState({});
     const [liked, setLiked] = useState({});
@@ -112,7 +114,7 @@ const OttDetailReview = ({ reviews = [] }) => {
         }
     };
 
-    const handleLoadMore = () => setShowCount((c) => Math.min(c + LOAD_MORE_STEP, list.length));
+    // const handleLoadMore = () => setShowCount((c) => Math.min(c + LOAD_MORE_STEP, list.length));
 
     const hasMore = list.length > showCount;
 
@@ -165,7 +167,7 @@ const OttDetailReview = ({ reviews = [] }) => {
                                 <p>{r.content}</p>
                             </div>
 
-                            <div className="more" role="button">
+                            <div className="more" role="button" onClick={openOttReview}>
                                 더보기
                             </div>
                         </div>
@@ -174,7 +176,7 @@ const OttDetailReview = ({ reviews = [] }) => {
 
                 {hasMore && (
                     <div className="morebtn">
-                        <Button text="더보기" className="medium" onClick={handleLoadMore} />
+                        <Button text="더보기" className="medium" />
                     </div>
                 )}
             </div>
